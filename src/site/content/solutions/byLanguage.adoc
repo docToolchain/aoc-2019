@@ -1,0 +1,15 @@
+:jbake-type: page_toc
+:jbake-title: Solutions by Language
+:jbake-status: published
+
+:imagesdir: ../images
+
+:toc: left
+
+include::../config.adoc[]
+
+== Solutions by Language
+
+This overview lists all solutions by programming language.
+
+include::../generated/byLanguage.adoc[]

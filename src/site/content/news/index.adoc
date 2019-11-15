@@ -1,0 +1,6 @@
+= News
+:jbake-title: News
+:jbake-type: news
+:jbake-status: published
+
+:icons: font

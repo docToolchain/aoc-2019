@@ -1,0 +1,69 @@
+# aoc-2019
+
+WARNING: Spoiler Alert! If you want to solve the aoc problems on your own, do not read any further.
+This repository contains solutions for the problems in several languages.
+
+NOTE: Result can be found on https://aoc-2019.netlify.com/[aoc-2019.netlify.com] powered by netlify.
+
+In this repository, we will collect the code for the solutions of https://adventofcode.com[adventofcode] for the 2019 event.
+
+If you want to join the discussions, here is the invitation for our https://join.slack.com/t/aoc-2019/shared_invite/enQtNDg2NTI4NzY0Mjg5LTMzMDI1NzIyM2JiMzRhNGJhZTIwMWE4Y2Q3NmZmZjRlNWFhZDAwOWFkZDc0M2QxYTYzOGFmN2ZlZjIyYjNlZTU[slack channel].
+
+image::https://img.shields.io/badge/Slack-Invitation-orange.svg?style=for-the-badge[link=https://join.slack.com/t/aoc-2018/shared_invite/enQtNDg2NTI4NzY0Mjg5LTMzMDI1NzIyM2JiMzRhNGJhZTIwMWE4Y2Q3NmZmZjRlNWFhZDAwOWFkZDc0M2QxYTYzOGFmN2ZlZjIyYjNlZTU]
+
+The slack channel itself is https://aoc-2019.slack.com/[aoc-2019]
+
+The id of the https://adventofcode.com/2018/leaderboard/private/view/117454[shared leaderboard] is `117454-7d5aa225` .
+
+## The Goal of this repository
+
+... is to
+
+- have a shared code base. It will be interesting to see how the same problem is solved in different languages with different approaches
+- have a development environment in which all examples run out of the box
+
+### How do we ensure that all examples run out of the box?
+
+The best solution will be to use https://gitpod.io. Just prefix the URL with `gitpod.io#` or click the button:
+
+image:https://gitpod.io/button/open-in-gitpod.svg[link="https://gitpod.io#https://github.com/rdmueller/aoc-2019", title="Open in Gitpod"]
+
+
+A webbased IDE will open with the repository already cloned in a docker container.
+
+It would be awesome if we manage to get all solutions up and running in this container!
+
+The standard https://gitpod.io[gitpod.io] docker container supports JavaScript, TypeScript, Java, Groovy, Ruby, Python, Go, C, C++, Rust, Perl out of the box.
+
+At least Make, Gradle and Maven are available as build tools.
+
+## Repository structure
+
+The structure we start with is the following:
+
+```
+.
+├── README.md
+├── day01
+├── day02
+│   ├── groovy
+│   |   └── rdmueller
+│   |       ├── solution.groovy
+│   |       └── description.adoc
+│   └── [language]
+│       └── [githubhandle]
+│           ├── solution.[extension]
+│           └── description.adoc
+├── day03
+├── day04
+├── ...
+```
+
+## Documentation
+
+As you can see in the above repository structure, each folder contains a `description.adoc`.
+It would be great if everybody could explain their solution with a short description.
+
+## Questions?
+
+=> see you on Slack: https://aoc-2019.slack.com/[aoc-2019]

@@ -1,0 +1,30 @@
+// * create a new table for each day
+// * use the avatar images to make the file nicer
+// * create a new line for each use
+// a| means that you can use asciidoc syntax in this cell
+
+//some attributes to make the file more readable
+
+:rdmueller: image:https://avatars2.githubusercontent.com/u/1856308?s=40[link=https://github.com/rdmueller]
+:anoff: image:https://avatars2.githubusercontent.com/u/7142618?s=40[link=https://github.com/anoff]
+:robertwalter83: image:https://avatars2.githubusercontent.com/u/5462981?s=40[link=https://github.com/robertwalter83]
+:gysel: image:https://avatars0.githubusercontent.com/u/1065960?s=40[link=https://github.com/gysel]
+:tschulte: image:https://avatars1.githubusercontent.com/u/203910?s=40[link=https://github.com/tschulte]
+:olithissen: image:https://avatars1.githubusercontent.com/u/13063051?s=40[link=https://github.com/olithissen]
+
+== Today I learned..
+
+A collection of everyones daily learnings
+
+=== Day 1
+
+[cols="1,10"]
+|====
+
+|{rdmueller}
+a| * just started
+
+
+
+|====
+

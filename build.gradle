@@ -1,0 +1,148 @@
+buildscript {
+    dependencies {
+        classpath 'org.asciidoctor:asciidoctorj-diagram:1.5.4.1'
+    }
+
+}
+
+//tag::jbakeplugin[]
+plugins {
+    id 'org.jbake.site' version '5.0.0'
+}
+//end::jbakeplugin[]
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+//tag::jbakeconfig[]
+jbake {
+    version = '2.6.4'
+    srcDirName = 'src/site'
+    destDirName = 'docs/html5/site'
+    configuration['asciidoctor.option.requires'] = "asciidoctor-diagram"
+}
+//end::jbakeconfig[]
+
+//configure docToolchain to use the main project's config
+project('docToolchain') {
+    if (project.hasProperty('docDir')) {
+        docDir = '../.'
+        inputPath = 'docs'
+
+        mainConfigFile = 'docToolchain.config'
+    } else {
+        println "="*80
+        println "  please initialize the docToolchain submodule"
+        println "  by executing git submodule update -i"
+        println "="*80
+    }
+}
+
+task generateIndex() {
+    // this is ugly as obfuscated, but it works :-)
+    doLast {
+        def src = new File('.')
+
+        // build up an index of all code
+        def days = [:]
+        def languages = [:]
+        def coders = [:]
+        src.eachFile { day ->
+            if (day.name.startsWith('day')) {
+                days[day.name]=[]
+                day.eachFile { language ->
+                    if (!language.isFile()) {
+                        language.eachFile { coder ->
+                            if (!coder.isFile()) {
+                                if (!coders[coder.name]) {
+                                    coders[coder.name]=[]
+                                }
+                                coders[coder.name] << ([day.name,language.name])
+                                days[day.name] << ([coder.name, language.name])
+                                if (!languages[language.name]) {
+                                    languages[language.name]=[]
+                                }
+                                languages[language.name] << ([coder.name, day.name])
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        new File("build/.").mkdirs()
+        def coderIndex = ""
+        coders.sort{it.key.toLowerCase()}.each { coder, data ->
+            // * anoff
+            def daysFile = new File("src/site/content/generated/coder/${coder}/generatedDays.adoc")
+            new File("src/site/content/generated/coder/${coder}").mkdirs()
+            daysFile.write("""
+:jbake-type: page_toc
+:jbake-title: $coder
+:jbake-status: published
+
+:toc: left
+
+== $coder
+
+""")
+            coderIndex += "* link:../generated/coder/$coder/generatedDays.html[$coder]\n\n"
+            data.sort{it[0]}.each { datum ->
+                //=== Day 1
+                //
+                //include::../../day01/python/rdmueller/README.adoc[leveloffset=+2]
+                def link = "${datum[0]}/${datum[1]}/${coder}/README.adoc"
+                File readme = new File(link)
+                if (readme.exists()) {
+                    daysFile.append("=== Day ${datum[0]-"day"}: ${datum[1]}\n\n")
+                    daysFile.append("include::../../../../../../${datum[0]}/${datum[1]}/${coder}/README.adoc[leveloffset=+2]\n\n")
+                }
+            }
+        }
+        new File('src/site/content/generated/byCoder.adoc').write(coderIndex)
+        def dayIndex = ""
+        days.each { day, data ->
+            dayIndex += """
+=== Day ${day-"day"}
+
+The riddle for day ${day-"day"} can be found at https://adventofcode.com/2018/day/${day-"day"}.
+
+[cols="2"]
+|===
+"""
+            data.eachWithIndex { datum, i ->
+                def coder = datum[0]
+                def language = datum[1]
+                dayIndex += """\
+| $coder | link:/generated/coder/${coder}/generatedDays.html#_day_${day-"day"}_${language}[$language]
+"""
+            }
+            dayIndex += "|===\n"
+        }
+
+
+
+        new File('src/site/content/generated/byDay.adoc').write(dayIndex)
+        def langIndex = ""
+        languages.each { language, data ->
+            langIndex += """
+=== ${language}
+
+[cols="2"]
+|===
+"""
+            def lastDay = ""
+            data.sort{it[1]}.eachWithIndex { datum, i ->
+                def coder = datum[0]
+                def day = datum[1]
+                langIndex += """\
+| ${lastDay==day?"":"Day "+(day-"day")} | link:/generated/coder/${coder}/generatedDays.html#_day_${day-"day"}_${language}[$coder]
+"""
+                lastDay = day
+            }
+            langIndex += "|===\n"
+        }
+        new File('src/site/content/generated/byLanguage.adoc').write(langIndex)
+    }
+}

@@ -1,0 +1,15 @@
+//tag::header[]
+= Neuer Artikel "Die Werkzeuge"
+:jbake-type: post
+:jbake-date: 2019-05-02
+:jbake-status: published
+:jbake-tags: asciidoc, documentation
+//end::header[]
+
+image::https://www.informatik-aktuell.de/fileadmin/_processed_/0/0/csm_720-AdobeStock_243560609_b5f07fdc25.jpg[float=left]
+In der letzten Folge unseres Artikels haben wir Ihnen den Docs-as-Code-Ansatz erklärt und das wichtigste Werkzeug näher gebracht.
+Bei Docs-as-Code dreht sich alles darum, dass Sie Ihre Dokumentation als reinen Text verwalten.
+Was machen Sie aber, wenn das nicht reicht? In dieser Folge lernen Sie docToolchain kennen, die Open-Source-Lösung zur Unterstützung des Docs-as-Code-Ansatzes.
+
+link:/artikel/folge2.html[weiterlesen]
+

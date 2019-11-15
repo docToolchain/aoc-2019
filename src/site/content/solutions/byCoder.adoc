@@ -1,0 +1,17 @@
+:jbake-type: page_toc
+:jbake-title: Solutions by Coder
+:jbake-status: published
+
+:imagesdir: ../images
+
+:toc: left
+
+include::../config.adoc[]
+
+== Solutions by Coder
+
+This overview lists all developers who publish theis Advent of Code solutions in this repository.
+
+Alphabetical order.
+
+include::../generated/byCoder.adoc[]

@@ -1,0 +1,16 @@
+= Neuer Artikel "Die Grundlagen"
+:jbake-type: post
+:jbake-date: 2019-04-02
+:jbake-status: published
+:jbake-tags: asciidoc, documentation
+
+
+image::https://www.informatik-aktuell.de/fileadmin/_processed_/c/0/csm_720-AdobeStock_223290244_5fb7840988.jpg[float=left]
+Eine großangelegte Umfrage zu Open Source zeigt, dass unvollständige oder verwirrende Dokumentation zu den Hauptproblemen freier Software zählt.
+Das gilt neben Anwendungsdokumentation insbesondere auch für technische Dokumentation, etwa von Softwarearchitektur.
+Diese Aussage können wir sicherlich verallgemeinern: schlechte Dokumentation von Software erschwert Änderung, Support und letztlich auch Nutzung.
+Wir möchten hier auf technische Dokumentation von Software abzielen, also beispielsweise Entwicklungs-, Architektur- und Betriebsdokumentation.
+Das Thema Anwendungsdokumentation klammern wir bewusst aus.
+
+link:/artikel/folge1.html[weiterlesen]
+

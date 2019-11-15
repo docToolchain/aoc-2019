@@ -1,0 +1,19 @@
+:jbake-type: page
+:jbake-title: Rules
+:jbake-status: published
+= Rules
+
+:icons: font
+
+== Prerequisites
+
+If you don't know about https://Adventofcode.com[AdventOfCode.com] (short aoc) yet, please head over to the website and check it out.
+It is basically an advent calendar for geeks which reveals an algorithmic challenge for each day.
+
+== Spoiler Alert!
+
+WARNING: If you want to solve the aoc problems on your own, do not read any further. This repository contains solutions for the problems in several languages.
+
+== Never walk alone
+
+Coding together is much more fun and that is what this site and repository is about.

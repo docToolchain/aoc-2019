@@ -1,0 +1,2 @@
+// this fixes the imagesdir when you use intellij for preview
+:imagesdir: ../images

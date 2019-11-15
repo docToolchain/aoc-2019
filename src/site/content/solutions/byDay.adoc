@@ -1,0 +1,15 @@
+:jbake-type: page_toc
+:jbake-title: Solutions by Day
+:jbake-status: published
+
+:imagesdir: ../images
+
+:toc: left
+
+include::../config.adoc[]
+
+== Solutions by Day
+
+This overview lists all solutions sorted by day.
+
+include::../generated/byDay.adoc[]

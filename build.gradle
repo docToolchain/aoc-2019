@@ -72,6 +72,7 @@ task generateIndex() {
             }
         }
         new File("build/.").mkdirs()
+        new File('src/site/content/generated/.').mkdirs()
         def coderIndex = ""
         coders.sort{it.key.toLowerCase()}.each { coder, data ->
             // * anoff

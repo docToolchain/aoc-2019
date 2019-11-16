@@ -3,15 +3,10 @@ html {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-color: snow;
-    background-size: 100%;
-    -webkit-background-size: 100%;
-    -moz-background-size: 100%;
-    -o-background-size: 100%;
     background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    height: 100%;
 }
 body {
     background-color: transparent;

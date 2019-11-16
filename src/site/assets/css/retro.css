@@ -6,6 +6,10 @@ html {
     background-size: cover;
     height: 100%;
 }
+body {
+    background-color: transparent;
+    background: transparent;
+}
 pre {
     border: 0;
 }

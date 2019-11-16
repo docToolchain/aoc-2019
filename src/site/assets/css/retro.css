@@ -1,9 +1,10 @@
-body {
+html {
     background: url(/images/snowback.png);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-color: snow;
     background-size: cover;
+    height: 100%;
 }
 pre {
     border: 0;

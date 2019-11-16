@@ -26,6 +26,6 @@
           <p class="text-center"><img src="/images/EasySetup.png" alt="Easy Setup" style="max-width:70%;"/></p>
           <p>No development environment at hand?</p>
           <p>Use Gitpod.io with our customized docker image to get your favourite language up and running in minutes.</p>
-          <p>&nbsp;<a class="right" href="https://gitpod.io#https://github.com/rdmueller/aoc-2018" alt="Open in Gitpod"><img src="https://gitpod.io/button/open-in-gitpod.svg"></a></p>
+          <p>&nbsp;<a class="right" href="https://gitpod.io#https://github.com/docToolchain/aoc-2019" alt="Open in Gitpod"><img src="https://gitpod.io/button/open-in-gitpod.svg"></a></p>
         </div>
       </div>

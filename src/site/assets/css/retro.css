@@ -4,6 +4,9 @@ html {
     background-attachment: fixed;
     background-color: snow;
     background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     height: 100%;
 }
 body {

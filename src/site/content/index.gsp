@@ -3,7 +3,7 @@
           <h1>AoC-2019</h1>
           <p>Together we are more :-)</p>
           <p>This website shows the solutions for the <a href="https://adventofcode.com">Advent of Code 2019</a> riddles.
-          Feel free to contribute - send a pull request with your solution to <a href="https://github.com/docs-as-code/aoc-2019">github.com/docs-as-code/aoc-2019</a>.</p>
+          Feel free to contribute - send a pull request with your solution to <a href="https://github.com/docToolchain/aoc-2019">github.com/docToolchain/aoc-2019</a>.</p>
       </div>
     </div>
 

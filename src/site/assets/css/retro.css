@@ -8,17 +8,35 @@ body {
 pre {
     border: 0;
 }
-#toc.toc {
-    background-color: rgba(200,240,200,0.2);
-    border: 1px solid rgba(200,240,200,0.5)
+div#toc.toc {
+    background-color: rgba(200,240,200,0.6);
+    border: 1px solid rgba(34, 51, 34, 0.22);
 }
-.jumbotron {
+div.jumbotron {
     background-color: rgba(200,240,200,0.2);
-    border: 1px solid rgba(200,240,200,0.5)
+    border: 1px solid rgba(34, 51, 34, 0.22);
+}
+a {
+    color: #428731;
+}
+a:hover {
+    color: #9D3042;
+}
+.admonitionblock > table td.icon {
+    font-size: xx-large;
 }
 #footer {
     background-color: rgba(200,240,200,0.2);
-    border: 1px solid rgba(200,240,200,0.5)
+    border: 1px solid rgba(34, 51, 34, 0.22);
+}
+table { background: rgba(230,230,230,0.2);}
+table thead, table tfoot { background: rgba(230,230,230,0.2); }
+table tr.even, table tr.alt, table tr:nth-of-type(even) { background: rgba(240,200,200,0.2); }
+input.form-control, button, .btn-default {
+    background: #428731;
+    background-color: #428731;
+    background-image: none;
+    color: #ffffff !important;
 }
 .navbar {
     background-image: url(/images/treeback.png);
@@ -32,17 +50,43 @@ pre {
 }
 a.navbar-brand {
     font-weight: bold;
-    -webkit-animation: glow 1s ease-in-out infinite alternate;
-    -moz-animation: glow 1s ease-in-out infinite alternate;
-    animation: glow 1s ease-in-out infinite alternate;
+    color: #ffffff !important;
+    text-shadow: 0 0 5px #16c43b, 0 0 10px #16c43b, 0 0 15px #16c43b, 0 0 20px #16c43b, 0 0 30px #16c43b, 0 0 40px #16c43b, 0 0 55px #16c43b, 0 0 75px #16c43b !important;
 }
-@-webkit-keyframes glow {
-    from {
-        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
-    }
-    to {
-        text-shadow: 0 0 20px #fff, 0 0 30px #4dffa6, 0 0 40px #4dffa6, 0 0 50px #4dffa6, 0 0 60px #4dffa6, 0 0 70px #4dffa6, 0 0 80px #4dffa6;
-    }
+ul.navbar-nav>li>a {
+    font-weight: bold;
+    color: #ffffff !important;
+    text-shadow: 0 0 5px #c2bd25, 0 0 10px #c2bd25, 0 0 15px #c2bd25, 0 0 20px #c2bd25, 0 0 30px #c2bd25, 0 0 40px #16c43b, 0 0 55px #16c43b, 0 0 75px #16c43b !important;
+}
+a.navbar-brand:hover{
+    font-weight: bold;
+    color: #ffffff !important;
+    text-shadow: 0 0 5px #ff4918, 0 0 10px #ff4918, 0 0 15px #ff4918, 0 0 20px #ff4918, 0 0 30px #ff4918, 0 0 40px #ff4918, 0 0 55px #ff4918, 0 0 75px #ff4918 !important;
+}
+ul.navbar-nav>li>a:hover {
+    font-weight: bold;
+    color: #ffffff !important;
+    text-shadow: 0 0 5px #16c43b, 0 0 10px #16c43b, 0 0 15px #16c43b, 0 0 20px #16c43b, 0 0 30px #16c43b, 0 0 40px #16c43b, 0 0 55px #16c43b, 0 0 75px #16c43b !important;
+}
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus {
+    background-color: transparent;
+}
+ul.dropdown-menu > li > a {
+    color: #00aa00;
+    font-weight: bold;
+}
+ul.dropdown-menu > li > a:hover {
+    background-color: #00aa00;
+    color: snow;
+    font-weight: bold;
+}
+.dropdown-menu {
+    background-image: linear-gradient(134deg, #f5cece 25%, #faf7e3 25%, #faf7e3 50%, #f5cece 50%, #f5cece 75%, #faf7e3 75%, #faf7e3 100%);
+    background-size: 27.80px 28.79px;
+    padding-top: 20px;
+    top: 50px;
+    z-index: -20;
+    border-radius: 10px;
 }
 .navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus {
     background: transparent;

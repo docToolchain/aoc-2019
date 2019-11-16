@@ -1,0 +1,35 @@
+== Hello World
+
+This solution is written in Groovy.
+
+I will use my helper to read the input from a file:
+
+[source, groovy, numbered]
+....
+include::solution.groovy[tags=helper]
+....
+
+=== First Star
+
+The solutions shall print out a greeting.
+I will wrap this in a simple `helloWorld` method.
+
+[source, groovy, numbered]
+....
+include::solution.groovy[tags=starOne,!starTwo]
+....
+
+<1> this is where I call the helper method to read my input
+
+[plantuml]
+----
+file input.txt
+component readInput
+component helloWorld
+helloWorld -> readInput : calls
+readInput -> input.txt : reads file
+----
+
+=== Second Star
+
+There is no second star.

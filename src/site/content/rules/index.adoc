@@ -1,7 +1,10 @@
-:jbake-type: page
+:jbake-type: page_toc
 :jbake-title: Rules
 :jbake-status: published
-= Rules
+
+:imagesdir: ../images
+
+:toc: left
 
 :icons: font
 
@@ -17,3 +20,5 @@ WARNING: If you want to solve the aoc problems on your own, do not read any furt
 == Never walk alone
 
 Coding together is much more fun and that is what this site and repository is about.
+
+== This is not a Competition

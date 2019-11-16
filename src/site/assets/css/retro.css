@@ -1,3 +1,51 @@
 body {
-    /* font-family: DOS, Monaco, Menlo, Consolas, "Courier New", monospace; */
+    background: url(/images/snowback.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: snow;
+    background-size: cover;
+}
+pre {
+    border: 0;
+}
+#toc.toc {
+    background-color: rgba(200,240,200,0.2);
+    border: 1px solid rgba(200,240,200,0.5)
+}
+.jumbotron {
+    background-color: rgba(200,240,200,0.2);
+    border: 1px solid rgba(200,240,200,0.5)
+}
+#footer {
+    background-color: rgba(200,240,200,0.2);
+    border: 1px solid rgba(200,240,200,0.5)
+}
+.navbar {
+    background-image: url(/images/treeback.png);
+    background-size: contain;
+    background-repeat-x: repeat;
+    background-repeat-y: no-repeat;
+    border-bottom: 0;
+    padding-bottom: 20px;
+    background-color: transparent;
+    box-shadow: none;
+}
+a.navbar-brand {
+    font-weight: bold;
+    -webkit-animation: glow 1s ease-in-out infinite alternate;
+    -moz-animation: glow 1s ease-in-out infinite alternate;
+    animation: glow 1s ease-in-out infinite alternate;
+}
+@-webkit-keyframes glow {
+    from {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+    }
+    to {
+        text-shadow: 0 0 20px #fff, 0 0 30px #4dffa6, 0 0 40px #4dffa6, 0 0 50px #4dffa6, 0 0 60px #4dffa6, 0 0 70px #4dffa6, 0 0 80px #4dffa6;
+    }
+}
+.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus {
+    background: transparent;
+    font-color: #00aa00;
+    text-shadow: 0 0 20px #88ff88;
 }

@@ -41,8 +41,7 @@ input.form-control, button, .btn-default {
 .navbar {
     background-image: url(/images/treeback.png);
     background-size: contain;
-    background-repeat-x: repeat;
-    background-repeat-y: no-repeat;
+    background-repeat: repeat-x;
     border-bottom: 0;
     padding-bottom: 20px;
     background-color: transparent;

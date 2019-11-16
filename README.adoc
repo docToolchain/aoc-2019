@@ -9,11 +9,11 @@ In this repository, we will collect the code for the solutions of https://advent
 
 If you want to join the discussions, here is the invitation for our https://join.slack.com/t/aoc-2019/shared_invite/enQtNDg2NTI4NzY0Mjg5LTMzMDI1NzIyM2JiMzRhNGJhZTIwMWE4Y2Q3NmZmZjRlNWFhZDAwOWFkZDc0M2QxYTYzOGFmN2ZlZjIyYjNlZTU[slack channel].
 
-image::https://img.shields.io/badge/Slack-Invitation-orange.svg?style=for-the-badge[link=https://join.slack.com/t/aoc-2018/shared_invite/enQtNDg2NTI4NzY0Mjg5LTMzMDI1NzIyM2JiMzRhNGJhZTIwMWE4Y2Q3NmZmZjRlNWFhZDAwOWFkZDc0M2QxYTYzOGFmN2ZlZjIyYjNlZTU]
+image::https://img.shields.io/badge/Slack-Invitation-orange.svg?style=for-the-badge[link=https://join.slack.com/t/aoc-2019/shared_invite/enQtODM5MjYyODEzMjcxLTNlMzlmNTMzNTlhNDc2NWZjNTZjOGZmMDQzZTdmNDA4NjM4Mzc2NjFlMTdjYzM4Yzc3YjIzYTBlMTcyYmI1Mjc]
 
 The slack channel itself is https://aoc-2019.slack.com/[aoc-2019]
 
-The id of the https://adventofcode.com/2018/leaderboard/private/view/117454[shared leaderboard] is `117454-7d5aa225` .
+The id of the https://adventofcode.com/2019/leaderboard/private/view/117454[shared leaderboard] is `117454-7d5aa225` .
 
 ## The Goal of this repository
 

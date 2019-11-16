@@ -65,7 +65,7 @@ published_pages.each { page ->
             <!-- tag::search[] -->
             <form class="navbar-form navbar-right" action="https://google.de/search">
                 <div class="form-group">
-                    <input type="hidden" name="q" value="site:docs-as-co.de">
+                    <input type="hidden" name="q" value="site:aoc-2019.netlify.com">
                     <input type="text" name="q" class="form-control" placeholder="Search">
                 </div>
                 <button type="submit" class="btn btn-default">Submit</button>

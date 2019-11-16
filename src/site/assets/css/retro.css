@@ -97,3 +97,6 @@ ul.dropdown-menu > li > a:hover {
     border: none !important;
     background-color: transparent;
 }
+h5 {
+    font-size: 20px;
+}

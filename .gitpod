@@ -1,2 +1,2 @@
 tasks:
-  - command: "npm install ts-node elm -g"
+  - command: "npm install ts-node elm -g && sdk install groovy"

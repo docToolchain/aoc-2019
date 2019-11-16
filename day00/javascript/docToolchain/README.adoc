@@ -1,0 +1,17 @@
+== Hello World
+
+This solution is written in JavaScript.
+
+=== First Star
+
+The solution is quite straight forward.
+Much simpler than the groovy version.
+
+[source, javascript, numbered]
+....
+include::solution.js[]
+....
+
+=== Second Star
+
+There is no second star.

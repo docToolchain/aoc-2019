@@ -1,0 +1,21 @@
+== Solution written in Java
+
+This is just a setup-test. To build:
+
+    mvn clean install
+
+To run:
+
+   java -jar target/aoc-2018-day01-1.0.0-SNAPSHOT.jar
+
+== Solution
+
+To skip parsing the data, I've pasted the input directly into the programm as a list of integers.
+
+=== Part 1
+
+Simply sum the list using a stream collector.
+
+=== Part 2
+
+Keep track of reached frequencies using a set. Cycle over the data. Break the cycle when the set of reached frequencies already contains currently reached frequency.

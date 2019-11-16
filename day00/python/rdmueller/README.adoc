@@ -1,0 +1,39 @@
+This solution is written in Python.
+It is the soölution for Day1 taken from AoC-2018-
+
+https://adventofcode.com/2018/day/1
+
+== First Star
+
+So, the solution seems to be simple - one line of code in Groovy :-)
+
+Read a file line by line and add all numbers.
+It seems that Python comes with great file ahndling methods, but I have to tell python in wich mode I open the file - read, write etc.
+I also have to cast the line read to in via `int()`.
+Here is my solution for the first star:
+
+[source, python]
+....
+include::solution.py[tags=starOne]
+....
+
+== Second Star
+
+Now for the second part.
+
+I started the live stream ión twitch by lizthegry.
+She just finished the stream - it seems I am slow :-) - 15 minutes into advent of code...
+
+Now, for the second part I need a list to collect all the frequencies I've already encountered.
+
+It already starts: I had to re-read the specs twice.
+The second time I also had to go carefully through one of the example to understand that you might have to read the input several times.
+That reminds me of last year where I've coded the solution as function and did test driven development.
+Maybe I start this tomorrow....
+
+However, I collected my second star and already learned a lot about Python!
+
+[source, python]
+....
+include::solution.py[tags=starTwo]
+....

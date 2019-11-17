@@ -43,10 +43,18 @@ table { background: rgba(230,230,230,0.2);}
 table thead, table tfoot { background: rgba(230,230,230,0.2); }
 table tr.even, table tr.alt, table tr:nth-of-type(even) { background: rgba(240,200,200,0.2); }
 input.form-control, button, .btn-default {
-    background: #428731;
-    background-color: #428731;
+    background-color: rgba(0, 0, 0, 0.5);
     background-image: none;
     color: #ffffff !important;
+    text-shadow: 0 0 5px #16c43b, 0 0 10px #16c43b !important;
+    box-shadow: 0 0 5px #16c43b, 0 0 10px #16c43b !important;
+}
+input.form-control:hover, button:hover, .btn-default:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.5);
+    background-image: none;
+    color: #ffffff !important;
+    box-shadow: 0 0 5px #ff4918, 0 0 10px #ff4918 !important;
 }
 .navbar {
     background-image: url(/images/treeback.png);

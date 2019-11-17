@@ -1,0 +1,15 @@
+:jbake-type: page_toc
+:jbake-title: Solutions
+:jbake-status: published
+
+:imagesdir: ../images
+
+:toc: left
+
+include::../config.adoc[]
+
+== Solutions
+
+* link:byCoder.html[... by Coder]
+* link:byLanguage.html[... by Language]
+* link:byDay.html[... by Day]

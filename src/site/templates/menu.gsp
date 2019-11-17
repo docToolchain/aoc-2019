@@ -4,11 +4,7 @@
         title: 'AoC-2019',
         entries: [
           'Rules': 'rules/',
-          'Solutions': [
-                  '... by Day': 'solutions/byDay',
-                  '... by Coder': 'solutions/byCoder',
-                  '... by Language': 'solutions/byLanguage'
-          ],
+          'Solutions': 'solutions/',
           'TIL': 'til/',
           'Challenges': 'news/',
           'About': 'about/',
@@ -66,9 +62,9 @@ published_pages.each { page ->
             <form class="navbar-form navbar-right" action="https://google.de/search">
                 <div class="form-group">
                     <input type="hidden" name="q" value="site:aoc-2019.netlify.com">
-                    <input type="text" name="q" class="form-control" placeholder="Search">
+                    <input type="text" name="q" class="form-control" >
                 </div>
-                <button type="submit" class="btn btn-default">Submit</button>
+                <button type="submit" class="btn btn-default">Find</button>
             </form>
             <!-- end::search[] -->
         </div><!--/.nav-collapse -->

@@ -56,6 +56,47 @@ input.form-control:hover, button:hover, .btn-default:hover {
     color: #ffffff !important;
     box-shadow: 0 0 5px #ff4918, 0 0 10px #ff4918 !important;
 }
+button.navbar-toggle {
+    background-color: white;
+}
+.navbar-default button.navbar-toggle:hover, .navbar-default button.navbar-toggle:focus {
+    background-color: white;
+}
+.navbar-toggle:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1200px) {
+    #search {
+        width: 200px;
+    }
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px) {
+    #search {
+        width: 100px;
+    }
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+
+}
+@media only screen and (max-width : 768px) {
+    .navbar-collapse {
+        background-color: rgba(0, 0, 0, 0.5);
+        border: none;
+    }
+    #search {
+        width: auto;
+        display: inline-block;
+    }
+}
+.navbar-default button.navbar-toggle span.icon-bar {
+    background-color: #16c43b;
+}
 .navbar {
     background-image: url(/images/treeback.png);
     background-size: contain;

@@ -59,12 +59,12 @@ published_pages.each { page ->
               <% } %>
           </ul>
             <!-- tag::search[] -->
-            <form class="navbar-form navbar-right" action="https://google.de/search">
+            <form class="navbar-form navbar-right" action="https://google.de/search" style="border: none;">
                 <div class="form-group">
                     <input type="hidden" name="q" value="site:aoc-2019.netlify.com">
-                    <input type="text" name="q" class="form-control" >
+                    <input type="text" name="q" class="form-control" id="search">
+                    <button type="submit" class="btn btn-default hidden-sm ">Find</button>
                 </div>
-                <button type="submit" class="btn btn-default">Find</button>
             </form>
             <!-- end::search[] -->
         </div><!--/.nav-collapse -->

@@ -1,6 +1,6 @@
 * { margin: 0; padding: 0; }
 body, html{
-    min-height:100%;
+    height: auto;
 }
 html {
     background: url(/images/snowback.png) no-repeat center center fixed;

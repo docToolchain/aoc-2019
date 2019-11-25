@@ -1,6 +1,8 @@
-= News
+= Optional Challenges
 :jbake-title: News
 :jbake-type: news
 :jbake-status: published
 
 :icons: font
+
+Be patient. Soon I will add some optional challenges to have even more fun!

@@ -114,3 +114,6 @@ Have fun!
 Ralf
 
 PS: if you like adventofcode.com, consider to https://adventofcode.com/2019/support[sponsor Eric Wastl]
+
+PS PS: you might have noticed the TIL (Today I Learned) section.
+Feel free to add a daily statement about your experience. And if you want to, you can also explore the `src/site/content/news` section and add a blog post!

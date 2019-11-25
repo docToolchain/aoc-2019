@@ -28,6 +28,9 @@ div.jumbotron {
     color: #000;
     font-weight: 400;
 }
+div.jumbotron p {
+    font-weight: 400 !important;
+}
 a {
     color: #428731;
 }

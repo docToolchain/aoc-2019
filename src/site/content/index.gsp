@@ -10,23 +10,7 @@
       </div>
     </div>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-2">&nbsp;
-            </div>
-            <div class="col-md-4 text-center">
-                <a href="https://github.com/docToolchain/aoc-2019"><img src="images/githublogo.png" style="max-width: 70%"/></a>
-            </div>
-            <div class="col-md-4 text-center">
-                <a href="https://join.slack.com/t/aoc-2019/shared_invite/enQtNDg2NTI4NzY0Mjg5LTMzMDI1NzIyM2JiMzRhNGJhZTIwMWE4Y2Q3NmZmZjRlNWFhZDAwOWFkZDc0M2QxYTYzOGFmN2ZlZjIyYjNlZTU"><img src="/images/slacklogo.png"  style="max-width: 70%"/></a>
-            </div>
-            <div class="col-md-2">&nbsp;
-            </div>
-        </div>
-    </div>
 
-</div>
-</div>
 <div class="container">
 <!-- Example row of columns -->
 <div class="row">
@@ -49,3 +33,18 @@
   <p>&nbsp;<a class="right" href="https://gitpod.io#https://github.com/docToolchain/aoc-2019" alt="Open in Gitpod"><img src="https://gitpod.io/button/open-in-gitpod.svg" alt="open in gitpod"></a></p>
 </div>
 </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">&nbsp;
+            </div>
+            <div class="col-md-4 text-center">
+                <a href="https://github.com/docToolchain/aoc-2019"><img src="images/githublogo.png" style="max-width: 70%"/></a>
+            </div>
+            <div class="col-md-4 text-center">
+                <a href="https://join.slack.com/t/aoc-2019/shared_invite/enQtNDg2NTI4NzY0Mjg5LTMzMDI1NzIyM2JiMzRhNGJhZTIwMWE4Y2Q3NmZmZjRlNWFhZDAwOWFkZDc0M2QxYTYzOGFmN2ZlZjIyYjNlZTU"><img src="/images/slacklogo.png"  style="max-width: 70%"/></a>
+            </div>
+            <div class="col-md-2">&nbsp;
+            </div>
+        </div>
+    </div>

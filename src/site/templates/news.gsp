@@ -7,7 +7,7 @@
 	<%include "menu.gsp"%>
 	<div class="container content">
 	<div class="page-header">
-		<h1>Blog</h1>
+		<h1>Optional Challenges</h1>
 <div>
     <%
     alltags.sort().each { tag ->
@@ -23,7 +23,7 @@
     %>
 
 </div>
-
+<div>Be patient. Soon I will add some optional challenges to have even more fun!</div>
 	</div>
 	<%published_posts.each {post ->%>
 		<a href="/${post.uri}"><h2>${post.title}</h2></a>

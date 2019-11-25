@@ -25,6 +25,7 @@ div#toc.toc {
 div.jumbotron {
     background-color: rgba(200,240,200,0.2);
     border: 1px solid rgba(34, 51, 34, 0.22);
+    color: #000;
 }
 a {
     color: #428731;

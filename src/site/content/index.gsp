@@ -24,7 +24,7 @@
   <p class="text-center"><img src="/images/TheChallenges.png" alt="The Challenges" style="max-width:70%;"/></p>
   <p>Algorithmic programming challenges are not enough?</p>
   <p>From time to time we will publish some challenges which add to the fun.</p>
-  <p>&nbsp;<a class="btn btn-primary right" href="challenges/" role="button">Read more about it &raquo;</a></p>
+  <p>&nbsp;<a class="btn btn-primary right" href="news/" role="button">Read more about it &raquo;</a></p>
 </div>
 <div class="col-md-4 cleafix" >
   <p class="text-center"><img src="/images/EasySetup.png" alt="Easy Setup" style="max-width:70%;"/></p>

@@ -11,3 +11,5 @@
 :sectanchors:
 // render section headings as self referencing links
 :sectlinks:
+
+:icons: font

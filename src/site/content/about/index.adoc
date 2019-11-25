@@ -12,6 +12,8 @@ ifndef::imagesdir[:imagesdir: ]
 This site is based on and inspired by https://adventofcode.com[adventofcode.com].
 It provides a platform for coders to solve the challenges created by Eric Wastl, the brain behind adventofcode, together and compare the results.
 
+This website is a fan website and is not connected to adventofcode.com in any other way.
+
 == Imprint
 
 The following text has to be included in sites provided from Germany by German citizens, due to our sometimes strange, inconsistent and user-unfriendly data privacy laws.

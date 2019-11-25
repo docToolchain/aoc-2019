@@ -71,19 +71,21 @@ task generateIndex() {
                 }
             }
         }
-        new File("build/.").mkdirs()
-        new File('src/site/content/generated/.').mkdirs()
+        new File(projectDir, "build/.").mkdirs()
+        new File(projectDir, 'src/site/content/generated/.').mkdirs()
         def coderIndex = ""
         coders.sort{it.key.toLowerCase()}.each { coder, data ->
             // * anoff
-            def daysFile = new File("src/site/content/generated/coder/${coder}/generatedDays.adoc")
-            new File("src/site/content/generated/coder/${coder}").mkdirs()
+            def daysFile = new File(projectDir, "src/site/content/generated/coder/${coder}/generatedDays.adoc")
+            new File(projectDir, "src/site/content/generated/coder/${coder}").mkdirs()
             daysFile.write("""
 :jbake-type: page_toc
 :jbake-title: $coder
 :jbake-status: published
 
 :toc: left
+
+include::../../../config.adoc[]
 
 == $coder
 
@@ -101,7 +103,7 @@ task generateIndex() {
                 }
             }
         }
-        new File('src/site/content/generated/byCoder.adoc').write(coderIndex)
+        new File(projectDir, 'src/site/content/generated/byCoder.adoc').write(coderIndex)
         def dayIndex = ""
         days.each { day, data ->
             dayIndex += """

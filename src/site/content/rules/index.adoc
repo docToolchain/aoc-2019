@@ -8,10 +8,18 @@
 
 :icons: font
 
+== Rules
+
+maybe more of a manual...
+
 == Prerequisites
 
 If you don't know about https://Adventofcode.com[AdventOfCode.com] (short aoc) yet, please head over to the website and check it out.
 It is basically an advent calendar for geeks which reveals an algorithmic challenge for each day.
+
+Here is a video of Eric Wastle himself talking about Advent of Code:
+
+video::bS9882S0ZHs[youtube]
 
 == Spoiler Alert!
 
@@ -20,5 +28,89 @@ WARNING: If you want to solve the aoc problems on your own, do not read any furt
 == Never walk alone
 
 Coding together is much more fun and that is what this site and repository is about.
+Share your code and check out the shared code.
+You will notice that there is a lot to lear from other people's solutions!
+
+Don't be shy and follow our inventation to our https://join.slack.com/t/aoc-2019/shared_invite/enQtNDg2NTI4NzY0Mjg5LTMzMDI1NzIyM2JiMzRhNGJhZTIwMWE4Y2Q3NmZmZjRlNWFhZDAwOWFkZDc0M2QxYTYzOGFmN2ZlZjIyYjNlZTU[AOC-2019 Slack channel].
+It is the place to hamg around, talk about different solutions and language and get help if you are stuck.
+
+## The Goal of this repository
+
+... is to
+
+- have a shared code base. It will be interesting to see how the same problem is solved in different languages with different approaches
+- have a development environment in which all examples run out of the box
+
+### How do we ensure that all examples run out of the box?
+
+The best solution will be to use https://gitpod.io. Just prefix the URL with `gitpod.io#` or click the button:
+
+image:https://gitpod.io/button/open-in-gitpod.svg[link="https://gitpod.io#https://github.com/rdmueller/aoc-2019", title="Open in Gitpod"] [small]#(if you've forked the repository, the button will still open the master)#
+
+
+A webbased IDE will open with the repository already cloned in a docker container.
+
+It would be awesome if we manage to get all solutions up and running in this container!
+
+The standard https://gitpod.io[gitpod.io] docker container supports JavaScript, TypeScript, Java, Groovy, Ruby, Python, Go, C, C++, Rust, Perl out of the box.
+
+At least Make, Gradle and Maven are available as build tools.
+
+## Repository structure
+
+The structure we start with is the following:
+
+```
+.
+├── README.adoc
+├── day00
+├── day01
+├── day02
+│   ├── groovy
+│   |   └── rdmueller
+│   |       ├── solution.groovy
+│   |       └── README.adoc
+│   └── [language]
+│       └── [githubhandle]
+│           ├── solution.[extension]
+│           └── README.adoc
+├── day03
+├── day04
+├── ...
+```
+
+As you can see, there is one folder per day (create one if you are the first for the day) and underneath this is onve folder per language used.
+Then there is one fodler with your github handle which then contains your solution.
+
+The file structure is quie important, because the build needs it to pick up the day, language and name in order to generate the webpage you currently read.
+The build will also look for the `README.adoc` file in each folder which you can use to document your solution.
+
+Please, take a look at the https://github.com/docToolchain/aoc-2019/tree/master/day00[`day00`] examples.
+Feel free to submit any kind of `hello world` code to `day00` to see what happens.
+
+If you want to build the web page locally, just make sure that you have java installed ( 8 <= version <13 ) and run
+
+```
+./gradlew generateIndex bake bakePreviw
+```
+
+to generate the site and start a small webserver.
+
+//Contributing
+include::../../../../.github/CONTRIBUTING.md[]
 
 == This is not a Competition
+
+Solving riddles is fun but it is X-Mas Time and you probably have more important things to do.
+So please, don't get too involved.
+That's why I don't create a private leader board this year.
+Have fun in solving some puzzles, but please remember it is not a competiotn and you don't have to solve all problems.
+
+and now, get you keyboard ready and start coding!
+If you just want to check out the repository, there is a day00 where you can place your `hello world` code just to give it a try.
+
+Have fun!
+
+Ralf
+
+PS: if you like adventofcode.com, consider to https://adventofcode.com/2019/support[sponsor Eric Wastl]

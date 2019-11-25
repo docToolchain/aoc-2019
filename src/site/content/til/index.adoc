@@ -1,0 +1,21 @@
+:jbake-type: page_toc
+:jbake-title: TIL
+:jbake-status: published
+
+:imagesdir: ../images
+
+:toc: left
+
+:icons: font
+
+== **T**oday *I* **L**earned
+
+Feel free to add a daily statement about your AoC Experience!
+
+=== Day00
+
+[cols="1,6"]
+|===
+| RalfDMueller
+| as you can clearly see, I just noticed that I am not a web designer - at least not for an X-Mas theme ;-) 🎅 🎄 🤣
+|===

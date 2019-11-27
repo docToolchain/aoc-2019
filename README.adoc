@@ -26,7 +26,7 @@ The id of the https://adventofcode.com/2019/leaderboard/private/view/117454[shar
 
 The best solution will be to use https://gitpod.io. Just prefix the URL with `gitpod.io#` or click the button:
 
-image:https://gitpod.io/button/open-in-gitpod.svg[link="https://gitpod.io#https://github.com/rdmueller/aoc-2019", title="Open in Gitpod"]
+image:https://gitpod.io/button/open-in-gitpod.svg[link="https://gitpod.io#https://github.com/docToolchain/aoc-2019", title="Open in Gitpod"]
 
 
 A webbased IDE will open with the repository already cloned in a docker container.

@@ -14,6 +14,10 @@ It provides a platform for coders to solve the challenges created by Eric Wastl,
 
 This website is a fan website and is not connected to adventofcode.com in any other way.
 
+== Clipart
+
+The used clipart and other images for the website is (c) presentermedia.com and licenced to ralf.d.mueller@gmail.com
+
 == Imprint
 
 The following text has to be included in sites provided from Germany by German citizens, due to our sometimes strange, inconsistent and user-unfriendly data privacy laws.

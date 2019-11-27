@@ -5,7 +5,7 @@
           <p>This website is a fan-site for the famous <a href="https://adventofcode.com">Advent of Code 2019</a>.</p>
           <p>You might already have experienced that coding together is more fun. So let's solve the AoC riddles together!</p>
           <p>Feel free to contribute - send a pull request with your solution for each day to <a href="https://github.com/docToolchain/aoc-2019"> our github.com/docToolchain/aoc-2019 repository</a>.</p>
-          <p>Join our <a href="https://join.slack.com/t/aoc-2019/shared_invite/enQtNDg2NTI4NzY0Mjg5LTMzMDI1NzIyM2JiMzRhNGJhZTIwMWE4Y2Q3NmZmZjRlNWFhZDAwOWFkZDc0M2QxYTYzOGFmN2ZlZjIyYjNlZTU">AOC-2019 slack channel</a> and help or be helped when a solution is not too obvious 😎</p>
+          <p>Join our <a href="https://join.slack.com/t/aoc-2019/shared_invite/enQtODUzMTE3MDQzMzM0LTUyYmZjOTg1ZTYxMzEwM2JlMmNjNjE4ZDFkOWM0ZDZhMGRhNGYyMzhiMzFjZGMxNjM4YjM2NDZlNTY3NjA1M2Y">AOC-2019 slack channel</a> and help or be helped when a solution is not too obvious 😎</p>
 
       </div>
     </div>
@@ -42,7 +42,7 @@
                 <a href="https://github.com/docToolchain/aoc-2019"><img src="images/githublogo.png" style="max-width: 70%"/></a>
             </div>
             <div class="col-md-4 text-center">
-                <a href="https://join.slack.com/t/aoc-2019/shared_invite/enQtNDg2NTI4NzY0Mjg5LTMzMDI1NzIyM2JiMzRhNGJhZTIwMWE4Y2Q3NmZmZjRlNWFhZDAwOWFkZDc0M2QxYTYzOGFmN2ZlZjIyYjNlZTU"><img src="/images/slacklogo.png"  style="max-width: 70%"/></a>
+                <a href="https://join.slack.com/t/aoc-2019/shared_invite/enQtODUzMTE3MDQzMzM0LTUyYmZjOTg1ZTYxMzEwM2JlMmNjNjE4ZDFkOWM0ZDZhMGRhNGYyMzhiMzFjZGMxNjM4YjM2NDZlNTY3NjA1M2Y"><img src="/images/slacklogo.png"  style="max-width: 70%"/></a>
             </div>
             <div class="col-md-2">&nbsp;
             </div>

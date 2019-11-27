@@ -31,7 +31,7 @@ Coding together is much more fun and that is what this site and repository is ab
 Share your code and check out the shared code.
 You will notice that there is a lot to lear from other people's solutions!
 
-Don't be shy and follow our inventation to our https://join.slack.com/t/aoc-2019/shared_invite/enQtNDg2NTI4NzY0Mjg5LTMzMDI1NzIyM2JiMzRhNGJhZTIwMWE4Y2Q3NmZmZjRlNWFhZDAwOWFkZDc0M2QxYTYzOGFmN2ZlZjIyYjNlZTU[AOC-2019 Slack channel].
+Don't be shy and follow our inventation to our https://join.slack.com/t/aoc-2019/shared_invite/enQtODUzMTE3MDQzMzM0LTUyYmZjOTg1ZTYxMzEwM2JlMmNjNjE4ZDFkOWM0ZDZhMGRhNGYyMzhiMzFjZGMxNjM4YjM2NDZlNTY3NjA1M2Y[AOC-2019 Slack channel].
 It is the place to hamg around, talk about different solutions and language and get help if you are stuck.
 
 ## The Goal of this repository

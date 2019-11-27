@@ -104,7 +104,7 @@ include::../../../../.github/CONTRIBUTING.md[]
 Solving riddles is fun but it is X-Mas Time and you probably have more important things to do.
 So please, don't get too involved.
 That's why I don't create a private leader board this year.
-Have fun in solving some puzzles, but please remember it is not a competiotn and you don't have to solve all problems.
+Have fun in solving some puzzles, but please remember it is not a competition and you don't have to solve all problems.
 
 and now, get you keyboard ready and start coding!
 If you just want to check out the repository, there is a day00 where you can place your `hello world` code just to give it a try.

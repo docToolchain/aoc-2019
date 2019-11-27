@@ -1,0 +1,17 @@
+== Hello World
+
+This solution is written in PHP.
+
+=== First Star
+
+The solution is quite simple.
+Just run "php -f solution.php".
+If you wanna listen to some great music search the output on google/youtube ;-)
+
+....
+include::solution.php[]
+....
+
+=== Second Star
+
+There is no second star.

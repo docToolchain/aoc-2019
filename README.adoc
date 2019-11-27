@@ -7,9 +7,9 @@ NOTE: Result can be found on https://aoc-2019.netlify.com/[aoc-2019.netlify.com]
 
 In this repository, we will collect the code for the solutions of https://adventofcode.com[adventofcode] for the 2019 event.
 
-If you want to join the discussions, here is the invitation for our https://join.slack.com/t/aoc-2019/shared_invite/enQtNDg2NTI4NzY0Mjg5LTMzMDI1NzIyM2JiMzRhNGJhZTIwMWE4Y2Q3NmZmZjRlNWFhZDAwOWFkZDc0M2QxYTYzOGFmN2ZlZjIyYjNlZTU[slack channel].
+If you want to join the discussions, here is the invitation for our https://join.slack.com/t/aoc-2019/shared_invite/enQtODUzMTE3MDQzMzM0LTUyYmZjOTg1ZTYxMzEwM2JlMmNjNjE4ZDFkOWM0ZDZhMGRhNGYyMzhiMzFjZGMxNjM4YjM2NDZlNTY3NjA1M2Y[slack channel].
 
-image::https://img.shields.io/badge/Slack-Invitation-orange.svg?style=for-the-badge[link=https://join.slack.com/t/aoc-2019/shared_invite/enQtODM5MjYyODEzMjcxLTNlMzlmNTMzNTlhNDc2NWZjNTZjOGZmMDQzZTdmNDA4NjM4Mzc2NjFlMTdjYzM4Yzc3YjIzYTBlMTcyYmI1Mjc]
+image::https://img.shields.io/badge/Slack-Invitation-orange.svg?style=for-the-badge[link=https://join.slack.com/t/aoc-2019/shared_invite/enQtODUzMTE3MDQzMzM0LTUyYmZjOTg1ZTYxMzEwM2JlMmNjNjE4ZDFkOWM0ZDZhMGRhNGYyMzhiMzFjZGMxNjM4YjM2NDZlNTY3NjA1M2Y]
 
 The slack channel itself is https://aoc-2019.slack.com/[aoc-2019]
 

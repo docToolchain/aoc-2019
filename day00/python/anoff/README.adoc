@@ -1,0 +1,12 @@
+Hello world for Advent of Code 2019
+
+== Python
+
+This year I want to refurbish my python skills..and maybe try some Ruby.
+
+Run the solution with `python solution.py`
+
+[source, python]
+....
+include::solution.py[]
+....

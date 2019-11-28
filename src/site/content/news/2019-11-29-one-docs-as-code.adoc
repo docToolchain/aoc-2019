@@ -1,5 +1,4 @@
 = ONE: Docs-as-Code
-
 :jbake-type: post
 :jbake-date: 2019-11-29
 :jbake-status: published

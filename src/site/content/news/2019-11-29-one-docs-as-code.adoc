@@ -9,7 +9,18 @@ _Docs-as-Code_ is the approach where you treat your documentation as code which 
 Within this repository, you can give this approach a try.
 Whenever you store a `README.adoc` along with your code, the build will pick it up and render it on the website.
 
-For instance the `README.adoc` for the JavaScript "Hello World" example created by `docToolchain` looks like this:
+To give it a try on your local machine, just execute
+
+```
+./gradlew  generateIndex bake bakePreview
+```
+
+and the build will generate the website and start a server for you.
+You can also get a powerful preview of your docs if you install the AsciiDoc plugin for your favourite Editor or IDE.
+
+== Example
+
+As an example, the `README.adoc` for the JavaScript "Hello World" example created by `docToolchain` looks like this:
 
 ./day00/groovy/docToolchain/README.adoc
 [source, aciidoc, numbered]
@@ -53,10 +64,12 @@ There is no second star.
 
 and it is rendered https://aoc-2019.netlify.com/generated/coder/doctoolchain/generateddays#_day_00_groovy[on the webpage].
 
+== About AsciiDoc
+
 The `.adoc` format is just plain text but quite powerful.
 Here are some examples:
 
-== Headlines
+=== Headlines
 
 Just add some `=` in front of your line to get a headline
 
@@ -73,7 +86,7 @@ a|
 
 |===
 
-== Basic Formatting
+=== Basic Formatting
 
 There are several text formatting styles available. 
 Here are three examples:
@@ -87,7 +100,7 @@ This is *bold*, _kursive_, `monospaced`
 
 |===
 
-== Include Source
+=== Include Source
 
 You don't have to copy & paste your source to your docs, just reference them:
 
@@ -110,7 +123,7 @@ println "*"*20
 
 |===
 
-== Diagrams
+=== Diagrams
 
 And you even have https://plantuml.com/[plantUML] at hand - a powerful library which converts text into diagrams:
 
@@ -134,4 +147,10 @@ a|
 ----
 
 |===
+
+You can read more about AsciiDoc in the the https://asciidoctor.org/docs/user-manual/[AsciiDoc User Manual] and more about the Docs-as-Code approach at https://docs-as-co.de
+
+Now try to document your solution with your own `README.adoc`!
+
+Ralf
 

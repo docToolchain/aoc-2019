@@ -152,5 +152,3 @@ You can read more about AsciiDoc in the the https://asciidoctor.org/docs/user-ma
 
 Now try to document your solution with your own `README.adoc`!
 
-Ralf
-

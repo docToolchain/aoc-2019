@@ -1,0 +1,18 @@
+== Hello World
+
+This solution is written in GO.
+
+=== First Star
+
+The solution is quite a simple copy & paste from https://gobyexample.com/ as I never did anything in/with GO. So let's see :-)
+
+You can execute it with "go run hello-world.go" or "./hello-world"
+
+
+....
+include::hello-world.go[]
+....
+
+=== Second Star
+
+There is no second star.

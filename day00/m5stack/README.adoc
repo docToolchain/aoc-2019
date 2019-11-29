@@ -1,0 +1,9 @@
+I'll use the https://m5stack.com/[M5Stack] to solve the puzzle on my arduino.
+
+Here is my first `Hello World`:
+
+[source,c]
+----
+include::day00_m5stack/day00_m5stack.ino[]
+----
+

@@ -1,4 +1,4 @@
-# aoc-2019
+= aoc-2019
 
 WARNING: Spoiler Alert! If you want to solve the aoc problems on your own, do not read any further.
 This repository contains solutions for the problems in several languages.
@@ -15,14 +15,14 @@ The slack channel itself is https://aoc-2019.slack.com/[aoc-2019]
 
 The id of the https://adventofcode.com/2019/leaderboard/private/view/117454[shared leaderboard] is `117454-7d5aa225` .
 
-## The Goal of this repository
+== The Goal of this repository
 
 ... is to
 
 - have a shared code base. It will be interesting to see how the same problem is solved in different languages with different approaches
 - have a development environment in which all examples run out of the box
 
-### How do we ensure that all examples run out of the box?
+=== How do we ensure that all examples run out of the box?
 
 The best solution will be to use https://gitpod.io. Just prefix the URL with `gitpod.io#` or click the button:
 
@@ -59,11 +59,11 @@ The structure we start with is the following:
 ├── ...
 ```
 
-## Documentation
+== Documentation
 
 As you can see in the above repository structure, each folder contains a `description.adoc`.
 It would be great if everybody could explain their solution with a short description.
 
-## Questions?
+== Questions?
 
 => see you on Slack: https://aoc-2019.slack.com/[aoc-2019]

@@ -23,7 +23,6 @@
     %>
 
 </div>
-<div>Be patient. Soon I will add some optional challenges to have even more fun!</div>
 	</div>
 	<%published_posts.each {post ->%>
 		<a href="/${post.uri}"><h2>${post.title}</h2></a>
@@ -33,7 +32,6 @@
 	
 	<hr />
 	
-	<p>Older posts are available in the <a href="${content.rootpath}${config.archive_file}">archive</a>.</p>
 
 </div>
 <div id="push"></div>

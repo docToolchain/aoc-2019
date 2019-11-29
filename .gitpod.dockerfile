@@ -10,8 +10,7 @@ USER gitpod
 # Apply user-specific settings
 #ENV ...
 
-RUN npm install ts-node elm -g \ 
-    && sdk install groovy
+RUN npm install ts-node elm -g 
 
 # Give back control
 USER root

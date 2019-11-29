@@ -1,0 +1,42 @@
+This year, I wil luse Advent of Code to learn ruby.
+The reason is simple.
+I don't know ruby yet and Asciidoctor, the converter for AsciiDoc, is written in ruby.
+So this knowledge should help me to make better use of Asciidoctor.
+
+What I've found to get started with ruby are the http://rubykoans.com/[ruby koans].
+Programming koans are simply put just a bunch of unit tests which you have to fix to get them to pass.
+This way, you also learn the language they are written in.
+You also learn how to write tests in the given language which gives you a good start because you can do test driven development right from the start!
+
+A second goal for this year it to use documentation driven development/design (DDD/D) 🤣.
+With this approach, I first write my thoughts down as documentation and then start to code.
+
+While I write the docs, I will already decided about classes and methods I need.
+I will already add them to the docs as references to the code.
+
+Next I will turn my thoughts into test driven development (TDD).
+As soon as I know what I want to code, I can already write some acceptance criteria and then some tests.
+These tests can also be referenced from the docs.
+
+Now let's start with the simple `hello world`:
+
+.solution.rb
+[source, ruby]
+----
+include::solution.rb[]
+----
+
+Acceptance criteria is that the code returns the text "Hello World" when executed.
+Let's write the tests as bash script :-)
+
+.tests.bash
+[source, bash]
+----
+include::test.bash[]
+----
+
+.results.txt
+[source, text]
+----
+include::results.txt[]
+----

@@ -1,4 +1,6 @@
-I'll use the https://m5stack.com/[M5Stack] to solve the puzzle on my arduino. The M5Stack I bought about one and a half year ago, was a suggestion from a colleague of mine, and I liked the concept, even if there are cheaper boards.
+I'll use the https://m5stack.com/[M5Stack] to solve the puzzle on my arduino. 
+
+The M5Stack I bought about one and a half year ago was a suggestion from a colleague of mine and I liked the concept, even if there are cheaper boards.
 
 The idea was to teach my children something about software, and therefore this M5Stack looked like a good idea, since it was running without having to do some haredware soldering etc..
 

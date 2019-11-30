@@ -1,0 +1,10 @@
+== Groovy
+
+Here is another solution written in Groovy.
+
+For the the time being I keep it simple and just call println.
+
+[source, groovy]
+....
+include::solution.groovy[tags=helper]
+....

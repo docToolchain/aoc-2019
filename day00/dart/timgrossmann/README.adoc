@@ -4,5 +4,10 @@ Hello world for Advent of Code 2019
 
 This year I want to learn a bit about Dart for future Flutter development.
 
-Run the solution with `dart helloWorld.dart.
+[source,dart,numbered]
+----
+include::helloWorld.dart[]
+----
+
+Run the solution with `dart helloWorld.dart`.
 

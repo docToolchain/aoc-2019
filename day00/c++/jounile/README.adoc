@@ -1,0 +1,19 @@
+== Hello World
+
+This solution is written in C++.
+
+=== First Star
+
+Build using command:
+$ g++ solution.cpp -o ./hello-world
+
+Run using:
+$ ./hello-world
+
+....
+include::hello-world.cpp[tags=helper]
+....
+
+=== Second Star
+
+There is no second star.

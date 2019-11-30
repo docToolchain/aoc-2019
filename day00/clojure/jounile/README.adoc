@@ -1,0 +1,22 @@
+== Hello World
+
+This solution is written in Clojure.
+
+=== First Star
+
+Compile:
+$ lein compile
+
+Package
+$ lein uberjar
+
+Run:
+$ lein run
+
+....
+include::hello-world.clj[tags=helper]
+....
+
+=== Second Star
+
+There is no second star.

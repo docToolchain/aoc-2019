@@ -39,16 +39,36 @@ Star two was a bit more evolved.
 I wanted to avoid recursive lambdas. 
 Those are possible (and rather easy in JShell, as JShell allows forward references), but hard to understand.
 
-We settled with the same stream and "flat mapping" each computed fuel value into a new stream, much like in the puzzle itself.
+We first settled with the same stream and "flat mapping" each computed fuel value into a new stream, much like in the puzzle itself.
 "Flat mapping" is the process of taking one element of a stream and create a new stream from it, thus fanning out the elements of the original stream.
+While porting our solution from JShell into an executable Java, I accidently used the wrong variable as initial value for our inner stream (`builder.add(fuelForMass);` instead of `builder.add(fuelForIndividualMass);`).
+I noticed that when playing around ideas to make it more readable.
+
+Let's see if can make things a bit more readable:
 
 .Star Two
 [source,java,numbered]
 ----
+include::Solution.java[tags=equation]
+
 include::Solution.java[tags=starTwo]
 ----
-<1> Here the "flat mapping" of fuel per individual module starts
-<2> The fuel for the mass needs to be added to the new stream
-<3> We add fuel for fuel until we reach 0 or a negative value and hope for the best
+<1> We define a second operator, `computeFuelForFuel`
+<2> That generates a stream of integers in the form of a glorified for-loop.
+    The first argument is the initial value (computing the fuel for the inital fuel), 
+    the second argument checks if we need to compute more fuel,
+    the third is the operator for the next value, that receives the previous one
+<3> We reduce it again, this time not with `0` as the initial value for the fuel, but with the original value we need for the module
+<4> Here we concatenate two operators for the mapping. The rest is the same is in the solution for star one.
 
-And that's about it.
+I was so emberrased for having commited the wrong solution, that I added some simple assertions to the file with values from the puzzle itself:
+
+[source,java,numbered]
+----
+include::Solution.java[tags=someTests]
+----
+
+Be aware that those preconditions are only asserted when you run Java with the `-ea` flag.
+They are not a replacement for real tests, but for this solution, they are good enough.
+
+I'm quite positve suprised that a modern Java solution is a readable 13 lines.

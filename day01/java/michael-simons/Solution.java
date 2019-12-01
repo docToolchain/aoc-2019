@@ -1,6 +1,7 @@
 package aoc2019;
 
 import java.util.function.UnaryOperator;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -15,6 +16,21 @@ public class Solution {
 		UnaryOperator<Integer> computeFuel = mass -> mass/3 - 2;
 		// end::equation[]
 
+		// tag::starTwo[]
+		UnaryOperator<Integer> computeFuelForFuel = fuelForIndividualMass ->  // <1>
+		Stream
+			.iterate(computeFuel.apply(fuelForIndividualMass), fuel -> fuel > 0, computeFuel) // <2>
+			.reduce(fuelForIndividualMass, Integer::sum); // <3>
+
+		// end::starTwo[]
+
+		// tag::someTests[]
+		assert computeFuel.andThen(computeFuelForFuel).apply(1969) == 966;
+		assert computeFuel.andThen(computeFuelForFuel).apply(100756) == 50346;
+		assert Stream.of(1969, 100756).map(computeFuel.andThen(computeFuelForFuel))
+			.reduce(0, Integer::sum) == 51312;
+		// end::someTests[]
+
 		// tag::starOne[]
 		var fuelForMass = Files.readAllLines(Path.of("input.txt")).stream() // <1>
 			.map(Integer::parseInt) // <2>
@@ -27,22 +43,10 @@ public class Solution {
 		// tag::starTwo[]
 		var totalFuel = Files.readAllLines(Path.of("input.txt")).stream()
 			.map(Integer::parseInt)
-			.map(computeFuel)
-			.flatMap(fuelForIndividualMass -> { // <1>
-				var builder = Stream.<Integer>builder();
-				builder.add(fuelForMass); // <2>
-				for(
-					var fuel = computeFuel.apply(fuelForIndividualMass); 
-					fuel > 0; 
-					fuel = computeFuel.apply(fuel)
-				) { // <3>
-					builder.add(fuel);
-				}
-				return builder.build();
-			})
+			.map(computeFuel.andThen(computeFuelForFuel)) // <4>
 			.reduce(0, Integer::sum);
-		// end::starTwo[]
 
 		System.out.println("Total fuel needed " + totalFuel);
+		// end::starTwo[]
 	}
 }

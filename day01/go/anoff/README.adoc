@@ -1,0 +1,21 @@
+Puzzle: https://adventofcode.com/2019/day/1[The Tyranny of the Rocket Equation]
+
+== Part 1
+
+The link:https://stackoverflow.com/questions/48124565/why-does-vscode-delete-golang-source-on-save[biggest struggle] was to configure VScode to allow me adding the `"math"` package to my solution.
+
+I also did not read the manual correctly and forgot to subtract minus 2 at first.
+
+== Solution in Go
+
+[source, go]
+....
+include::solution.go[tag=part1]
+....
+
+=== Test cases
+
+[source, go]
+....
+include::solution_test.go[]
+....

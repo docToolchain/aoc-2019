@@ -1,0 +1,10 @@
+3226488
+Loaded suite ./testsuite
+Started
+..
+Finished in 0.000650887 seconds.
+-------------------------------------------------------------------------------
+2 tests, 5 assertions, 0 failures, 0 errors, 0 pendings, 0 omissions, 0 notifications
+100% passed
+-------------------------------------------------------------------------------
+3072.73 tests/s, 7681.82 assertions/s

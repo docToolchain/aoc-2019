@@ -1,0 +1,60 @@
+== The Tyranny of the Rocket Equation
+
+Since I still don't know too much about Ruby, I will have to google most of the solution.
+
+First, let's set up the right equation as method.
+It seems that my knowledge about Groovy helps me a lot with Ruby.
+A method will return the result of the last statement, so no explicit `return` necessary.
+And the Integer DIV also rounds by default.
+
+.rocket equations
+[source,ruby,numbered]
+----
+include::solution.rb[tags=equation]
+----
+
+Let's write some tests for this. 
+I found a good https://en.wikibooks.org/wiki/Ruby_Programming/Unit_testing[introductionn to unit test with ruby].
+That helped to get the tests qickly up and running.
+
+.rocket equations tests
+[source,ruby,numbered]
+----
+include::testsuite.rb[tags=acceptance_tests1]
+----
+
+Now I need a method which adds the required fuel up.
+I already now about ruby arrays from the koans (day00), but I still have to figure out how to iterate over an array.
+
+.sum up the fuel
+[source,ruby,numbered]
+----
+include::solution.rb[tags=sum_up]
+----
+
+And again some tests
+
+.sum up tests
+[source,ruby,numbered]
+----
+include::testsuite.rb[tags=acceptance_tests2]
+----
+
+Now I need to read in the file with my input for day01.
+
+.read file
+[source,ruby,numbered]
+----
+include::solution.rb[tags=read_file]
+----
+
+This gives me the solution 
+
+include::solution_day1s1.txt[]
+
+Here is also the result of the tests:
+
+[source]
+----
+include::testresult_day1s1.txt[]
+----

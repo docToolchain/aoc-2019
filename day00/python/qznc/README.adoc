@@ -1,0 +1,7 @@
+Hello World for Advent of Code 2019
+
+== Python
+
+[Jupyter](https://jupyter.org/) let's me mix documentation on code nicely.
+
+Integration with gitpod.io and Asciidoc is still a question.

@@ -1,0 +1,26 @@
+Puzzle: https://adventofcode.com/2019/day/1[The Tyranny of the Rocket Equation]
+
+== Part 1
+
+First program in ruby.
+Had to figure out how to layout the main file to allow multiple methods and running tests.
+Solution is pretty straight forward.
+Way shorter than go 😲
+
+== Part 2
+
+Decided to do a loop instead of a recursion to find the total amount of fuel.
+
+== Solution in Go
+
+[source, ruby]
+....
+include::solution.rb[]
+....
+
+=== Test cases
+
+[source, ruby]
+....
+include::solution_test.rb[]
+....

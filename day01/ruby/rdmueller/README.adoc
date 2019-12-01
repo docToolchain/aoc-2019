@@ -2,15 +2,19 @@
 
 Since I still don't know too much about Ruby, I will have to google most of the solution.
 
+The original puzzle can be found at https://adventofcode.com/2019/day/1 .
+
+=== Star 1
+
 First, let's set up the right equation as method.
 It seems that my knowledge about Groovy helps me a lot with Ruby.
 A method will return the result of the last statement, so no explicit `return` necessary.
 And the Integer DIV also rounds by default.
 
-.rocket equations
+.rocket equation
 [source,ruby,numbered]
 ----
-include::solution.rb[tags=equation]
+include::solution/day1s1.rb[tags=equation]
 ----
 
 Let's write some tests for this. 
@@ -20,7 +24,7 @@ That helped to get the tests qickly up and running.
 .rocket equations tests
 [source,ruby,numbered]
 ----
-include::testsuite.rb[tags=acceptance_tests1]
+include::tests/day1s1.rb[tags=acceptance_tests1]
 ----
 
 Now I need a method which adds the required fuel up.
@@ -29,7 +33,7 @@ I already now about ruby arrays from the koans (day00), but I still have to figu
 .sum up the fuel
 [source,ruby,numbered]
 ----
-include::solution.rb[tags=sum_up]
+include::solution/day1s1.rb[tags=sum_up]
 ----
 
 And again some tests
@@ -37,7 +41,7 @@ And again some tests
 .sum up tests
 [source,ruby,numbered]
 ----
-include::testsuite.rb[tags=acceptance_tests2]
+include::tests/day1s1.rb[tags=acceptance_tests2]
 ----
 
 Now I need to read in the file with my input for day01.
@@ -45,16 +49,46 @@ Now I need to read in the file with my input for day01.
 .read file
 [source,ruby,numbered]
 ----
-include::solution.rb[tags=read_file]
+include::solution/day1s1.rb[tags=read_file]
 ----
 
 This gives me the solution 
 
-include::solution_day1s1.txt[]
+include::results/solution_day1s1.out[]
 
 Here is also the result of the tests:
 
 [source]
 ----
-include::testresult_day1s1.txt[]
+include::results/testresult_day1s1.out[]
+----
+
+=== Star 2
+
+For star 2, we have to change the rocket equation:
+
+.new rocket equation
+[source,ruby,numbered]
+----
+include::solution/day1s2.rb[tags=equation]
+----
+
+As you can see, I decided to use an iterative and not a recursive approach.
+
+.additional tests
+[source,ruby,numbered]
+----
+include::tests/day1s2.rb[tags=acceptance_tests]
+----
+
+Works quite nice.
+The result is
+
+include::results/solution_day1s2.out[]
+
+and the result of the additional tests is:
+
+[source]
+----
+include::results/testresult_day1s2.out[]
 ----

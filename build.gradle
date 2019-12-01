@@ -135,7 +135,7 @@ The riddle for day ${day-"day"} can be found at https://adventofcode.com/2019/da
 """
             data.eachWithIndex { datum, i ->
                 def coder = datum[0]
-                def language = datum[1]
+                def language = datum[1].replaceAll("[+]","p")
                 dayIndex += """\
 | $coder | link:/generated/coder/${coder}/generatedDays.html#_day_${day-"day"}_${language}[$language]
 """

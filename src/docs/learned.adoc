@@ -14,21 +14,44 @@
 
 == Today I learned..
 
-A collection of everyones daily learnings
+A collection of everyones daily learnings.
 
-=== Day 1
+You can add your own content at https://github.com/docToolchain/aoc-2019/blob/master/src/docs/learned.adoc[/src/docs/learned.adoc]
+
+=== Day 00
 
 [cols="1,10"]
 |====
 
-|{rdmueller}
-a| * just started
+a|{rdmueller}
+a| as you can clearly see, I just noticed that I am not a web designer - at least not for an X-Mas theme ;-) 🎅 🎄 🤣 +
+  you can do test driven development with bash!
 
-|{anoff}
+|====
+
+=== Day 01
+
+[cols="1,10"]
+|====
+
+a|{rdmueller}
+a| * to learn ruby through https://rubykoans.com is fun!
+
+a|{anoff}
 a|  * having solved a problem in one language (Go) makes it easy to solve it in another (Ruby)
     * Ruby divisions are `floor` by default
     * Ruby has `.map` and `.reduce` operations 💖
     * file and string handling in Ruby is fun e.g. `File.read("./input.txt").split("\n").map(&:to_i)`
 
+a|{RJPlog}
+a|  * The problem was not the coding but not having read the specification thoroughly.
+    * Having the wrong test cases does not help you finding the problem
+
 |====
 
+=== Day 01
+
+[cols="1,10"]
+|====
+
+|====

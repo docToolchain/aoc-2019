@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-require_relative "solution"
+require_relative "../solution/day1s1"
 require "test/unit"
 
 class TestEquation < Test::Unit::TestCase

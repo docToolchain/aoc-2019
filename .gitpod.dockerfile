@@ -17,7 +17,16 @@ RUN curl https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - &
     apt-get -y autoremove && \
     apt-get -y clean && \
     rm -rf /var/lib/apt/lists/*;
-    
+
+# Set up JAVA_CMD (required by Leiningen)
+ENV JAVA_CMD /home/gitpod/.sdkman/candidates/java/current/bin/java
+ENV PATH $JAVA_CMD:$PATH
+
+# Install Leiningen for Clojure
+RUN wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
+RUN chmod +x lein
+RUN mv lein /usr/local/bin
+
 USER gitpod
 # Apply user-specific settings
 #ENV ...

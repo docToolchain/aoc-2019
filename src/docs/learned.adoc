@@ -14,7 +14,9 @@
 
 == Today I learned..
 
-A collection of everyones daily learnings
+A collection of everyones daily learnings.
+
+You can add your own content at https://github.com/docToolchain/aoc-2019/blob/master/src/docs/learned.adoc[/src/docs/learned.adoc]
 
 === Day 00
 

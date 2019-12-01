@@ -4,7 +4,7 @@ Between coming back from singing in church and preparing the lunch I had no time
 
 Therefore here not really quick but dirty the code for the first part (at the end it was good enough for reaching part 2 :-)):
 
-It took me a little while until I found out what I made wrong with the second apart, but finally I made it!!!
+It took me a little while until I found out what I made wrong with the second a part, but finally I made it!!!
 
 [source,c]
 ----

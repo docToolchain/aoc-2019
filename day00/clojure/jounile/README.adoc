@@ -1,22 +1,13 @@
 == Hello World
 
-This solution is written in Clojure.
+This Hello World is written in Clojure.
 
 === First Star
-
-Compile:
-$ lein compile
-
-Package
-$ lein uberjar
 
 Run:
 $ lein run
 
 ....
-include::hello-world.clj[tags=helper]
+include::hello-world/src/hello_world/core.clj[]
 ....
 
-=== Second Star
-
-There is no second star.

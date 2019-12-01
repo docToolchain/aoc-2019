@@ -1,0 +1,22 @@
+This solution is written in Python.
+It is the solution for the first day of AoC:
+https://adventofcode.com/2019/day/1[The Tyranny of the Rocket Equation]
+
+https://aoc-2019.netlify.com
+
+== Fuel calculation
+
+The solution for the first part is pretty simple. 
+The function `calculate_fuel_requirement` calculates
+the required fuel based on the given mass. 
+
+The solution for the second part is a bit more complicated. 
+The function `calculate_fuel_requirement_plus` calculates
+the required fuel based on the given mass of the required fuel.
+https://en.wikipedia.org/wiki/Recursion[Recursion] is the hint
+you need. 
+
+[source, python]
+....
+include::solution.py[]
+....

@@ -1,0 +1,26 @@
+Puzzle: https://adventofcode.com/2019/day/1[The Tyranny of the Rocket Equation]
+
+== Part 1
+
+The link:https://stackoverflow.com/questions/48124565/why-does-vscode-delete-golang-source-on-save[biggest struggle] was to configure VScode to allow me adding the `"math"` package to my solution.
+
+I also did not read the manual correctly and forgot to subtract minus 2 at first.
+
+== Part 2
+
+I solved the _fuel needs more fuel_ dilemma by creating a `requiredFuelRecursive` function that takes its intermediate result and calls itself again.
+To prevent an endless loop it checks the intermediate result to be positive before recursion.
+
+== Solution
+
+[source, go]
+....
+include::solution.go[]
+....
+
+=== Test cases
+
+[source, go]
+....
+include::solution_test.go[]
+....

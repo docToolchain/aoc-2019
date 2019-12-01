@@ -16,15 +16,26 @@
 
 A collection of everyones daily learnings
 
-=== Day 1
+=== Day 00
 
 [cols="1,10"]
 |====
 
-|{rdmueller}
-a| * just started
+a|{rdmueller}
+a| as you can clearly see, I just noticed that I am not a web designer - at least not for an X-Mas theme ;-) 🎅 🎄 🤣 +
+  you can do test driven development with bash!
 
-|{anoff}
+|====
+
+=== Day 01
+
+[cols="1,10"]
+|====
+
+a|{rdmueller}
+a| * to learn ruby through https://rubykoans.com is fun!
+
+a|{anoff}
 a|  * having solved a problem in one language (Go) makes it easy to solve it in another (Ruby)
     * Ruby divisions are `floor` by default
     * Ruby has `.map` and `.reduce` operations 💖
@@ -32,3 +43,9 @@ a|  * having solved a problem in one language (Go) makes it easy to solve it in 
 
 |====
 
+=== Day 01
+
+[cols="1,10"]
+|====
+
+|====

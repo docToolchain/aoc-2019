@@ -24,7 +24,11 @@ A collection of everyones daily learnings
 |{rdmueller}
 a| * just started
 
-
+|{anoff}
+a|  * having solved a problem in one language (Go) makes it easy to solve it in another (Ruby)
+    * Ruby divisions are `floor` by default
+    * Ruby has `.map` and `.reduce` operations 💖
+    * file and string handling in Ruby is fun e.g. `File.read("./input.txt").split("\n").map(&:to_i)`
 
 |====
 

@@ -19,7 +19,7 @@ public class Solution {
 		var fuelForMass = Files.readAllLines(Path.of("input.txt")).stream() // <1>
 			.map(Integer::parseInt) // <2>
 			.map(computeFuel) // <3>
-			.reduce(0, (a,b) -> a + b); // <4>
+			.reduce(0, Integer::sum); // <4>
 
 		System.out.println("Fuel for mass " + fuelForMass);
 		// end::starOne[]
@@ -40,7 +40,7 @@ public class Solution {
 				}
 				return builder.build();
 			})
-			.reduce(0, (a,b) -> a + b);
+			.reduce(0, Integer::sum);
 		// end::starTwo[]
 
 		System.out.println("Total fuel needed " + totalFuel);

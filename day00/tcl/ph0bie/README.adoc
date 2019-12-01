@@ -1,0 +1,13 @@
+== Hello World
+
+This solution is written in tcl (hail to tcl).
+
+=== First Star
+
+The solution is as simple as possible.
+Execute it with >tclsh helloworld.tcl
+
+[source, tcl, numbered]
+....
+include::helloworld.tcl[]
+....

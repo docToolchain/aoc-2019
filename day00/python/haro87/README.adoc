@@ -1,0 +1,13 @@
+This solution is written in Python.
+It is the solution for becoming a team member of the aoc-2019 community.
+
+https://aoc-2019.netlify.com
+
+== Hello, world!
+
+The solution is pretty simple, just one line of code.
+
+[source, python]
+....
+include::solution.py[]
+....

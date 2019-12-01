@@ -1,0 +1,17 @@
+I'll use the https://m5stack.com/[M5Stack] to solve the puzzle on my arduino. I guess all info you may be interested in m5stack can be found on the homepage, at least it is more than I know by myself about it ;-)
+
+The M5Stack I bought about one and a half year ago was a suggestion from a colleague of mine and I liked the concept, even if there are cheaper boards.
+
+The idea was to teach my children something about software, and therefore this M5Stack looked like a good idea, since it was running without having to do some haredware soldering etc..
+
+But so far it turned out as an useless exercise, since my little programms cannot compete against fortnite :-(. 
+
+So at least I have some fun, started learning something about git, github and some other stuff (I started my first programming experience with a C64 in the early 1980ies, software is something I am interested since this time, but I am not coding in my job) and hopefully it will help me through the AoC ;-)
+
+Here is my first `Hello World`:
+
+[source,c]
+----
+include::day00_m5stack.ino[]
+----
+

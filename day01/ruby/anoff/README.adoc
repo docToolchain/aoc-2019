@@ -11,7 +11,7 @@ Way shorter than go 😲
 
 Decided to do a loop instead of a recursion to find the total amount of fuel.
 
-== Solution in Go
+== Solution
 
 [source, ruby]
 ....

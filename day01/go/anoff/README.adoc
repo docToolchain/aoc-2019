@@ -11,7 +11,7 @@ I also did not read the manual correctly and forgot to subtract minus 2 at first
 I solved the _fuel needs more fuel_ dilemma by creating a `requiredFuelRecursive` function that takes its intermediate result and calls itself again.
 To prevent an endless loop it checks the intermediate result to be positive before recursion.
 
-== Solution in Go
+== Solution
 
 [source, go]
 ....

@@ -24,6 +24,8 @@ USER gitpod
 
 RUN npm install ts-node elm -g 
 
+SHELL ["/bin/bash", "-c"]
+
 RUN bash sdk install groovy && \
     bash sdk install java
 

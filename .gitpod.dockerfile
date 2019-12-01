@@ -30,6 +30,8 @@ RUN source "$HOME/.sdkman/bin/sdkman-init.sh" && \
     sdk install groovy && \
     sdk install java
 
+SHELL ["/bin/sh", "-c"]
+
 # Give back control
 USER root
 

@@ -24,9 +24,8 @@ USER gitpod
 
 RUN npm install ts-node elm -g 
 
-RUN . "$HOME/.sdkman/bin/sdkman-init.sh" && \
-    sdk install groovy && \
-    sdk install java
+RUN bash sdk install groovy && \
+    bash sdk install java
 
 # Give back control
 USER root

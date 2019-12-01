@@ -1,0 +1,16 @@
+This solution is written in Python.
+It is the solution for the second day of AoC:
+https://adventofcode.com/2019/day/2[Not known yet]
+
+https://aoc-2019.netlify.com
+
+== Fuel calculation
+
+The solution for the first part is ...
+
+The solution for the second part is ...
+
+[source, python]
+....
+include::solution.py[]
+....

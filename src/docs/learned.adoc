@@ -43,6 +43,10 @@ a|  * having solved a problem in one language (Go) makes it easy to solve it in 
     * Ruby has `.map` and `.reduce` operations 💖
     * file and string handling in Ruby is fun e.g. `File.read("./input.txt").split("\n").map(&:to_i)`
 
+a|{RJPlog}
+a|  * The problem was not the coding but not having read the specification thoroughly.
+    * Having the wrong test cases does not help you finding the problem
+
 |====
 
 === Day 01

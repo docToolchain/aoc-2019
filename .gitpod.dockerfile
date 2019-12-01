@@ -27,8 +27,8 @@ RUN npm install ts-node elm -g
 SHELL ["/bin/bash", "-c"]
 
 RUN source "$HOME/.sdkman/bin/sdkman-init.sh" && \
-    bash sdk install groovy && \
-    bash sdk install java
+    sdk install groovy && \
+    sdk install java
 
 # Give back control
 USER root

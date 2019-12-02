@@ -12,6 +12,6 @@ Here is my first `Hello World`:
 
 [source,c]
 ----
-include::day00_m5stack/day00_m5stack.ino[]
+include::day00_m5stack.ino[]
 ----
 

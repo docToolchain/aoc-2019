@@ -1,0 +1,16 @@
+Hello World for Advent of Code 2019
+
+== Day 1 in Python
+
+https://jupyter.org/[Jupyter] let's me mix documentation on code nicely.
+
+This notebook can be executed in gitpod via:
+
+[source,bash]
+-----
+/home/gitpod/.pyenv/versions/3.7.4/bin/jupyter nbconvert --execute AOC-2019-01.ipynb 
+-----
+
+++++
+include::AOC-2019-01.html[]
+++++

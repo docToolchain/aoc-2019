@@ -11,7 +11,7 @@
 :gysel: image:https://avatars0.githubusercontent.com/u/1065960?s=40[link=https://github.com/gysel]
 :tschulte: image:https://avatars1.githubusercontent.com/u/203910?s=40[link=https://github.com/tschulte]
 :olithissen: image:https://avatars1.githubusercontent.com/u/13063051?s=40[link=https://github.com/olithissen]
-:RJPlog: image:https://avatars3.githubusercontent.com/u/44948239?s=460&v=4[link=https://github.com/RJPlog]
+:RJPlog: image:https://avatars3.githubusercontent.com/u/44948239?s=40[link=https://github.com/RJPlog]
 
 
 == Today I learned..

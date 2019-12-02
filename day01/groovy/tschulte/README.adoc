@@ -1,0 +1,23 @@
+== The Tyranny of the Rocket Equation
+
+=== First Star
+
+The sollution for the first star was pretty straightforward.
+Iterate over all lines in the input file, convert the line's content to an int, calculate the required fuel and sum all values.
+
+[source,groovy]
+....
+include::day01_1.groovy[]
+....
+
+=== Second Star
+
+For the second star, I first misunderstood the problem and tried to take the result from the first star and calculate the required fuel for that.
+But that resulted in a wrong value.
+
+The final solution was to refactor the calculateFuel to recursively call itself, when the fuel was greater than 0.
+
+[source,groovy]
+....
+include::day01_2.groovy[tags=calculateFuelRecursive]
+....

@@ -1,0 +1,18 @@
+== Hello World
+
+This solution is written in Kotlin.
+
+=== First Star
+
+The solution is quite straight forward.
+
+Just run "kotlinc-jvm -script solution.kts".
+
+[source, kotlin, numbered]
+....
+include::solution.kts[]
+....
+
+=== Second Star
+
+There is no second star.

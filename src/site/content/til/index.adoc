@@ -8,15 +8,4 @@
 
 :icons: font
 
-== **T**oday *I* **L**earned
-
-Feel free to add a daily statement about your AoC Experience!
-
-=== Day00
-
-[cols="1,6"]
-|===
-| RalfDMueller
-| as you can clearly see, I just noticed that I am not a web designer - at least not for an X-Mas theme ;-) 🎅 🎄 🤣 +
-  you can do test driven development with bash!
-|===
+include::../../../docs/learned.adoc[]

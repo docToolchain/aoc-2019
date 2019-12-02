@@ -1,0 +1,9 @@
+{
+    "files": [
+        "src/solution1.ts", "src/solution2.ts", "./src/Modul.ts", "./src/Spacecraft.ts" , "./src/CalculateFuelService.ts" , "./src/CalculateFuelWithFuelService.ts"
+    ],
+    "compilerOptions": {
+        "noImplicitAny": true,
+        "target": "es5"
+    }
+}

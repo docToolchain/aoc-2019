@@ -1,0 +1,16 @@
+== Day01
+
+This solution is written in PHP.
+It is the solution for the first day of AoC:
+https://adventofcode.com/2019/day/1[The Tyranny of the Rocket Equation]
+
+=== First Star
+The calculation to get the required fuel per module is straight forward and done in day01-1.php
+
+=== Second Star
+The was a beautiful christmas market in our little town......... :-)
+
+[source, gphp, numbered]
+....
+include::day01-1.php
+....

@@ -51,11 +51,13 @@ a|  * The problem was not the coding but not having read the specification thoro
 
 |====
 
-=== Day 01
+=== Day 02
 
 [cols="1,10"]
 |====
 
+a|{RJPlog}
+a|  * Again having the wrong test cases does not help you finding the problem
+    * being to lasy to find the number of elements of an array by code may couse some trouble if you just declare a value you think might fit
+
 |====
-
-

@@ -1,0 +1,16 @@
+This solution is written in Python.
+It is the solution for the third day of AoC:
+https://adventofcode.com/2019/day/3[]
+
+https://aoc-2019.netlify.com
+
+== ??
+
+The solution for the first part ...
+
+The solution for the second part ... 
+
+[source, python]
+....
+include::solution.py[]
+....

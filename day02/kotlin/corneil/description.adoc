@@ -1,9 +1,0 @@
-= Day 02 - 1202 Program Alarm
-
-It will be simple to add more operation with the support for an operation lambda.
-
-
-[source,kotlin,numbered]
-----
-include::src/main/kotlin/solution.kt[]
-----

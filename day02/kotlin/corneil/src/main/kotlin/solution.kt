@@ -6,8 +6,15 @@ fun readProgram(input: String) = input.split(",").map { it.toInt() }
 
 fun readProgram(input: File) = readProgram(input.readText().trim())
 
+inline fun deref(input: List<Int>, address: Int): Int = input[input[address]]
+
+inline fun assign(input: MutableList<Int>, address: Int, value: Int) {
+    input[input[address]] = value
+}
+
 fun applyOperation(input: MutableList<Int>, pc: Int, operation: (Int, Int) -> Int): Int {
-    input[input[pc + 3]] = operation(input[input[pc + 1]], input[input[pc + 2]])
+    val result = operation(deref(input, pc + 1), deref(input, pc + 2))
+    assign(input, pc + 3, result)
     return pc + 4
 }
 
@@ -38,11 +45,10 @@ fun executeProgram(input: MutableList<Int>): List<Int> {
 }
 
 // We make a copy of the original for testing an iteration.
-fun executeIteration(program: MutableList<Int>, i: Int, j: Int): List<Int> {
-    val copyX = mutableListOf<Int>()
-    copyX.addAll(program)
-    copyX[1] = i
-    copyX[2] = j
+fun executeIteration(program: List<Int>, noun: Int, verb: Int): List<Int> {
+    val copyX = program.toMutableList()
+    copyX[1] = noun
+    copyX[2] = verb
     return executeProgram(copyX)
 }
 

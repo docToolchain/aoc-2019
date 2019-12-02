@@ -11,7 +11,8 @@
 :gysel: image:https://avatars0.githubusercontent.com/u/1065960?s=40[link=https://github.com/gysel]
 :tschulte: image:https://avatars1.githubusercontent.com/u/203910?s=40[link=https://github.com/tschulte]
 :olithissen: image:https://avatars1.githubusercontent.com/u/13063051?s=40[link=https://github.com/olithissen]
-:RJPlog: image:https://avatars3.githubusercontent.com/u/44948239?s=460&v=40[link=https://github.com/RJPlog]
+:RJPlog: image:https://avatars3.githubusercontent.com/u/44948239?s=40[link=https://github.com/RJPlog]
+
 
 == Today I learned..
 
@@ -45,8 +46,8 @@ a|  * having solved a problem in one language (Go) makes it easy to solve it in 
     * file and string handling in Ruby is fun e.g. `File.read("./input.txt").split("\n").map(&:to_i)`
 
 a|{RJPlog}
-a|  * The problem was not the coding but not having read the specification thoroughly.
-    * Having the wrong test cases does not help you finding the problem
+a|  * the problem was not the coding but not having read the specification thoroughly.
+    * having the wrong test cases does not help you finding the problem
 
 |====
 
@@ -56,7 +57,7 @@ a|  * The problem was not the coding but not having read the specification thoro
 |====
 
 a|{RJPlog}
-a|  * Again having the wrong test cases does not help you finding the problem
+a|  * again having the wrong test cases does not help you finding the problem
     * being to lasy to find the number of elements of an array by code may couse some trouble if you just declare a value you think might fit
 
 |====

@@ -128,7 +128,7 @@ include::${file.canonicalPath-(currentFolder.canonicalPath+'/')}[]
             dayIndex += """
 === Day ${day-"day"}
 
-The riddle for day ${day-"day"} can be found at https://adventofcode.com/2019/day/${day-"day"}.
+The riddle for day ${day-"day"} can be found at https://adventofcode.com/2019/day/${(day-"day").replaceAll("^0","")}.
 
 [cols="2"]
 |===

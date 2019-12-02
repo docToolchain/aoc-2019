@@ -14,6 +14,6 @@ line arguments.
 == Solution
 
 [source, haskell]
-```
-include::answer.hs
-```
+----
+include::answer.hs[]
+----

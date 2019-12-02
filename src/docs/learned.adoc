@@ -60,4 +60,10 @@ a|{RJPlog}
 a|  * again having the wrong test cases does not help you finding the problem
     * being to lasy to find the number of elements of an array by code may couse some trouble if you just declare a value you think might fit
 
+a|{rdmueller}
+a| Use a https://de.wikipedia.org/wiki/Shebang[shebang] like `#!/usr/bin/env ruby` at the start of your file, 
+do a `chmod +x solution.rb` on your file 
+and you can easily execute it as `./solution.rb`,
+because it now nows how it wants to be executed! ⭐ 
+
 |====

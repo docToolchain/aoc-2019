@@ -1,0 +1,10 @@
+This solution is written in Python.
+It is the solution for the first day of AoC:
+https://adventofcode.com/2019/day/1[The Tyranny of the Rocket Equation]
+
+== Python Fuel Calculation
+
+[source, python]
+....
+include::solution.py[]
+....

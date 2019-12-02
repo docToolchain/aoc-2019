@@ -6,7 +6,7 @@ https://adventofcode.com/2019/day/1[The Tyranny of the Rocket Equation]
 
 I want to get more into test drive development, so this seems like a good opportunity to get some experience and play around with it!
 
-== Answer one
+== Answers one and two
 
 You can run the application by typign `python3 solution.py`.
 Run the tests with `python3 -m unittest test_solution.py`.

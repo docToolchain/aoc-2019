@@ -1,0 +1,44 @@
+== 1202 Program Alarm
+
+The main problem to tackle today is to work on state but keeping the original state around for later use.
+
+For today, I decided to use Kotlin.
+
+The solution can be run as a Kotlin script: `kotlinc -script solution.kts`
+
+To solve the problem, one needs to access arbitrary elements by index.
+So for that either an array fits nicely or an index accessible collection.
+
+Reading the input is pretty much the same with modern days Java 8 / Java 11:
+
+[source,kotlin,numbered,indent=0]
+----
+include::solution.kts[tags=readingTheInput]
+----
+
+The program is a Kotlin `List`, which by default is immutable.
+That is nice, so we don't change the original program by accident when run.
+
+I was more focussed on writing idiomatic Kotlin code than writing something more elaborate than my straight forward solution.
+The solution is a function taking in the program as a list and two additional `Int`-parameter representing the `noun` and `verb` to set.
+The function returns the memory after the program run as an `IntArray`.
+
+[source,kotlin,numbered,indent=0]
+----
+include::solution.kts[tags=theSolution]
+----
+<1> Define the supported operations (plus and times)
+<2> Create a mutable `IntArray` from the `List<Int>` so that we can modify it
+<3> Iterate over all instructions, which have a maximum length of 4
+<4> Slice out one instruction. Care must be taken not to read over the end of the array when the op code is `99`
+<5> Use `when` as a statement, reacting on the range of supported opcodes and the special opcode to terminate the program
+
+The solution for the second star is a brute force nested loop:
+
+[source,kotlin,numbered,indent=0]
+----
+include::solution.kts[tags=starTwo]
+----
+
+There are by a high chance nicer solutions to that, but there's only so much time in a lunch break.
+Note that I don't have to read the file multiple times, as the program is stored in an immutable collection.

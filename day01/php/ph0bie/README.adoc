@@ -8,7 +8,7 @@ https://adventofcode.com/2019/day/1[The Tyranny of the Rocket Equation]
 The calculation to get the required fuel per module is straight forward and done in day01-1.php
 
 === Second Star
-The was a beautiful christmas market in our little town......... :-)
+There was a beautiful christmas market in our little town......... :-)
 
 [source, gphp, numbered]
 ....

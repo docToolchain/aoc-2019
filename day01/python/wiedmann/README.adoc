@@ -1,0 +1,8 @@
+Day 1 - Solution in Python
+
+Getting to know gitpod - should really start not pressing "CTRL+W anymore :-)
+
+[source, python]
+....
+include::solution.py[]
+....

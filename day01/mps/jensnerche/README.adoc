@@ -1,0 +1,36 @@
+= Doing the Day 01 Exercise with JetBrains MPS
+
+== Preparations: download, install, open project
+
+* Download and install MetaProgrammingSystem (MPS) 2019.1 from https://www.jetbrains.com/mps/download/previous.html
+* In MPS, open project aoc-2019/day01/mps/jensnerche
+* Open the Project view
+
+
+== Create editor and other tools from the language specification
+
+* Make or Rebuild Language Fuel by right-clicking on the "[L] Fuel" in the project tree
+* Extend the solution "Fuel.sandbox"
+* You'll find a model "sandbox" with one program written in Fuel called "Example"
+* In Example, there are some of the example numbers given in the exercise text
+
+== Write your own program in Fuel
+
+* Create your own program by right-clicking on [M] sandbox, select new -> fuel counter-upper
+* Give your program a name (you'll see how in the project view your new node also gets this name)
+* Download the exercise input file, if not yet done
+* Enter the *absolute* path to the input file in the field next to "Input file path:" (with slashes, e.g. in Windows C:/Temp/input.txt)
+* As in JetBrains universe usual, so-called Intensions can be used by Alt-Enter or clicking on the yellow bubble on the left side
+* Choose "Read Module Masses" from the Intensions menu
+* Below "Modules", there should now be lines with module masses and calculated fuel, additional fuel and total fuel
+* Your program now contains all program lines that are needed to run
+
+
+== Execute your Fuel program
+
+* until now, in all cases I created runnable (machine) code from the programs with Generators and Compilers, 
+  but in Advent of Code I wanted to try out an interpreter approach
+* therefor, no executable binary is created
+* instead, run the interpreter by open the Intensions menu and choose "Calculate Sum of Fuel Requirements"
+* after that, you should find the calculated result in the field next to "Sum of fuel requirements"
+

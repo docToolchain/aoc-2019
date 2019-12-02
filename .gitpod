@@ -6,4 +6,4 @@ ports:
 - port: 8888
   onOpen: open-browser
 tasks:
-  - command: "sdk install groovy"
+  - command: "echo 'have fun!'"

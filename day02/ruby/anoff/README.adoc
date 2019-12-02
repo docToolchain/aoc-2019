@@ -1,0 +1,27 @@
+Puzzle: https://adventofcode.com/2019/day/2[1202 Program Alarm]
+
+== Part 1
+
+At first I was reminded of last years puzzle.
+But thinking about it for a while it seemed to be the best approach to just manipulate the program in memory.
+After figuring out how ruby passes data - by argument - the implementation was rather straight forward.
+
+However I forgot to RTFM again and did not configure my program prior to start and was wondering why test cases passed and the program failed.
+
+== Part 2
+
+The major challenge for part 2 was to figure out how I can clone a list in ruby to make sure that each program execution really starts with a clean memory.
+
+== Solution
+
+[source, ruby]
+....
+include::solution.rb[]
+....
+
+=== Test cases
+
+[source, ruby]
+....
+include::solution_test.rb[]
+....

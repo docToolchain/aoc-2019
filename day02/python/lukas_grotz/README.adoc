@@ -1,0 +1,17 @@
+== 1202 Program Alarm
+
+The solution for this puzzle is in python.
+It is the solution for the first day of AoC:
+https://adventofcode.com/2019/day/2[1202 Program Alarm]
+
+I want to get more into test drive development, so this seems like a good opportunity to get some experience and play around with it!
+
+== Answers one and two
+
+You can run the application by typign `python3 solution.py`.
+Run the tests with `python3 -m unittest test_solution.py`.
+
+[source, python]
+....
+include::solution.py[]
+....

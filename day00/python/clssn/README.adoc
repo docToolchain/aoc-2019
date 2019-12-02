@@ -1,0 +1,14 @@
+Hello AOC2019
+
+== Python
+
+Let's see whether I'll find the time for AOC this year.
+Saying 'hello' is definitely possible though :-)
+
+Run `python solution.py`
+
+[source, python]
+.... 
+include::solution.pyp[]
+....
+

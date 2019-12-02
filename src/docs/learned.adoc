@@ -11,20 +11,59 @@
 :gysel: image:https://avatars0.githubusercontent.com/u/1065960?s=40[link=https://github.com/gysel]
 :tschulte: image:https://avatars1.githubusercontent.com/u/203910?s=40[link=https://github.com/tschulte]
 :olithissen: image:https://avatars1.githubusercontent.com/u/13063051?s=40[link=https://github.com/olithissen]
+:RJPlog: image:https://avatars3.githubusercontent.com/u/44948239?s=40[link=https://github.com/RJPlog]
+
 
 == Today I learned..
 
-A collection of everyones daily learnings
+A collection of everyones daily learnings.
 
-=== Day 1
+You can add your own content at https://github.com/docToolchain/aoc-2019/blob/master/src/docs/learned.adoc[/src/docs/learned.adoc]
+
+=== Day 00
 
 [cols="1,10"]
 |====
 
-|{rdmueller}
-a| * just started
-
-
+a|{rdmueller}
+a| as you can clearly see, I just noticed that I am not a web designer - at least not for an X-Mas theme ;-) 🎅 🎄 🤣 +
+  you can do test driven development with bash!
 
 |====
 
+=== Day 01
+
+[cols="1,10"]
+|====
+
+a|{rdmueller}
+a| * to learn ruby through https://rubykoans.com is fun!
+
+a|{anoff}
+a|  * having solved a problem in one language (Go) makes it easy to solve it in another (Ruby)
+    * Ruby divisions are `floor` by default
+    * Ruby has `.map` and `.reduce` operations 💖
+    * file and string handling in Ruby is fun e.g. `File.read("./input.txt").split("\n").map(&:to_i)`
+
+a|{RJPlog}
+a|  * the problem was not the coding but not having read the specification thoroughly.
+    * having the wrong test cases does not help you finding the problem
+
+|====
+
+=== Day 02
+
+[cols="1,10"]
+|====
+
+a|{RJPlog}
+a|  * again having the wrong test cases does not help you finding the problem
+    * being to lasy to find the number of elements of an array by code may couse some trouble if you just declare a value you think might fit
+
+a|{rdmueller}
+a| Use a https://de.wikipedia.org/wiki/Shebang[shebang] like `#!/usr/bin/env ruby` at the start of your file, 
+do a `chmod +x solution.rb` on your file 
+and you can easily execute it as `./solution.rb`,
+because it now nows how it wants to be executed! ⭐ 
+
+|====

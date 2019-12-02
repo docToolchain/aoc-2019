@@ -1,0 +1,35 @@
+This solution is written in Rust.
+It is the solution for the first day of AoC:
+https://adventofcode.com/2019/day/1[The Tyranny of the Rocket Equation]
+
+https://aoc-2019.netlify.com
+
+
+== Fuel calculation
+
+Simple fuel calculation by creating the sum over all masses with the mapping function `floor(mass/3) - 2`. For the second star, I needed to add a recursive function.
+
+[source, rust]
+....
+include::src/main.rs[]
+....
+
+== Run instructions 🧙‍♂️
+
+No need to install and configure Rust on your host, just use VSCode and the remote development extension pack for running the code without polluting your host. It's magic ✨
+
+```bash
+code --install-extension ms-vscode-remote.vscode-remote-extensionpack
+```
+
+Open folder in VSCode and re-open folder inside of the dev container by running the quick action
+
+```
+Select Remote-Containers: Open Folder in Container...
+```
+
+Run the program by executing following command in the integrated VSCode terminal
+
+```
+cargo run
+```

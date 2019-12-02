@@ -1,0 +1,74 @@
+== The Tyranny of the Rocket Equation
+
+I have written the solution with my 9 year old kid in Java's https://docs.oracle.com/javase/9/jshell/introduction-jshell.htm#JSHEL-GUID-630F27C8-1195-4989-9F6B-2C51D46F52C8[JShell].
+The JShell makes it easy to focus on the main part (equation of fuel, mapping inputs), without going through the hassles of building classes and whatnot.
+
+To run the final program, you need JDK 11.
+Thanks to http://openjdk.java.net/jeps/330[JEP 330], launching is as easy as `java Solution.java`.
+
+Please bare in mind, that one would possible optimize the computation a bit more, but I wanted my kid to understand it.
+
+The equation was straight forward, that's basic math:
+
+.rocket equations
+[source,java,numbered,indent=0]
+----
+include::Solution.java[tags=equation]
+----
+
+Sadly, I cannot use the `var` keyword to define variables from Lambdas.
+
+We stored the input masses as `input.txt` and used `java.nio.file.Files` to read them line by line. 
+This gives a stream of strings. 
+I explained that those needed to be turned into numbers and we also spoke about basis of numbers.
+For each item of the stream, our equation can be applied.
+
+.Star One
+[source,java,numbered,indent=0]
+----
+include::Solution.java[tags=starOne]
+----
+<1> Read the file line by line
+<2> Parse the lines into Integers
+<3> Apply the equation
+<4> Reduce the values to one single value
+
+I was positivly suprised that a reduction was explainable in minutes with a piece of paper.
+
+Star two was a bit more evolved.
+I wanted to avoid recursive lambdas. 
+Those are possible (and rather easy in JShell, as JShell allows forward references), but hard to understand.
+
+We first settled with the same stream and "flat mapping" each computed fuel value into a new stream, much like in the puzzle itself.
+"Flat mapping" is the process of taking one element of a stream and create a new stream from it, thus fanning out the elements of the original stream.
+While porting our solution from JShell into an executable Java, I accidently used the wrong variable as initial value for our inner stream (`builder.add(fuelForMass);` instead of `builder.add(fuelForIndividualMass);`).
+I noticed that when playing around ideas to make it more readable.
+
+Let's see if can make things a bit more readable:
+
+.Star Two
+[source,java,numbered,indent=0]
+----
+include::Solution.java[tags=equation]
+
+include::Solution.java[tags=starTwo]
+----
+<1> We define a second operator, `computeFuelForFuel`
+<2> That generates a stream of integers in the form of a glorified for-loop.
+    The first argument is the initial value (computing the fuel for the inital fuel), 
+    the second argument checks if we need to compute more fuel,
+    the third is the operator for the next value, that receives the previous one
+<3> We reduce it again, this time not with `0` as the initial value for the fuel, but with the original value we need for the module
+<4> Here we concatenate two operators for the mapping. The rest is the same is in the solution for star one.
+
+I was so emberrased for having commited the wrong solution, that I added some simple assertions to the file with values from the puzzle itself:
+
+[source,java,numbered,indent=0]
+----
+include::Solution.java[tags=someTests]
+----
+
+Be aware that those preconditions are only asserted when you run Java with the `-ea` flag.
+They are not a replacement for real tests, but for this solution, they are good enough.
+
+I'm quite positve suprised that a modern Java solution is a readable 13 lines.

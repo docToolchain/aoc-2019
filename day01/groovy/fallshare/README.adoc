@@ -1,0 +1,26 @@
+== Day01
+
+This solution is written in Groovy.
+It is the solution for the first day of AoC:
+https://adventofcode.com/2019/day/1[The Tyranny of the Rocket Equation]
+
+=== First Star
+The calculation to get the required fuel per module is straight forward and done in `calculateFuelForMass`.
+I decided to iterate through the input list and calculate the total fuel on the fly with `calculateTotalRequiredFuel`.
+
+=== Second Star
+I have already wondered that it in part one negative fuel values are possible.
+But since the input file did not contain any numbers smaller then (1 + 2) * 3 = 9 
+I decided that this not a problem to get the task done...
+
+I decided to recuryivley calculate the total mass of fuel that is required per module.
+So `calculateTotalRequiredFuelConsideringFuelMass` iterativley calls `calculateFuelForMass` until the final result is available.
+
+With `calculateTotalRequiredFuelConsideringFuelMass` the required fuel for all modules is calculated with the update method.
+There is quite some duplicated code between `calculateTotalRequiredFuel` and `calculateTotalRequiredFuelConsideringFuelMass` 
+but I'm to lazy to clean this up now.
+
+[source, groovy, numbered]
+....
+include::solution.groovy
+....

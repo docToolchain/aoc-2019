@@ -20,7 +20,7 @@ The program is a Kotlin `List`, which by default is immutable.
 That is nice, so we don't change the original program by accident when run.
 
 I was more focussed on writing idiomatic Kotlin code than writing something more elaborate than my straight forward solution.
-The solution is a function taking in the program as a list and two additional `Int`'s representing the `noun` and `verb` to set.
+The solution is a function taking in the program as a list and two additional `Int`-parameter representing the `noun` and `verb` to set.
 The function returns the memory after the program run as an `IntArray`.
 
 [source,kotlin,numbered,indent=0]

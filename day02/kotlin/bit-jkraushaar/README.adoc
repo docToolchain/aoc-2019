@@ -1,0 +1,56 @@
+== Day 02
+
+For todays puzzle I decided to build kind of a Turing machine.
+Therefore I first wrote an function to determine the next operation.
+
+.Determine the next operation
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=operation]
+----
+
+The function returns the operation to be executed.
+
+Afterwards I had to write the four operations.
+Disclaimer: I think the add and multiply functions can be written with less duplicated code.
+I had a long day, so I decided to leave it as is.
+
+.Operator functions
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=operatorFunctions]
+----
+
+The last part of my solution is a function to actually calculate the result of the intcode program.
+
+.intcode program execution
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=program]
+----
+
+Here I am reading the contents of the file and use it to initialize the 'memory'.
+Then, in the loop, I determine my next operation based on the current position ('pointer').
+The operation is executed and the memory and position pointer are updated.
+
+=== First Star
+
+With this setup, the first star can be solved with this command:
+
+.First Star
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=firstStar]
+----
+
+=== Second Star
+
+The second star is a little bit more complicated.
+I had to iterate over all possible input values for the noun and verb.
+Actually this could have been done using coroutines, but again... I am little bit lazy today.
+
+.Second Star
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=secondStar]
+----

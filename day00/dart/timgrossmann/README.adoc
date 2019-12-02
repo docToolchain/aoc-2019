@@ -1,0 +1,13 @@
+Hello world for Advent of Code 2019
+
+== Dart
+
+This year I want to learn a bit about Dart for future Flutter development.
+
+[source,dart,numbered]
+----
+include::helloWorld.dart[]
+----
+
+Run the solution with `dart helloWorld.dart`.
+

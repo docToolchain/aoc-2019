@@ -1,0 +1,10 @@
+3226488
+Loaded suite ./tests/day1s1
+Started
+..
+Finished in 0.000542482 seconds.
+-------------------------------------------------------------------------------
+2 tests, 5 assertions, 0 failures, 0 errors, 0 pendings, 0 omissions, 0 notifications
+100% passed
+-------------------------------------------------------------------------------
+3686.76 tests/s, 9216.90 assertions/s

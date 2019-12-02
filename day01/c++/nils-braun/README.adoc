@@ -1,0 +1,14 @@
+Solution for Day 01 of the AoC 2019: https://adventofcode.com/2019/day/1[Day 1: The Tyranny of the Rocket Equation]
+
+== Solution
+
+The first star of the challenge is a straight-forward calculation
+following the exercise description.
+
+The second part uses an iterative approach to calculate the
+additional fuel costs of the fuel itself.
+This is not the prettiest solution, but it works :-)
+
+....
+include::solution.cpp
+....

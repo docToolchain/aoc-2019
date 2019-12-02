@@ -1,0 +1,25 @@
+== Day 01
+
+It took me some time to figure out how the second star is computed... However this is my solution in Kotlin.
+
+=== First Star
+
+The first star is easy: Compute the module fuel by applying the formula to the mass of the module and then sum everything up.
+
+.First Star
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=firstStar]
+----
+
+=== Second Star
+
+What took me so much time was to figure out that first the fuel of the first module has to be calculated, then fuel for the second module and so on.
+Finally everything has to be summed together.
+My first approach was to calculate the sum of the module fuel and then add the fuel and fuel for the fuel, and ... So the result was too high.
+
+.Second Star
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=secondStar]
+----

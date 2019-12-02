@@ -1,0 +1,12 @@
+== Day 1
+
+This solution is written in Python.
+
+=== First Star
+
+You can execute it with "python3 solution.py"
+
+
+=== Second Star
+
+There is no second star.

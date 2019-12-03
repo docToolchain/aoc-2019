@@ -1,0 +1,16 @@
+This solution is written in Python.
+It is the solution for the third day of AoC:
+https://adventofcode.com/2019/day/3[Crossed Wires]
+
+https://aoc-2019.netlify.com
+
+== Crossed Wires
+
+This was the hardest puzzle for me up until now. No tests
+this time due to some other priorities. :-(
+You can run the solution by `python solution.py` 
+
+[source, python]
+....
+include::solution.py[]
+....

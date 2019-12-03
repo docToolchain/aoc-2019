@@ -15,7 +15,7 @@ include::day01-1.php
 === Second Star
 There was a beautiful christmas market in our little town.........but now I did it :-)
 
-Took me hours to find good variable names....well, just "php -f day01-02.php" to see the result all of you still moght know.
+Took me hours to find good variable names....well, just "php -f day01-2.php" to see the result all of you still moght know.
 
 [source, php, numbered]
 ....

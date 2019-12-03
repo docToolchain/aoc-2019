@@ -1,0 +1,13 @@
+Day 3 - Solution in Python
+
+numpy for better array handling!
+
+[source, python]
+....
+include::solution.py[]
+....
+
+[source, python]
+....
+include::manhattan.py[]
+....

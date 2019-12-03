@@ -5,7 +5,7 @@ require_relative './geom'
 #   if a hash was passed it will be modified in place, otherwise a blank one will be created
 def parseWire(wire, wireID, map = Hash.new)
   pos = Point.new(0, 0)
-  map[pos.to_s] = [wireID].concat(map[pos.to_s] || Array.new())
+  steps = 0
   for instruction in wire
     delta = Point.new(0, 0)
     dir = instruction[0]
@@ -22,10 +22,12 @@ def parseWire(wire, wireID, map = Hash.new)
     else
       raise "Unexpected direction instruction %s" % dir
     end
+    
     while length > 0
+      map[pos.to_s] = [wireID + "-" + steps.to_s].concat(map[pos.to_s] || Array.new())
       pos = pos + delta
-      map[pos.to_s] = [wireID].concat(map[pos.to_s] || Array.new())
       length -= 1
+      steps += 1
     end
   end
   return map
@@ -35,14 +37,14 @@ def part1(wires)
   map = Hash.new
   wireID = 1
   for wire in wires
-    parseWire(wire, wireID, map)
+    parseWire(wire, wireID.to_s, map)
     wireID += 1
   end
   closestPoint = nil
   shortestDistance = 1/0.0 # infinity
   origin = Point.new(0, 0)
   map.each do |key, value|
-    if value.include?(1) && value.include?(2)
+    if value.find {|item| item.include?("1-")} && value.find {|item| item.include?("2-")}
       p1 = Point.from_s(key)
       distance = p1.manhattan(origin)
       if distance < shortestDistance && p1 != origin
@@ -54,8 +56,30 @@ def part1(wires)
   shortestDistance
 end
 
+
 def part2(wires)
-  2
+  map = Hash.new
+  wireID = 1
+  for wire in wires
+    parseWire(wire, wireID.to_s, map)
+    wireID += 1
+  end
+  closestPoint = nil
+  shortestDistance = 1/0.0 # infinity
+  origin = Point.new(0, 0)
+  map.each do |key, value|
+    if value.find {|item| item.include?("1-")} && value.find {|item| item.include?("2-")}
+      p1 = Point.from_s(key)
+      steps1 = value.select {|item| item.include?("1-")}.map{|item| item[2..-1].to_i}.reduce(1/0.0){|prev, cur| prev = cur if cur < prev}
+      steps2 = value.select {|item| item.include?("2-")}.map{|item| item[2..-1].to_i}.reduce(1/0.0){|prev, cur| prev = cur if cur < prev}
+      distance = steps1 + steps2
+      if distance < shortestDistance && p1 != origin
+        closestPoint = p1
+        shortestDistance = distance
+      end
+    end
+  end
+  shortestDistance
 end
 
 if caller.length == 0

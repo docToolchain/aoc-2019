@@ -36,27 +36,25 @@ List<WirePoint> getWirePointSteps (WirePoint currPoint, Instruction inst) {
     switch (inst.dir) {
       case Direction.RIGHT:
         currPoint.x++;
-        steps.add(new WirePoint(currPoint.x, currPoint.y, currPoint.wireNum, currPoint.steps));
         break;
 
       case Direction.LEFT:
         currPoint.x--;
-        steps.add(new WirePoint(currPoint.x, currPoint.y, currPoint.wireNum, currPoint.steps));
         break;
 
       case Direction.UP:
         currPoint.y++;
-        steps.add(new WirePoint(currPoint.x, currPoint.y, currPoint.wireNum, currPoint.steps));
         break;
 
       case Direction.DOWN:
         currPoint.y--;
-        steps.add(new WirePoint(currPoint.x, currPoint.y, currPoint.wireNum, currPoint.steps));
         break;
 
       default:
         throw new UnsupportedError('Direction not supported for walking ${inst.dir}');
     }
+
+    steps.add(new WirePoint(currPoint.x, currPoint.y, currPoint.wireNum, currPoint.steps));
   }
 
   return steps;

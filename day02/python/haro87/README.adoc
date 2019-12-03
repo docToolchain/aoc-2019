@@ -1,0 +1,19 @@
+This solution is written in Python.
+It is the solution for the second day of AoC:
+https://adventofcode.com/2019/day/2[1202 Program Alarm]
+
+https://aoc-2019.netlify.com
+
+== Fixing the board computer
+
+The solution for the first part consists of
+translating the input values and executing them.
+Attention: you need to operate on the whole data set.
+
+The solution for the second part is basically a brute force
+approach to find the right noun and verb.
+
+[source, python]
+....
+include::solution.py[]
+....

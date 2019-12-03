@@ -1,0 +1,39 @@
+== 1202 Program Alarm
+
+The first method `parseInput` takes the input string, splits it and converts each element to an int.
+
+[source,groovy]
+....
+include::day02.groovy[tags=parseInput]
+....
+
+The second method takes the input, replaces it in place with the changed values and returns the output value.
+
+[source,groovy]
+....
+include::day02.groovy[tags=computeOutput]
+....
+
+Now we need a method to replace the noun and the verb.
+
+[source,groovy]
+....
+include::day02.groovy[tags=restoreState]
+....
+
+Putting it all together to get the first star.
+We create a copy of the input list, because we will need the input unchanged for the second star, and `computeOutput` alters the input list.
+
+[source,groovy]
+....
+include::day02.groovy[tags=starOne]
+....
+
+For the second star, we try every combination of noun and verb in the range 0..99 brute force.
+Maybe there is a better sollution, but this is fast enough and not worth the effort.
+
+[source,groovy]
+....
+include::day02.groovy[tags=bruteForce]
+....
+

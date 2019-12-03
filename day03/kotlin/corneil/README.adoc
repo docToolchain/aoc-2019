@@ -1,0 +1,12 @@
+= Day 03 - Crossed Wires
+
+I chose to model a Grid with Cells.
+Each movement will result in activity on a cell and create them as needed.
+Steps was later added to the cells for each wire and recorded as the grid was populated.
+There are some flaws in the when you have 3 wires a total value cannot be used to indicate an intersection.
+The intersections will have to be recorded in a different mechanism.
+
+[source,kotlin,numbered]
+----
+include::src/main/kotlin/solution.kt[]
+----

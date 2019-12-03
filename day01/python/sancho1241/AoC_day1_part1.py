@@ -103,7 +103,6 @@ def puzzle_input_list ():
         86568
         148706
         '''
-    #print (puzzle_input)
     puzzle_input_list = puzzle_input.split()
     return puzzle_input_list
 
@@ -121,7 +120,6 @@ def fuel (mass):
         return required_fuel + fuel(required_fuel)
 
 # iterate through list calculate mass and add to total sum
-#print ("drin")
 total = 0
 for x in puzzle_input_list():
 #for x in test_data():

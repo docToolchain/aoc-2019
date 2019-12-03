@@ -139,29 +139,6 @@ def getCrossings(matrix1, matrix2, matrixDimensions)
     return intersections
 }
 
-wire_instructions = readFile("input.txt")
-println wire_instructions[0]
-println "--------------"
-println wire_instructions[1]
-
-firstWireDimensions = getMatrixDimensions(wire_instructions[0])
-secondWireDimensions = getMatrixDimensions(wire_instructions[1])
-
-minMaxMatrix = getMatrixMinMax(firstWireDimensions, secondWireDimensions)
-
-//By executin until here I know now that both on x and y axis the min values are negative
-centralPort = [(-1 * minMaxMatrix[0][0]), (-1 * minMaxMatrix [1][0])]
-matrixDimensions = [(-1 * minMaxMatrix[0][0]) + minMaxMatrix[0][1], (-1 * minMaxMatrix [1][0]) + minMaxMatrix[1][1]]
-println "Matrix dimensions: ${matrixDimensions}"
-println "location of central port: ${centralPort}"
-
-firstWirePath = createWirePath(wire_instructions[0],centralPort, matrixDimensions)
-secondWirePath = createWirePath(wire_instructions[1],centralPort, matrixDimensions)
-
-crossings = getCrossings(firstWirePath, secondWirePath, matrixDimensions)
-println "Smalles distance is: " + getSmallestDistance(crossings, centralPort)
-println "End"
-
 Integer getSmallestDistance(crossings, centralPort){
     min = 100000
     minI = 0
@@ -183,4 +160,105 @@ Integer calcManhattanDistance(intersection, centralPort){
     xDistance = Math.abs(intersection[0] - centralPort[0])
     yDistance = Math.abs(intersection[1] - centralPort[1])
     return xDistance + yDistance
+}
+
+wire_instructions = readFile("input.txt")
+println wire_instructions[0]
+println "--------------"
+println wire_instructions[1]
+
+firstWireDimensions = getMatrixDimensions(wire_instructions[0])
+secondWireDimensions = getMatrixDimensions(wire_instructions[1])
+
+minMaxMatrix = getMatrixMinMax(firstWireDimensions, secondWireDimensions)
+
+//By executin until here I know now that both on x and y axis the min values are negative
+centralPort = [(-1 * minMaxMatrix[0][0]), (-1 * minMaxMatrix [1][0])]
+matrixDimensions = [(-1 * minMaxMatrix[0][0]) + minMaxMatrix[0][1], (-1 * minMaxMatrix [1][0]) + minMaxMatrix[1][1]]
+println "Matrix dimensions: ${matrixDimensions}"
+println "location of central port: ${centralPort}"
+
+firstWirePath = createWirePath(wire_instructions[0],centralPort, matrixDimensions)
+secondWirePath = createWirePath(wire_instructions[1],centralPort, matrixDimensions)
+
+crossings = getCrossings(firstWirePath, secondWirePath, matrixDimensions)
+println "Smalles distance is: " + getSmallestDistance(crossings, centralPort)
+println "End Star 1"
+
+println "Star 2:"
+println "Short total distance to intersection: " + getPointWithShortestTotalDistance(wire_instructions, crossings, centralPort)
+
+def getPointWithShortestTotalDistance(wire_instructions, crossings, centralPort){
+    min = 10000000
+    minI = 0
+    for(int i = 0; i < crossings.size(); i++){
+        println "crossing ${i} is: " + crossings[i]
+        distWire1 = getDistanceToPoint(wire_instructions[0], crossings[i][0], crossings[i][1], centralPort)
+        distWire2 = getDistanceToPoint(wire_instructions[1], crossings[i][0], crossings[i][1], centralPort)
+        dist = distWire1 + distWire2
+
+        if(dist < min){
+            min = dist
+            minI = i
+        }            
+    }
+
+    println "Closest intersection with the smalles distance: ${crossings[i][0]} | ${crossings[i][1]}"
+    return min
+}
+
+Integer getDistanceToPoint(instructions, xInter, yInter, centralPort)
+{
+    int x = centralPort[0] 
+    int y = centralPort[1] 
+    int totalDist = 0
+    //instructions.each{ instruction ->
+    for(int i = 0; i < instructions.size(); i++){
+        instruction = instructions[i]
+        operator = instruction[0]
+  
+        value = instruction.substring(1).toInteger()
+        switch (operator) {
+            case "L":
+                for(int j = 1; j <= value; j++)
+                {
+                    x--
+                    if((xInter == x)&&(yInter == y)){
+                        return totalDist + j                  
+                    }
+                }
+                break
+            case "R":
+                for(int j = 1; j <= value; j++)
+                {
+                    x++
+                    if((xInter == x)&&(yInter == y)){
+                        return totalDist + j                
+                    }
+                }
+                break
+            case "U":
+                for(int j = 1; j <= value; j++)
+                {
+                    y++
+                    if((xInter == x)&&(yInter == y)){
+                        return totalDist + j       
+                    }
+                }
+                break
+            case "D":
+                for(int j = 1; j <= value; j++)
+                {
+                    y--
+                    if((xInter == x)&&(yInter == y)){
+                        return totalDist + j                   
+                    }
+                }
+                break    
+        }
+        totalDist += value
+        println xInter + ":" + yInter + "  " + x + ":" + y
+        
+    }
+    return totalDist
 }

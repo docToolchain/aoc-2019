@@ -67,3 +67,18 @@ and you can easily execute it as `./solution.rb`,
 because it now nows how it wants to be executed! ⭐ 
 
 |====
+
+=== Day 03
+
+[cols="1,10"]
+|====
+
+a|{RJPlog}
+a|  * today was a tough for me. After four stars on the first days I thought it would stay that easy and I can improve and learn something about git, github and so on, for example as I learned yesterday how to bring my fork up to date, but the puzzle today told me some other story
+    * today I learned, that with my Ardunio/M5Stack I will not be able to solve the puzzle, even if the puzzle itself was well understood. 
+    * today I also learned, that not giving up and trying something new kann help you, even if it was hard to start learning VBA. I guess I am completely old-fashioned :-)
+    * today I also learned how good it feels, to be part of that party. Thank you all! 
+
+
+
+|====

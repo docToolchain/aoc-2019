@@ -11,6 +11,7 @@ mass2 x = do
   else 0
 
 main = do
-  x <- getArgs
-  print (sum (map mass1 (map (read::String->Int) x)))
-  print (sum (map mass2 (map (read::String->Int) x)))
+  inputs <- getArgs
+  let ints = map (read::String->Int) inputs
+  print $ sum $ map mass1 ints
+  print $ sum $ map mass2 ints

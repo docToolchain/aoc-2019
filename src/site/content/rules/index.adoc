@@ -29,10 +29,10 @@ WARNING: If you want to solve the aoc problems on your own, do not read any furt
 
 Coding together is much more fun and that is what this site and repository is about.
 Share your code and check out the shared code.
-You will notice that there is a lot to lear from other people's solutions!
+You will notice that there is a lot to learn from other people's solutions!
 
 Don't be shy and follow our inventation to our https://join.slack.com/t/aoc-2019/shared_invite/enQtODUzMTE3MDQzMzM0LTUyYmZjOTg1ZTYxMzEwM2JlMmNjNjE4ZDFkOWM0ZDZhMGRhNGYyMzhiMzFjZGMxNjM4YjM2NDZlNTY3NjA1M2Y[AOC-2019 Slack channel].
-It is the place to hamg around, talk about different solutions and language and get help if you are stuck.
+It is the place to hang around, talk about different solutions and language and get help if you are stuck.
 
 ## The Goal of this repository
 
@@ -43,7 +43,7 @@ It is the place to hamg around, talk about different solutions and language and 
 
 ### How do we ensure that all examples run out of the box?
 
-The best solution will be to use https://gitpod.io. Just prefix the URL with `gitpod.io#` or click the button:
+The best solution will be to use https://gitpod.io. Just prefix the URL of your GitHub fork with `https://gitpod.io#` e.g. `https://gitpod.io#https://github.com/rdmueller/aoc-2019` or click the button:
 
 image:https://gitpod.io/button/open-in-gitpod.svg[link="https://gitpod.io#https://github.com/rdmueller/aoc-2019", title="Open in Gitpod"] [small]#(if you've forked the repository, the button will still open the master)#
 
@@ -79,10 +79,10 @@ The structure we start with is the following:
 ├── ...
 ```
 
-As you can see, there is one folder per day (create one if you are the first for the day) and underneath this is onve folder per language used.
+As you can see, there is one folder per day (create one if you are the first for the day) and underneath there is one folder per language used.
 Then there is one fodler with your github handle which then contains your solution.
 
-The file structure is quie important, because the build needs it to pick up the day, language and name in order to generate the webpage you currently read.
+The file structure is quite important, because the build needs it to pick up the day, language and name in order to generate the webpage you currently read.
 The build will also look for the `README.adoc` file in each folder which you can use to document your solution.
 
 Please, take a look at the https://github.com/docToolchain/aoc-2019/tree/master/day00[`day00`] examples.

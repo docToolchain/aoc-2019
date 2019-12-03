@@ -1,0 +1,12 @@
+{
+    "files": [
+        "src/solution1.ts", "src/solution2.ts", "./src/Wire.ts", "./src/CoordinateSet.ts", 
+        "./src/Coordinate.ts" , "./src/Distance.ts" , 
+        "./src/ManhattanDistance.ts" , "./src/SignalDelayDistance.ts" , "./src/ShortestDistance.ts"
+    ],
+    "compilerOptions": {
+        "noImplicitAny": true,
+        "target": "es5",
+        "downlevelIteration": true
+    }
+}

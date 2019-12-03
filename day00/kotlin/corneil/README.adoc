@@ -1,0 +1,15 @@
+= Day 00 - Hello World
+
+Hello World!
+
+Kotlin has extension functions that can be used to extend existing classes.
+Like in this case `File.readText():String`.
+This function is not available in `java.io.File`.
+The Kotlin compiler will generate the proper call to the function make the relevant object available as thise.
+Think of like a named Lambda.
+
+[source,kotlin,numbered]
+----
+include::solution.kts[]
+----
+__

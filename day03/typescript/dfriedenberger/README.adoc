@@ -1,0 +1,56 @@
+== Crossed Wires
+
+This solution is written in Typescript.
+
+....
+npm install
+gulp
+node dist/solution1.js
+node dist/solution1.js
+....
+
+First implementing the Wire class. It's handle convertion from path to x,y-Coordinates in constructor 
+[source, typescript, numbered]
+....
+include::src/Wire.ts[tag=constructor]
+....
+
+and find crosses by comparing the coordinates
+[source, typescript, numbered]
+....
+include::src/Wire.ts[tag=cross]
+....
+
+=== First Star
+This was solved by implementing ManhattanDistance (here first time uses interfaces in Typescript)
+[source, typescript, numbered]
+....
+include::src/ManhattanDistance.ts[tag=distance]
+....
+
+and find the minimum of the distances.
+[source, typescript, numbered]
+....
+include::src/ShortestDistance.ts[]
+....
+
+=== Second Star
+
+Second solution solved by replacing the Implementation of Distance from ManhattanDistance to SignalDelayDistance
+[source, typescript, numbered]
+....
+include::src/solution1.ts[tag=distance]
+....
+
+[source, typescript, numbered]
+....
+include::src/solution2.ts[tag=distance]
+....
+
+
+SignalDelayDistance uses map of distances created during Wire construction
+[source, typescript, numbered]
+....
+include::src/SignalDelayDistance.ts[]
+....
+

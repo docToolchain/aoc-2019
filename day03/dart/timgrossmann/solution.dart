@@ -51,7 +51,7 @@ int main (List<String> args) {
   int minManDist = intersections
     .toList()
     .fold(1000000, (minDist, currIntersect) 
-      => min(get_manhatten_distance(currIntersect.x, 0, currIntersect.y, 0), minDist));
+      => min(getManhattenDistance(currIntersect.x, 0, currIntersect.y, 0), minDist));
 
   // get the element with the lowest number of steps 
   // start with the minSteps of 1000000 to make sure we override

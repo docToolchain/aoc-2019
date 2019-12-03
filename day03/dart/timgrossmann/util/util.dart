@@ -1,7 +1,7 @@
 import 'Instruction.dart';
 import 'WirePoint.dart';
 
-int get_manhatten_distance (int xVal, int xGoal, yVal, yGoal) {
+int getManhattenDistance (int xVal, int xGoal, yVal, yGoal) {
   return (xVal - xGoal).abs() + (yVal - yGoal).abs();
 }
 

@@ -1,4 +1,4 @@
-== Solution1
+== The Tyranny of the Rocket Equation
 
 This solution is written in Typescript.
 I decided for Typescript because want write better Javascript.

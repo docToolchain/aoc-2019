@@ -1,0 +1,7 @@
+== Day 2 in Python
+
+https://jupyter.org/[Jupyter] let's me mix documentation on code nicely.
+
+++++
+include::AOC-2019-02.html[]
+++++

@@ -1,0 +1,16 @@
+Solution for Day 02 of the AoC 2019: https://adventofcode.com/2019/day/2[Day 2: 1202 Program Alarm]
+
+== Solution
+
+I solved it with a rather brute-force ansatz - probably one can also solve it better
+but it just worked.
+
+Array computation is quite simple in C++, I though about using iterators but in 
+principle it makes no difference (std::vector iterators are also just index numbers)
+for me in this case.
+
+I forgot about the std::getline function, which is quite handy in this context.
+
+....
+include::solution.cpp
+....

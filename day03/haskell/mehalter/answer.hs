@@ -3,10 +3,6 @@ import Data.Set as Set
 import Data.List as List
 import Data.Maybe as Maybe
 
--- Return length of wire in a single direction
-getLen :: String -> Int
-getLen (s:ss) = read ss::Int
-
 -- Calculate given a direction, whether the length should be added or subtracted
 getDir :: Char -> Int
 getDir dir = if dir == 'L' || dir == 'D' then -1 else 1
@@ -14,22 +10,22 @@ getDir dir = if dir == 'L' || dir == 'D' then -1 else 1
 -- Calculate an array of points in a single step of the wire
 getPoints :: Char -> Int -> [[Int]] -> [[Int]]
 getPoints dir len points = do
-  let x = (last points)!!0
-  let y = (last points)!!1
-  points ++ [if dir == 'L' || dir == 'R' then [x + point, y] else [x, y + point] | point <- Prelude.map ((getDir dir)*) [1..len]]
+  let [x,y] = last points
+  points ++ [if dir == 'L' || dir == 'R' then [x + point, y] else [x, y + point]
+    | point <- Prelude.map ((getDir dir)*) [1..len]]
 
 -- Calculate all the points for all the steps
 getAllPoints :: [String] -> [[Int]] -> [[Int]]
 getAllPoints [] points = points
-getAllPoints (d:ds) points = getAllPoints ds (getPoints (d!!0) (getLen d) points)
+getAllPoints (d:ds) points = getAllPoints ds (getPoints (head d) (read (tail d)::Int) points)
 
 -- Convert two wire array of points to sets, and find where they cross
 getIntersectionSet :: [[Int]] -> [[Int]] -> Set [Int]
-getIntersectionSet a b = (Set.fromList a) `Set.intersection` (Set.fromList b)
+getIntersectionSet a b = (fromList a) `Set.intersection` (fromList b)
 
 -- Calculate Manhattan distance of point to (0,0)
 getDis :: [Int] -> Int
-getDis point = (abs (point!!0)) + (abs (point!!1))
+getDis [x,y] = (abs x) + (abs y)
 
 -- Calculate Manhattan distance for all the intersection points, and return the smallest that isn't 0
 getMinManhattan :: Set [Int] -> Int

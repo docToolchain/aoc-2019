@@ -1,4 +1,4 @@
-== Solution1
+== 1202 Program Alarm
 
 This solution is written in Typescript.
 

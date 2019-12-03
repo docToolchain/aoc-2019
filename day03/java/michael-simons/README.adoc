@@ -1,0 +1,57 @@
+== Crossed Wires
+
+Today's problem can be solved mathematically or by brute force.
+Either you need to compute intersections of segments in 2d (which isn't that hard) or just search for intersecting points.
+
+Before I even knew the second star puzzle I settled for the brute force searching for common points.
+The problem space is constrained to two wires anyway, so I didn't care about memory usage.
+
+Solution is written in Java 11 and can be executed with `java Solution.java`.
+
+The main idea is a point that can be moved to another point and creating a segment along the way:
+
+[source,java,numbered,indent=0]
+----
+include::Solution.java[tags=thePoint]
+----
+
+The input is a fixed set of two wires, each on a line.
+Two wires are represented as maps of `Point` to `Integer` (`Map<Point, Integer>`), mapping each point to the number of steps it took to reach it.
+The map per wire will not contain duplicate points (self intersections).
+
+So reading and "creating" the wires look like this:
+
+[source,java,numbered,indent=0]
+----
+include::Solution.java[tags=creatingTheWires]
+----
+<1> Fixed number of wires
+<2> Build wire from central point
+<3> Create segments with the instructions from the input
+<4> Move starting point
+
+To find the intersecting point I use Java's `Set`, which cannot contain duplicate values.
+First, add all points from wire 1, than retain only those that are in wire 2 as well.
+
+[source,java,numbered,indent=0]
+----
+include::Solution.java[tags=findIntersections]
+----
+
+For the first start, we have to sort them by "Manhattan distance" from central and take the first one out:
+
+[source,java,numbered,indent=0]
+----
+include::Solution.java[tags=firstStar]
+----
+
+Before reading puzzle two, I had only sets and didn't store the steps. 
+I didn't like the solution, because the memory usage is horrible.
+But than, for the second star, we need the steps each wire needs to reach the intersection. 
+Yeah!
+So with them being stored by wire, we can just map each intersection to the sum of steps each wire takes to get there and done:
+
+[source,java,numbered,indent=0]
+----
+include::Solution.java[tags=secondStar]
+----

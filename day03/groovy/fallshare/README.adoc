@@ -1,0 +1,39 @@
+== Day02
+
+This is the solution for the third day of AoC:
+https://adventofcode.com/2019/day/3[Crossed Wires]
+
+=== First Star
+So it is slowly gets interesting. 
+I am having two ideas how to solve this riddle. I guess I'll come back later to try out both variants.
+I first will write down some assumptions and ideas before I start coding.
+My first idea is it to create two matrices that mark all points that are part of the wires paths (0; no wire; 1:wire present)
+If I add both matrices the resulting matrix shall have the value two where the two wires overlap.
+I only have to find those points and calculate the Manhattan distance.
+BUT there are two details missing: 
+    - What is the location of the central port in my matrices?
+    - What is the size of the matrices?
+Those questions must be answered first before I get started with the path calculation.
+So let's get started.
+
+===== Caculating the matrix size and port location
+As usual we a first reading in the input file. This time a list of string list will be returned.
+The first dimension defines which wire is selected, the second contains the instructions to draw the wires.
+[source, groovy, numbered]
+....
+include::solution.groovy[tags=readFile]
+.... 
+Both lines start at the central port. We assume that this is the origin of our coordinate sytem for the time being.
+We need calculate the absolute locations of the wire by adding the wire instructions. 
+The resulting coordinates are stored as tuples in a list.
+Once we are done with calculating the whole wire path we can find the smalles and bigges value of the x and y axis.
+Which give us the total distance of the coordiante system.
+
+
+Today I first
+Once again a text file is being read. This time it is a comma separated list of integers.
+So the readFile methods returns an array of integers which represents our computer memory.
+[source, groovy, numbered]
+....
+include::solution.groovy[tags=readFile]
+....

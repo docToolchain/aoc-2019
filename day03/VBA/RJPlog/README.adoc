@@ -14,11 +14,10 @@ But I did not want to give up. Finaly I made it, even if there are some pre- and
 
 First of all I read the input vector into a Excelsheet and transformed it in a way that direction and number of steps are seperated. 
 From there the program itself reads out and starts with the first path to mark in the Excelsheet with "1", 
-to make clear that somebody was already here, then the second path and where already a "1" was, I marked an "X", at the same time I
-calculated the distance to the starting point.
-Here it took me some time to puzzle out what the best starting point is, since the input data could also go more to the left than the startingpoint.
-A second major issue I found by my first aproach, that the first path could cross it's own way, and I marked them also with "X", which lead to the
-wrong output, so I had to distinguish between a crossing of the path itself or both.
+to make clear that somebody was already here, then the second path and where already a "1" was, I marked an "X". 
+At the same time I calculated the distance to the starting point.
+Here it took me some time to puzzle out what the best starting point is according to placing the path in the excelsheet, since the input data could also go more to the left than the startingpoint.
+A second major issue I found by my first aproach, that the first path could cross it's own way, and I marked them also with "X", which lead to the wrong output, so I had to distinguish between a crossing of the path itself or both.
 
 I wrote all crossing points in the excel and did afterwards a min selection, I was to tired to programm it, even if it would have been easy.
 

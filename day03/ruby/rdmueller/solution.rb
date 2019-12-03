@@ -77,7 +77,7 @@ input[1].each { |inst|
             panel[x] = []
         end
         if (panel[x][y] == "#") then
-            puts x-sx+y-sy
+            puts (x-sx).abs+(y-sy).abs
         else
             panel[x][y] = '*'
         end
@@ -92,6 +92,7 @@ puts minx
 puts maxx
 puts miny
 puts maxy
+=begin
 (miny..maxy).each { |y| 
     (minx..maxx).each { |x|
         if (panel[x].nil?) then
@@ -106,3 +107,4 @@ puts maxy
     }
     puts "-"
 }
+=end

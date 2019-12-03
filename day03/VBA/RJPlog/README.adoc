@@ -2,12 +2,12 @@
 
 The original puzzle can be found at https://adventofcode.com/2019/day/3
 
-Today again I starte in the morning in best mood to finish the puzzle before children were ready for school. 
+Today again I started in the morning in best mood to finish the puzzle before children were ready for school. 
 Unfortunately I had to recognise, that with my M5Stack board and Arduino my skills are not enough to solve the puzzle, 
-starting by dividing the input data into direction and length.
+starting the separation of the input data into direction and length.
 
-So I decided to work with the only environment I have at hand, Excel and VBA, which I never used before. 
-So the day startet with internet tutorials. Nearly very instruction I had to look up in the internet. 
+So I decided to work with the only environment I had at hand, Excel and VBA, which I never used before. 
+Therefore the day startet with internet turials. Nearly very instruction I had to look up in the internet. 
 But I did not want to give up. Finaly I made it, even if there are some pre- and postprocessing steps.
 
 === First Star

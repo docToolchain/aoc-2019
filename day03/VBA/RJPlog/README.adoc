@@ -16,7 +16,9 @@ First of all I read the input vector into a Excelsheet and transformed it in a w
 From there the program itself reads out and starts with the first path to mark in the Excelsheet with "1", 
 to make clear that somebody was already here, then the second path and where already a "1" was, I marked an "X". 
 At the same time I calculated the distance to the starting point.
+
 Here it took me some time to puzzle out what the best starting point is according to placing the path in the excelsheet, since the input data could also go more to the left than the startingpoint.
+
 A second major issue I found by my first aproach, that the first path could cross it's own way, and I marked them also with "X", which lead to the wrong output, so I had to distinguish between a crossing of the path itself or both.
 
 I wrote all crossing points in the excel and did afterwards a min selection, I was to tired to programm it, even if it would have been easy.
@@ -24,9 +26,9 @@ I wrote all crossing points in the excel and did afterwards a min selection, I w
 
 === Second Star
 
-For the second star I made the assumtion, that the shortes way would be from the starting point, either following the first path or the second, 
-but not a crossing in between. So I drew the first path, then the second and counted until the first crossing. Then I followed again the first
-path until reaching the crossing and counted again. Afterwars I changed order of both pathes and did the procedure again. The minimum of both
+For the second star I made the assumtion, that the shortes way would be from the starting point, either following the first path or the second, but not a crossing in between. 
+So I drew the first path, then the second and counted until the first crossing. Then I followed again the firstpath until reaching the crossing and counted again. 
+Afterwars I changed order of both pathes and did the procedure again, but this I made by hand. The minimum of both
 values was the right input.
 
 

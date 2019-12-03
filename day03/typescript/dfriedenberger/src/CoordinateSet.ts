@@ -1,5 +1,6 @@
 import { Coordinate } from "./Coordinate";
-export class CoordinateSet  {
+export class CoordinateSet implements Iterable<Coordinate> {
+   
     map: any = {};
 
     add(coordinate: Coordinate) {
@@ -13,6 +14,26 @@ export class CoordinateSet  {
     size() : number
     {
         return Object.keys(this.map).length
+    }
+
+    [Symbol.iterator](): Iterator<Coordinate, any, undefined> {
+        let ix = 0;
+        let components : any = Object.values(this.map);
+        return {
+            next(): IteratorResult<Coordinate> {
+              if (ix < components.length) {
+                return {
+                  done: false,
+                  value: components[ix++]
+                }
+              } else {
+                return {
+                  done: true,
+                  value: null
+                }
+              }
+            }
+          }
     }
 
 }

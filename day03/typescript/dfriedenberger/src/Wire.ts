@@ -49,9 +49,8 @@ class Wire {
    {
        let crosses = new CoordinateSet();
 
-       for(let k in this.coordinates.map)
+       for(let coordinate of this.coordinates)
        {
-           let coordinate = this.coordinates.map[k];
            if(wire.contains(coordinate.x,coordinate.y))
            {
                 crosses.add(coordinate);

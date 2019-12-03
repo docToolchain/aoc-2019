@@ -1,4 +1,4 @@
-== Solution1
+== Crossed Wires
 
 This solution is written in Typescript.
 
@@ -15,10 +15,10 @@ First implementing the Wire class. It's handle convertion from path to x,y-Coord
 include::src/Wire.ts[tag=constructor]
 ....
 
-and find crosses throw comparing the coordinates
+and find crosses by comparing the coordinates
 [source, typescript, numbered]
 ....
-include::src/Wire.ts[tag=constructor]
+include::src/Wire.ts[tag=cross]
 ....
 
 === First Star

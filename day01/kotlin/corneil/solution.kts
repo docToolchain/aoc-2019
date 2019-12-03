@@ -38,4 +38,4 @@ fun calculateFuelForMass(mass: Long): Long {
 
 val totalFuel = massValues.map { calculateFuelForMass(it) }.sum()
 println("Total Fuel=${totalFuel}")
-//end:calc3[]
+//end::calc3[]

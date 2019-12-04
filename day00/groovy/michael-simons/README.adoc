@@ -10,8 +10,6 @@ The application defines a `HelloWorldController` as a top level Spring bean:
 include::solution.groovy[tags=helloWorld]
 ....
 
-=== First Star
-
 The solutions shall print out a greeting.
 I will call the above endpoint via Springs reactive `WebClient` and subscribe to the flow.
 This is done in a Spring Application listener, reacting on `ApplicationReadyEvent`.
@@ -19,14 +17,12 @@ This is done in a Spring Application listener, reacting on `ApplicationReadyEven
 After the flow ends, I'll define a completable future to shutdown the application context.
 That needs to happen on a new thread, as it contains some blocking calls, which are not allowed in a reactive flow.
 
-
 [source, groovy, numbered]
 ....
 include::solution.groovy[tags=callingTheGreeter]
 ....
 
 I connect everything in a top level class call `DemoApplication` and wire up the listener:
-
 
 [source, groovy, numbered]
 ....
@@ -41,8 +37,4 @@ groovy -Dlogging.level.root=WARN -Dspring.main.banner-mode=OFF solution.groovy
 
 I incuded some configuration variables to turn off logging and Springs Banner, so that the application outputs only the greeting.
 
-Bear in mind that this solution fires up a complete web stack and therefore is slower than others.
-
-=== Second Star
-
-There is no second star.
+Bear in mind that this solution fires up a complete web stack and therefore is slower than probably any other _Hello World_ program out there.

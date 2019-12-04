@@ -1,0 +1,34 @@
+== Secure Container
+
+Yeah, password hacking! Why not choosing Ruby for iterating a lot of stuff? :) 
+Run the solution via `./solution.rb` or `ruby solution.rb`.
+
+You have to love the language for it's expressiveness. 
+
+Star one basically reads like the conditions for the possible passwords:
+
+[source,ruby,numbered,indent=0]
+----
+include::solution.rb[tags=starOne]
+----
+<1> Create range reassembling my input values and select all values for which the block returns `true`
+<2> Turn each value into a string, get the cars from it and create pairs of consecutive chars
+<3> Return whether any of those pairs satisfies being identical and all of the pairs being consecutive numbers
+
+I refrained from using regex here. Finding pairs of numbers is rather easy (`/(\d)\1/`), but checking if there are lower or equal? Naaa…
+
+However, I used regex for star two:
+
+[source,ruby,numbered,indent=0]
+----
+include::solution.rb[tags=starTwo]
+----
+<1> Find all numbers repeated at last two times in the string and check if any of those matches is exactly 2 chars long.
+
+The solution uses the previous list of numbers and applies the count method with a block, counting only those elements that return true for the block.
+
+The regex `/((\d)\2+)/` needs some explanation: It consists of two capturing groups. The outer one being number one, enclosing everything matched, and the inner one being number two and matching a single digit `\d`. 
+`\2` is a back reference to this second group and needs to be at least once in the string.
+`scan` returns an array of arrays (all matches, presented as an item in an array for each group).
+
+That was way easier for me than day 3.

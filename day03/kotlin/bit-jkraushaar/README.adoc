@@ -1,0 +1,89 @@
+== Day 03
+
+This was the first day where I had to give up and go to bed.
+I was annoyed that all tests pass but my solution was wrong.
+After a refreshing sleep I finally found the solution to my problem.
+To cut a long story short: I missunderstod one of the requirements.
+
+____
+If a wire visits a position on the grid multiple times, use the steps value from the first time it visits that position when calculating the total value of a specific intersection.
+____
+
+I thought this means that I have to implement a shortest path algorithm.
+I was wrong (see <<secondStar, Second Star>>).
+
+First I started defining a point on the grid.
+I use Kotlins `typealias`, because I only want a alias for Kotlins `Pair` data type.
+I also provide a extension function to calculate the Manhattan distance of my `Point`.
+
+.Point definition
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=point]
+----
+
+Next I define a Line, which actually consists of a staring and an ending point and a direction.
+Each command in the input file is converted into a `Line`.
+Furthermore `Line` has another extension function to expand all points on the line.
+Here I also make use of Kotlins destructuring declarations to extract the contents of my line and points.
+
+.Line definition
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=line]
+----
+
+Now I need a function to convert the string commands into lines.
+Again I am using an extension function, but to be honest it is only for the sake of readability.
+
+.String command parsing
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=pointConversion]
+----
+
+Finally I need an utility function to calculate the distance of every point on the wire from the starting point.
+
+.Distance calculation for second star
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=utilityFunction]
+----
+
+(Yeah, another extension function... ;-))
+
+=== First Star
+
+Now everything is set up to calculate the result of the first star.
+The calculation is now quite easy:
+
+. Read wires from file
+. Convert them an ordered list of points
+. Calculate the intersection of both lists (and remove `Point(0, 0)`)
+. Calculate the Manhattan distance for every point in the intersection
+. Choose the minimum
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=firstStar]
+----
+
+[[secondStar]]
+=== Second Star
+
+At the end the second star is really easy... if you have not missunderstod the requirements.
+
+. Calculate the distance of every point from start on the wire
+. Filter the distances by the points in the intersection
+. Fetch the distances on both wires
+. Choose the minimum
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=secondStar]
+----
+
+That's all.
+
+I feel good, because I solved the puzzle.
+However, I think I need a break now for one or two days.

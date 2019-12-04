@@ -1,0 +1,12 @@
+{
+    "files": [
+        "src/solution1.ts" , "src/solution2.ts" ,
+        "src/PasswordDigitGenerator.ts" , "src/PasswordDigitValidator.ts" ,
+        "src/PasswordDigitValidatorAdjacentDigits.ts" ,
+        "src/PasswordDigitValidatorAdjacentDigitsInGroup.ts" 
+    ],
+    "compilerOptions": {
+        "noImplicitAny": true,
+        "target": "es5"
+    }
+}

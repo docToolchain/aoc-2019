@@ -45,6 +45,7 @@ task generateIndex() {
     doLast {
         def src = new File('.')
 
+        def stats = [coders:0,languages:0,stars:[:],days:[]]
         // build up an index of all code
         def days = [:]
         def languages = [:]
@@ -75,6 +76,7 @@ task generateIndex() {
         new File(projectDir, "build/.").mkdirs()
         new File(projectDir, 'src/site/content/generated/.').mkdirs()
         def coderIndex = ""
+        stats.coders = coders.size()
         coders.sort{it.key.toLowerCase()}.each { coder, data ->
             // * anoff
             def daysFile = new File(projectDir, "src/site/content/generated/coder/${coder}/generatedDays.adoc")
@@ -126,6 +128,8 @@ include::${file.canonicalPath-(currentFolder.canonicalPath+'/')}[]
         new File(projectDir, 'src/site/content/generated/byCoder.adoc').write(coderIndex)
         def dayIndex = ""
         days.sort{it.key}.each { day, data ->
+            def dayNum = (day - "day").replaceAll("^0", "")
+            stats.days << dayNum
             dayIndex += """
 === Day ${day-"day"}
 
@@ -146,6 +150,13 @@ The riddle for day ${day - "day"} can be found at https://adventofcode.com/2019/
                 dayIndex += """\
 | ${lastCoder==coder?"":coder} | link:/generated/coder/${coder}/generatedDays.html#_day_${day-"day"}_${language}[$language]
 """
+                dayNum = (day - "day").replaceAll("^0", "")
+                if (lastCoder!=coder) {
+                    if (!stats.stars[coder]) {
+                        stats.stars[coder] = [:]
+                    }
+                    stats.stars[coder][dayNum]=1
+                }
                 lastCoder = coder
             }
             dayIndex += "|===\n"
@@ -155,6 +166,7 @@ The riddle for day ${day - "day"} can be found at https://adventofcode.com/2019/
 
         new File('src/site/content/generated/byDay.adoc').write(dayIndex)
         def langIndex = ""
+        stats.languages = languages.size()
         languages.sort{it.key.toLowerCase()}each { language, data ->
             langIndex += """
 === ${language}
@@ -174,5 +186,24 @@ The riddle for day ${day - "day"} can be found at https://adventofcode.com/2019/
             langIndex += "|===\n"
         }
         new File('src/site/content/generated/byLanguage.adoc').write(langIndex)
+
+        def statsFile = """
+= Stats and Leaderboard
+
+Here are some stats for those who are interested.
+
+The repository contains solutions in ${stats.languages} languages by ${stats.coders} developers.
+
+[cols="${stats.days.size()+2}"]
+|===
+|Developer ^| ${stats.days.collect{"Day $it"}.join(' ^| ')} ^| Sum
+"""
+        stats.stars.sort{e1, e2 -> e2.value.size() <=> e1.value.size()}.each{ coder, stars ->
+            statsFile += "|$coder ^| ${stats.days.collect{ stars[it]?'🎄':'-' }.join(' ^| ')} ^| ${stars.size()}\n"
+        }
+        statsFile += """
+|===
+"""
+        new File('src/site/content/generated/stats.adoc').write(statsFile)
     }
 }

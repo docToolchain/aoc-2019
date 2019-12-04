@@ -1,0 +1,42 @@
+Solution for Day 03 of the AoC 2019: https://adventofcode.com/2019/day/3[Day 3: Crossed Wires]
+
+== Solution
+
+Things get a bit more complicated now (and to be honest, I think I over-engineered this time).
+
+I build a class for a visited point including the x and y position as a `std::pair`
+and the travelled distance as a private member with some helper functions.
+
+....
+include::Point.h
+....
+
+Hint: add print functions to make your code debug-able.
+
+I also built a class for the wire line, which can be constructed out of a string.
+After some string magic (split by comma, convert to direction and length), I store 
+a set of visited points by stepping through all points the wire has visited.
+The important key here is, that I use a sorting function only respecting x and y (not the distance),
+so points with the same x/y are only stored once in the set. As we advance 
+from beginning to end, we only store the first occurrence of every point.
+
+Not very readable - but I basically wanted to use some nice comparator functions :-) 
+
+....
+include::WirePath.h
+....
+
+What is missing is now only the possibility to built the intersection of those two sets.
+In principle there are C++ functions for that, but I wanted to have both the left and the right point 
+(for the second star), so I needed to re-code the intersection function using some iterator magic 
+(it is however not so hard).
+Then I convert to either the manhatten distance or the sum of travelled distances, build the min and 
+print.
+
+....
+include::solution.cpp
+....
+
+Attention: this time you need to built with
+
+    g++ solution.cpp -std=c++17 -I. -o solution

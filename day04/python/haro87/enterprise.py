@@ -38,9 +38,8 @@ class NyotaUhura:
             large = False
             for count in c.values():
                 count = int(count)
-                if count > 1:
-                    if count % 2 != 0:
-                        large = True
-            if not large:
+                if count == 2:
+                    large = True
+            if large:
                 validcodes.append(code)
         return validcodes

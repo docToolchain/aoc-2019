@@ -71,6 +71,7 @@ task generateIndex() {
                 }
             }
         }
+        days.sort({k1, k2 -> k1.substring(3).toInteger() <=> k2.substring(3).toInteger()} as Comparator)
         new File(projectDir, "build/.").mkdirs()
         new File(projectDir, 'src/site/content/generated/.').mkdirs()
         def coderIndex = ""

@@ -71,6 +71,7 @@ task generateIndex() {
                 }
             }
         }
+        days.sort()
         new File(projectDir, "build/.").mkdirs()
         new File(projectDir, 'src/site/content/generated/.').mkdirs()
         def coderIndex = ""

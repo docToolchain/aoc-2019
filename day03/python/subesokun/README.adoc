@@ -1,0 +1,35 @@
+This solution is written in Python.
+It is the solution for the first day of AoC:
+https://adventofcode.com/2019/day/3[Crossed Wires]
+
+https://aoc-2019.netlify.com
+
+
+== Solution
+
+Not best solution, but it works 🙈
+
+[source, python]
+....
+include::solution.py[]
+....
+
+== Run instructions 🧙‍♂️
+
+No need to install and configure Python on your host, just use VSCode and the remote development extension pack for running the code without polluting your host. It's magic ✨
+
+```bash
+code --install-extension ms-vscode-remote.vscode-remote-extensionpack
+```
+
+Open folder in VSCode and re-open folder inside of the dev container by running the quick action
+
+```
+Select Remote-Containers: Open Folder in Container...
+```
+
+Run the code via the integrated VSCode terminal
+
+```bash
+python solution.py
+```

@@ -1,0 +1,31 @@
+== 1202 Program Alarm
+
+I have written my solutions in Haskell. I am using this year's Advent of Code to
+brush up on my functional programming.
+
+To run the final program you need Haskell installed, and simply run the
+`runhaskell answer.hs`.
+
+My solution for part 1 defines a recursive function `comp`, that computes a single step of
+the computer and then continues to call itself with the next instruction address
+until it encounters an error or the halt opcode, `99`.
+
+My solution for part 2 defines a brute force recursive function `findParamsBrute`, that checks to
+see if a set of params results in the expected output. If it doesn't, it calls
+itself with the parameters updated accordingly, and runs until the desired
+output is found.
+
+I also added a `O(1)` solution specific to the challenege input, that calculates
+the correct params for a given final answer based on the rate of change caused
+by the first and second parameters. A single unit increase in the first parameter
+causes a change of +243000, while a single unit increase in the second parameter
+causes a change of +1. Knowing this, and the fact that the initial result given
+parameters `[0, 0]` is 493708, we can solve for the correct parameters in a
+single calculation.
+
+== Solution
+
+[source, haskell]
+----
+include::answer.hs[]
+----

@@ -1,0 +1,35 @@
+== Day01
+
+This is the solution for the second day of AoC:
+https://adventofcode.com/2019/day/2[1202 Program Alarm]
+
+=== Star 1
+Once again a text file is being read. This time it is a comma separated list of integers.
+So the readFile methods returns an array of integers which represents our computer memory.
+[source, groovy, numbered]
+....
+include::solution.groovy[tags=readFile]
+....
+The whole computer operations part is implemented inside the processCode() function.
+It takes the computer's memory (array of integers) as input and performs the operation according to the specification.
+This could also have been implemented as a class, but I was to lazy for that.
+[source, groovy, numbered]
+....
+include::solution.groovy[tags=processor]
+....
+Now the "code" which was read in must only be manipulated according to the requirements (substiuting the second and third integer)
+and then processCode() returns with the desired value.
+[source, groovy, numbered]
+....
+include::processor.groovy[tags=star1]
+....
+
+=== Second Star
+What a "lucky" coincidence ;) that processCode()  takes the computer memory as input.
+So we can easily brutforce through all combinations of nouns and verbs (99 * 99)
+until the calculation returns with the right return value.
+
+[source, groovy, numbered]
+....
+include::solution.groovy[tags=star2]
+....

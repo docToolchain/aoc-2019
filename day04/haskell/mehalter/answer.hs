@@ -10,23 +10,15 @@ isSorted [] = True
 isSorted [x] = True
 isSorted (x:y:xs) = x <= y && isSorted (y:xs)
 
--- check if a list contains any duplicates
-hasDup :: (Ord a) => [a] -> Bool
-hasDup xs = length (nub xs) /= length xs
+-- check if the number an item appears satisfies a supplied function
+containsN :: Ord a => (Int -> Bool) -> [a] -> Bool
+containsN func list = (<) 0 $ length $ filter (\l -> func $ length l) $ group list
 
--- check if a item in a sorted list appears strictly twice
-containsTwo :: Ord a => [a] -> Bool
-containsTwo list = or $ map (\l -> length l == 2) (group list)
-
--- Check if digits are sorted and if there are any duplicates
-valid1 :: [Int] -> Int
-valid1 ints = fromEnum $ (isSorted ints) && (hasDup ints)
-
--- Check if digits are sorted and if there is a digit with only 2 appearances
-valid2 :: [Int] -> Int
-valid2 ints = fromEnum $ (isSorted ints) && (containsTwo ints)
+-- Check if digits are sorted and if there is a digit who's appearance satisfies a function
+valid :: Ord a => (Int -> Bool) -> [a] -> Bool
+valid func list = isSorted list && containsN func list
 
 main = do
   let ints = map digits [245318..765747]
-  print $ sum $ map valid1 ints
-  print $ sum $ map valid2 ints
+  print $ length $ filter (valid (>1)) ints
+  print $ length $ filter (valid (==2)) ints

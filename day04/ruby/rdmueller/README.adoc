@@ -12,7 +12,7 @@ The processing power should be enough.
 
 [source, ruby, numbered, indent=0]
 ----
-include::solution.rb[tags=star1]
+include::solution.rb[]
 ----
 
 == Star Two
@@ -21,5 +21,5 @@ I think I can stay with the brute force approach, but I have to update my checks
 
 [source, ruby, numbered, indent=0]
 ----
-include::solution_s2.rb[tags=star1]
+include::solution_s2.rb[]
 ----

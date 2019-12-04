@@ -22,7 +22,6 @@ However, I used regex for star two:
 [source,ruby,numbered,indent=0]
 ----
 include::solution.rb[tags=starTwo]
-  p.to_s.scan(/((\d)\2+)/).map{ |a| a[0]}.any? { |v| v.length == 2 } # <1>
 ----
 <1> Find all numbers repeated at last two times in the string and check if any of those matches is exactly 2 chars long.
 

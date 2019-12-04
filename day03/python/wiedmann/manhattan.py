@@ -22,8 +22,20 @@ def compute(input_1, input_2):
         distance = abs(intersection[0]) + abs(intersection[1])
         smallest_manhattan_distance = min(distance, smallest_manhattan_distance)
     print("Result: " + str(smallest_manhattan_distance))
-    return smallest_manhattan_distance
 
+    # Count steps to intersection
+    steps_cable_1 = count_steps(steps_cable_1, intersections)
+    steps_cable_2 = count_steps(steps_cable_2, intersections)
+    
+    # Get minimum number of steps
+    min_steps = 10000000
+    for i in range(0, len(steps_cable_1)):
+        min_steps = min(min_steps, (steps_cable_1[i] + steps_cable_2[i]))
+    
+    print("Minimum steps for both cables:",min_steps)
+    return [smallest_manhattan_distance, min_steps]
+    
+    
 def extract_steps(steps_input, steps_output):
     for i in range(0, len(steps_input)):
         char_1 = steps_input[i][0]
@@ -58,3 +70,18 @@ def walk_over_board_cable_2(board, steps):
         print("Intersections:",intersections)
     return intersections
     
+def count_steps(steps, intersections):
+    result_num_steps = []
+    for i in range(0, len(intersections)):
+        x = 0
+        y = 0
+        num_steps = 0
+        intersection = intersections[i]
+        for j in range(0, len(steps)):
+            x += steps[j][0]
+            y += steps[j][1]
+            num_steps += 1
+            if (x == intersection[0] and y == intersection[1]):
+                result_num_steps.append(num_steps)
+                break
+    return result_num_steps

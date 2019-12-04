@@ -1,0 +1,11 @@
+﻿== Day 4: Secure Container
+
+The original puzzle can be found at https://adventofcode.com/2019/day/4
+
+Today I did it just with calculation of all variants by interlaced for loops and then checking if the number fits the rules, nothing special about that.
+
+For the last part with my puzzle input I had to check manually in the excelsheet.
+
+I struggled to put the 6 numbers together to a number which I could check if inbound or outbound. Even with using long it does not work.
+
+Maybe that's something I will figure out later, in the moment I am glad to be through for day04.

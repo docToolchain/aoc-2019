@@ -71,6 +71,7 @@ task generateIndex() {
                 }
             }
         }
+        days.sort({k1, k2 -> k1.substring(3).toInteger() <=> k2.substring(3).toInteger()} as Comparator)
         new File(projectDir, "build/.").mkdirs()
         new File(projectDir, 'src/site/content/generated/.').mkdirs()
         def coderIndex = ""
@@ -124,21 +125,28 @@ include::${file.canonicalPath-(currentFolder.canonicalPath+'/')}[]
         }
         new File(projectDir, 'src/site/content/generated/byCoder.adoc').write(coderIndex)
         def dayIndex = ""
-        days.each { day, data ->
+        days.sort{it.key}.each { day, data ->
             dayIndex += """
 === Day ${day-"day"}
 
-The riddle for day ${day-"day"} can be found at https://adventofcode.com/2019/day/${(day-"day").replaceAll("^0","")}.
-
+"""
+            if (day!="day00") {
+                dayIndex += """
+The riddle for day ${day - "day"} can be found at https://adventofcode.com/2019/day/${(day - "day").replaceAll("^0", "")}.
+"""
+            }
+            dayIndex += """
 [cols="2"]
 |===
 """
-            data.eachWithIndex { datum, i ->
+            def lastCoder = ""
+            data.sort{it[0].toLowerCase()}.eachWithIndex { datum, i ->
                 def coder = datum[0]
                 def language = datum[1].replaceAll("[+]","p")
                 dayIndex += """\
-| $coder | link:/generated/coder/${coder}/generatedDays.html#_day_${day-"day"}_${language}[$language]
+| ${lastCoder==coder?"":coder} | link:/generated/coder/${coder}/generatedDays.html#_day_${day-"day"}_${language}[$language]
 """
+                lastCoder = coder
             }
             dayIndex += "|===\n"
         }
@@ -147,7 +155,7 @@ The riddle for day ${day-"day"} can be found at https://adventofcode.com/2019/da
 
         new File('src/site/content/generated/byDay.adoc').write(dayIndex)
         def langIndex = ""
-        languages.each { language, data ->
+        languages.sort{it.key.toLowerCase()}each { language, data ->
             langIndex += """
 === ${language}
 

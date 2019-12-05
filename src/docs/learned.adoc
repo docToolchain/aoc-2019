@@ -12,7 +12,7 @@
 :tschulte: image:https://avatars1.githubusercontent.com/u/203910?s=40[link=https://github.com/tschulte]
 :olithissen: image:https://avatars1.githubusercontent.com/u/13063051?s=40[link=https://github.com/olithissen]
 :RJPlog: image:https://avatars3.githubusercontent.com/u/44948239?s=40[link=https://github.com/RJPlog]
-
+:sancho1241: image:https://avatars0.githubusercontent.com/u/24798802?s=40[link=https://github.com/sancho1241]
 
 == Today I learned..
 
@@ -48,6 +48,10 @@ a|  * having solved a problem in one language (Go) makes it easy to solve it in 
 a|{RJPlog}
 a|  * the problem was not the coding but not having read the specification thoroughly.
     * having the wrong test cases does not help you finding the problem
+a|{sancho1241}
+a|  * the python int operator
+    * brought recursion back to memory
+    * how to contribute to an adoc file ;-)
 
 |====
 
@@ -65,7 +69,8 @@ a| Use a https://de.wikipedia.org/wiki/Shebang[shebang] like `#!/usr/bin/env rub
 do a `chmod +x solution.rb` on your file 
 and you can easily execute it as `./solution.rb`,
 because it now nows how it wants to be executed! ⭐ 
-
+a|{sancho1241}
+a|  * how to break out of nested loops
 |====
 
 === Day 03

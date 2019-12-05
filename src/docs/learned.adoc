@@ -84,7 +84,11 @@ a|  * today was a tough for me. After four stars on the first days I thought it 
     * today I also learned, that not giving up and trying something new kann help you, even if it was hard to start learning VBA. I guess I am completely old-fashioned :-)
     * today I also learned how good it feels, to be part of that party. Thank you all! 
 
-
+a|{anoff}
+a| In Ruby 🔻 you can 
+    * you can overload `+` and `==` operators for classes which allows you to define the behavior of simple additions and comparisons
+    * class properties do not have accessory by default, but you can use `attr_accessor :x, :y` to generate them
+    * when `put` (printing) a class instance it is automatically turned to a string if the `to_s` method is implemented
 
 |====
 
@@ -97,6 +101,17 @@ a|  * today was a tough for me. After four stars on the first days I thought it 
 a|{RJPlog}
 a|  * today I better understood the puzzle and the necessary algorithm for the calculation of the solution compared to yesterday, so I could concentrate on deepening my knowledge in VBA. For me it seems to be pretty good for using it for this kind of puzzles making fast progress or trying something out. 
     * but until now I have not found a good way in structuring the VBA code, so if looking at Santa's mission from a ISO26262 view, I would not have a good trust on my own coding in VBA :-)
+
+
+|====
+
+=== Day 05
+
+[cols="1,10"]
+|====
+
+a|{anoff}
+a|  * creating software with extendable architecture for AoC pays off 😉
 
 
 |====

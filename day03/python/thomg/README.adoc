@@ -1,0 +1,4 @@
+== DISCLAIMER
+
+I'm not a professional developer and only doing this for fun. Solutions will be messy. 
+I ended up brute forcing this one because it got late in the evening.

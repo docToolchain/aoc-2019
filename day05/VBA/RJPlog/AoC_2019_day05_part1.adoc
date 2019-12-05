@@ -1,0 +1,6 @@
+﻿== Day 5: Sunny with a Chance of Asteroids
+
+The original puzzle can be found at https://adventofcode.com/2019/day/5
+
+First part solved. Details to be found in VBA :-). If I have time in the evening, I will add some comments in the readme.
+

@@ -1,4 +1,4 @@
-== The Tyranny of the Rocket Equation: The database strikes back
+== https://adventofcode.com/2019/day/1[The Tyranny of the Rocket Equation]: The database strikes back
 
 This one is a solution just for fun. 
 Why not solving the thing with SQL?

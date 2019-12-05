@@ -8,7 +8,7 @@ and I possible never tried hard enough to understand at least a bit about it.
 
 TIP: I plan on getting https://twitter.com/kaffeecoder[Daniels] book https://leanpub.com/scala-from-scratch-exploration[Scala From Scratch]
       respectively https://leanpub.com/theneophytesguidetoscala[The Neophyte's Guide to Scala].
-      Daniel is one of the friendliest developers I know and I guess his books will be good, gentle introduction.
+      Daniel is one of the friendliest developers I know and I guess his books will be a good, gentle introduction.
 
 Anyway, the solution to day 5 is my second try with Scala and I behaved like a kid in a sweet shop, trying a bit from everything.
 So please excuse me, when it's not exactly the Scala way.
@@ -35,10 +35,10 @@ Reading stuff seems to be the everywhere. I misst `try-with-resources`, though:
 include::Solution.scala[tags=input]
 ----
 
-However, the underscore sticks it. What the? Turns out, a lot of ussages, see this https://stackoverflow.com/a/8001065[SO answer].
+However, the underscore sticks out. What the? Turns out, a lot of ussages, see this https://stackoverflow.com/a/8001065[SO answer].
 In the example above, it's just used as _Method values_.
 
-It became appearant, that todays puzzle would add a lot of operators, so this time I wanted them to objects and I wanted to use https://docs.scala-lang.org/tour/case-classes.html[Case Classes] for them
+It became apparent, that todays puzzle would add a lot of operators, so this time I wanted them to objects and I wanted to use https://docs.scala-lang.org/tour/case-classes.html[Case Classes] for them
 and if possible, work with them in a https://docs.scala-lang.org/tour/pattern-matching.html[pattern match].
 
 I started with a basic operation:
@@ -116,7 +116,7 @@ include::Solution.scala[tags=readerAndWriter2,indent=0]
     After that, it takes a `Tuple2`, which we gonna use in a second.
 <3> Partial application of the write methode, with only the memory passed to it, effectivly turning it into an accessor or _writer_.
 
-The look funny… Both have two parameter lists, the first taking in the memory, the second one positional and mode respectivly positional and value parameter.
+They look funny… Both have two parameter lists, the first taking in the memory, the second one positional and mode respectively positional and value parameter.
 Those are methods that applicable to https://docs.scala-lang.org/tour/multiple-parameter-lists.html[partial application (currying)].
 
 The last helper method I have extracts the parameter modes:

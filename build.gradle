@@ -198,8 +198,9 @@ The repository contains solutions in ${stats.languages} languages by ${stats.cod
 |===
 |Developer ^| ${stats.days.collect{"Day $it"}.join(' ^| ')} ^| Sum
 """
+        def emojis=['👋','🕯','🎄','🎶','❄','🔔','🧦','☃','🕯🕯','🎁','🎄','🔔','☃','❄','⛪','🕯🕯🕯','🦌','🧝','🤶','🎄','☃','❄','🕯🕯🕯🕯','🎶','🎅','👪👼🦌']
         stats.stars.sort{e1, e2 -> e2.value.size() <=> e1.value.size()}.each{ coder, stars ->
-            statsFile += "|$coder ^| ${stats.days.collect{ stars[it]?'🎄':'-' }.join(' ^| ')} ^| ${stars.size()}\n"
+            statsFile += "|$coder ^| ${stats.days.collect{ stars[it]?emojis[it as Integer]:'-' }.join(' ^| ')} ^| ${stars.size()}\n"
         }
         statsFile += """
 |===

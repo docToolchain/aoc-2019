@@ -1,0 +1,23 @@
+Puzzle: https://adventofcode.com/2019/day/5[Sunny with a Chance of Asteroids]
+
+== Part 1
+
+
+== Part 2
+
+
+== Solution
+
+To run the solution use 
+
+[source, ruby]
+....
+include::solution.rb[]
+....
+
+=== Test cases
+
+[source, ruby]
+....
+include::solution_test.rb[]
+....

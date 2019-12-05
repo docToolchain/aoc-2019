@@ -112,7 +112,7 @@ def test_data():
 
 #calculate fuel amount per given mass
 def fuel (mass):
-    required_fuel = round((mass//3-2))
+    required_fuel = (mass//3-2)
     if required_fuel <= 0:
         return 0
     else:

@@ -1,0 +1,43 @@
+== The Tyranny of the Rocket Equation
+
+This solution is written in Typescript.
+I decided for Typescript because want write better Javascript.
+
+....
+npm install
+gulp
+node dist/solution1.js
+node dist/solution1.js
+....
+
+Need some classes
+- Modul
+- Spacecraft
+
+For each solution implement own calculator service
+
+[source, typescript, numbered]
+....
+include::src/CalculateFuelService.ts[]
+....
+
+[source, typescript, numbered]
+....
+include::src/CalculateFuelWithFuelService.ts[]
+....
+
+=== First Star
+
+The solution is quite straight forward.
+
+[source, typescript, numbered]
+....
+include::src/solution1.ts[]
+....
+
+=== Second Star
+
+[source, typescript, numbered]
+....
+include::src/solution2.ts[]
+....

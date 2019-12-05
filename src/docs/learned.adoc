@@ -11,6 +11,8 @@
 :gysel: image:https://avatars0.githubusercontent.com/u/1065960?s=40[link=https://github.com/gysel]
 :tschulte: image:https://avatars1.githubusercontent.com/u/203910?s=40[link=https://github.com/tschulte]
 :olithissen: image:https://avatars1.githubusercontent.com/u/13063051?s=40[link=https://github.com/olithissen]
+:RJPlog: image:https://avatars3.githubusercontent.com/u/44948239?s=40[link=https://github.com/RJPlog]
+
 
 == Today I learned..
 
@@ -44,14 +46,53 @@ a|  * having solved a problem in one language (Go) makes it easy to solve it in 
     * file and string handling in Ruby is fun e.g. `File.read("./input.txt").split("\n").map(&:to_i)`
 
 a|{RJPlog}
-a|  * The problem was not the coding but not having read the specification thoroughly.
-    * Having the wrong test cases does not help you finding the problem
+a|  * the problem was not the coding but not having read the specification thoroughly.
+    * having the wrong test cases does not help you finding the problem
 
 |====
 
-=== Day 01
+=== Day 02
 
 [cols="1,10"]
 |====
 
+a|{RJPlog}
+a|  * again having the wrong test cases does not help you finding the problem
+    * being to lasy to find the number of elements of an array by code may couse some trouble if you just declare a value you think might fit
+
+a|{rdmueller}
+a| Use a https://de.wikipedia.org/wiki/Shebang[shebang] like `#!/usr/bin/env ruby` at the start of your file, 
+do a `chmod +x solution.rb` on your file 
+and you can easily execute it as `./solution.rb`,
+because it now nows how it wants to be executed! ⭐ 
+
 |====
+
+=== Day 03
+
+[cols="1,10"]
+|====
+
+a|{RJPlog}
+a|  * today was a tough for me. After four stars on the first days I thought it would stay that easy and I can improve and learn something about git, github and so on, for example as I learned yesterday how to bring my fork up to date, but the puzzle today told me some other story
+    * today I learned, that with my Ardunio/M5Stack I will not be able to solve the puzzle, even if the puzzle itself was well understood. 
+    * today I also learned, that not giving up and trying something new kann help you, even if it was hard to start learning VBA. I guess I am completely old-fashioned :-)
+    * today I also learned how good it feels, to be part of that party. Thank you all! 
+
+
+
+|====
+
+
+=== Day 04
+
+[cols="1,10"]
+|====
+
+a|{RJPlog}
+a|  * today I better understood the puzzle and the necessary algorithm for the calculation of the solution compared to yesterday, so I could concentrate on deepening my knowledge in VBA. For me it seems to be pretty good for using it for this kind of puzzles making fast progress or trying something out. 
+    * but until now I have not found a good way in structuring the VBA code, so if looking at Santa's mission from a ISO26262 view, I would not have a good trust on my own coding in VBA :-)
+
+
+|====
+

@@ -1,0 +1,5 @@
+== Disclaimer
+I’m not a professional developer and only doing this for fun. The solutions might me messy.
+
+== Day 04
+I ended up simply looping through the entire range and applying a regex to each one and loop over every single digit to determine if they are not descending.

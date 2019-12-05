@@ -1,0 +1,29 @@
+== 1202 Program Alarm
+
+The original puzzle can be found at https://adventofcode.com/2019/day/2
+
+Today, my quality criteria is just to do it quick.
+I only have time to spend while I commute, so apox 15 minutes in each direction.
+Let's go!
+
+=== First Star
+
+I need a little interpreter for the code isntructions.
+First time, I didn't get the reference right, but then I noticed that I had to use the instruction of the instruction (ìnt[int[x]]) and everything worked out.
+
+.First Star
+[source, ruby, numbered]
+----
+include::solution.rb[tags=star1]
+----
+
+=== Second Star
+
+The code for the first star started out as a simple script.
+For the second star, I wrapped it as method and iterated brute force over it until it matched the result.
+
+.Second Star
+[source, ruby, numbered]
+----
+include::solution.rb[tags=star2]
+----

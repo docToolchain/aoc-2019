@@ -1,0 +1,28 @@
+== 1202 Program Alarm
+
+This solution is written in Typescript.
+
+....
+npm install
+gulp
+node dist/solution1.js
+node dist/solution1.js
+....
+
+=== First Star
+
+Solved solution one by implementing the computer and the rules
+[source, typescript, numbered]
+....
+include::src/Computer.ts[]
+....
+
+
+=== Second Star
+
+Second solution solved through brute force.
+
+[source, typescript, numbered]
+....
+include::src/solution2.ts[]
+....

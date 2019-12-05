@@ -1,13 +1,12 @@
 #!/usr/bin/ruby
 def required_fuel(mass)
-  return (mass / 3) - 2
+  (mass / 3) - 2
 end
 
 def part1(massInventory)
   fuelSum = massInventory
     .map { |mass| required_fuel(mass) }
     .reduce(0) { |sum, num| sum + num }
-  return fuelSum
 end
 
 def part2(massInventory)
@@ -19,7 +18,7 @@ def part2(massInventory)
       fuel = required_fuel(fuel)
     end
   }
-  return fuelSum
+  fuelSum
 end
 
 if caller.length == 0

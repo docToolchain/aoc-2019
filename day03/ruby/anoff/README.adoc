@@ -1,0 +1,43 @@
+Puzzle: https://adventofcode.com/2019/day/3[Crossed Wires]
+
+== Part 1
+
+This was another challenge where having participated previously makes the solution process a lot easier.
+Having thought about similar problems I quickly decided to create a write:
+
+. a parser for the wire paths
+. create a hashmap with key=gridpoint and value=wires passing
+. after parsing all wires, check the entire hashmaps for keys where multiple wires passed
+. identify crossing with smallest manhattan distance
+
+Playing around with classes in Ruby I learned a lot of interesting things:
+
+* you can overload `+` and `==` operators which allows you to define the behavior of simple additions and comparisons
+* class properties do not have accessory by default
+* when `put` (printing) a class instance it is automatically turned to a string if the `to_s` method is implemented
+
+[source, ruby]
+....
+include::solution.rb[]
+....
+
+
+== Part 2
+
+To calculate the length of the wires until they cross I simply added the wire length to the Hash map from part 1.
+That way at each position on the grid I can identify if a wire is there and how many steps the wire took to get there.
+Using the same method to identify crossings I simply changed the selection logic to take into account the wire length instead of the manhattan distance.
+
+== Solution
+
+[source, ruby]
+....
+include::solution.rb[]
+....
+
+=== Test cases
+
+[source, ruby]
+....
+include::solution_test.rb[]
+....

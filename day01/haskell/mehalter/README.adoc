@@ -1,4 +1,4 @@
-# The Tyranny of the Rocket Equation
+== The Tyranny of the Rocket Equation
 
 I have written my solutions in Haskell. I am using this year's Advent of Code to
 brush up on my functional programming.
@@ -10,3 +10,10 @@ the Haskell script defined in `answer.hs`.
 My solutions define the math equation as a function for both part one and part
 two, and maps the function across the array of integers passed in as command
 line arguments.
+
+== Solution
+
+[source, haskell]
+----
+include::answer.hs[]
+----

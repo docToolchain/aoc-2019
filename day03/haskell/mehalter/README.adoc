@@ -1,0 +1,22 @@
+== Crossed Wires
+
+To run the final program you need Haskell installed, and simply run the
+`runhaskell answer.hs`.
+
+My solution takes a brute force approach that generates all the points each
+wire touches using the `getAllPoints` function, then gets the intersection of
+the two wire points to get all the places the wires cross.
+
+My solution for part 1 then takes the intersection, finds the closest one to the
+central point, and calculates the Manhattan distance.
+
+My solution for part 2 takes the intersection, calculates how many steps it
+takes to get to each of the crosses, and returns the minimum steps to reach a
+cross.
+
+== Solution
+
+[source, haskell]
+----
+include::answer.hs[]
+----

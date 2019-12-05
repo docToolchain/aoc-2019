@@ -10,7 +10,7 @@ def op(program, ptr)
   case opcode
   when 99
     return 0
-  when 1..4
+  when 1..8
     if opcode == 1
       in1 = modes[0] == 1 ? program[ptr+1] : program[program[ptr+1]] # switch between position mode (0) and immediate/value mode (1)
       in2 = modes[1] == 1 ? program[ptr+2] : program[program[ptr+2]]
@@ -32,9 +32,45 @@ def op(program, ptr)
       return 2
     elsif opcode == 4
       in1 = modes[0] == 1 ? program[ptr+1] : program[program[ptr+1]] # switch between position mode (0) and immediate/value mode (1)
-      puts "Running output for ptr:%d mode:%d in:%d" % [ptr, modes[0], in1]
-      puts "Output: %d" % program[in1]
+      puts "Running output for ptr:%d mode:%d at:%d" % [ptr, modes[0], program[ptr+1]]
+      puts "Output: %d" % in1
       return 2
+    elsif opcode == 5
+      in1 = modes[0] == 1 ? program[ptr+1] : program[program[ptr+1]] # switch between position mode (0) and immediate/value mode (1)
+      in2 = modes[1] == 1 ? program[ptr+2] : program[program[ptr+2]]
+      if in1 > 0
+        return in2 - ptr
+      else
+        return 3
+      end
+    elsif opcode == 6
+      in1 = modes[0] == 1 ? program[ptr+1] : program[program[ptr+1]] # switch between position mode (0) and immediate/value mode (1)
+      in2 = modes[1] == 1 ? program[ptr+2] : program[program[ptr+2]]
+      if in1 == 0
+        return in2 - ptr
+      else
+        return 3
+      end
+    elsif opcode == 7
+      in1 = modes[0] == 1 ? program[ptr+1] : program[program[ptr+1]] # switch between position mode (0) and immediate/value mode (1)
+      in2 = modes[1] == 1 ? program[ptr+2] : program[program[ptr+2]]
+      out = program[ptr+3]
+      if in1 < in2
+        program[out] = 1
+      else
+        program[out] = 0
+      end
+      return 4
+    elsif opcode == 8
+      in1 = modes[0] == 1 ? program[ptr+1] : program[program[ptr+1]] # switch between position mode (0) and immediate/value mode (1)
+      in2 = modes[1] == 1 ? program[ptr+2] : program[program[ptr+2]]
+      out = program[ptr+3]
+      if in1 == in2
+        program[out] = 1
+      else
+        program[out] = 0
+      end
+      return 4
     end
   else
     puts "Unknown opcode: %d" % opcode

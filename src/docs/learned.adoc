@@ -82,3 +82,17 @@ a|  * today was a tough for me. After four stars on the first days I thought it 
 
 
 |====
+
+
+=== Day 04
+
+[cols="1,10"]
+|====
+
+a|{RJPlog}
+a|  * today I better understood the puzzle and the necessary algorithm for the calculation of the solution compared to yesterday, so I could concentrate on deepening my knowledge in VBA. For me it seems to be pretty good for using it for this kind of puzzles making fast progress or trying something out. 
+    * but until now I have not found a good way in structuring the VBA code, so if looking at Santa's mission from a ISO26262 view, I would not have a good trust on my own coding in VBA :-)
+
+
+|====
+

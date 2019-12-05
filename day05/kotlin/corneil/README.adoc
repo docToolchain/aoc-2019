@@ -1,0 +1,19 @@
+= Day 05 - Sunny with a Chance of Asteroids
+
+I found a phrase in the description ambiguous.
+
+_Parameters that an instruction writes to will never be in immediate mode._
+
+When in reality the value refered to in the parameter is always the address.
+In my reading this means it is always in immediate mode.
+
+I have a class the represents the program counter `ProgramCounter` and a class for the executing state `ProgramState`
+The program state loads the code into mutable memory and resets the program counter.
+Each instruction modifies memory and returns a new program counter.
+
+I couldn't decide if the program counter belongs in the program state or if it should be passed along.
+
+[source,kotlin,numbered]
+----
+include::src/main/kotlin/solution.kt[]
+----

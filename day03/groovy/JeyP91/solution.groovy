@@ -5,19 +5,23 @@ ArrayList<String> pathString = Arrays.asList(new File('input.txt').text.split("\
 // ArrayList<String> pathString = Arrays.asList(new File('input_test1.txt').text.split("\\r?\\n")) // 610
 // ArrayList<String> pathString = Arrays.asList(new File('input_test2.txt').text.split("\\r?\\n")) // 410
 
+// Split up path strings
 ArrayList<String> path1 = Arrays.asList(pathString[0].split("\\s*,\\s*"))
 ArrayList<String> path2 = Arrays.asList(pathString[1].split("\\s*,\\s*"))
 
+// Convert path (R1, U2, ...) to sections with absolute start and end coordinates
 List<Section> sectionsPath1 = convertToSections(path1)
 List<Section> sectionsPath2 = convertToSections(path2)
 
 List<Coordinate> intersections = new ArrayList<Coordinate>()
 
+// Iterate over all sections and check if they cross each other
 sectionsPath1.each { Section sec1 ->
     sectionsPath2.each { Section sec2 ->
-        // sec1 -> vertical
-        // sec2 -> horizontal
-        if(sec1.getStartX() == sec1.getEndX() && sec2.getStartY() == sec2.getEndY()) {
+
+        // Check the two cases where either sec1 is vertical and sec2 horizontal and vice versa.
+        // The case where both are either vertical or horizontal does not need to be taken care
+        if(sec1.isVertical() && sec2.isHorizontal()) {
             if(
                 isInBetween(sec1.getStartX(), sec2.getStartX(), sec2.getEndX())
                 && isInBetween(sec2.getStartY(), sec1.getStartY(), sec1.getEndY())
@@ -25,9 +29,7 @@ sectionsPath1.each { Section sec1 ->
                 intersections.add(new Coordinate(sec1.getStartX(), sec2.getStartY()))
             }
         }
-        // sec1 -> horizontal
-        // sec2 -> vertical
-        else if (sec1.getStartY() == sec1.getEndY() && sec2.getStartX() == sec2.getEndX()) {
+        else if (sec1.isHorizontal() && sec2.isVertical()) {
             if(
                 isInBetween(sec1.getStartY(), sec2.getStartY(), sec2.getEndY())
                 && isInBetween(sec2.getStartX(), sec1.getStartX(), sec1.getEndX())
@@ -38,46 +40,70 @@ sectionsPath1.each { Section sec1 ->
     }
 }
 
-Integer shortestDistance = null
-intersections.each { Coordinate coor ->
 
-    int distance = getDistanceToPoint(coor, sectionsPath1) + getDistanceToPoint(coor, sectionsPath2)
+// Calculate and print Manhatten distance for part 1
+Integer shortestDistance = null
+// tag::distancePart1[]
+intersections.each { Coordinate coor ->
+    int distance = Math.abs(coor.getX()) + Math.abs(coor.getY())
+    if(shortestDistance == null || distance < shortestDistance) {
+        shortestDistance = distance
+    }
+}
+// end::distancePart1[]
+println "Solution Part 1: Manhattan distance: " + shortestDistance
+
+// Calculate and print fewest combined steps for part 1
+shortestDistance = null
+intersections.each { Coordinate coor ->
+    int distance = getStepsToPointOnSection(coor, sectionsPath1) + getStepsToPointOnSection(coor, sectionsPath2)
     if(shortestDistance == null|| distance < shortestDistance) {
         shortestDistance = distance
     }
 }
+println "Solution Part 2: Fewest combined steps: " + shortestDistance
 
-println shortestDistance
-
+// Convert path (R1, U2, ...) to sections with absolute start and end coordinates
 List<Section> convertToSections (List<String> path) {
     List<Section> sections = new ArrayList<Section>()
-    sections.add(new Section(0,0,0,0))
+    
+    // add temporary start section as reference for loop
+    sections.add(new Section(0,0,0,0,0))
     for(int i = 0; i < path.size(); i++) {
+
+        // get direction from first character of string
         String direction = path[i].substring(0, 1)
+
+        // get length of section from the number 
         int length = Integer.parseInt(path[i].substring(1, path[i].length()))
         
         int lastX = sections.get(sections.size() - 1).getEndX()
         int lastY = sections.get(sections.size() - 1).getEndY()
         switch(direction) {
             case "U":
-                sections.add(new Section(lastX, lastX, lastY, lastY + length))
+                sections.add(new Section(lastX, lastX, lastY, lastY + length, length))
                 break
             case "R":
-                sections.add(new Section(lastX, lastX + length, lastY, lastY))
+                sections.add(new Section(lastX, lastX + length, lastY, lastY, length))
                 break
             case "D":
-                sections.add(new Section(lastX, lastX, lastY, lastY - length))
+                sections.add(new Section(lastX, lastX, lastY, lastY - length, length))
                 break
             case "L":
-                sections.add(new Section(lastX, lastX - length, lastY, lastY))
+                sections.add(new Section(lastX, lastX - length, lastY, lastY, length))
                 break
         }
     }
+
+    // remove temporary start section
     sections.remove(0)
+
     return sections
 }
 
-int getDistanceToPoint(Coordinate coor, List<Section> sections) {
+// Follow wire until intersection is found
+int getStepsToPointOnSection(Coordinate coor, List<Section> sections) {
+    // tag::distancePart2[]
     int length = 0
     for(int i = 0; i < sections.size(); i++) {
         if(sections[i].isCoordinateOnSection(coor)) {
@@ -93,8 +119,10 @@ int getDistanceToPoint(Coordinate coor, List<Section> sections) {
             length += sections[i].getLength()
         }
     }
+    // end::distancePart2[]
 }
 
+// Helper function to check if a value "a" is in between two other values "b", "c" independently of sign
 boolean isInBetween(int a, int b, int c) {
     if(a < b && a > c) {
         return true
@@ -105,6 +133,7 @@ boolean isInBetween(int a, int b, int c) {
     return false
 }
 
+// Class to just hold X and Y
 class Coordinate {
     private int x
     private int y
@@ -116,23 +145,19 @@ class Coordinate {
     public int getY() {return this.y}
 }
 
+// Class to hold section information (start coordinate, end coordinate, length)
 class Section {
     private int startX
     private int endX
     private int startY
     private int endY
     private int length
-    public Section(int startX, int endX, int startY, int endY){
+    public Section(int startX, int endX, int startY, int endY, length){
         this.startX = startX
         this.endX = endX
         this.startY = startY
         this.endY = endY
-        if(startX == endX) {
-            length = Math.abs(startY - endY)
-        }
-        if(startY == endY) {
-            length = Math.abs(startX - endX)
-        }
+        this.length = length
     }
     public int getStartX() {return startX}
     public int getStartY() {return startY}
@@ -174,5 +199,13 @@ class Section {
         else {
             return false
         }
+    }
+
+    public boolean isVertical() {
+        return this.getStartX() == this.getEndX()
+    }
+    
+    public boolean isHorizontal() {
+        return this.getStartY() == this.getEndY()
     }
 }

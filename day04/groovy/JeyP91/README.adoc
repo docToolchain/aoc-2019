@@ -1,0 +1,32 @@
+= Advent of Code - Day 04
+
+Task is to check if six digit numbers are following certain rules and to find the total of these numbers in the range of 235741-706948. 
+
+https://adventofcode.com/2019/day/4
+
+=== Split number into single positions
+
+To split a number into its single positions a combination of modulo and divions is used.
+
+[source, groovy]
+....
+include::solution.groovy[tags=splitUpNumber]
+....
+
+=== Check rules
+
+For each rule a method is implemented to evaluate the rule
+
+Example: check if the digits do not decrease
+
+[source, groovy]
+....
+include::solution.groovy[tags=checkNeverDecrease]
+....
+
+=== While iterating over all numbers in range of 235741-706948, add them to the lists if the rules apply.
+
+[source, groovy]
+....
+include::solution.groovy[tags=iterateAllNumbers]
+....

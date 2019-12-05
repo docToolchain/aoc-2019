@@ -1,0 +1,23 @@
+= Groovy
+
+== Part 1
+
+1. Iterate over text file with all masses.
+2. For each mass calculate the fuel
+3. Sum fuel and print
+
+[source, groovy, numnbered]
+....
+include::solution_part1.groovy[tags=calcFuel]
+....
+
+== Part 2
+
+1. Iterate over text file with all masses.
+2. For each mass calculate the fuel
+3. Recoursively recalculate additional fuel for transporting fuel
+4. Sum fuel and print
+[source, groovy, numnbered]
+....
+include::solution_part2.groovy[tags=recursion]
+....

@@ -1,0 +1,33 @@
+= Advent of Code - Day 05
+
+Task is to check for the lowest distance to an intersection between to wire from a given starting point.
+Part 1 is the absolute distance through air between starting point and intersection.
+Part 2 is by following the wires to the first intersection. 
+
+https://adventofcode.com/2019/day/5
+
+== Convert input to absolute sections
+
+First step is to convert the input (R1,U2,L3) to wire sections with an absolute start coordinate and absolute end coordinate.
+
+For this a class is used, which converts the string of one section provides some useful methods like orientation of the wire section or if a coordinate is located on the section.
+
+== Calculate intersections between the two wires
+
+Seconds step is to calculate all intersections between the two wires. For this two loops are used which check for overlap of the coordinates.
+
+== Calculate distance from origin of the two wires to intersections
+
+Calculate the absolute through air distance by just adding up the absolutes of the coordinates.
+
+[source, groovy]
+....
+include::solution.groovy[tags=distancePart1]
+....
+
+For calculating the manhatten distance each wire has to be followed until the intersection is found.
+
+[source, groovy]
+....
+include::solution.groovy[tags=distancePart2]
+....

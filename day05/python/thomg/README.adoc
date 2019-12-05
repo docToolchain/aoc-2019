@@ -1,0 +1,6 @@
+== Disclaimer
+I’m not a professional developer and only doing this for fun. The solutions might me messy.
+
+== Day 05
+Adding the new opcodes and param modes to my intcomp from day 2 wasn't too difficult, and that's all that was needed for day 5.
+I just hope there will be enough time for me to refactor the thing before the next extension :)

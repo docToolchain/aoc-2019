@@ -10,21 +10,16 @@ enum class ParameterMode(val mode: Int) {
 }
 
 data class ParameterModes(private val modes: List<ParameterMode>) {
-    fun get(index: Int) = if (modes.size > index) {
+    operator fun get(index: Int) = if (modes.size > index) {
         modes[index]
     } else {
         POSITION
     }
 }
 
-fun parameterMode(mode: Int): ParameterMode {
-    for (m in ParameterMode.values()) {
-        if (m.mode == mode) {
-            return m
-        }
-    }
-    throw Exception("Invalid mode $mode")
-}
+fun parameterMode(mode: Int) = ParameterMode.values().find {
+    it.mode == mode
+} ?: throw Exception("Invalid mode $mode")
 
 fun paramModesFrom(mode: Int): ParameterModes {
     var remainingMode = mode
@@ -63,9 +58,9 @@ class ProgramState(val memory: MutableList<Int>, val inputs: MutableList<Int>) {
         memory[address] = value
     }
 
-    fun applyOperation(parameterModes: ParameterModes, operation: (Int, Int) -> Int): ProgramCounter {
-        val value1 = deref(parameterModes.get(0), memory[counter.pc + 1])
-        val value2 = deref(parameterModes.get(1), memory[counter.pc + 2])
+    fun applyOperation(paramModes: ParameterModes, operation: (Int, Int) -> Int): ProgramCounter {
+        val value1 = deref(paramModes[0], memory[counter.pc + 1])
+        val value2 = deref(paramModes[1], memory[counter.pc + 2])
         val result = operation(value1, value2)
         assign(memory[counter.pc + 3], result)
         return counter.add(4)
@@ -77,36 +72,36 @@ class ProgramState(val memory: MutableList<Int>, val inputs: MutableList<Int>) {
         return counter.add(2)
     }
 
-    fun operationLessThan(paramMode: ParameterModes): ProgramCounter {
-        val value1 = deref(paramMode.get(0), memory[counter.pc + 1])
-        val value2 = deref(paramMode.get(1), memory[counter.pc + 2])
+    fun operationLessThan(paramModes: ParameterModes): ProgramCounter {
+        val value1 = deref(paramModes[0], memory[counter.pc + 1])
+        val value2 = deref(paramModes[1], memory[counter.pc + 2])
         val result = if (value1 < value2) 1 else 0
         assign(memory[counter.pc + 3], result)
         return counter.add(4)
     }
 
-    fun operationEquals(paramMode: ParameterModes): ProgramCounter {
-        val value1 = deref(paramMode.get(0), memory[counter.pc + 1])
-        val value2 = deref(paramMode.get(1), memory[counter.pc + 2])
+    fun operationEquals(paramModes: ParameterModes): ProgramCounter {
+        val value1 = deref(paramModes[0], memory[counter.pc + 1])
+        val value2 = deref(paramModes[1], memory[counter.pc + 2])
         val result = if (value1 == value2) 1 else 0
         assign(memory[counter.pc + 3], result)
         return counter.add(4)
     }
 
-    fun jumpIfTrue(paramMode: ParameterModes): ProgramCounter {
-        val value = deref(paramMode.get(0), memory[counter.pc + 1])
-        val target = deref(paramMode.get(1), memory[counter.pc + 2])
+    fun jumpIfTrue(paramModes: ParameterModes): ProgramCounter {
+        val value = deref(paramModes[0], memory[counter.pc + 1])
+        val target = deref(paramModes[1], memory[counter.pc + 2])
         return if (value != 0) counter.jump(target) else counter.add(3)
     }
 
-    fun jumpIfFalse(paramMode: ParameterModes): ProgramCounter {
-        val value = deref(paramMode.get(0), memory[counter.pc + 1])
-        val target = deref(paramMode.get(1), memory[counter.pc + 2])
+    fun jumpIfFalse(paramModes: ParameterModes): ProgramCounter {
+        val value = deref(paramModes[0], memory[counter.pc + 1])
+        val target = deref(paramModes[1], memory[counter.pc + 2])
         return if (value == 0) counter.jump(target) else counter.add(3)
     }
 
-    fun outputValue(paramMode: ParameterModes): ProgramCounter {
-        val value = deref(paramMode.get(0), memory[counter.pc + 1])
+    fun outputValue(paramModes: ParameterModes): ProgramCounter {
+        val value = deref(paramModes[0], memory[counter.pc + 1])
         output.add(value)
         return counter.add(2)
     }
@@ -162,7 +157,8 @@ class Program(private val code: List<Int>) {
 
     fun executeProgram(input: List<Int>): Pair<List<Int>, List<Int>> {
         val state = ProgramState(code.toMutableList(), input.toMutableList())
-        return Pair(state.executeProgram(), state.outputs())
+        val results = state.executeProgram()
+        return Pair(results, state.outputs())
     }
 }
 

@@ -1,0 +1,6 @@
+def days = ['day00','day01','day02','day03','day04','day05']
+
+days.each { day ->
+    include(":$day")
+    project(":$day").projectDir = file("../$day/kotlin/corneil")
+}

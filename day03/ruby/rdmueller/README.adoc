@@ -1,0 +1,10 @@
+I start to recognize that I use a special coding style when I code in a new language.
+Let's call it the smallest common subset style (scs-style).
+I hate to look up language features because it is time consuming.
+So instead to use the best language constructs, I use the features which are most likely to work, because they are common to all languages.
+
+As an example, I started to use `if-then-else` instead of a switch statement.
+That is horrible and doesn't teach me anything.
+So I wonder if it makes sense to first code in a language which I know well (Groovy) and then translate it to Ruby?
+
+= First start

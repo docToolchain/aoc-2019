@@ -13,12 +13,8 @@
 a| **rdmueller** +
 {rdmueller-realName} +
 icon:github[]: https://github.com/rdmueller[rdmueller]
-ifeval::[{rdmueller-twitter} != -]
-  icon:twitter[] : https://twitter.com/{rdmueller-twitter}[rdmueller-twitter] +
-endif::[]
-ifeval::[{rdmueller-blog} != -]
-  Blog : {rdmueller-blog} 
-endif::[]
+icon:twitter[] : https://twitter.com/{rdmueller-twitter}[{rdmueller-twitter}] +
+Blog : {rdmueller-blog}
 |===
 
 === About me

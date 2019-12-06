@@ -1,0 +1,15 @@
+Day 6 Solution in Python
+
+== Disclaimer
+
+The code of this solution is not perfect in any way but it seems to do its job.
+This is due to the fact that I don't want to entirely miss the AOC this year
+again due to family implications but instead participate in an efficient way.
+
+So don't expect fancy interface descriptions and nicely edited readmes unless
+I need it myself to handle the complexity of the puzzle :-)
+
+[source, python]
+....
+include::solution.py[]
+....

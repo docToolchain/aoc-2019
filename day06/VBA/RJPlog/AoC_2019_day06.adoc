@@ -1,0 +1,9 @@
+﻿== Day 6: Universal Orbit Map
+
+The original puzzle can be found at https://adventofcode.com/2019/day/6
+
+This day for part 1 I had to start with recursive algorithms to evaluate the direct and indirect orbits. 
+Since my puzzle input included 2603 relations and the middle length of the orbits was 239, it took more than 3 hours to calculate in Excel VBA, so this is a real disadvantage.
+But the VBA programming hat also a big advantage, it was easy to develop the algorithm, so that I had the 3 hours only once ;-), with this times of calculation you have to be carefull.
+
+

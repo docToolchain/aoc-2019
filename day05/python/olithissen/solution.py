@@ -20,23 +20,41 @@ class OpCodeParameterRetriever:
                 except IndexError:
                     parameterMode = 0
 
-            if (parameterMode == 0 and index < numberOfParameters - 1):
-                # Immediate mode
-                parameters.append(memory[memory[pointer + index + 1]])
-            else:
+            if (parameterMode == 0):
                 # Address mode
-                parameters.append(memory[pointer + index + 1])
+                parameters.append({"mode": "address", "addr": memory[pointer + index + 1], "valueAt": memory[memory[pointer + index + 1]]})
+            else:
+                # Immediate mode
+                parameters.append({"mode": "immediate", "addr": pointer + index + 1, "valueAt": memory[pointer + index + 1]})
 
         return parameters
+
+class AssemblyHelper:
+    @staticmethod
+    def debug(data):
+        pointer = data['pointer']
+        opcode = data['opcode']
+        opcodeNum = data['opcodeNum']
+        
+        parameterText = ""
+
+        for parameter in data['parameters']:
+            if (parameter['mode'] == "address"):
+                parameterText += "@" + str(parameter['addr']) + "(=" + str(parameter['valueAt']) + "), "
+            else:
+                parameterText += str(parameter['valueAt']) + ", "
+
+        print (f'{pointer:05}', "\t", opcode, "\t", f'{opcodeNum:05}', "\t", parameterText)
 
 class OpCodeAdd:
     def run(self, memory, pointer):
         numberOfParameters = 3
-        parameters = OpCodeParameterRetriever.read(memory, pointer, numberOfParameters)
-        result = parameters[0] + parameters[1]
-        memory[parameters[2]] = result
 
-        print ("ADD", parameters[0], parameters[1], "=", result, "-> ADDR", parameters[2])
+        parameters = OpCodeParameterRetriever.read(memory, pointer, numberOfParameters)
+        result = parameters[0]['valueAt'] + parameters[1]['valueAt']
+        memory[parameters[2]['addr']] = result
+
+        AssemblyHelper.debug({"pointer": pointer, "opcode": "ADD",  "opcodeNum": memory[pointer], "parameters": parameters})
 
         return (pointer + numberOfParameters + 1, True)
 
@@ -44,10 +62,60 @@ class OpCodeMultiply:
     def run(self, memory, pointer):
         numberOfParameters = 3
         parameters = OpCodeParameterRetriever.read(memory, pointer, numberOfParameters)
-        result = parameters[0] * parameters[1]
-        memory[parameters[2]] = result
+        result = parameters[0]['valueAt'] * parameters[1]['valueAt']
+        memory[parameters[2]['addr']] = result
 
-        print ("MUL", parameters[0], parameters[1], "=", result, "-> ADDR", parameters[2])
+        AssemblyHelper.debug({"pointer": pointer, "opcode": "MUL",  "opcodeNum": memory[pointer], "parameters": parameters})
+
+        return (pointer + numberOfParameters + 1, True)
+
+class OpCodeJumpIfTrue:
+    def run(self, memory, pointer):
+        numberOfParameters = 2
+        parameters = OpCodeParameterRetriever.read(memory, pointer, numberOfParameters)
+        
+        AssemblyHelper.debug({"pointer": pointer, "opcode": "JE",  "opcodeNum": memory[pointer], "parameters": parameters})
+
+        if (parameters[0]['valueAt'] != 0):
+            return (parameters[1]['valueAt'], True)
+
+        return (pointer + numberOfParameters + 1, True)
+
+class OpCodeJumpIfFalse:
+    def run(self, memory, pointer):
+        numberOfParameters = 2
+        parameters = OpCodeParameterRetriever.read(memory, pointer, numberOfParameters)
+
+        AssemblyHelper.debug({"pointer": pointer, "opcode": "JNE",  "opcodeNum": memory[pointer], "parameters": parameters})
+
+        if (parameters[0]['valueAt'] == 0):
+            return (parameters[1]['valueAt'], True)
+
+        return (pointer + numberOfParameters + 1, True)
+
+class OpCodeLessThan:
+    def run(self, memory, pointer):
+        numberOfParameters = 3
+        parameters = OpCodeParameterRetriever.read(memory, pointer, numberOfParameters)
+        AssemblyHelper.debug({"pointer": pointer, "opcode": "LT",  "opcodeNum": memory[pointer], "parameters": parameters})
+
+        if (parameters[0]['valueAt'] < parameters[1]['valueAt']):
+            memory[parameters[2]['addr']] = 1
+        else:
+            memory[parameters[2]['addr']] = 0
+
+        return (pointer + numberOfParameters + 1, True)
+
+class OpCodeEquals:
+    def run(self, memory, pointer):
+        numberOfParameters = 3
+        parameters = OpCodeParameterRetriever.read(memory, pointer, numberOfParameters)
+        AssemblyHelper.debug({"pointer": pointer, "opcode": "EQ",  "opcodeNum": memory[pointer], "parameters": parameters})
+
+        if (parameters[0]['valueAt'] == parameters[1]['valueAt']):
+            memory[parameters[2]['addr']] = 1
+        else:
+            memory[parameters[2]['addr']] = 0
 
         return (pointer + numberOfParameters + 1, True)
 
@@ -56,11 +124,11 @@ class OpCodeInput:
         numberOfParameters = 1
         parameters = OpCodeParameterRetriever.read(memory, pointer, numberOfParameters)
         print("Program input required: ")
-        # input = int(input())
-        input = 1
-        memory[parameters[0]] = input
+        inp = int(input())
+        #inp = 8
+        memory[parameters[0]['addr']] = inp
 
-        print ("INP", "VALUE", memory[parameters[0]], "-> ADDR", parameters[0])
+        AssemblyHelper.debug({"pointer": pointer, "opcode": "INP",  "opcodeNum": memory[pointer], "parameters": parameters})
 
         return (pointer + numberOfParameters + 1, True)
 
@@ -69,13 +137,15 @@ class OpCodeOutput:
         numberOfParameters = 1
         parameters = OpCodeParameterRetriever.read(memory, pointer, numberOfParameters, noOutput=True)
 
-        print ("OUT", "VALUE", parameters[0])
+        AssemblyHelper.debug({"pointer": pointer, "opcode": "OUT",  "opcodeNum": memory[pointer], "parameters": parameters})
 
         return (pointer + numberOfParameters + 1, True)
 
 class OpCodeTerminate:
     def run(self, memory, pointer):
         pointer += 1
+
+        AssemblyHelper.debug({"pointer": pointer, "opcode": "EXT",  "opcodeNum": memory[pointer], "parameters": []})
 
         return (pointer + 1, False)
 
@@ -92,6 +162,10 @@ class ControlComputer:
         2: OpCodeMultiply,
         3: OpCodeInput,
         4: OpCodeOutput,
+        5: OpCodeJumpIfTrue,
+        6: OpCodeJumpIfFalse,
+        7: OpCodeLessThan,
+        8: OpCodeEquals,
         99: OpCodeTerminate,
     }
 
@@ -134,33 +208,6 @@ def solutionStar1(inputFile):
     x.run()
     return x.readMemoryAt(0)
 
-# sample1ResultStar1 = solutionStar1("sample.txt")
-# print("Sample1 result *1: ", sample1ResultStar1)
-# assert sample1ResultStar1 == 3500
-
-# sample2ResultStar1 = solutionStar1("sample2.txt")
-# print("Sample2 result *1: ", sample2ResultStar1)
-# assert sample2ResultStar1 == 1002
-
-# sample3ResultStar1 = solutionStar1("sample3.txt")
-# print("Sample3 result *1: ", sample3ResultStar1)
-# assert sample3ResultStar1 == 1101
-
 x = ControlComputer()
 x.loadFile("input.txt")
 x.run()
-
-#realResultStar1 = solutionStar1("input.txt", 12, 2)
-#realResultStar1 = solutionStar1("sample3.txt", 100, -1)
-# sampleResultStar2 = solutionStar2("sample.txt", 3500)
-#realResultStar2 = solutionStar2("input.txt", 19690720)
-
-
-#print("Real result *1: ", realResultStar1)
-#assert realResultStar1 == 4576384
-
-# print("Sample result *2: ", sampleResultStar2)
-# assert sampleResultStar2 == 910
-
-#print("Real result *2: ", realResultStar2)
-#assert realResultStar2 == 5398

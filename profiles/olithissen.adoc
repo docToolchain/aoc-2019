@@ -1,0 +1,29 @@
+
+:olithissen-avatar: https://avatars0.githubusercontent.com/u/13063051?v=4
+:olithissen-twitter: -
+:olithissen-realName: Oli Thissen
+:olithissen-blog: -
+
+
+//tag::free-form[]
+
+[cols="1,5"]
+|===
+| image:{olithissen-avatar}[]
+a| **olithissen** +
+//{olithissen-realName} +
+icon:github[]: https://github.com/olithissen[olithissen]
+ifeval::[{olithissen-twitter} != -]
+  icon:twitter[] : https://twitter.com/{olithissen-twitter}[olithissen-twitter] +
+endif::[]
+ifeval::[{olithissen-blog} != -]
+  Blog : {olithissen-blog} 
+endif::[]
+|===
+
+=== About me
+
+Nothing here yet. Update your profile at https://github.com/docToolchain/aoc-2019/blob/master/profiles/olithissen.adoc[/profiles/olithissen.adoc] 
+
+//end::free-form[]
+

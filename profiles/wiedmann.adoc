@@ -1,0 +1,29 @@
+
+:wiedmann-avatar: https://avatars3.githubusercontent.com/u/5281620?v=4
+:wiedmann-twitter: -
+:wiedmann-realName: null
+:wiedmann-blog: -
+
+
+//tag::free-form[]
+
+[cols="1,5"]
+|===
+| image:{wiedmann-avatar}[]
+a| **wiedmann** +
+//{wiedmann-realName} +
+icon:github[]: https://github.com/wiedmann[wiedmann]
+ifeval::[{wiedmann-twitter} != -]
+  icon:twitter[] : https://twitter.com/{wiedmann-twitter}[wiedmann-twitter] +
+endif::[]
+ifeval::[{wiedmann-blog} != -]
+  Blog : {wiedmann-blog} 
+endif::[]
+|===
+
+=== About me
+
+Nothing here yet. Update your profile at https://github.com/docToolchain/aoc-2019/blob/master/profiles/wiedmann.adoc[/profiles/wiedmann.adoc] 
+
+//end::free-form[]
+

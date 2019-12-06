@@ -1,0 +1,29 @@
+
+:subesokun-avatar: https://avatars0.githubusercontent.com/u/6920421?v=4
+:subesokun-twitter: -
+:subesokun-realName: null
+:subesokun-blog: -
+
+
+//tag::free-form[]
+
+[cols="1,5"]
+|===
+| image:{subesokun-avatar}[]
+a| **subesokun** +
+//{subesokun-realName} +
+icon:github[]: https://github.com/subesokun[subesokun]
+ifeval::[{subesokun-twitter} != -]
+  icon:twitter[] : https://twitter.com/{subesokun-twitter}[subesokun-twitter] +
+endif::[]
+ifeval::[{subesokun-blog} != -]
+  Blog : {subesokun-blog} 
+endif::[]
+|===
+
+=== About me
+
+Nothing here yet. Update your profile at https://github.com/docToolchain/aoc-2019/blob/master/profiles/subesokun.adoc[/profiles/subesokun.adoc] 
+
+//end::free-form[]
+

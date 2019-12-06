@@ -1,0 +1,29 @@
+
+:jounile-avatar: https://avatars0.githubusercontent.com/u/1835129?v=4
+:jounile-twitter: -
+:jounile-realName: Jouni Leino
+:jounile-blog: -
+
+
+//tag::free-form[]
+
+[cols="1,5"]
+|===
+| image:{jounile-avatar}[]
+a| **jounile** +
+//{jounile-realName} +
+icon:github[]: https://github.com/jounile[jounile]
+ifeval::[{jounile-twitter} != -]
+  icon:twitter[] : https://twitter.com/{jounile-twitter}[jounile-twitter] +
+endif::[]
+ifeval::[{jounile-blog} != -]
+  Blog : {jounile-blog} 
+endif::[]
+|===
+
+=== About me
+
+Nothing here yet. Update your profile at https://github.com/docToolchain/aoc-2019/blob/master/profiles/jounile.adoc[/profiles/jounile.adoc] 
+
+//end::free-form[]
+

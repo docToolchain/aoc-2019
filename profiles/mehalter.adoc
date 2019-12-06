@@ -1,0 +1,29 @@
+
+:mehalter-avatar: https://avatars3.githubusercontent.com/u/1591837?v=4
+:mehalter-twitter: -
+:mehalter-realName: Micah Halter
+:mehalter-blog: -
+
+
+//tag::free-form[]
+
+[cols="1,5"]
+|===
+| image:{mehalter-avatar}[]
+a| **mehalter** +
+//{mehalter-realName} +
+icon:github[]: https://github.com/mehalter[mehalter]
+ifeval::[{mehalter-twitter} != -]
+  icon:twitter[] : https://twitter.com/{mehalter-twitter}[mehalter-twitter] +
+endif::[]
+ifeval::[{mehalter-blog} != -]
+  Blog : {mehalter-blog} 
+endif::[]
+|===
+
+=== About me
+
+Nothing here yet. Update your profile at https://github.com/docToolchain/aoc-2019/blob/master/profiles/mehalter.adoc[/profiles/mehalter.adoc] 
+
+//end::free-form[]
+

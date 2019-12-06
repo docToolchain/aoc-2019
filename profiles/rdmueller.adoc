@@ -1,0 +1,29 @@
+
+:rdmueller-avatar: https://avatars3.githubusercontent.com/u/1856308?v=4
+:rdmueller-twitter: -
+:rdmueller-realName: Ralf D. Müller
+:rdmueller-blog: -
+
+
+//tag::free-form[]
+
+[cols="1,5"]
+|===
+| image:{rdmueller-avatar}[]
+a| **rdmueller** +
+//{rdmueller-realName} +
+icon:github[]: https://github.com/rdmueller[rdmueller]
+ifeval::[{rdmueller-twitter} != -]
+  icon:twitter[] : https://twitter.com/{rdmueller-twitter}[rdmueller-twitter] +
+endif::[]
+ifeval::[{rdmueller-blog} != -]
+  Blog : {rdmueller-blog} 
+endif::[]
+|===
+
+=== About me
+
+Nothing here yet. Update your profile at https://github.com/docToolchain/aoc-2019/blob/master/profiles/rdmueller.adoc[/profiles/rdmueller.adoc] 
+
+//end::free-form[]
+

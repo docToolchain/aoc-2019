@@ -1,0 +1,29 @@
+
+:bit-jkraushaar-avatar: https://avatars3.githubusercontent.com/u/31614932?v=4
+:bit-jkraushaar-twitter: -
+:bit-jkraushaar-realName: Jochen Kraushaar
+:bit-jkraushaar-blog: -
+
+
+//tag::free-form[]
+
+[cols="1,5"]
+|===
+| image:{bit-jkraushaar-avatar}[]
+a| **bit-jkraushaar** +
+//{bit-jkraushaar-realName} +
+icon:github[]: https://github.com/bit-jkraushaar[bit-jkraushaar]
+ifeval::[{bit-jkraushaar-twitter} != -]
+  icon:twitter[] : https://twitter.com/{bit-jkraushaar-twitter}[bit-jkraushaar-twitter] +
+endif::[]
+ifeval::[{bit-jkraushaar-blog} != -]
+  Blog : {bit-jkraushaar-blog} 
+endif::[]
+|===
+
+=== About me
+
+Nothing here yet. Update your profile at https://github.com/docToolchain/aoc-2019/blob/master/profiles/bit-jkraushaar.adoc[/profiles/bit-jkraushaar.adoc] 
+
+//end::free-form[]
+

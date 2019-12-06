@@ -1,0 +1,29 @@
+
+:dfriedenberger-avatar: https://avatars3.githubusercontent.com/u/4932168?v=4
+:dfriedenberger-twitter: -
+:dfriedenberger-realName: Dirk Friedenberger
+:dfriedenberger-blog: -
+
+
+//tag::free-form[]
+
+[cols="1,5"]
+|===
+| image:{dfriedenberger-avatar}[]
+a| **dfriedenberger** +
+//{dfriedenberger-realName} +
+icon:github[]: https://github.com/dfriedenberger[dfriedenberger]
+ifeval::[{dfriedenberger-twitter} != -]
+  icon:twitter[] : https://twitter.com/{dfriedenberger-twitter}[dfriedenberger-twitter] +
+endif::[]
+ifeval::[{dfriedenberger-blog} != -]
+  Blog : {dfriedenberger-blog} 
+endif::[]
+|===
+
+=== About me
+
+Nothing here yet. Update your profile at https://github.com/docToolchain/aoc-2019/blob/master/profiles/dfriedenberger.adoc[/profiles/dfriedenberger.adoc] 
+
+//end::free-form[]
+

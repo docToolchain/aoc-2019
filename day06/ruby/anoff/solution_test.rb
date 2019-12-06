@@ -39,6 +39,7 @@ class TestSolution < Test::Unit::TestCase
       assert_equal result, orbit_count(map, input), "for input %s" % input
     }
   end
+  # tag::full_tdd[]
   def test_total_orbit_count
     d = {
        ["COM)B",
@@ -58,4 +59,5 @@ class TestSolution < Test::Unit::TestCase
       assert_equal result, total_orbit_count(map), "for input %s" % input
     }
   end
+  # end::full_tdd[]
 end

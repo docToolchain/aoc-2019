@@ -40,6 +40,7 @@ def get_orbit_centers(orbit_map, satellite)
   end
   centers
 end
+# tag::p2[]
 def part2(map_data)
   orbit_map = build_map(map_data)
   target_center = orbit_map["SAN"] # the object we want to orbit as well
@@ -50,6 +51,7 @@ def part2(map_data)
   hops_from_common_to_santa = santas_orbits.each_with_index.find{|(center, ix)| center == first_common_center[0]}[1]
   my_hops_to_common_center + hops_from_common_to_santa
 end
+# end::p2[]
 if caller.length == 0
   input = File.read("./input.txt")
 

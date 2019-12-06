@@ -4,6 +4,7 @@
 :rdmueller-realName: Ralf D. Müller
 :rdmueller-blog: https://docs-as-co.de
 
+:icons: font
 
 //tag::free-form[]
 

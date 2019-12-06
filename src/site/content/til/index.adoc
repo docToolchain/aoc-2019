@@ -8,7 +8,7 @@
 
 :icons: font
 
-include::../generated/stats.adoc[]
+include::../generated/stats.adoc[leveloffset=+1]
 
 include::../../../docs/learned.adoc[]
 

@@ -13,8 +13,8 @@
 | image:{rdmueller-avatar}[]
 a| **rdmueller** +
 {rdmueller-realName} +
-icon:github[]: https://github.com/rdmueller[rdmueller]
-icon:twitter[] : https://twitter.com/{rdmueller-twitter}[{rdmueller-twitter}] +
+Github: https://github.com/rdmueller[rdmueller],
+Twitter: https://twitter.com/{rdmueller-twitter}[{rdmueller-twitter}] +
 Blog : {rdmueller-blog}
 |===
 

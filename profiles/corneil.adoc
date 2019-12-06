@@ -13,12 +13,8 @@
 a| **corneil** +
 {corneil-realName} +
 icon:github[]: https://github.com/corneil[corneil]
-ifeval::[{corneil-twitter} != -]
-  icon:twitter[] : https://twitter.com/{corneil-twitter}[corneil-twitter] +
-endif::[]
-ifeval::[{corneil-blog} != -]
-  Blog : {corneil-blog} 
-endif::[]
+icon:twitter[] : https://twitter.com/{corneil-twitter}[{corneil-twitter}] +
+Blog : {corneil-blog} 
 |===
 
 === About me

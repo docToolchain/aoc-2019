@@ -113,6 +113,25 @@ a|  * today I better understood the puzzle and the necessary algorithm for the c
 a|{anoff}
 a|  * creating software with extendable architecture for AoC pays off 😉
 
+a|{RJPlog}
+a|  * day05 instructions seemed so simple, that I started coding the elements for one OP code and started to copy and modify this in all other OP codes without proper testing. Most of the bugs while running the program where simple errors inherited by this coping.
+    * Lesson learned: Never multiply a modul you have not tested in all use cases. At the end bugfixing took more time than having done it right from the start. (I went trough every single instruction by hand :-()
+
 
 |====
 
+
+
+=== Day 06
+
+[cols="1,10"]
+|====
+
+a|{RJPlog}
+a|  * I am still working with Excel VBA. Today I learned some more stuff how to enable in VBA to start test runs and the final run within one file by defining different sub's
+    * I also started not to try to write the code in one piece (as on day05), but in small steps with always "automated" testcases, which helped me in the end by having a working SW. After each step I was able to run a test showing that the snipe of code works as intended
+    * Excel VBA is also capable to do recursive functions, but unfortunately the programm starts to get very slow when having a lot of recursions (day06's part 1 was running more than 3hours. Pro: Effort spent in testing at start provided a FPY).
+
+
+
+|====

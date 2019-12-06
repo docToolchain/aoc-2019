@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="MPSProject">
-    <projectModules>
-      <modulePath path="$PROJECT_DIR$/languages/Day03/Day03.mpl" folder="" />
-      <modulePath path="$PROJECT_DIR$/languages/Day03/sandbox/Day03.sandbox.msd" folder="" />
-    </projectModules>
-  </component>
-</project>

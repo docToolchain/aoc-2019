@@ -42,7 +42,7 @@ include::star1.cypher[]
 This reads: "Match the object named 'COM' (Center of Mass), than match the path from all other objects to this object and return the sum of the length of those paths.".
 This works because the input is a https://en.wikipedia.org/wiki/Tree_(graph_theory)[tree] respectivly a https://en.wikipedia.org/wiki/Directed_acyclic_graph[directed acyclic graph], to be precise.
 
-Star two uses the build-in `shortestPath` operation
+Star two uses the built-in `shortestPath` operation
 
 [source,cypher]
 ----
@@ -50,7 +50,7 @@ include::star2.cypher[]
 ----
 <1> Find the starting objects (one step away from `YOU` and `SAN`)
 <2> Pass them on to the next section of the query
-<3> Match the shortest path and return it's length.
+<3> Match the shortest path and return its length.
 
 And with the SQL example from day 1: Don't just dump unstructured data into your databases.
 Use them the way they where meant to be used.

@@ -1,0 +1,13 @@
+Day 5 - Solution in Python
+
+Switched to VS Code - good decision!
+
+[source, python]
+....
+include::solution.py[]
+....
+
+[source, python]
+....
+include::computer.py[]
+....

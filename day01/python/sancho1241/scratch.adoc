@@ -1,0 +1,5 @@
+I'm not a pro.
+Quick and dirty solutions just for fun to learn Python.
+
+Since part 1 was a warm up I decided to go for the recursion for part 2.
+Needed to visit google but eventually made it.

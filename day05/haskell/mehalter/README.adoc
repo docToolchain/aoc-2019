@@ -1,0 +1,17 @@
+== Sunny with a Chance of Asteroids
+
+I have written my solutions in Haskell. I am using this year's Advent of Code to
+brush up on my functional programming.
+
+To run the final program you need Haskell installed, and simply run the
+`runhaskell answer.hs`.
+
+This solution extends my Day 02 solution by adding extra checks and functionality
+for the new op codes.
+
+== Solution
+
+[source, haskell]
+----
+include::answer.hs[]
+----

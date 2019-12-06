@@ -1,0 +1,41 @@
+= Advent of Code - Day 05
+
+Task is to add multiple additional opcodes to the Intcode computer of day 02.
+
+https://adventofcode.com/2019/day/5
+
+== Add opcode-parameters
+
+Each instruction can have additional parameters now. To separate the actual opcode from the parameters modulo and division is used:
+
+[source, groovy]
+....
+include::solution.groovy[tags=opcodeParameters]
+....
+
+== Instruction Execution
+
+Each instruction execution basically consists out of 3 steps:
+
+=== 1. Calculate needed values
+
+Here the interesting part is the usage of the parameters of the instruction. Depending on 0 or 1 either the value at the location is used, or the value is a pointer to another location from which the value shall be used.
+
+[source, groovy]
+....
+include::solution.groovy[tags=lessThen1]
+....
+
+=== 2. Execute instruction
+
+[source, groovy]
+....
+include::solution.groovy[tags=lessThen2]
+....
+
+=== 3. Jump to next instruction
+
+[source, groovy]
+....
+include::solution.groovy[tags=lessThen3]
+....

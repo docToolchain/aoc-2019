@@ -1,4 +1,4 @@
-== Crossed Wires
+== https://adventofcode.com/2019/day/3[Crossed Wires]
 
 Today's problem can be solved mathematically or by brute force.
 Either you need to compute intersections of segments in 2d (which isn't that hard) or just search for intersecting points.

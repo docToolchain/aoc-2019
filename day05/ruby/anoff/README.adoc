@@ -1,0 +1,31 @@
+Puzzle: https://adventofcode.com/2019/day/5[Sunny with a Chance of Asteroids]
+
+== Part 1
+
+Luckily I could re-use a lot of day2 code.
+The main changes were adding new opcodes and initially splitting the opcode and modes from the command instruction.
+
+Another minor tweak was to modify my `op(program, ptr)` method to return a variable pointer offset.
+During day02 I used the return value of `op()` and treated it like a program return code in bash - meaning 0 = ok and everything else leads to an error.
+With day05 every return code >= 0 is a valid return code, where the returned number equals the steps the pointer needs to take.
+Negative return codes result in errors caused by unknown opcodes or parsing errors - happened a few times during building this solution 🙄
+
+== Part 2
+
+This was not really a challenge and only meant implementing a few more instructions into my `op()` method.
+
+== Solution
+
+To run the solution use `ruby solution.rb`
+
+[source, ruby]
+....
+include::solution.rb[]
+....
+
+=== Test cases
+
+[source, ruby]
+....
+include::solution_test.rb[]
+....

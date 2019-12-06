@@ -1,4 +1,4 @@
-package com.github.corneil.aoc2019
+package com.github.corneil.aoc2019.day2
 
 import java.io.File
 

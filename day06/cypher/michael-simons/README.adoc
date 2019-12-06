@@ -18,7 +18,7 @@ I'm gonna use the shell, but you can of course also use the http://localhost:747
 It has a friendly interface to get you started with your first graph and some nice visualisations.
 Here's the one from the puzzle's description:
 
-image::day6.png[]
+image::/images/day6.png[]
 
 I'm gonna use `LOAD CSV` as described (among other things) in one of my https://speakerdeck.com/michaelsimons/going-from-relational-databases-to-databases-with-relations-with-neo4j-and-spring-data-b5522486-f2bb-4609-9a35-be54feae6702[Neo4j related talks].
 `LOAD CSV` processes CSV files line by line and takes in an optional field separator, which will be `)` in our case:

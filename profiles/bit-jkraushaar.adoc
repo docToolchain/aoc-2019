@@ -1,6 +1,6 @@
 
 :bit-jkraushaar-avatar: https://avatars3.githubusercontent.com/u/31614932?v=4
-:bit-jkraushaar-twitter: -
+:bit-jkraushaar-twitter: KraushaarJochen
 :bit-jkraushaar-realName: Jochen Kraushaar
 :bit-jkraushaar-blog: -
 
@@ -23,7 +23,7 @@ endif::[]
 
 === About me
 
-Nothing here yet. Update your profile at https://github.com/docToolchain/aoc-2019/blob/master/profiles/bit-jkraushaar.adoc[/profiles/bit-jkraushaar.adoc] 
+Software Architect. Speaker. Kotlin-Fanboy.
 
 //end::free-form[]
 

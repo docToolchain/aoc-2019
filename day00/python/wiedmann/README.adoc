@@ -1,0 +1,6 @@
+Day 0 - Hello world in python
+
+[source, python]
+....
+include::solution.py[]
+....

@@ -1,0 +1,175 @@
+== https://adventofcode.com/2019/day/5[Sunny with a Chance of Asteroids]
+
+Our teamlead teased and https://xkcd.com/356/[nerd sniped] me a bit this week.
+https://www.scala-lang.org[Scala] was the topic.
+I tend to make this joke now for some time: "Can you read my code? Shall I increase the font? Can you read it now?" - "No, it's still Scala".
+I never wrote a Scala program until https://github.com/michael-simons/aoc/commit/1d2bc43b8f70ce4a5935953258c2c66d98ecb595#r36279635[yesterday], actually,
+and I possible never tried hard enough to understand at least a bit about it.
+
+TIP: I plan on getting https://twitter.com/kaffeecoder[Daniels] book https://leanpub.com/scala-from-scratch-exploration[Scala From Scratch]
+      respectively https://leanpub.com/theneophytesguidetoscala[The Neophyte's Guide to Scala].
+      Daniel is one of the friendliest developers I know and I guess his books will be a good, gentle introduction.
+
+Anyway, the solution to day 5 is my second try with Scala and I behaved like a kid in a sweet shop, trying a bit from everything.
+So please excuse me, when it's not exactly the Scala way.
+
+Day 5 builds on https://adventofcode.com/2019/day/2[1202 Program Alarm] in which a programmable integer computer has to be build.
+That computer has mutable memory, which exposes an interesting design decision upfront for a Scala program:
+All the cool iterables, `Seq`, `List` and so on, are immutable.
+I could copy them over and over again, but honestly: That just doesn't feel right to me.
+Therefore, I chose an `Array` as memory.
+I cannot add or remove elements on the same instance, but elements are mutable.
+Good enough for the task at hand.
+
+A bit of ceremony is needed to turn the Scala-file into an executable script. So be it.
+
+[source,scala,numbered,indent=0]
+----
+include::Solution.scala[tags=ceremony]
+----
+
+Reading stuff seems to be the everywhere. I misst `try-with-resources`, though:
+
+[source,scala,numbered,indent=0]
+----
+include::Solution.scala[tags=input]
+----
+
+However, the underscore sticks out. What the? Turns out, a lot of ussages, see this https://stackoverflow.com/a/8001065[SO answer].
+In the example above, it's just used as _Method values_.
+
+It became apparent, that todays puzzle would add a lot of operators, so this time I wanted them to objects and I wanted to use https://docs.scala-lang.org/tour/case-classes.html[Case Classes] for them
+and if possible, work with them in a https://docs.scala-lang.org/tour/pattern-matching.html[pattern match].
+
+I started with a basic operation:
+
+[source,scala,numbered,indent=0]
+----
+include::Solution.scala[tags=baseOperation]
+----
+<1> An abstract class
+<2> An abstract method, This method has 4 arguments:
+    The current position, the arguments for the operation (a sequence of tuples of ints),
+    a reader from the memory and a writer to the memory.
+    Reader and writer are of type function: The reader from one tuple of ints to an int, the
+    writer takes two ints.
+    The tuples contain the position in memory in the first place, and in the second, the access mode.
+
+The `execute` method is meant to execute the operation and returns the the next position.
+Now, how does an operation look?
+
+Star one requires all operations from day 2 (`add`, `mul` and `exit`) as well as an input and an echo operation.
+The exit operation is the easiest one. It does nothing:
+
+[source,scala,numbered,indent=0]
+----
+include::Solution.scala[tags=exitOperation]
+----
+
+I want some more _traits_ for the numerics operation.
+https://docs.scala-lang.org/tour/traits.html[Traits] are used to share interfaces and fields between classes. They are similar to Java 8’s interfaces. Classes and objects can extend traits but traits cannot be instantiated and therefore have no parameters.
+
+[source,scala,numbered,indent=0]
+----
+include::Solution.scala[tags=someTraits]
+----
+<1> Some more methods
+<2> A member variable representing the available ops, here `+` and `*`, the functions using the `_` as placeholder for the actual arguments
+<3> A function with a default implementation
+<4> And the default `execute` method for a numeric operation.
+    This selects the the operation based on the opcode, applies it by reading stuff from the memory
+    and writing it back.
+
+The concrete ops look like this then:
+
+[source,scala,numbered,indent=0]
+----
+include::Solution.scala[tags=concreteOps]
+----
+
+Traits extends other traits, classes extends other classe and are with Traits.
+Much like extends and implements in Java.
+
+Now, how to get such an operation?
+I defined a https://docs.scala-lang.org/tour/singleton-objects.html[Companion object] for the class
+and an `apply` method.
+The `apply` method bridges between function and object oriented programming and creates instances of an object.
+Here, it is a beautiful representation of a factory method, determining via a pattern match which concrete instance to create:
+
+[source,scala,numbered,indent=0]
+----
+include::Solution.scala[tags=companionToOperation]
+----
+
+This allows for writing `val op = Operation(1, Array(3))` instead of throwing `news`around.
+The last `case` with the `@` assigns the matched value to the variable before so that I can use it.
+
+Before I show the actual program run, here are the functions I use to read and write from the memory, according the modes defined in the puzzle (`position mode` (use the value at the given memory adress) or `immediate` (use the value itself)).
+
+[source,scala,numbered]
+----
+include::Solution.scala[tags=readerAndWriter1,indent=0]
+include::Solution.scala[tags=readerAndWriter2,indent=0]
+----
+<1> Definition of methods with multiple parameter lists
+<2> `tupled` is helpful: The partial function originally takes 2 parameters.
+    After that, it takes a `Tuple2`, which we gonna use in a second.
+<3> Partial application of the write methode, with only the memory passed to it, effectivly turning it into an accessor or _writer_.
+
+They look funny… Both have two parameter lists, the first taking in the memory, the second one positional and mode respectively positional and value parameter.
+Those are methods that applicable to https://docs.scala-lang.org/tour/multiple-parameter-lists.html[partial application (currying)].
+
+The last helper method I have extracts the parameter modes:
+
+[source,scala,numbered,indent=0]
+----
+include::Solution.scala[tags=extractModes]
+----
+
+It uses a https://docs.scala-lang.org/tour/for-comprehensions.html[for-comprehension], something I heard at my work at https://neo4j.com[Neo4j] for the first time.
+We support this in _Cypher_ to generate new patterns.
+
+Adding up gives the following program, representing our computer:
+
+[source,scala,numbered,indent=0]
+----
+include::Solution.scala[tags=puttingItTogether]
+----
+<1> Create tuples of parameters and their mod
+<2> Create reader
+<3> and writer
+<4> match on the operation and either exit or execute and run again
+
+To run it, we create an array copy from the instructions read at the start and begin with:
+
+[source,scala,numbered,indent=0]
+----
+include::Solution.scala[tags=runIt]
+----
+
+Star two just added additional ops, you'll find them in the source of course.
+
+Other valid programs are (when loaded `Solution.scala` into the Scala REPL)
+
+[source,scala,numbered,indent=0]
+----
+:load Solution.scala
+// Using position mode, consider whether the input is equal to 8; output 1 (if it is) or 0 (if it is not).
+Solution.run(Array(3,9,8,9,10,9,4,9,99,-1,8))
+// Using position mode, consider whether the input is less than 8; output 1 (if it is) or 0 (if it is not).
+Solution.run(Array(3,9,7,9,10,9,4,9,99,-1,8))
+// Using immediate mode, consider whether the input is equal to 8; output 1 (if it is) or 0 (if it is not).
+Solution.run(Array(3,3,1108,-1,8,3,4,3,99))
+// Using immediate mode, consider whether the input is less than 8; output 1 (if it is) or 0 (if it is not).
+Solution.run(Array(3,3,1107,-1,8,3,4,3,99))
+// And a bigger example, indidicating less than, equal or greater than 8
+Solution.run(Array(3,21,1008,21,8,20,1005,20,22,107,8,21,20,1006,20,31,
+1106,0,36,98,0,0,1002,21,125,20,4,20,1105,1,46,104,
+999,1105,1,46,1101,1000,1,20,4,20,1105,1,46,98,99))
+----
+
+And that concludes my adventure in Scala world.
+
+NOTE: Run with `scala Solution.scala`.
+      Tested with `Scala code runner version 2.13.1`
+      Correct solutions are: `12896948` and `7704130`

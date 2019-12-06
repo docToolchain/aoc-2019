@@ -1,0 +1,29 @@
+
+:haro87-avatar: https://avatars0.githubusercontent.com/u/5933065?v=4
+:haro87-twitter: -
+:haro87-realName: Robert Hansel
+:haro87-blog: -
+
+
+//tag::free-form[]
+
+[cols="1,5"]
+|===
+| image:{haro87-avatar}[]
+a| **haro87** +
+//{haro87-realName} +
+icon:github[]: https://github.com/HaRo87[haro87]
+ifeval::[{haro87-twitter} != -]
+  icon:twitter[] : https://twitter.com/{haro87-twitter}[haro87-twitter] +
+endif::[]
+ifeval::[{haro87-blog} != -]
+  Blog : {haro87-blog} 
+endif::[]
+|===
+
+=== About me
+
+Nothing here yet. Update your profile at https://github.com/docToolchain/aoc-2019/blob/master/profiles/haro87.adoc[/profiles/haro87.adoc] 
+
+//end::free-form[]
+

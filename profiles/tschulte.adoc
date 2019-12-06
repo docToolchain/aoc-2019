@@ -1,0 +1,29 @@
+
+:tschulte-avatar: https://avatars3.githubusercontent.com/u/203910?v=4
+:tschulte-twitter: -
+:tschulte-realName: Tobias Schulte
+:tschulte-blog: -
+
+
+//tag::free-form[]
+
+[cols="1,5"]
+|===
+| image:{tschulte-avatar}[]
+a| **tschulte** +
+//{tschulte-realName} +
+icon:github[]: https://github.com/tschulte[tschulte]
+ifeval::[{tschulte-twitter} != -]
+  icon:twitter[] : https://twitter.com/{tschulte-twitter}[tschulte-twitter] +
+endif::[]
+ifeval::[{tschulte-blog} != -]
+  Blog : {tschulte-blog} 
+endif::[]
+|===
+
+=== About me
+
+Nothing here yet. Update your profile at https://github.com/docToolchain/aoc-2019/blob/master/profiles/tschulte.adoc[/profiles/tschulte.adoc] 
+
+//end::free-form[]
+

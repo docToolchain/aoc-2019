@@ -1,0 +1,29 @@
+
+:qznc-avatar: https://avatars3.githubusercontent.com/u/91316?v=4
+:qznc-twitter: -
+:qznc-realName: Andreas Zwinkau
+:qznc-blog: -
+
+
+//tag::free-form[]
+
+[cols="1,5"]
+|===
+| image:{qznc-avatar}[]
+a| **qznc** +
+//{qznc-realName} +
+icon:github[]: https://github.com/qznc[qznc]
+ifeval::[{qznc-twitter} != -]
+  icon:twitter[] : https://twitter.com/{qznc-twitter}[qznc-twitter] +
+endif::[]
+ifeval::[{qznc-blog} != -]
+  Blog : {qznc-blog} 
+endif::[]
+|===
+
+=== About me
+
+Nothing here yet. Update your profile at https://github.com/docToolchain/aoc-2019/blob/master/profiles/qznc.adoc[/profiles/qznc.adoc] 
+
+//end::free-form[]
+

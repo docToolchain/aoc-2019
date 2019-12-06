@@ -1,0 +1,29 @@
+
+:lukas_grotz-avatar: []
+:lukas_grotz-twitter: -
+:lukas_grotz-realName: []
+:lukas_grotz-blog: -
+
+
+//tag::free-form[]
+
+[cols="1,5"]
+|===
+| image:{lukas_grotz-avatar}[]
+a| **lukas_grotz** +
+//{lukas_grotz-realName} +
+icon:github[]: [][lukas_grotz]
+ifeval::[{lukas_grotz-twitter} != -]
+  icon:twitter[] : https://twitter.com/{lukas_grotz-twitter}[lukas_grotz-twitter] +
+endif::[]
+ifeval::[{lukas_grotz-blog} != -]
+  Blog : {lukas_grotz-blog} 
+endif::[]
+|===
+
+=== About me
+
+Nothing here yet. Update your profile at https://github.com/docToolchain/aoc-2019/blob/master/profiles/lukas_grotz.adoc[/profiles/lukas_grotz.adoc] 
+
+//end::free-form[]
+

@@ -1,0 +1,26 @@
+
+:rdmueller-avatar: https://avatars3.githubusercontent.com/u/1856308?v=4
+:rdmueller-twitter: RalfDMueller
+:rdmueller-realName: Ralf D. Müller
+:rdmueller-blog: https://docs-as-co.de
+
+:icons: font
+
+//tag::free-form[]
+
+[cols="1,5"]
+|===
+| image:{rdmueller-avatar}[]
+a| **rdmueller** +
+{rdmueller-realName} +
+Github: https://github.com/rdmueller[rdmueller],
+Twitter: https://twitter.com/{rdmueller-twitter}[{rdmueller-twitter}] +
+Blog : {rdmueller-blog}
+|===
+
+=== About me
+
+More will follow shortly.
+
+//end::free-form[]
+

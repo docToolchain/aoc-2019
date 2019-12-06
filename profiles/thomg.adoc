@@ -1,0 +1,29 @@
+
+:thomg-avatar: https://avatars2.githubusercontent.com/u/431746?v=4
+:thomg-twitter: -
+:thomg-realName: Thom Goodsell
+:thomg-blog: -
+
+
+//tag::free-form[]
+
+[cols="1,5"]
+|===
+| image:{thomg-avatar}[]
+a| **thomg** +
+//{thomg-realName} +
+icon:github[]: https://github.com/thomg[thomg]
+ifeval::[{thomg-twitter} != -]
+  icon:twitter[] : https://twitter.com/{thomg-twitter}[thomg-twitter] +
+endif::[]
+ifeval::[{thomg-blog} != -]
+  Blog : {thomg-blog} 
+endif::[]
+|===
+
+=== About me
+
+Nothing here yet. Update your profile at https://github.com/docToolchain/aoc-2019/blob/master/profiles/thomg.adoc[/profiles/thomg.adoc] 
+
+//end::free-form[]
+

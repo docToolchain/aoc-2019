@@ -32,6 +32,5 @@ with open("./input.txt", "r") as fd:
         santa_chain.append(orbit_mapping[santa_object])
         santa_object = orbit_mapping[santa_object]
 
-    common_objects = set(you_chain) & set(santa_chain)
-    travel_distance = len(you_chain) + len(santa_chain) - 2 * len(common_objects)
-    print("Travel distance:",travel_distance)
+    common_objects = set(you_chain) ^ set(santa_chain)
+    print("Travel distance:",len(common_objects))

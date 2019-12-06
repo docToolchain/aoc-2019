@@ -1,0 +1,12 @@
+== Dart
+
+This year I want to learn a bit about Dart for future Flutter development.
+
+There is a sub direcotry for both parts of the challenge.
+
+[source,dart,numbered]
+----
+include::solution.dart[]
+----
+
+Run the solution with `dart solution.dart`

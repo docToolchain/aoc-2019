@@ -1,7 +1,7 @@
 
-:wiedmann-avatar: https://avatars3.githubusercontent.com/u/5281620?v=4
+:wiedmann-avatar: https://avatars0.githubusercontent.com/u/5105977?s=460&v=4
 :wiedmann-twitter: -
-:wiedmann-realName: null
+:wiedmann-realName: Christian Wiedmann
 :wiedmann-blog: -
 
 
@@ -12,7 +12,7 @@
 | image:{wiedmann-avatar}[]
 a| **wiedmann** +
 //{wiedmann-realName} +
-icon:github[]: https://github.com/wiedmann[wiedmann]
+icon:github[]: https://github.com/beckel[beckel]
 ifeval::[{wiedmann-twitter} != -]
   icon:twitter[] : https://twitter.com/{wiedmann-twitter}[wiedmann-twitter] +
 endif::[]

@@ -13,7 +13,7 @@
 a| **bit-jkraushaar** +
 //{bit-jkraushaar-realName} +
 Github: https://github.com/bit-jkraushaar[bit-jkraushaar],
-Twitter: https://twitter.com/{bit-jkraushaar-twitter}[bit-jkraushaar] +
+Twitter: https://twitter.com/{bit-jkraushaar-twitter}[{bit-jkraushaar-twitter}] +
 |===
 
 === About me

@@ -18,7 +18,7 @@ dependencies {
 }
 
 application {
-    mainClassName = 'com.github.corneil.aoc2019.day5.SolutionKt'
+    mainClassName = 'com.github.corneil.aoc2019.day6.SolutionKt'
 }
 
 test {

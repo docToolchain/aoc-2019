@@ -1,7 +1,5 @@
 #!/usr/bin/python
 
-passwords = []
-
 def get_index_value(password, idx):
     return int(str(password)[idx])
 
@@ -11,19 +9,15 @@ def previous_is_same(password, idx):
 def next_is_same(password, idx):
     return get_index_value(password, idx) == get_index_value(password, idx+1)
 
-def nextnext_is_same(password, idx):
-    if(idx < 4):
-        if get_index_value(password, idx) == get_index_value(password, idx+2):
-            return True
-    return False
-
 def previous_and_next_not_same(password, idx):
     return get_index_value(password, idx-1) != get_index_value(password, idx+1)
 
 def has_double_digit(password):
     for idx in range(0, 5):
-        if (previous_is_same(password, idx) or next_is_same(password, idx)):
-            return True
+        if(next_is_same(password, idx)):
+            if (idx+2 > 5 or get_index_value(password, idx+2) != get_index_value(password, idx)):
+                if (idx-1 < 0 or get_index_value(password, idx-1) != get_index_value(password, idx)):
+                    return True
     return False
 
 def is_next_value_larger(password):
@@ -41,12 +35,20 @@ def is_next_value_larger(password):
         return True
     return False
 
+def passes_criteria(password):
+    if is_next_value_larger(password) and has_double_digit(password):
+        return True
+    return False
+
+def check_passwords(start, end):
+    passwords = []
+    for password in range(start, end):
+        if passes_criteria(password):
+            passwords.append(password)
+    return passwords
+
 start = 347312
 end = 805915
 
-for password in range(start, end):
-    if is_next_value_larger(password):
-        if has_double_digit(password):
-            passwords.append(password)
-
-print(len(passwords))
+print(len(check_passwords(start, end)))
+# 364

@@ -2,8 +2,6 @@
 
 This solution is written in Python.
 
-=== First Star
-
 You can execute it with "python3 solution.py"
 
 [source, python]
@@ -11,7 +9,9 @@ You can execute it with "python3 solution.py"
 include::solution.py[]
 ....
 
+You can test it with "python3 test.py"
 
-=== Second Star
-
-TODO
+[source, python]
+....
+include::test.py[]
+....

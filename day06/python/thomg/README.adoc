@@ -1,0 +1,10 @@
+== Disclaimer
+I’m not a professional developer and only doing this for fun. The solutions might me messy.
+
+== Day 06
+I was stuck for hours on star 1, even though I had the solution in my head within minutes. I wanted to model a Tree, so I wrote a Node class and gave it a list of Nodes 
+(the Node's children) as a member. Turns out it's a bad idea to give a python class a list with objects of its own type as a member, because apparently any instance will
+somehow link to itself (or at least the memory where itself resides) and you end up in recursion hell. Live and learn.
+
+Star 2 made me realize my life would have been a lot easier and I wouldn't have needed a tree structure if I just stored the relations the other way around. But I got so
+distracted by the very tree-like example map that I couldn't think of anything else at first. 

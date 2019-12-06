@@ -4,11 +4,10 @@ import java.io.File
 
 class OrbitData {
     fun addOrbit(obj: String, orbiting: String) {
-        orbits.add(
-            Orbit(
-                objects[obj] ?: createObj(obj),
-                objects[orbiting] ?: createObj(orbiting)
-            )
+        assert(orbits[orbiting] == null)
+        orbits[orbiting] = Orbit(
+            objects[obj] ?: createObj(obj),
+            objects[orbiting] ?: createObj(orbiting)
         )
     }
 
@@ -19,14 +18,13 @@ class OrbitData {
     }
 
     val objects: MutableMap<String, Orbitable> = mutableMapOf()
-    val orbits: MutableList<Orbit> = mutableListOf()
+    val orbits: MutableMap<String, Orbit> = mutableMapOf()
     fun findOrbits(obj: String): List<Orbit> {
-        val foundObj = objects[obj]
-        val orbiting = orbits.filter { it.orbits == foundObj }
-        return orbiting + orbiting.flatMap { findOrbits(it.centre.name) }
+        val orbiting = orbits[obj]
+        return if(orbiting == null) emptyList() else listOf(orbiting) + findOrbits(orbiting.centre.name)
     }
 
-    fun findTransfer(start: String, end: String): List<Pair<Orbitable, Orbitable>> {
+    fun findTransfers(start: String, end: String): List<Pair<Orbitable, Orbitable>> {
         val startOrbits = findOrbits(start)
         val endOrbits = findOrbits(end)
         val shared = startOrbits.find { orbit -> endOrbits.find { it == orbit } != null }
@@ -38,7 +36,7 @@ class OrbitData {
     }
 
     fun findOrbit(obj: String): Orbit {
-        return orbits.find { it.orbits.name == obj } ?: throw Exception("Expected to find $obj orbiting something")
+        return orbits[obj] ?: throw Exception("Expected to find $obj orbiting something")
     }
 }
 
@@ -67,13 +65,13 @@ fun main(args: Array<String>) {
     val orbits = loadOrbits(File(fileName).readLines().map { it.trim() })
     val allOrbits = orbits.objects.keys.flatMap { orbits.findOrbits(it) }
     println("Orbits=${allOrbits.size}")
-    val you2san = orbits.findTransfer("YOU", "SAN")
+    val you2san = orbits.findTransfers("YOU", "SAN")
     println("YOU->SAN=${you2san.size}")
     val you = orbits.findOrbit("YOU")
     val san = orbits.findOrbit("SAN")
     println("YOU=$you")
     println("SAN=$san")
-    val transfer = orbits.findTransfer(you.centre.name, san.centre.name)
+    val transfer = orbits.findTransfers(you.centre.name, san.centre.name)
     println(transfer.map { it.first.name + " -> " + it.second.name }.joinToString("\n"))
     println("Transfers=${transfer.size}")
 }

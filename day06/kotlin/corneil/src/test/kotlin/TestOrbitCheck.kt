@@ -44,14 +44,14 @@ K)L
 K)YOU
 I)SAN""".trimIndent()
         val orbits = loadOrbits(prepareData(input))
-        val transfer = orbits.findTransfer("YOU", "SAN")
+        val transfer = orbits.findTransfers("YOU", "SAN")
         println(transfer.map { it.first.name + " -> " + it.second.name }.joinToString("\n"))
         assertThat(transfer.size).isEqualTo(4)
         val you = orbits.findOrbit("YOU")
         val san = orbits.findOrbit("SAN")
         println("YOU=$you")
         println("SAN=$san")
-        val transfer2 = orbits.findTransfer(you.centre.name, san.centre.name)
+        val transfer2 = orbits.findTransfers(you.centre.name, san.centre.name)
         println(transfer2.map { it.first.name + " -> " + it.second.name }.joinToString("\n"))
         println("Transfers=${transfer2.size}")
     }

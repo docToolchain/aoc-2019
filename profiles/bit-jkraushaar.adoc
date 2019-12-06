@@ -12,13 +12,8 @@
 | image:{bit-jkraushaar-avatar}[]
 a| **bit-jkraushaar** +
 //{bit-jkraushaar-realName} +
-icon:github[]: https://github.com/bit-jkraushaar[bit-jkraushaar]
-ifeval::[{bit-jkraushaar-twitter} != -]
-  icon:twitter[] : https://twitter.com/{bit-jkraushaar-twitter}[bit-jkraushaar-twitter] +
-endif::[]
-ifeval::[{bit-jkraushaar-blog} != -]
-  Blog : {bit-jkraushaar-blog} 
-endif::[]
+Github: https://github.com/bit-jkraushaar[bit-jkraushaar],
+Twitter: https://twitter.com/{bit-jkraushaar-twitter}[bit-jkraushaar] +
 |===
 
 === About me

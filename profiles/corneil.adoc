@@ -12,8 +12,8 @@
 | image:{corneil-avatar}[]
 a| **corneil** +
 {corneil-realName} +
-icon:github[]: https://github.com/corneil[corneil]
-icon:twitter[] : https://twitter.com/{corneil-twitter}[{corneil-twitter}] +
+GitHub: https://github.com/corneil[corneil]
+Twitter: https://twitter.com/{corneil-twitter}[{corneil-twitter}] +
 Blog : {corneil-blog} 
 |===
 

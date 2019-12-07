@@ -12,7 +12,7 @@
 | image:{wiedmann-avatar}[]
 a| **wiedmann** +
 //{wiedmann-realName} +
-icon:github[]: https://github.com/beckel[beckel]
+GitHub: https://github.com/beckel[beckel]
 ifeval::[{wiedmann-twitter} != -]
   icon:twitter[] : https://twitter.com/{wiedmann-twitter}[wiedmann-twitter] +
 endif::[]

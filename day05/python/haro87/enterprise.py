@@ -1,7 +1,7 @@
 import logging
 from enum import Enum
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.ERROR)
 
 class Instruction(Enum):
     ADD = 1
@@ -147,10 +147,14 @@ class MontgomeryScott:
             elif command.instruction() == Instruction.LESS_THAN.value:
                 if params[0] < params [1]:
                     self._store(1, params[2], commands)
+                else:
+                    self._store(0, params[2], commands)
                 count = count + 4
             elif command.instruction() == Instruction.EQUALS.value:
                 if params[0] == params[1]:
                     self._store(1, params[2], commands)
+                else:
+                    self._store(0, params[2], commands)
                 count = count + 4
             else:
                 count = count + 1

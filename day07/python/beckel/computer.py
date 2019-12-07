@@ -1,62 +1,69 @@
 logging = 1
 
-def compute(code, in_values):
-    i = 0
-    input_iterator = 0
+class Computer:
 
-    while(True):
-        [opcode, modes] = evaluate_instruction(code[i])
-        if (opcode == 99):
-            return
-        if (opcode == 1):
-            summand_1 = code[i+1] if len(modes) >= 1 and modes[0] == 1 else code[code[i+1]]
-            summand_2 = code[i+2] if len(modes) >= 2 and modes[1] == 1 else code[code[i+2]]
-            code[code[i+3]] = summand_1 + summand_2
-            i += 4
-        if (opcode == 2):
-            factor_1 = code[i+1] if len(modes) >= 1 and modes[0] == 1 else code[code[i+1]]
-            factor_2 = code[i+2] if len(modes) >= 2 and modes[1] == 1 else code[code[i+2]]
-            code[code[i+3]] = factor_1 * factor_2
-            i += 4
-        if (opcode == 3):
-            code[code[i+1]] = in_values[input_iterator]
-            input_iterator += 1
-            i += 2
-        if (opcode == 4):
-            output = code[i+1] if len(modes) >= 1 and modes[0] == 1 else code[code[i+1]]
-            print("Output:",str(output))
-            return output
-            # i += 2
-        if (opcode == 5):
-            value = code[i+1] if len(modes) >= 1 and modes[0] == 1 else code[code[i+1]]
-            jump_to = code[i+2] if len(modes) >= 2 and modes[1] == 1 else code[code[i+2]]
-            if value != 0:
-                i = jump_to
-            else:
-                i += 3
-        if (opcode == 6):
-            value = code[i+1] if len(modes) >= 1 and modes[0] == 1 else code[code[i+1]]
-            jump_to = code[i+2] if len(modes) >= 2 and modes[1] == 1 else code[code[i+2]]
-            if value == 0:
-                i = jump_to
-            else:
-                i += 3
-        if (opcode == 7):
-            operand_1 = code[i+1] if len(modes) >= 1 and modes[0] == 1 else code[code[i+1]]
-            operand_2 = code[i+2] if len(modes) >= 2 and modes[1] == 1 else code[code[i+2]]
-            if operand_1 < operand_2:
-                code[code[i+3]] = 1
-            else:
-                code[code[i+3]] = 0
-            i += 4
-        if (opcode == 8):
-            operand_1 = code[i+1] if len(modes) >= 1 and modes[0] == 1 else code[code[i+1]]
-            operand_2 = code[i+2] if len(modes) >= 2 and modes[1] == 1 else code[code[i+2]]
-            if operand_1 == operand_2:
-                code[code[i+3]] = 1
-            else:
-                code[code[i+3]] = 0
-            i += 4
+    def __init__(self, code, program_input):
+        self.code = code
+        self.ptr = 0 # ptr: instruction pointer 
+        self.program_output = []
+        self.program_input = program_input
+    
+    def run(self):
+        while(True):
+            [opcode, modes] = evaluate_instruction(self.code[self.ptr])
+            if (opcode == 99):
+                return
+            if (opcode == 1):
+                summand_1 = self.code[self.ptr+1] if len(modes) >= 1 and modes[0] == 1 else self.code[self.code[self.ptr+1]]
+                summand_2 = self.code[self.ptr+2] if len(modes) >= 2 and modes[1] == 1 else self.code[self.code[self.ptr+2]]
+                self.code[self.code[self.ptr+3]] = summand_1 + summand_2
+                self.ptr += 4
+            if (opcode == 2):
+                factor_1 = self.code[self.ptr+1] if len(modes) >= 1 and modes[0] == 1 else self.code[self.code[self.ptr+1]]
+                factor_2 = self.code[self.ptr+2] if len(modes) >= 2 and modes[1] == 1 else self.code[self.code[self.ptr+2]]
+                self.code[self.code[self.ptr+3]] = factor_1 * factor_2
+                self.ptr += 4
+            if (opcode == 3):
+                self.code[self.code[self.ptr+1]] = self.program_input.pop(0)
+                self.ptr += 2
+            if (opcode == 4):
+                output = self.code[self.ptr+1] if len(modes) >= 1 and modes[0] == 1 else self.code[self.code[self.ptr+1]]
+                print("Output:",str(output))
+                self.program_output.append(output)
+                self.ptr += 2
+            if (opcode == 5):
+                value = self.code[self.ptr+1] if len(modes) >= 1 and modes[0] == 1 else self.code[self.code[self.ptr+1]]
+                jump_to = self.code[self.ptr+2] if len(modes) >= 2 and modes[1] == 1 else self.code[self.code[self.ptr+2]]
+                if value != 0:
+                    self.ptr = jump_to
+                else:
+                    self.ptr += 3
+            if (opcode == 6):
+                value = self.code[self.ptr+1] if len(modes) >= 1 and modes[0] == 1 else self.code[self.code[self.ptr+1]]
+                jump_to = self.code[self.ptr+2] if len(modes) >= 2 and modes[1] == 1 else self.code[self.code[self.ptr+2]]
+                if value == 0:
+                    self.ptr = jump_to
+                else:
+                    self.ptr += 3
+            if (opcode == 7):
+                operand_1 = self.code[self.ptr+1] if len(modes) >= 1 and modes[0] == 1 else self.code[self.code[self.ptr+1]]
+                operand_2 = self.code[self.ptr+2] if len(modes) >= 2 and modes[1] == 1 else self.code[self.code[self.ptr+2]]
+                if operand_1 < operand_2:
+                    self.code[self.code[self.ptr+3]] = 1
+                else:
+                    self.code[self.code[self.ptr+3]] = 0
+                self.ptr += 4
+            if (opcode == 8):
+                operand_1 = self.code[self.ptr+1] if len(modes) >= 1 and modes[0] == 1 else self.code[self.code[self.ptr+1]]
+                operand_2 = self.code[self.ptr+2] if len(modes) >= 2 and modes[1] == 1 else self.code[self.code[self.ptr+2]]
+                if operand_1 == operand_2:
+                    self.code[self.code[self.ptr+3]] = 1
+                else:
+                    self.code[self.code[self.ptr+3]] = 0
+                self.ptr += 4
+
+    def get_last_output(self):
+        return self.program_output[len(self.program_output)-1]
 
 def evaluate_instruction(instruction):
     opcode_low = instruction % 10

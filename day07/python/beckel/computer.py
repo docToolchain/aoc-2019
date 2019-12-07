@@ -1,4 +1,4 @@
-logging = 1
+debug = 0
 
 class Computer:
 
@@ -7,11 +7,13 @@ class Computer:
         self.ptr = 0 # ptr: instruction pointer 
         self.program_output = []
         self.program_input = program_input
+        self.state = "RUNNING"
     
     def run(self):
         while(True):
             [opcode, modes] = evaluate_instruction(self.code[self.ptr])
             if (opcode == 99):
+                self.state = "TERMINATED"
                 return
             if (opcode == 1):
                 summand_1 = self.code[self.ptr+1] if len(modes) >= 1 and modes[0] == 1 else self.code[self.code[self.ptr+1]]
@@ -24,11 +26,14 @@ class Computer:
                 self.code[self.code[self.ptr+3]] = factor_1 * factor_2
                 self.ptr += 4
             if (opcode == 3):
+                if (len(self.program_input) == 0):
+                    return # wait for input
                 self.code[self.code[self.ptr+1]] = self.program_input.pop(0)
                 self.ptr += 2
             if (opcode == 4):
                 output = self.code[self.ptr+1] if len(modes) >= 1 and modes[0] == 1 else self.code[self.code[self.ptr+1]]
-                print("Output:",str(output))
+                if (debug):
+                    print("Output:",str(output))
                 self.program_output.append(output)
                 self.ptr += 2
             if (opcode == 5):
@@ -64,6 +69,12 @@ class Computer:
 
     def get_last_output(self):
         return self.program_output[len(self.program_output)-1]
+
+    def provide_input(self, i):
+        self.program_input.append(i)
+    
+    def has_terminated(self):
+        return True if self.state == "TERMINATED" else False
 
 def evaluate_instruction(instruction):
     opcode_low = instruction % 10

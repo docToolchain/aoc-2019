@@ -1,5 +1,9 @@
 Day 7 - Solution in Python
 
+Refactored computer into an object oriented version (i.e., a class) such that it can maintain state of program/memory and the instruction pointer.
+
+Now I know what "self hell" means in python ;-)
+
 [source, python]
 ....
 include::solution.py[]

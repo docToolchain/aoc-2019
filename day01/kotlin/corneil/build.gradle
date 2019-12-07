@@ -1,0 +1,31 @@
+// There is a separate gradle project that references the project code for each day in one large multi-module project.
+apply plugin: 'kotlin'
+apply plugin: 'application'
+
+repositories {
+    mavenLocal()
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.jetbrains.kotlin:kotlin-reflect'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+    testImplementation 'org.jetbrains.kotlin:kotlin-test'
+    testImplementation 'org.jetbrains.kotlin:kotlin-test-junit'
+    testImplementation 'com.willowtreeapps.assertk:assertk-jvm:0.20'
+
+}
+
+application {
+    mainClassName = 'com.github.corneil.aoc2019.day1.SolutionKt'
+}
+
+test {
+    useJUnit()
+    testLogging.showStandardStreams = true
+
+    testLogging {
+        events "PASSED", "FAILED", "SKIPPED", "STANDARD_OUT", "STANDARD_ERROR"
+    }
+}

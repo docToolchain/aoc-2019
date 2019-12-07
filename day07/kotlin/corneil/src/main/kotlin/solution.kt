@@ -196,7 +196,7 @@ fun phaseAmplifierFeedback(code: List<Int>, sequence: IntArray): Int {
         amplifiers.add(program.createProgram(listOf(phase)))
     }
     do {
-        amplifiers.forEachIndexed { index, amp ->
+        amplifiers.forEach { amp ->
             if (amp.counter.run) {
                 val result = amp.executeUntilOutput(amplifierInput)
                 if (result.isNotEmpty()) {

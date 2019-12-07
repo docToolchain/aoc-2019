@@ -153,7 +153,7 @@ class ProgramState(val memory: MutableList<Int>, val inputs: MutableList<Int> = 
         return memory.toList()
     }
 
-    fun executeUntilOutput(input: MutableList<Int>): List<Int> {
+    fun executeUntilOutput(input: List<Int>): List<Int> {
         inputs.addAll(input)
         while (counter.run && counter.pc < memory.size && output.isEmpty()) {
             counter = readAndExecute()
@@ -181,7 +181,7 @@ fun phaseAmplifierTest(code: List<Int>, sequence: IntArray): Int {
     val program = Program(code)
     var amplifierInput = 0
     sequence.forEach { phase ->
-        val result = program.executeProgram(mutableListOf(phase, amplifierInput))
+        val result = program.executeProgram(listOf(phase, amplifierInput))
         amplifierInput = result.second.first()
     }
     return amplifierInput
@@ -190,10 +190,10 @@ fun phaseAmplifierTest(code: List<Int>, sequence: IntArray): Int {
 fun phaseAmplifierFeedback(code: List<Int>, sequence: IntArray): Int {
     val program = Program(code)
     var lastOutput = 0
-    var amplifierInput = mutableListOf(0)
+    var amplifierInput = listOf(0)
     val amplifiers = mutableListOf<ProgramState>()
     sequence.forEach { phase ->
-        amplifiers.add(program.createProgram(mutableListOf(phase)))
+        amplifiers.add(program.createProgram(listOf(phase)))
     }
     do {
         amplifiers.forEachIndexed { index, amp ->
@@ -201,7 +201,7 @@ fun phaseAmplifierFeedback(code: List<Int>, sequence: IntArray): Int {
                 val result = amp.executeUntilOutput(amplifierInput)
                 if (result.isNotEmpty()) {
                     lastOutput = result.last()
-                    amplifierInput = result.toMutableList()
+                    amplifierInput = result
                 }
             }
         }

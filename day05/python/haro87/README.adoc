@@ -1,0 +1,32 @@
+This solution is written in Python.
+It is the solution for the fifth day of AoC:
+https://adventofcode.com/2019/day/5[Sunny with a Chance of Asteroids]
+
+https://aoc-2019.netlify.com
+
+== Sunny with a Chance of Asteroids
+
+The solution for the fifth day is not that hard but it still took me some
+time. Structure is key and I learned some new Python features along the way.
+
+The solution can be run by `python solution.py`:
+
+[source, python]
+....
+include::solution.py[]
+....
+
+The actual methods are in a separate class:
+
+[source, python]
+....
+include::enterprise.py[]
+....
+
+Test cases are derived from the puzzle description and
+can be run by `pytest enterprise_test.py`
+
+[source, python]
+....
+include::enterprise_test.py[]
+....

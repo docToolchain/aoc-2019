@@ -1,0 +1,44 @@
+== Day 04
+
+After a short real life break I continued with the fourth day.
+
+=== First Star
+
+My idea to solve this problem was to first create a sequence of numbers.
+Fortunately Kotlin makes it easy to do so by specifying a range of numbers.
+Afterwards the sequence of numbers is interpreted as char array and filtered.
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=firstStar]
+----
+
+So all I have to do is write two filter functions.
+Again (see day 3) I am using extension functions for readability.
+I make use of the very handy `windowed` function of Kotlin.
+It creates me a list of all adjacent digits in the char array.
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=firstStarFilters]
+----
+
+=== Second Star
+
+The algorithm for the second star is essentially the same.
+But I had to create an improved version of the 'pair of digits' check.
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=secondStarFilters]
+----
+
+First I use `withIndex` to enrich my chars with their index.
+Afterwards `zipWithNext` does the same as `windowed`, except it returns a list instead of an iterarble.
+Then I filter all pairs and afterwards take a look at the left and right neighbor of the pairs.
+If any pair is left, the test of the password is passed.
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=secondStar]
+----

@@ -1,0 +1,9 @@
+Day 4 - Solution in Python
+
+Brute force is easy - "Non brute force" impossible?
+
+[source, python]
+....
+include::solution.py[]
+....
+

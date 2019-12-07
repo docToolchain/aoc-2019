@@ -1,0 +1,42 @@
+This solution is written in Python.
+It is the solution for the fourth day of AoC:
+https://adventofcode.com/2019/day/4[Secure Container]
+
+https://aoc-2019.netlify.com
+
+== Finding the code
+
+The solution for the first part was achieved by iterating
+over each position in a 6 digit code and subtracting the
+two adjacent values. If the value is < 0 then we had an
+decrease which would violate the rules.
+Furthermore we needed to check whether there is at least
+one occurance of matching adjacent positions. The calculation
+is the same as for the first one but having a 0 as result 
+of that calculation indicates matching positions.
+
+The solution for the second part was achieved by counting
+the occurances of values in the code and checking if there
+was at least one count of exactly two matching values.
+
+The solution can be run by `python solution.py`:
+
+[source, python]
+....
+include::solution.py[]
+....
+
+The actual methods are in a separate class:
+
+[source, python]
+....
+include::enterprise.py[]
+....
+
+Test cases are derived from the puzzle description and
+can be run by `pytest enterprise_test.py`
+
+[source, python]
+....
+include::enterprise_test.py[]
+....

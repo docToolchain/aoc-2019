@@ -1,0 +1,29 @@
+
+:day02_m5stack-avatar: []
+:day02_m5stack-twitter: -
+:day02_m5stack-realName: []
+:day02_m5stack-blog: -
+
+
+//tag::free-form[]
+
+[cols="1,5"]
+|===
+| image:{day02_m5stack-avatar}[]
+a| **day02_m5stack** +
+//{day02_m5stack-realName} +
+icon:github[]: [][day02_m5stack]
+ifeval::[{day02_m5stack-twitter} != -]
+  icon:twitter[] : https://twitter.com/{day02_m5stack-twitter}[day02_m5stack-twitter] +
+endif::[]
+ifeval::[{day02_m5stack-blog} != -]
+  Blog : {day02_m5stack-blog} 
+endif::[]
+|===
+
+=== About me
+
+Nothing here yet. Update your profile at https://github.com/docToolchain/aoc-2019/blob/master/profiles/day02_m5stack.adoc[/profiles/day02_m5stack.adoc] 
+
+//end::free-form[]
+

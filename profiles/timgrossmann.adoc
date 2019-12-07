@@ -1,0 +1,29 @@
+
+:timgrossmann-avatar: https://avatars2.githubusercontent.com/u/16529337?v=4
+:timgrossmann-twitter: -
+:timgrossmann-realName: Tim Großmann
+:timgrossmann-blog: -
+
+
+//tag::free-form[]
+
+[cols="1,5"]
+|===
+| image:{timgrossmann-avatar}[]
+a| **timgrossmann** +
+//{timgrossmann-realName} +
+icon:github[]: https://github.com/timgrossmann[timgrossmann]
+ifeval::[{timgrossmann-twitter} != -]
+  icon:twitter[] : https://twitter.com/{timgrossmann-twitter}[timgrossmann-twitter] +
+endif::[]
+ifeval::[{timgrossmann-blog} != -]
+  Blog : {timgrossmann-blog} 
+endif::[]
+|===
+
+=== About me
+
+Nothing here yet. Update your profile at https://github.com/docToolchain/aoc-2019/blob/master/profiles/timgrossmann.adoc[/profiles/timgrossmann.adoc] 
+
+//end::free-form[]
+

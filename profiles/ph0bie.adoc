@@ -1,0 +1,29 @@
+
+:ph0bie-avatar: https://avatars3.githubusercontent.com/u/56651768?v=4
+:ph0bie-twitter: -
+:ph0bie-realName: null
+:ph0bie-blog: -
+
+
+//tag::free-form[]
+
+[cols="1,5"]
+|===
+| image:{ph0bie-avatar}[]
+a| **ph0bie** +
+//{ph0bie-realName} +
+icon:github[]: https://github.com/ph0bie[ph0bie]
+ifeval::[{ph0bie-twitter} != -]
+  icon:twitter[] : https://twitter.com/{ph0bie-twitter}[ph0bie-twitter] +
+endif::[]
+ifeval::[{ph0bie-blog} != -]
+  Blog : {ph0bie-blog} 
+endif::[]
+|===
+
+=== About me
+
+Nothing here yet. Update your profile at https://github.com/docToolchain/aoc-2019/blob/master/profiles/ph0bie.adoc[/profiles/ph0bie.adoc] 
+
+//end::free-form[]
+

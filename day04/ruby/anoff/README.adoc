@@ -1,0 +1,24 @@
+Puzzle: https://adventofcode.com/2019/day/4[Secure Container]
+
+== Part 1
+
+
+== Part 2
+
+AHHHHHHHH! Forgot to add the `.length` and always tried to fix my code but the problem was in outputting the length of solutions correctly 😨
+
+== Solution
+
+To run the solution use 
+
+[source, ruby]
+....
+include::solution.rb[]
+....
+
+=== Test cases
+
+[source, ruby]
+....
+include::solution_test.rb[]
+....

@@ -1,4 +1,4 @@
-== The Tyranny of the Rocket Equation
+== https://adventofcode.com/2019/day/1[The Tyranny of the Rocket Equation]
 
 I have written the solution with my 9 year old kid in Java's https://docs.oracle.com/javase/9/jshell/introduction-jshell.htm#JSHEL-GUID-630F27C8-1195-4989-9F6B-2C51D46F52C8[JShell].
 The JShell makes it easy to focus on the main part (equation of fuel, mapping inputs), without going through the hassles of building classes and whatnot.

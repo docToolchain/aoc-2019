@@ -1,0 +1,29 @@
+
+:jensnerche-avatar: https://avatars0.githubusercontent.com/u/139336?v=4
+:jensnerche-twitter: -
+:jensnerche-realName: Jens Nerche
+:jensnerche-blog: -
+
+
+//tag::free-form[]
+
+[cols="1,5"]
+|===
+| image:{jensnerche-avatar}[]
+a| **jensnerche** +
+//{jensnerche-realName} +
+icon:github[]: https://github.com/jensnerche[jensnerche]
+ifeval::[{jensnerche-twitter} != -]
+  icon:twitter[] : https://twitter.com/{jensnerche-twitter}[jensnerche-twitter] +
+endif::[]
+ifeval::[{jensnerche-blog} != -]
+  Blog : {jensnerche-blog} 
+endif::[]
+|===
+
+=== About me
+
+Nothing here yet. Update your profile at https://github.com/docToolchain/aoc-2019/blob/master/profiles/jensnerche.adoc[/profiles/jensnerche.adoc] 
+
+//end::free-form[]
+

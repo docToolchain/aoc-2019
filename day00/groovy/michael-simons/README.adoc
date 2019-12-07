@@ -1,7 +1,9 @@
 == Hello, World
 
 This is an over engineered "Hello, World" application written in Groovy, using Spring Boot and the reactive web stack.
-Of course, one wouldn't need a framework for that, but since Ralf asked for it...  ¯\\_(ツ)_/¯
+Of course, one wouldn't need a framework for that, but since Ralf asked for it...  ¯\\_(ツ)_/¯.
+
+Day 0 doesn't correspond to any of the official AoC puzzles.
 
 The application defines a `HelloWorldController` as a top level Spring bean:
 
@@ -35,6 +37,6 @@ By using Groovys "Grapes" (`@Grab('org.springframework.boot:spring-boot-starter-
 groovy -Dlogging.level.root=WARN -Dspring.main.banner-mode=OFF solution.groovy
 ```
 
-I incuded some configuration variables to turn off logging and Springs Banner, so that the application outputs only the greeting.
+I included some configuration variables to turn off logging and Springs Banner, so that the application outputs only the greeting.
 
 Bear in mind that this solution fires up a complete web stack and therefore is slower than probably any other _Hello World_ program out there.

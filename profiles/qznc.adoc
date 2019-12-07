@@ -1,0 +1,30 @@
+
+:qznc-avatar: https://avatars3.githubusercontent.com/u/91316?v=4
+:qznc-twitter: azwinkau
+:qznc-realName: Andreas Zwinkau
+:qznc-blog: https://beza1e1.tuxen.de/
+
+
+//tag::free-form[]
+
+[cols="1,5"]
+|===
+| image:{qznc-avatar}[]
+a| **qznc** +
+//{qznc-realName} +
+icon:github[]: https://github.com/qznc[qznc]
+ifeval::[{qznc-twitter} != -]
+  icon:twitter[] : https://twitter.com/{qznc-twitter}[qznc-twitter] +
+endif::[]
+ifeval::[{qznc-blog} != -]
+  Blog : {qznc-blog} 
+endif::[]
+|===
+
+=== About me
+
+Programming is the closest thing to magic we have.
+Here we use it to rescue Santa.
+
+//end::free-form[]
+

@@ -1,0 +1,59 @@
+== Day 05
+
+For this puzzle I decided to rewrite my solution from day 2 and extend it to be something like a virtual CPU.
+It is also the first time I am using a class in this year Advent of Code.
+
+=== Setup
+
+Before I start writing my CPU, I need a couple of helper functions and enumerations.
+So I created a `typealias` for instructions and parameters.
+The instruction also supports reading the opcode and parameter modes.
+To make parsing easier I pad the instruction with leading zeros and handle it as string.
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=instruction]
+----
+
+Then, for extendability, I added two enumerations representing the available operations and parameter modes.
+Please note: The enumeration already contains operations from the second star.
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=enums]
+----
+
+=== The virtual CPU
+
+Next I wrote the virtual CPU.
+My CPU has a memory and an instruction pointer.
+The memory is initialized with the program read from the input file.
+Running the program takes these steps in a loop:
+
+. Load the instruction from memory
+. Load the operation of the instruction
+. Load the parameters of the instruction
+. Process the operation with the parameters
+
+While loading the parameters I also add the parameter modes.
+To encapsulate the parameter modes, I wrote a `load()` method.
+This method loads the parameter value depending on the mode.
+
+The `process()` method simply delegates to the concrete implementations.
+Each operation method loads its parameters values, processes them and updates the memory and instruction pointer.
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=cpu]
+----
+
+To start the virtual CPU, the program has to be loaded from the input file.
+Then a new CPU is constructed and `run()` is called.
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=firstAndSecondStar]
+----
+
+You can solve the first star by entering 1 and the second star by entering 5.
+The program will also output the operation and its parameters for debugging purposes.

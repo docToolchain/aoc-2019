@@ -1,0 +1,5 @@
+== https://adventofcode.com/2019/day/7[Amplification Circuit]
+
+NOTE: Run with `java --source 13 --enable-preview Solution.java`.
+      Tested with `java version "13" 2019-09-17`
+      Correct solutions are: `92663` and `14365052`

@@ -9,8 +9,7 @@ with open("input.txt", "r") as fd:
 
     max_output = 0
     # permutations
-    phase_permuations = list(itertools.permutations(range(5)))
-    for permutation in phase_permuations:
-        output = amplifier_sequence.run(code, permutation)
+    for permutation in list(itertools.permutations(range(5))):
+        output = amplifier_sequence.run_standalone(code, permutation)
         max_output = max(output, max_output) 
     print("Max output:",max_output)

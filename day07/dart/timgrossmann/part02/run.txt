@@ -1,0 +1,165 @@
+3
+[3, 0, 0, 0]
+Please enter the System ID to run the test on:
+Storing called: 0 in 8
+
+1001
+[1, 0, 1, 0]
+Addition called: 0 + 10 to 8
+
+105
+[5, 1, 0, 0]
+Jump if True: 1 is true, 21
+
+3
+[3, 0, 0, 0]
+Please enter the System ID to run the test on:
+Storing called: 0 in 9
+
+101
+[1, 1, 0, 0]
+Addition called: 2 + 0 to 9
+
+1002
+[2, 0, 1, 0]
+Multiplication called: 2 * 2 to 9
+
+101
+[1, 1, 0, 0]
+Addition called: 5 + 4 to 9
+
+4
+[4, 0, 0, 0]
+Printing called: 9
+3
+[3, 0, 0, 0]
+Please enter the System ID to run the test on:
+Storing called: 1 in 8
+
+1001
+[1, 0, 1, 0]
+Addition called: 1 + 10 to 8
+
+105
+[5, 1, 0, 0]
+Jump if True: 1 is true, 38
+
+3
+[3, 0, 0, 0]
+Please enter the System ID to run the test on:
+Storing called: 9 in 9
+
+102
+[2, 1, 0, 0]
+Multiplication called: 2 * 9 to 9
+
+101
+[1, 1, 0, 0]
+Addition called: 3 + 18 to 9
+
+1002
+[2, 0, 1, 0]
+Multiplication called: 21 * 4 to 9
+
+4
+[4, 0, 0, 0]
+Printing called: 84
+3
+[3, 0, 0, 0]
+Please enter the System ID to run the test on:
+Storing called: 2 in 8
+
+1001
+[1, 0, 1, 0]
+Addition called: 2 + 10 to 8
+
+105
+[5, 1, 0, 0]
+Jump if True: 1 is true, 55
+
+3
+[3, 0, 0, 0]
+Please enter the System ID to run the test on:
+Storing called: 84 in 9
+
+102
+[2, 1, 0, 0]
+Multiplication called: 2 * 84 to 9
+
+4
+[4, 0, 0, 0]
+Printing called: 168
+3
+[3, 0, 0, 0]
+Please enter the System ID to run the test on:
+Storing called: 3 in 8
+
+1001
+[1, 0, 1, 0]
+Addition called: 3 + 10 to 8
+
+105
+[5, 1, 0, 0]
+Jump if True: 1 is true, 64
+
+3
+[3, 0, 0, 0]
+Please enter the System ID to run the test on:
+Storing called: 168 in 9
+
+1002
+[2, 0, 1, 0]
+Multiplication called: 168 * 5 to 9
+
+1001
+[1, 0, 1, 0]
+Addition called: 840 + 4 to 9
+
+102
+[2, 1, 0, 0]
+Multiplication called: 4 * 844 to 9
+
+4
+[4, 0, 0, 0]
+Printing called: 3376
+3
+[3, 0, 0, 0]
+Please enter the System ID to run the test on:
+Storing called: 4 in 8
+
+1001
+[1, 0, 1, 0]
+Addition called: 4 + 10 to 8
+
+105
+[5, 1, 0, 0]
+Jump if True: 1 is true, 81
+
+3
+[3, 0, 0, 0]
+Please enter the System ID to run the test on:
+Storing called: 3376 in 9
+
+102
+[2, 1, 0, 0]
+Multiplication called: 2 * 3376 to 9
+
+1001
+[1, 0, 1, 0]
+Addition called: 6752 + 5 to 9
+
+102
+[2, 1, 0, 0]
+Multiplication called: 3 * 6757 to 9
+
+1001
+[1, 0, 1, 0]
+Addition called: 20271 + 4 to 9
+
+102
+[2, 1, 0, 0]
+Multiplication called: 5 * 20275 to 9
+
+4
+[4, 0, 0, 0]
+Printing called: 101375

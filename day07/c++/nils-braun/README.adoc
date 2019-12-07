@@ -1,0 +1,18 @@
+Solution for Day 07 of the AoC 2019: https://adventofcode.com/2019/day/7[Day 7: Amplification Circuit]
+
+== Solution
+
+I reused solution of day 05 (of course), just did some small changes (fortunately it was already refactored):
+* if an input is requested, and there is no input, break out of the parsing loop (and go back one step to digest the input instruction again the next time)
+* add a bool to break out the parsing loop in every output
+....
+include::IntMachine.cpp
+....
+
+
+Then, the implementation was quite simple. Very useful was the `std::next_permutation` function.
+
+
+....
+include::solution.cpp
+....

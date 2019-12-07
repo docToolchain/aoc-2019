@@ -1,0 +1,25 @@
+Day 3 Solution in Python
+
+== Disclaimer
+
+The code of this solution is not perfect in any way but it seems to do its job.
+This is due to the fact that I don't want to entirely miss the AOC this year
+again due to family implications but instead participate in an efficient way.
+
+So don't expect fancy interface descriptions and nicely edited readmes unless
+I need it myself to handle the complexity of the puzzle :-)
+
+== Day 03 Notes
+
+At first I didn't read the instructions thoroughly and thought the input was
+about checkerboard style coordinates with letters for x and numbers for y axis.
+I spent 1 hour coding the totally wrong solution until I asked myself where
+to find the central port (since both paths seemingly started from different
+locations).
+Re-reading the instructions I got aware of the fact that only letters R, L, U
+and D are used...
+
+[source, python]
+....
+include::solution.py[]
+....

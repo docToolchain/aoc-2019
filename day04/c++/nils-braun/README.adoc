@@ -1,0 +1,16 @@
+Solution for Day 04 of the AoC 2019: https://adventofcode.com/2019/day/4[Day 4: Secure Container]
+
+== Solution
+
+I have chosen a pretty straight-forward solution, which is fine as C++ is 
+quite good at just doing loops and stuff.
+
+I represent the number as a list of digits and count each digit from <0 or last highest> to 9.
+Then I check the two star requirements via "histogramming" over the digits.
+
+There is tons of improvement possible. One could cache the histogrammed digits and just increase by 
+one when I add another digit. Also, I do not need to do the two quizzes separately.
+
+....
+include::solution.cpp
+....

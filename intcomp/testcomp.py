@@ -32,7 +32,7 @@ for permutation in list(itertools.permutations(range(5, 10))):
     amplifiers[0].input.append(0)
     while 1:
         amplifiers[i].run()
-        output = amplifiers[i].getOutput()
+        output = amplifiers[i].output
         i = (i+1)%5
         if not amplifiers[i].has_terminated:
             amplifiers[i].input.append(output)

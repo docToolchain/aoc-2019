@@ -15,16 +15,12 @@ class IntcodeComputer:
         return (opcode, modes)
     
     def run(self):
-        (opcode, modes) = self.parseInstruction(self.program[self.pointer])
         val = -1
         while val < 0:
             (opcode, modes) = self.parseInstruction(self.program[self.pointer])
             val = self.executeInstruction(opcode, modes)
         return val
-
-    def getOutput(self):
-        return self.output
-
+        
     def executeInstruction(self, opcode, modes):
         if opcode == 1: # add
             arg1 = self.program[self.pointer+1] if modes[0] else self.program[self.program[self.pointer+1]]

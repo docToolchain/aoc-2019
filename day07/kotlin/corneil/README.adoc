@@ -1,0 +1,11 @@
+= Day 07 - Amplification Circuit
+
+Permutation generation was the biggest challenge.
+The examples I found of Heap's Algorithm for generating permutations sent me in circles.
+Eventually I did a brute force implementation that works.
+
+
+[source,kotlin,numbered]
+----
+include::src/main/kotlin/solution.kt[]
+----

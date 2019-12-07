@@ -1,0 +1,42 @@
+= Day 07 - Amplification Circuit
+
+Permutation generation was the biggest challenge.
+The examples I found of Heap's Algorithm for generating permutations sent me in circles.
+Eventually I did a brute force implementation that works.
+
+== Class Diagram of the IntCode program model
+
+[plantuml]
+----
+@startuml
+class ProgramCounter {
+    pc: Int
+    run: Boolean
+}
+
+class ProgramState {
+    memory: List<Int>
+    inputs: List<Int>
+    output = List<Int>
+    executeProgram(): List<Int>
+    executeUntilOutput(input: List<Int>): List<Int>
+}
+
+ProgramState --> ProgramCounter: counter
+
+class Program {
+    code: List<Int>
+
+    executeProgram(input: List<Int>): Pair<List<Int>, List<Int>>
+    createProgram(input: List<Int>): ProgramState
+}
+
+Program ..left..> ProgramState: <<produces>>
+
+@enduml
+----
+
+[source,kotlin,numbered]
+----
+include::src/main/kotlin/solution.kt[]
+----

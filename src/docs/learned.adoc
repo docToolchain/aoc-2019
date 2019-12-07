@@ -12,7 +12,7 @@
 :tschulte: image:https://avatars1.githubusercontent.com/u/203910?s=40[link=https://github.com/tschulte]
 :olithissen: image:https://avatars1.githubusercontent.com/u/13063051?s=40[link=https://github.com/olithissen]
 :RJPlog: image:https://avatars3.githubusercontent.com/u/44948239?s=40[link=https://github.com/RJPlog]
-
+:sancho1241: image:https://avatars0.githubusercontent.com/u/24798802?s=40[link=https://github.com/sancho1241]
 
 == Today I learned..
 
@@ -48,6 +48,10 @@ a|  * having solved a problem in one language (Go) makes it easy to solve it in 
 a|{RJPlog}
 a|  * the problem was not the coding but not having read the specification thoroughly.
     * having the wrong test cases does not help you finding the problem
+a|{sancho1241}
+a|  * the python int operator
+    * brought recursion back to memory
+    * how to contribute to an adoc file ;-)
 
 |====
 
@@ -65,5 +69,69 @@ a| Use a https://de.wikipedia.org/wiki/Shebang[shebang] like `#!/usr/bin/env rub
 do a `chmod +x solution.rb` on your file 
 and you can easily execute it as `./solution.rb`,
 because it now nows how it wants to be executed! ⭐ 
+a|{sancho1241}
+a|  * how to break out of nested loops
+|====
+
+=== Day 03
+
+[cols="1,10"]
+|====
+
+a|{RJPlog}
+a|  * today was a tough for me. After four stars on the first days I thought it would stay that easy and I can improve and learn something about git, github and so on, for example as I learned yesterday how to bring my fork up to date, but the puzzle today told me some other story
+    * today I learned, that with my Ardunio/M5Stack I will not be able to solve the puzzle, even if the puzzle itself was well understood. 
+    * today I also learned, that not giving up and trying something new kann help you, even if it was hard to start learning VBA. I guess I am completely old-fashioned :-)
+    * today I also learned how good it feels, to be part of that party. Thank you all! 
+
+a|{anoff}
+a| In Ruby 🔻 you can 
+    * you can overload `+` and `==` operators for classes which allows you to define the behavior of simple additions and comparisons
+    * class properties do not have accessory by default, but you can use `attr_accessor :x, :y` to generate them
+    * when `put` (printing) a class instance it is automatically turned to a string if the `to_s` method is implemented
+
+|====
+
+
+=== Day 04
+
+[cols="1,10"]
+|====
+
+a|{RJPlog}
+a|  * today I better understood the puzzle and the necessary algorithm for the calculation of the solution compared to yesterday, so I could concentrate on deepening my knowledge in VBA. For me it seems to be pretty good for using it for this kind of puzzles making fast progress or trying something out. 
+    * but until now I have not found a good way in structuring the VBA code, so if looking at Santa's mission from a ISO26262 view, I would not have a good trust on my own coding in VBA :-)
+
+
+|====
+
+=== Day 05
+
+[cols="1,10"]
+|====
+
+a|{anoff}
+a|  * creating software with extendable architecture for AoC pays off 😉
+
+a|{RJPlog}
+a|  * day05 instructions seemed so simple, that I started coding the elements for one OP code and started to copy and modify this in all other OP codes without proper testing. Most of the bugs while running the program where simple errors inherited by this coping.
+    * Lesson learned: Never multiply a modul you have not tested in all use cases. At the end bugfixing took more time than having done it right from the start. (I went trough every single instruction by hand :-()
+
+
+|====
+
+
+
+=== Day 06
+
+[cols="1,10"]
+|====
+
+a|{RJPlog}
+a|  * I am still working with Excel VBA. Today I learned some more stuff how to enable in VBA to start test runs and the final run within one file by defining different sub's
+    * I also started not to try to write the code in one piece (as on day05), but in small steps with always "automated" testcases, which helped me in the end by having a working SW. After each step I was able to run a test showing that the snipe of code works as intended
+    * Excel VBA is also capable to do recursive functions, but unfortunately the programm starts to get very slow when having a lot of recursions (day06's part 1 was running more than 3hours. Pro: Effort spent in testing at start provided a FPY).
+
+
 
 |====

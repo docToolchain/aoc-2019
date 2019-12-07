@@ -1,0 +1,29 @@
+
+:anoff-avatar: https://avatars1.githubusercontent.com/u/7142618?v=4
+:anoff-twitter: -
+:anoff-realName: Andreas Offenhaeuser
+:anoff-blog: -
+
+
+//tag::free-form[]
+
+[cols="1,5"]
+|===
+| image:{anoff-avatar}[]
+a| **anoff** +
+{anoff-realName} +
+icon:github[]: https://github.com/anoff[anoff]
+ifeval::[{anoff-twitter} != -]
+  icon:twitter[] : https://twitter.com/{anoff-twitter}[anoff-twitter] +
+endif::[]
+ifeval::[{anoff-blog} != -]
+  Blog : {anoff-blog} 
+endif::[]
+|===
+
+=== About me
+
+Nothing here yet. Update your profile at https://github.com/docToolchain/aoc-2019/blob/master/profiles/anoff.adoc[/profiles/anoff.adoc] 
+
+//end::free-form[]
+

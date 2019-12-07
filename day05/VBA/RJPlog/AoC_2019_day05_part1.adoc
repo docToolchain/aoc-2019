@@ -1,0 +1,9 @@
+﻿== Day 5: Sunny with a Chance of Asteroids
+
+The original puzzle can be found at https://adventofcode.com/2019/day/5
+
+First and second part solved. Especially the second part made some difficulties with those nested if's for position mode and immediate mode.
+I had to test every single case, which I started unstructured, therefore I did it over and over :-)
+
+Details to be found in VBA :-). If I have time in the evening, I will add some comments in the readme.
+

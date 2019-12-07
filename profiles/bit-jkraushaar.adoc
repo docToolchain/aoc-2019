@@ -1,0 +1,24 @@
+
+:bit-jkraushaar-avatar: https://avatars3.githubusercontent.com/u/31614932?v=4
+:bit-jkraushaar-twitter: KraushaarJochen
+:bit-jkraushaar-realName: Jochen Kraushaar
+:bit-jkraushaar-blog: -
+
+
+//tag::free-form[]
+
+[cols="1,5"]
+|===
+| image:{bit-jkraushaar-avatar}[]
+a| **bit-jkraushaar** +
+//{bit-jkraushaar-realName} +
+Github: https://github.com/bit-jkraushaar[bit-jkraushaar],
+Twitter: https://twitter.com/{bit-jkraushaar-twitter}[{bit-jkraushaar-twitter}] +
+|===
+
+=== About me
+
+Software Architect. Speaker. Kotlin-Fanboy.
+
+//end::free-form[]
+

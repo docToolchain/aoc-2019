@@ -1,0 +1,29 @@
+
+:RJPlog-avatar: https://avatars0.githubusercontent.com/u/44948239?v=4
+:RJPlog-twitter: -
+:RJPlog-realName: null
+:RJPlog-blog: -
+
+
+//tag::free-form[]
+
+[cols="1,5"]
+|===
+| image:{RJPlog-avatar}[]
+a| **RJPlog** +
+//{RJPlog-realName} +
+icon:github[]: https://github.com/RJPlog[RJPlog]
+ifeval::[{RJPlog-twitter} != -]
+  icon:twitter[] : https://twitter.com/{RJPlog-twitter}[RJPlog-twitter] +
+endif::[]
+ifeval::[{RJPlog-blog} != -]
+  Blog : {RJPlog-blog} 
+endif::[]
+|===
+
+=== About me
+
+Nothing here yet. Update your profile at https://github.com/docToolchain/aoc-2019/blob/master/profiles/RJPlog.adoc[/profiles/RJPlog.adoc] 
+
+//end::free-form[]
+

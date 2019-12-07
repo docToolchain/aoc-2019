@@ -1,0 +1,3 @@
+I decided to put the operators in a dictionary refering to the functions.
+I assume I could have used list comprehension for the calculation ...
+For part 2 I created 2 nested loops 

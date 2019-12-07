@@ -1,0 +1,29 @@
+
+:wschaef-avatar: https://avatars1.githubusercontent.com/u/7858781?v=4
+:wschaef-twitter: -
+:wschaef-realName: Waldemar Schäfer
+:wschaef-blog: -
+
+
+//tag::free-form[]
+
+[cols="1,5"]
+|===
+| image:{wschaef-avatar}[]
+a| **wschaef** +
+//{wschaef-realName} +
+icon:github[]: https://github.com/wschaef[wschaef]
+ifeval::[{wschaef-twitter} != -]
+  icon:twitter[] : https://twitter.com/{wschaef-twitter}[wschaef-twitter] +
+endif::[]
+ifeval::[{wschaef-blog} != -]
+  Blog : {wschaef-blog} 
+endif::[]
+|===
+
+=== About me
+
+Nothing here yet. Update your profile at https://github.com/docToolchain/aoc-2019/blob/master/profiles/wschaef.adoc[/profiles/wschaef.adoc] 
+
+//end::free-form[]
+

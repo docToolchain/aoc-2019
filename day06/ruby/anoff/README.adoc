@@ -1,0 +1,46 @@
+Puzzle: https://adventofcode.com/2019/day/6[Universal Orbit Map]
+
+== Part 1
+
+At first I thought this would require implementing a full graph solution again.
+However after studying the first part of the challenge I thought a simple hash map could also do the trick so I tried.
+Going from method to method in my head I built them using TDD on a unit test level to make sure the piece do their job correctly.
+Finally I implemented the overall testcase of check the overall functionality (excluding parsing the input file).
+
+[source, ruby]
+....
+include::solution_test.rb[tags=full_tdd]
+....
+
+== Part 2
+
+For part two I thought about how to implement this with my one-way graph implementation that only allows me to go from satellite to its center of orbit.
+My approach for this explicit problem was to just start with me and walk through my orbital path back to the center of mass.
+For each orbit I pass I check if this is also on santas way to the COM.
+If there is an overlap, that is the intermediate destination I need to go to before following SANta.
+
+The actual result is calcualted by using array operations to identify the intersection of mine and santas path.
+Using the `.each_with_index` array operation in Ruby it is easy to get the index (count) of array elements that are in between me and the common orbit.
+
+
+[source, ruby]
+....
+include::solution.rb[tags=p2]
+....
+
+
+== Solution
+
+To run the solution use `ruby solution.py`
+
+[source, ruby]
+....
+include::solution.rb[]
+....
+
+=== Test cases
+
+[source, ruby]
+....
+include::solution_test.rb[]
+....

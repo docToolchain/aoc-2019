@@ -12,4 +12,16 @@ Think of like a named Lambda.
 ----
 include::solution.kts[]
 ----
-__
+
+A trick for creating a Gradle project from multiple subprojects in different folders
+
+.settings.gradle
+[source,groovy,numbered]
+----
+def days = ['day00', 'day01', 'day02', 'day03', 'day04', 'day05', 'day06', 'day07']
+
+days.each { day ->
+    include(":solution-$day")
+    project(":solution-$day").projectDir = file("../$day/kotlin/corneil")
+}
+----

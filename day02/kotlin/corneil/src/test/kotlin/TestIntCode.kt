@@ -1,7 +1,7 @@
+package com.github.corneil.aoc2019.day2
+
 import assertk.assertThat
 import assertk.assertions.isEqualTo
-import com.github.corneil.aoc2019.executeProgram
-import com.github.corneil.aoc2019.readProgram
 import org.junit.Test
 
 class TestIntCode {
@@ -14,6 +14,7 @@ class TestIntCode {
         // then
         assertThat(result.joinToString(",")).isEqualTo("3500,9,10,70,2,3,11,0,99,30,40,50")
     }
+
     @Test
     fun `test2`() {
         // given
@@ -23,6 +24,7 @@ class TestIntCode {
         // then
         assertThat(result.joinToString(",")).isEqualTo("2,0,0,0,99")
     }
+
     @Test
     fun `test3`() {
         // given
@@ -42,6 +44,7 @@ class TestIntCode {
         // then
         assertThat(result.joinToString(",")).isEqualTo("2,4,4,5,99,9801")
     }
+
     @Test
     fun `test5`() {
         // given

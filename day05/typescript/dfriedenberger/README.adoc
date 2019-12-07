@@ -1,0 +1,21 @@
+== Sunny with a Chance of Asteroids
+
+The solutions are written in Typescript. To run them use the following commands.
+
+....
+npm install
+gulp
+node dist/solution1.js
+node dist/solution2.js
+....
+
+Nothing spectacular. Only extended the classes. It took a little time to find a bug in the jump obcode processing. I did this using the classic way with ```console.log```.  I think I need to start learning how to debug with vs code. But not today. ;-)
+
+=== First and Second Star
+
+Solved both solution by extending the computer and the rules.
+[source, typescript, numbered]
+....
+include::src/Computer.ts[]
+....
+

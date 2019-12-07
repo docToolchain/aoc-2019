@@ -1,0 +1,29 @@
+
+:docToolchain-avatar: https://avatars3.githubusercontent.com/u/32174902?v=4
+:docToolchain-twitter: -
+:docToolchain-realName: docToolchain
+:docToolchain-blog: -
+
+
+//tag::free-form[]
+
+[cols="1,5"]
+|===
+| image:{docToolchain-avatar}[]
+a| **docToolchain** +
+//{docToolchain-realName} +
+icon:github[]: https://github.com/docToolchain[docToolchain]
+ifeval::[{docToolchain-twitter} != -]
+  icon:twitter[] : https://twitter.com/{docToolchain-twitter}[docToolchain-twitter] +
+endif::[]
+ifeval::[{docToolchain-blog} != -]
+  Blog : {docToolchain-blog} 
+endif::[]
+|===
+
+=== About me
+
+Nothing here yet. Update your profile at https://github.com/docToolchain/aoc-2019/blob/master/profiles/docToolchain.adoc[/profiles/docToolchain.adoc] 
+
+//end::free-form[]
+

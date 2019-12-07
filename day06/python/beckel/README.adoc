@@ -1,0 +1,10 @@
+Day 6 - Solution in Python
+
+Trying to submit results with almost no receiption in the train ;-)
+Quite a long distance to travel to Santa!
+
+[source, python]
+....
+include::solution.py[]
+....
+

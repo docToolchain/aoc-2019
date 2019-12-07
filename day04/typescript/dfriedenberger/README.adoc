@@ -1,0 +1,65 @@
+== Secure Container
+
+The solutions are written in Typescript. To run them use the following commands.
+
+....
+npm install
+gulp
+node dist/solution1.js
+node dist/solution2.js
+....
+
+=== First Star
+First, I thought about how to solve it mathematically. But it's a little bit complicated, because the input range. 
+
+A few basic considerations:
+
+* six-digit number => 900.000‬  numbers
+* 353096-843212 =>  490.117‬ numbers
+* adjacent digits => 900.000‬ - 9 * 8 * 7 * 6 * 5 (possibilities with unique numbers) = 884880
+* digits never decrease => ???
+
+
+
+But was is the intersection?
+
+I decieded to solve it with brute force. Programmers are the laziest people on the planet. Algorithm only has a runtime complexity of O(n). And N is maximum 1 million.
+
+Solved this by implementing creation of digits and validating the resulting number.
+
+==== Generating Digits
+Use recursive function which add a digit an each call. Start with value for next digit which is greater or equals.
+[source, typescript, numbered]
+....
+include::src/PasswordDigitGenerator.ts[tags=digit;!validate]
+....
+
+To check the input range, validate each number when reach last digit
+....
+include::src/PasswordDigitGenerator.ts[tags=validate]
+....
+
+Then start it with first call.
+....
+include::src/PasswordDigitGenerator.ts[tag=start]
+....
+
+
+==== Validating Digits
+For checking adjacent digits use own class.
+....
+include::src/PasswordDigitValidatorAdjacentDigits.ts[]
+....
+
+Finally run generator to count the numbers
+....
+include::src/solution1.ts[]
+....
+
+
+=== Second Star
+
+Replaced the Validator class.
+....
+include::src/PasswordDigitValidatorAdjacentDigitsInGroup.ts[]
+....

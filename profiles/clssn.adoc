@@ -1,0 +1,29 @@
+
+:clssn-avatar: https://avatars0.githubusercontent.com/u/6572938?v=4
+:clssn-twitter: -
+:clssn-realName: null
+:clssn-blog: -
+
+
+//tag::free-form[]
+
+[cols="1,5"]
+|===
+| image:{clssn-avatar}[]
+a| **clssn** +
+//{clssn-realName} +
+icon:github[]: https://github.com/clssn[clssn]
+ifeval::[{clssn-twitter} != -]
+  icon:twitter[] : https://twitter.com/{clssn-twitter}[clssn-twitter] +
+endif::[]
+ifeval::[{clssn-blog} != -]
+  Blog : {clssn-blog} 
+endif::[]
+|===
+
+=== About me
+
+Nothing here yet. Update your profile at https://github.com/docToolchain/aoc-2019/blob/master/profiles/clssn.adoc[/profiles/clssn.adoc] 
+
+//end::free-form[]
+

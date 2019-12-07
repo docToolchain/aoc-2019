@@ -1,0 +1,17 @@
+
+== Secure Container
+
+For this task I chose to just iterate over the range and check each candidate.
+There might be a better sollution, but the possible values are still small enough to just check every value.
+
+.First Star
+[source]
+....
+include::day04.groovy[tags=firstStar]
+....
+
+.Second Star
+[source]
+....
+include::day04.groovy[tags=secondStar]
+....

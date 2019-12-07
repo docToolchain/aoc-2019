@@ -11,21 +11,21 @@ Specifically, to find the fuel required for a module, take its mass, divide by t
 
 [source,kotlin,numbered]
 ----
-include::solution.kts[tags=calc1]
+include::src/main/kotlin/solution.kt[tags=calc1]
 ----
 
 Reading file input file.
 
 [source,kotlin,numbered]
 ----
-include::solution.kts[tags=read]
+include::src/main/kotlin/solution.kt[tags=read]
 ----
 
 Calculating the fuel required for the modules.
 
 [source,kotlin,numbered]
 ----
-include::solution.kts[tags=calc2]
+include::src/main/kotlin/solution.kt[tags=calc2]
 ----
 
 
@@ -36,5 +36,5 @@ Calculating the fuel required for the fuel is a recursive function.
 
 [source,kotlin,numbered]
 ----
-include::solution.kts[tags=calc3]
+include::src/main/kotlin/solution.kt[tags=calc3]
 ----

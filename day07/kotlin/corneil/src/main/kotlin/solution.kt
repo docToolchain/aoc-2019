@@ -73,36 +73,38 @@ class ProgramState(val memory: MutableList<Int>, val inputs: MutableList<Int> = 
         return counter.add(2)
     }
 
-    fun operationLessThan(paramModes: ParameterModes): ProgramCounter {
-        val value1 = deref(paramModes[0], memory[counter.pc + 1])
-        val value2 = deref(paramModes[1], memory[counter.pc + 2])
+    fun param(paramModes: ParameterModes, index: Int) = deref(paramModes[index - 1], memory[counter.pc + index])
+
+    fun operationLessThan(paramModes: ParameterModes): ProgramChounter {
+        val value1 = param(paramModes, 1)
+        val value2 = param(paramModes, 2)
         val result = if (value1 < value2) 1 else 0
         assign(memory[counter.pc + 3], result)
         return counter.add(4)
     }
 
     fun operationEquals(paramModes: ParameterModes): ProgramCounter {
-        val value1 = deref(paramModes[0], memory[counter.pc + 1])
-        val value2 = deref(paramModes[1], memory[counter.pc + 2])
+        val value1 = param(paramModes, 1)
+        val value2 = param(paramModes, 2)
         val result = if (value1 == value2) 1 else 0
         assign(memory[counter.pc + 3], result)
         return counter.add(4)
     }
 
     fun jumpIfTrue(paramModes: ParameterModes): ProgramCounter {
-        val value = deref(paramModes[0], memory[counter.pc + 1])
-        val target = deref(paramModes[1], memory[counter.pc + 2])
+        val value = param(paramModes, 1)
+        val target = param(paramModes, 2)
         return if (value != 0) counter.jump(target) else counter.add(3)
     }
 
     fun jumpIfFalse(paramModes: ParameterModes): ProgramCounter {
-        val value = deref(paramModes[0], memory[counter.pc + 1])
-        val target = deref(paramModes[1], memory[counter.pc + 2])
+        val value = param(paramModes, 1)
+        val target = param(paramModes, 2)
         return if (value == 0) counter.jump(target) else counter.add(3)
     }
 
     fun outputValue(paramModes: ParameterModes): ProgramCounter {
-        val value = deref(paramModes[0], memory[counter.pc + 1])
+        val value = param(paramModes, 1)
         output.add(value)
         return counter.add(2)
     }
@@ -196,7 +198,7 @@ fun phaseAmplifierFeedback(code: List<Int>, sequence: IntArray): Int {
         amplifiers.add(program.createProgram(listOf(phase)))
     }
     do {
-        amplifiers.forEachIndexed { index, amp ->
+        amplifiers.forEach { amp ->
             if (amp.counter.run) {
                 val result = amp.executeUntilOutput(amplifierInput)
                 if (result.isNotEmpty()) {
@@ -210,7 +212,7 @@ fun phaseAmplifierFeedback(code: List<Int>, sequence: IntArray): Int {
 }
 
 // Ugly but it works
-fun permutationGeneration(start: Int, end: Int): List<IntArray> {
+fun uglyPermutationGeneration(start: Int, end: Int): List<IntArray> {
     val result = mutableSetOf<IntArray>()
     for (i in start..end) {
         for (j in start..end) {
@@ -227,6 +229,25 @@ fun permutationGeneration(start: Int, end: Int): List<IntArray> {
         }
     }
     return result.toList()
+}
+
+// found on https://rosettacode.org/wiki/Permutations#Kotlin
+fun <T> permute(input: List<T>): List<List<T>> {
+    if (input.size == 1) return listOf(input)
+    val perms = mutableListOf<List<T>>()
+    val toInsert = input[0]
+    for (perm in permute(input.drop(1))) {
+        for (i in 0..perm.size) {
+            val newPerm = perm.toMutableList()
+            newPerm.add(i, toInsert)
+            perms.add(newPerm)
+        }
+    }
+    return perms
+}
+
+fun permutationGeneration(start: Int, end: Int): List<IntArray> {
+    return permute((start..end).toList()).map { it.toIntArray() }
 }
 
 fun main(args: Array<String>) {

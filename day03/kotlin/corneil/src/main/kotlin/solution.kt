@@ -105,7 +105,7 @@ class Grid {
             coord.distance(cell.coord)
         }.firstOrNull()
         requireNotNull(closest) { "Could not find any cells!!!" }
-        return closest!!
+        return closest
     }
 
     fun findLowestStepsIntersection(minValue: Int): Int {

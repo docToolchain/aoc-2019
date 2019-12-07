@@ -1,0 +1,26 @@
+Solution for Day 06 of the AoC 2019: https://adventofcode.com/2019/day/6[Day 6: Universal Orbit Map]
+
+== Solution
+
+Typical graph-problem, which I solved with typical graph methods :-)
+While reading in, I built a map of "orbited -> orbiting children" and a map "orbiting -> orbited parent"
+(note that the second one is un-ambiguous).
+
+The next step is the important one: for each graph node, I calculate what I called the "automaton cell number".
+This is the number of steps needed to travel from this node to the root element (COM).
+It can be calculated easily with a recursive algorithm, by starting from COM and counting 
+up with every recursion step.
+
+With this number, the first star is straight forward: just sum up all of those automaton cell numbers.
+Think of it this way: if you need N steps from this node to COM, you have 1 direct relation and N - 1 indirect ones.
+So by summing up all of those numbers you end up with the total number of relations.
+
+The second star can be solved using this number also: first you need to find the node where SAN and YOU are meeting.
+This can be done by traversing the full path from e.g. YOU to COM and checking, which node is also in the path from 
+SAN to COM.
+Now you just need to calculate the differences between SAM and the common node and YOU and the common node - which gives 
+you the number of steps needed to travel.
+
+....
+include::solution.cpp
+....

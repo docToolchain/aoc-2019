@@ -104,8 +104,9 @@ class MontgomeryScott:
                 count = count + 1
                 continue
             logging.info("INFO -> Instruction: {0}".format(command.instruction()))
-            params = self._get_parameters(count, command, commands)
-            logging.info("INFO -> Parameters: {0}".format(params))
+            if command.instruction() > 0 and command.instruction() < 3:
+                params = self._get_parameters(count, command, commands)
+                logging.info("INFO -> Parameters: {0}".format(params))
             if command.instruction() == Instruction.ADD.value:
                 if len(params) < 3:
                     logging.error("ERROR -> Not enough paramters for ADD at position {0}".format(count))
@@ -119,16 +120,10 @@ class MontgomeryScott:
                 self._store(self._multiply(params[0], params[1]), params[2], commands)
                 count = count + 4
             elif command.instruction() == Instruction.STORE.value:
-                if len(params) < 1:
-                    logging.error("ERROR -> Not enough paramters for STORE at position {0}".format(count))
-                    continue
-                self._store(1, params[0], commands)
+                self._store(1, commands[count + 1], commands)
                 count = count +2
             elif command.instruction() == Instruction.OUTPUT.value:
-                if len(params) < 1:
-                    logging.error("ERROR -> Not enough paramters for OUTPUT at position {0}".format(count))
-                    continue
-                print("-->OUTPUT: {0}".format(self._output(params[0], commands)))
+                print("-->OUTPUT: {0}".format(self._output(commands[count + 1], commands)))
                 count = count + 2
             else:
                 count = count + 1

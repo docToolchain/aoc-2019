@@ -12,7 +12,7 @@ class Test_Enterprise(TestCase):
         scotty = Scotty()
         trans = scotty.translate('3,0,4,0,99')
         res = scotty.execute(trans)
-        self.assertEqual(res, [3, 0, 4, 1, 99])
+        self.assertEqual(res, [1, 0, 4, 0, 99])
 
     def test_execute_two(self):
         scotty = Scotty()

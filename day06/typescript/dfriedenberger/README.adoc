@@ -1,0 +1,31 @@
+== Universal Orbit Map
+
+The solutions are written in Typescript. To run them use the following commands.
+
+....
+npm install
+gulp
+node dist/solution1.js
+node dist/solution2.js
+....
+
+=== First Star
+
+First implementing Orbit container class and add each connection to a map with array of his direct adjacents. 
+[source, typescript, numbered]
+....
+include::src/Orbits.ts[tag=add]
+....
+
+Solving counting with recursive function
+....
+include::src/Orbits.ts[tag=count]
+....
+=== Second Star
+
+Second solution solved through modified recursive function. Searching for the YOU and SAN nodes and the connecting node.
+
+[source, typescript, numbered]
+....
+include::src/Orbits.ts[tag=find]
+....

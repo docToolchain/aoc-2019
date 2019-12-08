@@ -1,0 +1,7 @@
+= Day 08 - Space Image Format
+
+
+[source,kotlin,numbered]
+----
+include::src/main/kotlin/solution.kt[]
+----

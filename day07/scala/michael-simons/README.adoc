@@ -1,0 +1,77 @@
+== https://adventofcode.com/2019/day/7[Amplification Circuit]
+
+Shit. Still in Scala land: Today's task is continues at day 5. So, let's see if I can manage.
+
+We are speaking about a "real" compute more and more.
+To solve the task, we need persistent memory and address pointers, and also input.
+
+First, my stack based IO, implememented with a list:
+
+[source,scala,numbered,indent=0]
+----
+include::Solution.scala[tags=newIoClass]
+----
+<1> I like that: Creating own operators. Sadly, I cannot have infix operators with the same symbols, therefore the read
+
+The operations are the same as in day 5, but I added a whole computer class to stuff them together:
+
+[source,scala,numbered,indent=0]
+----
+include::Solution.scala[tags=theComputer]
+----
+<1> Computer has memory
+<2> It's own IO
+<3> This executes the current instruction and returns the next pointer
+<4> This is actually already part of star two: The computer pauses, when it echoed some output instead of immediate jumping to the next instruction
+<5> Return the last output
+<6> Convinence method to load a program
+
+I didn't find star one too hard:
+
+[source,scala,numbered,indent=0]
+----
+include::Solution.scala[tags=starOne]
+----
+<1> A run program function, takes an input (`0` or the output from the computer machine) and the computer and an optional phase to init the computer
+If there's a phase, we use it.
+The `runProgram` function returns the input for the next run.
+<2> Generator for 5 computers with the identical program each
+<3> A function that executes a sequence of phase, stored in a list of pairs (computer and phase). That list is folded from the left, with initial input of 0
+<4> Scala has a build in method for permutating lists. That is nice and I use that
+<5> Init 5 new computers and zip them each with their phase
+<6> Execute each sequence of computers and phase and determine the maximum, reachable output
+
+The second star took me the whole afternoon... The idea is to initialize all computers.
+Each get started with their assigned test phases.
+When they are used up, only `None` are generated, so that `runProgram` doesn't use it.
+Than, loop as long as the last computer expects more input:
+
+[source,scala,numbered,indent=0]
+----
+include::Solution.scala[tags=starTwo]
+----
+<1> A lazy list. This is quite cool.
+<2> Here the previous input gets feed back into the first computer (as the initial value for the fold)
+
+Other valid programs are (when loaded `Solution.scala` into the Scala REPL)
+
+[source,scala,numbered,indent=0]
+----
+:load Solution.scala
+// 43210
+Solution.runWithoutFeedback(Seq(3,15,3,16,1002,16,10,16,1,16,15,15,4,15,99,0,0))
+// 54321
+Solution.runWithoutFeedback(Seq(3,23,3,24,1002,24,10,24,1002,23,-1,23,
+101,5,23,23,1,24,23,23,4,23,99,0,0))
+139629729
+Solution.runWithFeedback(Seq(3,26,1001,26,-4,26,3,27,1002,27,2,27,1,27,26,
+27,4,27,1001,28,-1,28,1005,28,6,99,0,0,5))
+// 18216
+Solution.runWithFeedback(Seq(3,52,1001,52,-5,52,3,53,1,52,56,54,1007,54,5,55,1005,55,26,1001,54,
+-5,54,1105,1,12,1,53,54,53,1008,54,0,55,1001,55,1,55,2,53,55,53,4,
+53,1001,56,-1,56,1005,56,6,99,0,0,0,0,10))
+----
+
+NOTE: Run with `scala Solution.scala`.
+      Tested with `Scala code runner version 2.13.1`
+      Correct solutions are: `92663` and `14365052`

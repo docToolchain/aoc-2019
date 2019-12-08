@@ -1,0 +1,22 @@
+Day 5 Solution in Python
+
+== Disclaimer
+
+The code of this solution is not perfect in any way but it seems to do its job.
+This is due to the fact that I don't want to entirely miss the AOC this year
+again due to family implications but instead participate in an efficient way.
+
+So don't expect fancy interface descriptions and nicely edited readmes unless
+I need it myself to handle the complexity of the puzzle :-)
+
+== Day 05 Notes
+
+This one drove me crazy. I didn't want to spend the effort of thorough
+refactoring and test, but I ended up spending hours for trying around. 
+
+With tests in place: Piece of cake! :-|
+
+[source, python]
+....
+include::solution.py[]
+....

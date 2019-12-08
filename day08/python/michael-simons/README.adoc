@@ -1,11 +1,9 @@
-:tags: list comprehension, unpacking
-
 == https://adventofcode.com/2019/day/8[Space Image Format]
 
 I think that's maybe the second or third time I ever actively used Python.
 Significant spaces: Is this YAML in disguise ;)?
 
-The solution is build on https://docs.python.org/3.1/library/textwrap.html[textwrap] to split the string at a fixed width.
+The idea of the solution: Split the input into chunks the size of the images dimensions, sort by number of zeros and take the first. Second star uses an image mask.
 
 [source,python,numbered,indent=0]
 ----

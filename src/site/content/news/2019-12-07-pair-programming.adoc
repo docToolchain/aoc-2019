@@ -1,0 +1,17 @@
+= Two: Pair-Programming
+:jbake-type: post
+:jbake-date: 2019-11-29
+:jbake-status: published
+:jbake-tags: asciidoc, docs-as-code
+
+As a developer doing https://adventofcode.com[Advent of Code] puzzles, you probably already know about https://en.wikipedia.org/wiki/Pair_programming[pair programming] but how often do you pair program?
+
+Chances are that you (like me) nearly never do pair programming.
+But why not share the fun of Advent of Code and solve one puzzle with pair programming?
+
+Go and find someone at home or at work, grab a hot cup of coffee and try to solve one of the puzzles during the next #c0ffee break together!
+Share your keyboard and screen and try to solve the puzzle together!
+
+Happy second Advent!
+
+Ralf

@@ -1,5 +1,6 @@
 = Day 08 - Space Image Format
 
+Kotlin made this one very straight forward.
 
 [source,kotlin,numbered]
 ----

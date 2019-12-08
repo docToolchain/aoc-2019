@@ -1,0 +1,18 @@
+Solution for Day 08 of the AoC 2019: https://adventofcode.com/2019/day/8[Day 8: Space Image Format]
+
+== Solution
+
+Some straight-forward array operations - I would say there is nothing really special here.
+The Image and Layer classes:
+
+....
+include::Image.h
+....
+
+And the final solution:
+
+....
+include::solution.cpp
+....
+
+Only thing I really had problems with, is that I mixed x and y in the beginning and the image really looks strange then...

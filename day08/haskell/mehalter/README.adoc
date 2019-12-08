@@ -1,0 +1,18 @@
+== Space Image Format
+
+I have written my solutions in Haskell. I am using this year's Advent of Code to
+brush up on my functional programming.
+
+To run the final program you need Haskell installed, and simply run the
+`./run.sh`.
+
+This solution takes the input as an array of characters, splits it into the
+layers, and does a search through the layers to calculate part 1 and to decode
+the image for part 2.
+
+== Solution
+
+[source, haskell]
+----
+include::answer.hs[]
+----

@@ -3,7 +3,6 @@ package com.github.corneil.aoc2019.day7
 import com.github.corneil.aoc2019.day7.ParameterMode.IMMEDIATE
 import com.github.corneil.aoc2019.day7.ParameterMode.POSITION
 import java.io.File
-import kotlin.math.max
 
 enum class ParameterMode(val mode: Int) {
     POSITION(0),
@@ -112,39 +111,18 @@ class ProgramState(val memory: MutableList<Int>, val inputs: MutableList<Int> = 
     fun halt() = counter.halt()
 
     fun readAndExecute(): ProgramCounter {
-        val IP = memory[counter.pc]
-        val opcode = IP % 100
+        val opcode = memory[counter.pc] % 100
         return when (opcode) {
-            1    -> {
-                applyOperation() { a, b -> a + b }
-            }
-            2    -> {
-                applyOperation() { a, b -> a * b }
-            }
-            3    -> {
-                saveInput()
-            }
-            4    -> {
-                outputValue()
-            }
-            5    -> {
-                jumpIfTrue()
-            }
-            6    -> {
-                jumpIfFalse()
-            }
-            7    -> {
-                operationLessThan()
-            }
-            8    -> {
-                operationEquals()
-            }
-            99   -> {
-                halt()
-            }
-            else -> {
-                throw Exception("Invalid opcode $opcode")
-            }
+            1    -> applyOperation() { a, b -> a + b }
+            2    -> applyOperation() { a, b -> a * b }
+            3    -> saveInput()
+            4    -> outputValue()
+            5    -> jumpIfTrue()
+            6    -> jumpIfFalse()
+            7    -> operationLessThan()
+            8    -> operationEquals()
+            99   -> halt()
+            else -> throw Exception("Invalid opcode $opcode")
         }
     }
 
@@ -194,10 +172,7 @@ fun phaseAmplifierFeedback(code: List<Int>, sequence: IntArray): Int {
     val program = Program(code)
     var lastOutput = 0
     var amplifierInput = listOf(0)
-    val amplifiers = mutableListOf<ProgramState>()
-    sequence.forEach { phase ->
-        amplifiers.add(program.createProgram(listOf(phase)))
-    }
+    val amplifiers = sequence.map { phase -> program.createProgram(listOf(phase)) }
     do {
         amplifiers.forEach { amp ->
             if (amp.counter.run) {
@@ -254,16 +229,8 @@ fun permutationGeneration(start: Int, end: Int): List<IntArray> {
 fun main(args: Array<String>) {
     val fileName = if (args.size > 1) args[0] else "input.txt"
     val code = readProgram(File(fileName))
-    var maxOutput = 0
-    permutationGeneration(0, 4).forEach { seq ->
-        val output = phaseAmplifierTest(code, seq)
-        maxOutput = max(maxOutput, output)
-    }
+    val maxOutput = permutationGeneration(0, 4).map { seq -> phaseAmplifierTest(code, seq) }.max()
     println("Max Output = $maxOutput")
-    var maxOutput2 = 0
-    permutationGeneration(5, 9).forEach { seq ->
-        val output = phaseAmplifierFeedback(code, seq)
-        maxOutput2 = max(maxOutput2, output)
-    }
+    val maxOutput2 = permutationGeneration(5, 9).map { seq -> phaseAmplifierFeedback(code, seq) }.max()
     println("Max Output = $maxOutput2")
 }

@@ -1,3 +1,5 @@
+:tags: list comprehension, unpacking
+
 == https://adventofcode.com/2019/day/8[Space Image Format]
 
 I think that's maybe the second or third time I ever actively used Python.
@@ -9,7 +11,7 @@ The solution is build on https://docs.python.org/3.1/library/textwrap.html[textw
 ----
 include::Solution.py[]
 ----
-<1> Create the layers by wrapping the input at the given dimension
+<1> Create the layers by chunking the input at the given dimension (Please note the comment at the `chunk` method). `chunk` returns a generator. This can be iterated, but cannot be reseted. I need the list of layers twice, so I copy them into a list
 <2> Create a sorted copy of that list (by the count of `0`)
 <3> I use a dictionary for translating the image value
 <4> Start with a transparent image as mask.

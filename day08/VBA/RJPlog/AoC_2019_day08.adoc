@@ -1,0 +1,10 @@
+﻿== Day 8: Space Image Format
+
+The original puzzle can be found at https://adventofcode.com/2019/day/8
+
+== Star 1
+tbfol (to be filled out later)
+
+== Star 2
+Calculating recursive the path to COM from YOU and SAN, afterwards starting from YOU to find the next fit in the row with SAN (wich is the nearest crossing point)
+tbfol 

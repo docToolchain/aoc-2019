@@ -1,0 +1,26 @@
+== Amplification Circuit
+
+The solutions are written in Typescript. To run them use the following commands.
+
+....
+npm install
+gulp
+node dist/solution1.js
+node dist/solution2.js
+....
+
+Extend the Computer class with state. Stop's if is in state Done and also if it is waiting for Input.
+Implement AmplifierSeries which gets output value from one amplifier and put it to next. Can used for both solution
+
+....
+include::src/AmplifierSeries.ts[tag=run]
+....
+
+=== First and Second Star
+
+Difference between solution 1 and 2 is the used permutation.
+[source, typescript, numbered]
+....
+include::src/solution2.ts[tag=permutation]
+....
+

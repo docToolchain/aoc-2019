@@ -13,6 +13,7 @@
 :olithissen: image:https://avatars1.githubusercontent.com/u/13063051?s=40[link=https://github.com/olithissen]
 :RJPlog: image:https://avatars3.githubusercontent.com/u/44948239?s=40[link=https://github.com/RJPlog]
 :sancho1241: image:https://avatars0.githubusercontent.com/u/24798802?s=40[link=https://github.com/sancho1241]
+:corneil: image:https://avatars0.githubusercontent.com/u/466422?s=40[link=https://github.com/corneil]
 
 == Today I learned..
 
@@ -134,4 +135,12 @@ a|  * I am still working with Excel VBA. Today I learned some more stuff how to 
 
 
 
+|====
+
+=== Day 08
+[cols="1,10"]
+|====
+a|{corneil}
+a| * Kotlin has wonderful operator for collections.
+   * Today `minBy` saved me a lot of effort.
 |====

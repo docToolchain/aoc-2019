@@ -1,0 +1,12 @@
+= Day 08 - Space Image Format
+
+Kotlin made this one very straight forward, especially `minBy`
+
+Things a learned 30 years ago directly manipulating the screen memory on my PC came in handy.
+
+Thanks to Mr Norton.
+
+[source,kotlin,numbered]
+----
+include::src/main/kotlin/solution.kt[]
+----

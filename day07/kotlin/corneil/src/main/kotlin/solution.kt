@@ -46,7 +46,7 @@ class ProgramState(val memory: MutableList<Int>, val inputs: MutableList<Int> = 
     var counter = ProgramCounter(0, true)
     val output = mutableListOf<Int>()
     fun outputs() = output.toList()
-
+    fun paramModes(ip: Int) = paramModesFrom(ip / 100)
     fun deref(parameterMode: ParameterMode, address: Int): Int {
         val result = when (parameterMode) {
             IMMEDIATE -> address
@@ -59,9 +59,9 @@ class ProgramState(val memory: MutableList<Int>, val inputs: MutableList<Int> = 
         memory[address] = value
     }
 
-    fun applyOperation(paramModes: ParameterModes, operation: (Int, Int) -> Int): ProgramCounter {
-        val value1 = deref(paramModes[0], memory[counter.pc + 1])
-        val value2 = deref(paramModes[1], memory[counter.pc + 2])
+    fun applyOperation(operation: (Int, Int) -> Int): ProgramCounter {
+        val value1 = param(1)
+        val value2 = param(2)
         val result = operation(value1, value2)
         assign(memory[counter.pc + 3], result)
         return counter.add(4)
@@ -73,73 +73,74 @@ class ProgramState(val memory: MutableList<Int>, val inputs: MutableList<Int> = 
         return counter.add(2)
     }
 
-    fun param(paramModes: ParameterModes, index: Int) = deref(paramModes[index - 1], memory[counter.pc + index])
+    fun param(index: Int) = deref(paramModes(memory[counter.pc])[index - 1], memory[counter.pc + index])
 
-    fun operationLessThan(paramModes: ParameterModes): ProgramChounter {
-        val value1 = param(paramModes, 1)
-        val value2 = param(paramModes, 2)
+    fun operationLessThan(): ProgramCounter {
+        val value1 = param(1)
+        val value2 = param(2)
         val result = if (value1 < value2) 1 else 0
         assign(memory[counter.pc + 3], result)
         return counter.add(4)
     }
 
-    fun operationEquals(paramModes: ParameterModes): ProgramCounter {
-        val value1 = param(paramModes, 1)
-        val value2 = param(paramModes, 2)
+    fun operationEquals(): ProgramCounter {
+        val value1 = param(1)
+        val value2 = param(2)
         val result = if (value1 == value2) 1 else 0
         assign(memory[counter.pc + 3], result)
         return counter.add(4)
     }
 
-    fun jumpIfTrue(paramModes: ParameterModes): ProgramCounter {
-        val value = param(paramModes, 1)
-        val target = param(paramModes, 2)
+    fun jumpIfTrue(): ProgramCounter {
+        val value = param(1)
+        val target = param(2)
         return if (value != 0) counter.jump(target) else counter.add(3)
     }
 
-    fun jumpIfFalse(paramModes: ParameterModes): ProgramCounter {
-        val value = param(paramModes, 1)
-        val target = param(paramModes, 2)
+    fun jumpIfFalse(): ProgramCounter {
+        val value = param(1)
+        val target = param(2)
         return if (value == 0) counter.jump(target) else counter.add(3)
     }
 
-    fun outputValue(paramModes: ParameterModes): ProgramCounter {
-        val value = param(paramModes, 1)
+    fun outputValue(): ProgramCounter {
+        val value = param(1)
         output.add(value)
         return counter.add(2)
     }
 
+    fun halt() = counter.halt()
+
     fun readAndExecute(): ProgramCounter {
         val IP = memory[counter.pc]
         val opcode = IP % 100
-        val paramMode = paramModesFrom(IP / 100)
-        return when (opcode % 100) {
+        return when (opcode) {
             1    -> {
-                applyOperation(paramMode) { a, b -> a + b }
+                applyOperation() { a, b -> a + b }
             }
             2    -> {
-                applyOperation(paramMode) { a, b -> a * b }
+                applyOperation() { a, b -> a * b }
             }
             3    -> {
                 saveInput()
             }
             4    -> {
-                outputValue(paramMode)
+                outputValue()
             }
             5    -> {
-                jumpIfTrue(paramMode)
+                jumpIfTrue()
             }
             6    -> {
-                jumpIfFalse(paramMode)
+                jumpIfFalse()
             }
             7    -> {
-                operationLessThan(paramMode)
+                operationLessThan()
             }
             8    -> {
-                operationEquals(paramMode)
+                operationEquals()
             }
             99   -> {
-                counter.halt()
+                halt()
             }
             else -> {
                 throw Exception("Invalid opcode $opcode")

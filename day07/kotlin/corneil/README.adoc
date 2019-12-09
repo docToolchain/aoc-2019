@@ -40,3 +40,10 @@ Program ..left..> ProgramState: <<produces>>
 ----
 include::src/main/kotlin/solution.kt[]
 ----
+
+=== IntCode
+
+[source,kotlin,numbered]
+----
+include::../../../corneil/intcode/src/main/kotlin/intcode.kt[]
+----

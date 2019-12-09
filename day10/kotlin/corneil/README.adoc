@@ -1,0 +1,6 @@
+= Day 10 - TBA
+
+[source,kotlin,numbered]
+----
+include::src/main/kotlin/solution.kt[]
+----

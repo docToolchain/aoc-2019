@@ -17,13 +17,19 @@ ifeval::[{mehalter-twitter} != -]
   icon:twitter[] : https://twitter.com/{mehalter-twitter}[mehalter-twitter] +
 endif::[]
 ifeval::[{mehalter-blog} != -]
-  Blog : {mehalter-blog} 
+  Blog : {mehalter-blog}
 endif::[]
 |===
 
 === About me
 
-Nothing here yet. Update your profile at https://github.com/docToolchain/aoc-2019/blob/master/profiles/mehalter.adoc[/profiles/mehalter.adoc] 
+I am a researcher at the Georgia Tech Research Institute and Co-Owner/Mixologist
+of https://kindredspiritsatl.com[Kindred Spirits Atlanta]. My main research is
+in scientific knowledge representation, and am currently working on
+https://aske.gtri.gatech.edu/docs/latest/[SemanticModels.jl] that uses Category
+Theory based representations of scientific models to enhance meta-modeling tasks
+such as model augmentation, construction, and verification.
+
+More information on myself can be found at https://mehalter.com[mehalter.com].
 
 //end::free-form[]
-

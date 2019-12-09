@@ -6,7 +6,7 @@ image::https://media.giphy.com/media/Nblm6OgpcuvZe/giphy.gif[]
 
 Anyway.
 
-Today, we got relative parameter modes and a bigger address space. I build this on my https://github.com/michael-simons/aoc/blob/master/2019/day07/java/Solution.java[Java solution] for day 7.
+Today, we got relative parameter modes and a bigger address space. I build this on my https://github.com/docToolchain/aoc-2019/blob/master/day07/java/michael-simons/Solution.java#L52[Java solution] for day 7.
 
 Bigger address space has been solved with a view on the runnning program:
 

@@ -15,3 +15,8 @@ and maps to find the path between you and Santa
 ----
 include::answer.hs[]
 ----
+
+[source, bash]
+----
+include::run.sh[]
+----

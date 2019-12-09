@@ -1,10 +1,7 @@
 == 1202 Program Alarm
 
-I have written my solutions in Haskell. I am using this year's Advent of Code to
-brush up on my functional programming.
-
 To run the final program you need Haskell installed, and simply run the
-`runhaskell answer.hs`.
+`./run.sh`.
 
 My solution for part 1 defines a recursive function `comp`, that computes a single step of
 the computer and then continues to call itself with the next instruction address
@@ -28,4 +25,9 @@ single calculation.
 [source, haskell]
 ----
 include::answer.hs[]
+----
+
+[source, bash]
+----
+include::run.sh[]
 ----

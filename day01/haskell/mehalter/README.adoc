@@ -17,3 +17,8 @@ line arguments.
 ----
 include::answer.hs[]
 ----
+
+[source, bash]
+----
+include::run.sh[]
+----

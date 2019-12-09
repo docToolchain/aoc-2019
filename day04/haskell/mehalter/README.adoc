@@ -1,7 +1,7 @@
 == Secure Container
 
 To run the final program you need Haskell installed, and simply run the
-`runhaskell answer.hs`.
+`./run.sh`.
 
 My solution takes a brute force approach that checks to see if all the
 numbers in the specified range have sorted digits and duplicate items. The
@@ -12,4 +12,9 @@ second part makes sure that at least one item has exactly 2 appearances.
 [source, haskell]
 ----
 include::answer.hs[]
+----
+
+[source, bash]
+----
+include::run.sh[]
 ----

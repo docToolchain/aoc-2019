@@ -1,0 +1,5 @@
+== Disclaimer
+I’m not a professional developer and only doing this for fun. The solutions might be messy.
+
+== Day 08
+Not much to say about this one. I dumped the string from star 2 into an image<>binary converter on some website to get the image.

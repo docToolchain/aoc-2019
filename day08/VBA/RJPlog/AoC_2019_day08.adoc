@@ -1,0 +1,10 @@
+﻿== Day 8: Space Image Format
+
+The original puzzle can be found at https://adventofcode.com/2019/day/8
+
+== Star 1
+first part with VBA was easy, I used the mid function to cut the input piece by piece and write it directly in the pictue frames 25x6. In the same nested for loops I set up for x/y dimension I already summed up zero's, one's and two's. For testing purpuse I read not in all but stopped after 10 frames. I did not regocnise that I forgot to enhance it to the complete input again, and obviously in my input the frame with the most zero' was within the first ten frames, so I passed the first input
+
+== Star 2
+well, here it was also very easy up to the point where I was not able to read anything out of the captcha, no wonder with only 10% of the information used for the overlaying. After finding out that the input vector was much longer than 10 frames I used for overlaying the captcha was readable within minutes. The faulty input I recognised by counting the characters of the input, it was 15000 which means 100 frames and not only 10 :-) 
+ 

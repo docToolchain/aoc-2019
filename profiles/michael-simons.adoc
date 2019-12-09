@@ -1,8 +1,8 @@
 
 :michael-simons-avatar: https://avatars2.githubusercontent.com/u/526383?v=4
-:michael-simons-twitter: -
+:michael-simons-twitter: @rotnroll666
 :michael-simons-realName: Michael Simons
-:michael-simons-blog: -
+:michael-simons-blog: https://info.michael-simons.eu
 
 
 //tag::free-form[]
@@ -23,7 +23,8 @@ endif::[]
 
 === About me
 
-Nothing here yet. Update your profile at https://github.com/docToolchain/aoc-2019/blob/master/profiles/michael-simons.adoc[/profiles/michael-simons.adoc] 
+I am a father, husband and athlete (the later is probably just wishful thinking).
+Apart from that, I'm also a Java Champion, Oracle Cloud Groundbreaker ambassador, published author, JUG leader and currently working on Spring Data and Neo4j-OGM at Neo4j.
+In this role, my main focus is providing first class support of Neo4j in the Spring Environment, but also made contributions to Testcontainers, Spring Boot, Quarkus and a lot of other projects.
 
 //end::free-form[]
-

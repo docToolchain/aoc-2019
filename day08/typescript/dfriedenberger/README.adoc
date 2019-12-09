@@ -1,0 +1,47 @@
+== Solution1
+
+The solutions are written in Typescript. To run them use the following commands.
+
+....
+npm install
+gulp
+node dist/solution1.js
+node dist/solution2.js
+....
+
+=== First Star
+
+Create Layers from input data  '0' digets. 
+[source, typescript, numbered]
+....
+include::src/LayerManager.ts[tag=load]
+....
+and select this layer with fewest.
+....
+include::src/LayerManager.ts[tag=selectWithFewestDigits]
+....
+
+For solution calculate the product of 1 and 2 digits.
+....
+include::src/solution1.ts[tag=star1]
+....
+=== Second Star
+
+For Second solution joined the layers
+....
+include::src/LayerManager.ts[tag=joinLayers]
+....
+and dump it as Image.
+[source, typescript, numbered]
+....
+include::src/solution2.ts[tag=star2]
+....
+
+....
+***   **  ***  **** ***
+*  * *  * *  *    * *  *
+***  *    *  *   *  ***
+*  * *    ***   *   *  *
+*  * *  * *    *    *  *
+***   **  *    **** ***
+....

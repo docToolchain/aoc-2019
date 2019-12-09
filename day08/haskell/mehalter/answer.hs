@@ -1,12 +1,11 @@
 import System.Environment
 import Data.Char
 import Data.List
+import Data.List.Split
 import Data.Ord
 
-splitEvery :: Int -> [a] -> [[a]]
-splitEvery _ [] = []
-splitEvery n list = first : (splitEvery n rest) where
-    (first,rest) = splitAt n list
+count :: Char -> [Char] -> Int
+count char = length . filter (char ==)
 
 getPixel :: Char -> Char
 getPixel input = if input == '0' then ' ' else if input == '1' then '█' else input
@@ -20,12 +19,11 @@ merge2Layers in1 [] = in1
 merge2Layers (in1:in1s) (in2:in2s) = (if in1 == '2' then getPixel in2 else getPixel in1) : merge2Layers in1s in2s
 
 solveA :: [Char] -> (Int, Int) -> Int
-solveA input (x, y) = (length $ filter ((==) '1') found) * (length $ filter ((==) '2') found) where
-    split = splitEvery (x*y) input
-    found = fst $ minimumBy (comparing snd) $ map (\i -> (i, length $ filter ((==) '0') i)) split
+solveA input (x, y) = count '1' found * count '2' found where
+    found = fst $ minimumBy (comparing snd) $ map (\i -> (i, count '0' i)) $ chunksOf (x*y) input
 
 solveB :: [Char] -> (Int, Int) -> [Char]
-solveB input (x, y) = foldl (\i j->i ++ (j ++ ['\n'])) [] $ splitEvery x $ mergeAllLayers $ splitEvery (x*y) input
+solveB input (x, y) = foldl (\i j->i ++ (j ++ ['\n'])) [] $ chunksOf x $ mergeAllLayers $ chunksOf (x*y) input
 
 main = do
   inputs <- getArgs

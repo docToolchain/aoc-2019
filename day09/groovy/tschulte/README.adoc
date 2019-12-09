@@ -1,0 +1,22 @@
+
+== Sensor Boost
+
+For this days task I just copied the sollution from day 5 and altered the `computeOutput` method.
+
+.computeOutput
+[source]
+....
+include::day09.groovy[tags=computeOutput]
+....
+
+.First Star
+[source]
+....
+include::day09.groovy[tags=starOne]
+....
+
+.Second Star
+[source]
+....
+include::day09.groovy[tags=starTwo]
+....

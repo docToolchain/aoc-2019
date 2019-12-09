@@ -48,6 +48,11 @@ class ProgramState(val memory: MutableList<Long>, val inputs: MutableList<Long> 
     var base = 0L
     val output = mutableListOf<Long>()
     fun outputs() = output.toList()
+    fun extractOutput(): List<Long> {
+        val result = output.toList()
+        output.clear()
+        return result
+    }
 
     fun paramModes() = paramModesFrom(read(counter.pc.toLong()) / 100L)
 
@@ -71,25 +76,25 @@ class ProgramState(val memory: MutableList<Long>, val inputs: MutableList<Long> 
     }
 
     fun applyOperation(operation: (Long, Long) -> Long): ProgramCounter {
-        val value1 = param(1)
-        val value2 = param(2)
+        val value1 = paramValue(1)
+        val value2 = paramValue(2)
         val result = operation(value1, value2)
-        assign(address(3), result)
+        assign(paramAddress(3), result)
         return counter.add(4)
     }
 
     fun saveInput(): ProgramCounter {
         assert(inputs.isNotEmpty())
-        assign(address(1), inputs.removeAt(0))
+        assign(paramAddress(1), inputs.removeAt(0))
         return counter.add(2)
     }
 
-    fun param(index: Int): Long {
+    fun paramValue(index: Int): Long {
         val parameterModes = paramModes()
         return deref(parameterModes[index - 1], read((counter.pc + index).toLong()))
     }
 
-    fun address(index: Int): Long {
+    fun paramAddress(index: Int): Long {
         val parameterModes = paramModes()
         val address = read((counter.pc + index).toLong())
         return if (parameterModes[index - 1] == RELATIVE) {
@@ -100,42 +105,42 @@ class ProgramState(val memory: MutableList<Long>, val inputs: MutableList<Long> 
     }
 
     fun operationLessThan(): ProgramCounter {
-        val value1 = param(1)
-        val value2 = param(2)
+        val value1 = paramValue(1)
+        val value2 = paramValue(2)
         val result = if (value1 < value2) 1 else 0
-        assign(address(3), result.toLong())
+        assign(paramAddress(3), result.toLong())
         return counter.add(4)
     }
 
     fun operationEquals(): ProgramCounter {
-        val value1 = param(1)
-        val value2 = param(2)
+        val value1 = paramValue(1)
+        val value2 = paramValue(2)
         val result = if (value1 == value2) 1 else 0
-        assign(address(3), result.toLong())
+        assign(paramAddress(3), result.toLong())
         return counter.add(4)
     }
 
     fun jumpIfTrue(): ProgramCounter {
-        val value = param(1)
-        val target = param(2)
+        val value = paramValue(1)
+        val target = paramValue(2)
         return if (value != 0L) counter.jump(target.toInt()) else counter.add(3)
     }
 
     fun jumpIfFalse(): ProgramCounter {
-        val value = param(1)
-        val target = param(2)
+        val value = paramValue(1)
+        val target = paramValue(2)
         return if (value == 0L) counter.jump(target.toInt()) else counter.add(3)
     }
 
     fun outputValue(): ProgramCounter {
-        val value = param(1)
+        val value = paramValue(1)
         output.add(value)
         return counter.add(2)
     }
 
     fun halt() = counter.halt()
     fun adjustBase(): ProgramCounter {
-        base += param(1).toInt()
+        base += paramValue(1).toInt()
         return counter.add(2)
     }
 
@@ -170,9 +175,7 @@ class ProgramState(val memory: MutableList<Long>, val inputs: MutableList<Long> 
         while (counter.run && counter.pc < memory.size && output.isEmpty()) {
             counter = readAndExecute()
         }
-        val result = output.toList()
-        output.clear()
-        return result
+        return  extractOutput()
     }
 }
 
@@ -192,9 +195,10 @@ class Program(private val code: List<Long>) {
 fun main(args: Array<String>) {
     val fileName = if (args.size > 1) args[0] else "input.txt"
     val code = readProgram(File(fileName))
-    val outut = Program(code).executeProgram(listOf(1L))
 
-    println("Output = ${outut.outputs()}")
+    val output = Program(code).executeProgram(listOf(1L))
+    println("Output = ${output.outputs()}")
+
     val output2 = Program(code).executeProgram(listOf(2L))
     println("Output = ${output2.outputs()}")
 }

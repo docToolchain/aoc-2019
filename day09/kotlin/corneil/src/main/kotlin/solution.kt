@@ -48,6 +48,11 @@ class ProgramState(val memory: MutableList<Long>, val inputs: MutableList<Long> 
     var base = 0L
     val output = mutableListOf<Long>()
     fun outputs() = output.toList()
+    fun extractOutput(): List<Long> {
+        val result = output.toList()
+        output.clear()
+        return result
+    }
 
     fun paramModes() = paramModesFrom(read(counter.pc.toLong()) / 100L)
 
@@ -170,9 +175,7 @@ class ProgramState(val memory: MutableList<Long>, val inputs: MutableList<Long> 
         while (counter.run && counter.pc < memory.size && output.isEmpty()) {
             counter = readAndExecute()
         }
-        val result = output.toList()
-        output.clear()
-        return result
+        return  extractOutput()
     }
 }
 
@@ -192,9 +195,10 @@ class Program(private val code: List<Long>) {
 fun main(args: Array<String>) {
     val fileName = if (args.size > 1) args[0] else "input.txt"
     val code = readProgram(File(fileName))
-    val outut = Program(code).executeProgram(listOf(1L))
 
-    println("Output = ${outut.outputs()}")
+    val output = Program(code).executeProgram(listOf(1L))
+    println("Output = ${output.outputs()}")
+
     val output2 = Program(code).executeProgram(listOf(2L))
     println("Output = ${output2.outputs()}")
 }

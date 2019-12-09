@@ -19,102 +19,81 @@ class Computer:
                 return
             elif (opcode == 1):
                 modes.extend([0 for _ in range(3-len(modes))])
-                summand_1 = self.get_parameter_by_mode(self.ptr+1, modes[0])
-                summand_2 = self.get_parameter_by_mode(self.ptr+2, modes[1])
-                if modes[2] == 0:
-                    self.code[self.code[self.ptr+3]] = summand_1 + summand_2
-                elif modes[2] == 2:
-                    self.code[self.relative_base + self.code[self.ptr+3]] = summand_1 + summand_2
+                summand_1 = self.code[self.get_address_by_mode(self.ptr+1, modes[0])]
+                summand_2 = self.code[self.get_address_by_mode(self.ptr+2, modes[1])]
+                self.code[self.get_address_by_mode(self.ptr+3, modes[2])] = summand_1 + summand_2
                 self.ptr += 4
             elif (opcode == 2):
                 modes.extend([0 for _ in range(3-len(modes))])
-                factor_1 = self.get_parameter_by_mode(self.ptr+1, modes[0])
-                factor_2 = self.get_parameter_by_mode(self.ptr+2, modes[1])
-                if modes[2] == 0:
-                    self.code[self.code[self.ptr+3]] = factor_1 * factor_2
-                elif modes[2] == 2:
-                    self.code[self.relative_base + self.code[self.ptr+3]] = factor_1 * factor_2
+                factor_1 = self.code[self.get_address_by_mode(self.ptr+1, modes[0])]
+                factor_2 = self.code[self.get_address_by_mode(self.ptr+2, modes[1])]
+                self.code[self.get_address_by_mode(self.ptr+3, modes[2])] = factor_1 * factor_2
                 self.ptr += 4
             elif (opcode == 3):
                 modes.extend([0 for _ in range(1-len(modes))])
                 if (len(self.program_input) == 0):
                     self.state = "WAITING_FOR_INPUT"
                     return # wait for input
-                if (modes[0] == 0):
-                    self.code[self.code[self.ptr+1]] = self.program_input.pop(0)
-                elif (modes[0] == 2):
-                    self.code[self.relative_base + self.code[self.ptr+1]] = self.program_input.pop(0)
+                self.code[self.get_address_by_mode(self.ptr+1, modes[0])] = self.program_input.pop(0)
                 self.ptr += 2
             elif (opcode == 4):
                 modes.extend([0 for _ in range(1-len(modes))])
                 assert(len(modes) >= 1)
-                output = self.get_parameter_by_mode(self.ptr+1, modes[0])
+                output = self.code[self.get_address_by_mode(self.ptr+1, modes[0])]
                 if (debug):
                     print("Output:",str(output))
                 self.program_output.append(output)
                 self.ptr += 2
             elif (opcode == 5):
                 modes.extend([0 for _ in range(2-len(modes))])
-                value = self.get_parameter_by_mode(self.ptr+1, modes[0])
-                jump_to = self.get_parameter_by_mode(self.ptr+2, modes[1])
+                value = self.code[self.get_address_by_mode(self.ptr+1, modes[0])]
+                jump_to = self.code[self.get_address_by_mode(self.ptr+2, modes[1])]
                 if value != 0:
                     self.ptr = jump_to
                 else:
                     self.ptr += 3
             elif (opcode == 6):
                 modes.extend([0 for _ in range(2-len(modes))])
-                value = self.get_parameter_by_mode(self.ptr+1, modes[0])
-                jump_to = self.get_parameter_by_mode(self.ptr+2, modes[1])
+                value = self.code[self.get_address_by_mode(self.ptr+1, modes[0])]
+                jump_to = self.code[self.get_address_by_mode(self.ptr+2, modes[1])]
                 if value == 0:
                     self.ptr = jump_to
                 else:
                     self.ptr += 3
             elif (opcode == 7):
                 modes.extend([0 for _ in range(3-len(modes))])
-                operand_1 = self.get_parameter_by_mode(self.ptr+1, modes[0])
-                operand_2 = self.get_parameter_by_mode(self.ptr+2, modes[1])
+                operand_1 = self.code[self.get_address_by_mode(self.ptr+1, modes[0])]
+                operand_2 = self.code[self.get_address_by_mode(self.ptr+2, modes[1])]
                 if operand_1 < operand_2:
-                    if (modes[2] == 0):
-                        self.code[self.code[self.ptr+3]] = 1
-                    elif (modes[2] == 2):
-                        self.code[self.relative_base + self.code[self.ptr+3]] = 1
+                    self.code[self.get_address_by_mode(self.ptr+3, modes[2])] = 1
                 else:
-                    if (modes[2] == 0):
-                        self.code[self.code[self.ptr+3]] = 0
-                    elif (modes[2] == 2):
-                        self.code[self.relative_base + self.code[self.ptr+3]] = 0
+                    self.code[self.get_address_by_mode(self.ptr+3, modes[2])] = 0
                 self.ptr += 4
             elif (opcode == 8):
                 modes.extend([0 for _ in range(3-len(modes))])
-                operand_1 = self.get_parameter_by_mode(self.ptr+1, modes[0])
-                operand_2 = self.get_parameter_by_mode(self.ptr+2, modes[1])
+                operand_1 = self.code[self.get_address_by_mode(self.ptr+1, modes[0])]
+                operand_2 = self.code[self.get_address_by_mode(self.ptr+2, modes[1])]
                 if operand_1 == operand_2:
-                    if (modes[2] == 0):
-                        self.code[self.code[self.ptr+3]] = 1
-                    elif (modes[2] == 2):
-                        self.code[self.relative_base + self.code[self.ptr+3]] = 1
+                    self.code[self.get_address_by_mode(self.ptr+3, modes[2])] = 1
                 else:
-                    if (modes[2] == 0):
-                        self.code[self.code[self.ptr+3]] = 0
-                    elif (modes[2] == 2):
-                        self.code[self.relative_base + self.code[self.ptr+3]] = 0
+                    self.code[self.get_address_by_mode(self.ptr+3, modes[2])] = 0
                 self.ptr += 4
             elif (opcode == 9):
                 modes.extend([0 for _ in range(1-len(modes))])
-                offset_change = self.get_parameter_by_mode(self.ptr+1, modes[0])
+                offset_change = self.code[self.get_address_by_mode(self.ptr+1, modes[0])]
                 self.relative_base += offset_change
                 self.ptr += 2
             else:
                 print(self.program_output)
                 raise Exception("Unknown opcode: " + str(opcode))
-    
-    def get_parameter_by_mode(self, ptr, mode):
+
+    def get_address_by_mode(self, ptr, mode):
         if mode == 0:
-            return self.code[self.code[ptr]]
-        elif mode == 1:
             return self.code[ptr]
+        elif mode == 1:
+            return ptr
         elif mode == 2:
-            return self.code[self.relative_base + self.code[ptr]]
+            return self.relative_base + self.code[ptr]
         else:
             raise Exception("Unknown mode: " + str(mode))
 

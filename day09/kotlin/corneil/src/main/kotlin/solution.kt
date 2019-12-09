@@ -156,14 +156,15 @@ class ProgramState(val memory: MutableList<Long>, val inputs: MutableList<Long> 
         }
     }
 
-    fun executeProgram(): List<Long> {
+    fun executeProgram(): ProgramState {
         counter = ProgramCounter(0, true)
         while (counter.run && counter.pc < memory.size) {
             counter = readAndExecute()
         }
-        return memory.toList()
+        return this
     }
 
+    // Not that this removes the output from program state and returns the output
     fun executeUntilOutput(input: List<Long>): List<Long> {
         inputs.addAll(input)
         while (counter.run && counter.pc < memory.size && output.isEmpty()) {
@@ -179,12 +180,12 @@ class Program(private val code: List<Long>) {
 
     fun executeProgram(input: List<Long>): ProgramState {
         val state = ProgramState(code.toMutableList(), input.toMutableList())
-        val results = state.executeProgram()
+        state.executeProgram()
         return state
     }
 
-    fun createProgram(input: List<Long>): ProgramState {
-        return ProgramState(code.toMutableList(), input.toMutableList())
+    fun createProgram(): ProgramState {
+        return ProgramState(code.toMutableList(), mutableListOf())
     }
 }
 

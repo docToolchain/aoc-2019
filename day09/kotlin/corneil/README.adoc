@@ -1,8 +1,8 @@
 = Day 09 - Sensor Boost
 
-Permutation generation was the biggest challenge.
-The examples I found of Heap's Algorithm for generating permutations sent me in circles.
-Eventually I did a brute force implementation that works.
+Updated program to support Long for input and output.
+Added opcodes.
+Relative in conjunction with assignment tripped me up a little.
 
 == Class Diagram of the IntCode program model
 
@@ -15,20 +15,21 @@ class ProgramCounter {
 }
 
 class ProgramState {
-    memory: List<Int>
-    inputs: List<Int>
-    output = List<Int>
-    executeProgram(): List<Int>
-    executeUntilOutput(input: List<Int>): List<Int>
+    memory: List<Long>
+    inputs: List<Long>
+    output = List<Long>
+    base : Long
+    executeProgram(): ProgramState
+    executeUntilOutput(input: List<Long>): List<Long>
 }
 
 ProgramState --> ProgramCounter: counter
 
 class Program {
-    code: List<Int>
+    code: List<Long>
 
-    executeProgram(input: List<Int>): Pair<List<Int>, List<Int>>
-    createProgram(input: List<Int>): ProgramState
+    executeProgram(input: List<Long>): ProgramState
+    createProgram(input: List<Long>): ProgramState
 }
 
 Program ..left..> ProgramState: <<produces>>

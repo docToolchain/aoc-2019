@@ -1,0 +1,55 @@
+== https://adventofcode.com/2019/day/9[Sensor Boost]
+
+Say Intcode computer one more time…
+
+image::https://media.giphy.com/media/Nblm6OgpcuvZe/giphy.gif[]
+
+Anyway.
+
+Today, we got relative parameter modes and a bigger address space. I build this on my https://github.com/docToolchain/aoc-2019/blob/master/day07/java/michael-simons/Solution.java#L52[Java solution] for day 7.
+
+Bigger address space has been solved with a view on the runnning program:
+
+[source,java,numbered,indent=0]
+----
+include::Solution.java[tags=memorySpace]
+----
+<1> Implementing relative memory in one go
+
+The listing also shows the relative memory.
+One more new instruction to modify it:
+
+[source,java,numbered,indent=0]
+----
+include::Solution.java[tags=relativeMemory]
+----
+
+I also split my `io` stack into both `stdIn` and `stdOut` and throw an exception
+when the computer requries input:
+
+[source,java,numbered,indent=0]
+----
+include::Solution.java[tags=newIoHandling]
+----
+
+Reading and writing to standard io is now internal to the computer.
+Input can be piped into it. The computer doesn't return anything now on run.
+Output can be accessed via `head()` or `drain()`:
+
+[source,java,numbered,indent=0]
+----
+include::Solution.java[tags=usingNewIo]
+----
+
+I changed this from day 7, so that I can use the amplication circuit with todays computer.
+Todays computer should not halt after it produced output, in my day 7 solution, it needed to halt.
+
+IMPORTANT: Biggest challenge today?
+Can you spot the bug in my day 7 solution? Well, I couldn't for some time.
+There's one tiny, little instruction that just didn't get hit on day 7.
+Well, now it does.
+
+For the second star, I needed to drop the recursion, as the stack size went too big.
+
+NOTE: Run with `java --source 13 --enable-preview Solution.java`.
+      Tested with `java version "13" 2019-09-17`, correct solutions are: `3601950151` and `64236`.

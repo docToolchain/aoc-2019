@@ -1,0 +1,48 @@
+== Day 06
+
+I am not very proud of my solution.
+It is kind of messy, but it works.
+
+So I started by defining a helper class which represents a node in a tree.
+A node has an ID, an optional parent and a list of children.
+The node also has two functions:
+
+. `pathToRoot()` returns all nodes from this node to the root node of the tree
+. `level()` returns the length of the path from this node to the root node
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=node]
+----
+
+Next I wrote a factory method which creates my nodes from the input.
+The function stores the nodes in a map for fast and easy access.
+Unfortunately this also means, that my function is not free of side effects.
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=factoryFunction]
+----
+
+=== First Star
+
+To solve the first star I added a function which is actually a depth-first search of the tree.
+The function adds the levels of the nodes to get the result.
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=firstStar]
+----
+
+=== Second Star
+
+Using the `pathToRoot()` function solving the second star is easy.
+I get the `YOU` and the `SAN` node from the map and intersect their paths to root.
+Kotlin preservers the ordering of the nodes in the intersection, so the first node of the result ist actually the first common node.
+Then I get the index of the common node in the path to root, which is actually the number of steps to get there.
+The result is the sum of the steps from `YOU` to the common node and `SAN` to the common node.
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=secondStar]
+----

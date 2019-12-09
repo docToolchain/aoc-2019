@@ -7,10 +7,11 @@ typealias ImageLayer = List<Int>
 data class Image(val width: Int, val height: Int, val layers: List<ImageLayer>)
 
 fun readImage(width: Int, height: Int, input: String): Image {
-    val layersCount = input.length / (width * height)
+    val dim = width * height
+    val layersCount = input.length / dim
     val layers = (0 until layersCount).map { l ->
-        input.substring(l * width * height, (l + 1) * width * height).map {
-            "$it".toInt()
+        input.substring(l * dim, (l + 1) * dim).map {
+            it.toString().toInt()
         }
     }
     return Image(width, height, layers)
@@ -20,7 +21,9 @@ fun printImage(image: Image) {
     for (y in 0 until image.height) {
         for (x in 0 until image.width) {
             val offset = x + (y * image.width)
-            val pixel = (0 until image.layers.size).map { image.layers[it][offset] }.find { it != 2 }
+            val pixel = (0 until image.layers.size).map {
+                image.layers[it][offset]
+            }.find { it != 2 } ?: 0
             print(if (pixel == 1) "*" else " ")
         }
         println()

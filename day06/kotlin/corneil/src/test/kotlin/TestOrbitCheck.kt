@@ -31,18 +31,18 @@ class TestOrbitCheck {
     @Test
     fun `test2`() {
         val input = """COM)B
-B)C
-C)D
-D)E
-E)F
-B)G
-G)H
-D)I
-E)J
-J)K
-K)L
-K)YOU
-I)SAN""".trimIndent()
+                            B)C
+                            C)D
+                            D)E
+                            E)F
+                            B)G
+                            G)H
+                            D)I
+                            E)J
+                            J)K
+                            K)L
+                            K)YOU
+                            I)SAN""".trimIndent()
         val orbits = loadOrbits(prepareData(input))
         val transfer = orbits.findTransfers("YOU", "SAN")
         println(transfer.map { it.first.name + " -> " + it.second.name }.joinToString("\n"))

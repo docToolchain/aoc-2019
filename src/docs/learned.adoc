@@ -143,4 +143,10 @@ a|  * I am still working with Excel VBA. Today I learned some more stuff how to 
 a|{corneil}
 a| * Kotlin has wonderful operator for collections.
    * Today `minBy` saved me a lot of effort.
+   
+a|{RJPlog}
+a|* today VBA did a very good job, better than me. For testing purpose I started to read only the first ten frames into the program, unfortunately with those 10 frames also the test case of part1 was fullfilled, so I forgot to read the complete frames, which made me suffering in part2, with only 10% of the input was not readable. 
+   *Lessons Learned 1: Write down which restrictions you make in the start of programming, to check and change it to the right syntax values afterwards. (I hade the same before with the IntComputers, for testing I calculated not all variations, which also led to wrong outputs)
+   *Lessons Learned 2: With word the number of elements can very easily counted. I copied the puzzle input to a word documnent, at "Überprüfen" you can find a icon for counting words and signs.
+   
 |====

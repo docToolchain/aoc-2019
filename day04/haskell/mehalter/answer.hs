@@ -1,4 +1,9 @@
+import System.Environment
 import Data.List
+import Data.List.Split
+
+parse :: String -> [Int]
+parse = map (read :: String -> Int) . splitOn "-"
 
 -- convert a number to a list of digits
 digits :: Int -> [Int]
@@ -17,6 +22,8 @@ valid :: Ord a => (Int -> Bool) -> [a] -> Bool
 valid func list = isSorted list && containsN func list
 
 main = do
-  let ints = map digits [245318..765747]
+  input <- getArgs
+  let [x, y] = parse  $ input!!0
+  let ints = map digits [x..y]
   print $ length $ filter (valid (>1)) ints
   print $ length $ filter (valid (==2)) ints

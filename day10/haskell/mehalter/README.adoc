@@ -1,4 +1,4 @@
-== Amplification Circuit
+== Monitoring Station
 
 To run the final program you need Haskell installed, and simply run the
 `./run.sh`.

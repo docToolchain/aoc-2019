@@ -1,0 +1,41 @@
+== https://adventofcode.com/2019/day/10[Monitoring Station]
+
+I like python.
+
+Here's the idea to solve this puzzle. 
+First have some basic geometry:
+
+[source,python,numbered,indent=0]
+----
+include::Solution.py[tags=basicGeometry]
+----
+
+Than
+
+[source,python,numbered,indent=0]
+----
+include::Solution.py[tags=solutionPart1]
+----
+<.> Create the cross product of each asteroid with all others.
+<.> Compute the direction and the norm of the directional vector for each pair.
+<.> Store all targets per direction into a list
+<.> Sort that list by direction
+<.> Select the one that has most outgoing directions
+
+That's the base.
+From there on:
+
+[source,python,numbered,indent=0]
+----
+include::Solution.py[tags=solutionPart2]
+----
+<.> Go through all targeteting directions, counterclockwise
+<.> Hit the first
+<.> And move on.
+
+
+NOTE: Run with `python3 Solution.py`. Tested with `Python 3.7.0`.
+      +
+      Correct solutions are `263` and `1110`, 
+      expected solutions for `test-input2.txt` are `210` and `802`
+      and `30` and `1203` for `test-input3.txt`     

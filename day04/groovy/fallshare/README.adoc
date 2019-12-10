@@ -1,0 +1,32 @@
+== Day04
+
+This is the solution for the third day of AoC:
+https://adventofcode.com/2019/day/4[Secure Container]
+
+I guess this challenge can be solved by applying some stochastic theory
+but I didn't pay that much attention to it in school.
+So I guess I have to use brutforce to get the solution.
+
+=== First Star
+I'm iterating throw all the possible combinations in a for loop.
+In each iteration I split the current number into an array of digits.
+Then I interativle check if the digits fullfill the specified criteria.
+If this is the case the total number of valid combinations is incremented 
+and we continue with the next combination.
+
+[source, groovy, numbered]
+....
+include::solution.groovy[tags=star1]
+.... 
+
+=== Second Star
+The solution for start 2 is using the same approach then star 1.
+But this time the criteria for a valid combination is sligthly different.
+I'm using a list to collect twin digit pairs. 
+If a digit appears more then twice in a row then the digit is removed from that list
+and added to a list that collects digits ocurring more then twince in a row.
+A number is only valid when the digit twin list is not empty and all other critiera are fulfilled.
+[source, groovy, numbered]
+....
+include::solution.groovy[tags=star2]
+.... 

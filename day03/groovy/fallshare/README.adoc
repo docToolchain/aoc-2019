@@ -24,16 +24,27 @@ The first dimension defines which wire is selected, the second contains the inst
 include::solution.groovy[tags=readFile]
 .... 
 Both lines start at the central port. We assume that this is the origin of our coordinate sytem for the time being.
-We need calculate the absolute locations of the wire by adding the wire instructions. 
-The resulting coordinates are stored as tuples in a list.
-Once we are done with calculating the whole wire path we can find the smalles and bigges value of the x and y axis.
-Which give us the total distance of the coordiante system.
-
-
-Today I first
-Once again a text file is being read. This time it is a comma separated list of integers.
-So the readFile methods returns an array of integers which represents our computer memory.
+We need to calculate the absolute locations of the wire by adding the wire instructions. 
+The resulting coordinates are stored as tuples in a list:
 [source, groovy, numbered]
 ....
-include::solution.groovy[tags=readFile]
+include::solution.groovy[tags=matrixDimensions]
+.... 
+Once we are done with calculating the whole wire path we can find the smalles and biggest value of the x and y axis with the getMatrixMinMax() method.
+This gives us the total dimension  of the coordiante system.
+
+With this informtaion we can create two matrices (two dimensional arrays) and store the wire paths in themby using the createWirePath() method.
+
+Once this is done the two matrices can be compared so that we get all points that overlap (= crossings)
+[source, groovy, numbered]
 ....
+include::solution.groovy[tags=getCrossings]
+.... 
+Now we can caculate the Manhattan distance for all retrieved points and then can get the point with the smalles distance.
+And we are done :)
+
+=== Second Star
+If I knew what the star 2 challenge would be then my star 1 solution would look differnt.
+I lost my patience a litle bit and just hacked down the rest of the challenge.
+I take the list of found crossings and then I iterate through the wire instructions until this point is reached.
+By adding the distance and finding the smalles total distance the star 2 challenge is done.

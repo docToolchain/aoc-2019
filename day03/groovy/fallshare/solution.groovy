@@ -12,6 +12,7 @@ import  groovy.lang.Tuple
 }
 // end::readFile
 
+// tag::matrixDimensions[]
 Integer[][] getMatrixDimensions(String[] intstructions)
 {
     int x = 0
@@ -42,32 +43,30 @@ Integer[][] getMatrixDimensions(String[] intstructions)
     x_max = x_list.max()
     y_min = y_list.min()
     y_max = y_list.max()
-    println "x min: ${x_min}; x max: ${x_max};"
-    println "y min: ${y_min}; y max: ${y_max};"
 
-    // this is not a nice solution but gets the job done for the time being
     def dimensions = [][]
     dimensions << [x_min, x_max]
     dimensions << [y_min, y_max]
 
+    //i don't like to return an list of lists but it gets the job done for the time being
     return dimensions
 }
+// end::matrixDimensions[]
 
+// tag::MinMaxDimensions[]
 Integer[][] getMatrixMinMax(first, second){
     minMaxMatrix = [[0,0],[0,0]]
     for(i = 0; i < first[0].size(); i++){
-         println "Test: ${second[i][0]} : ${second[i][1]} "
           minMaxMatrix[i][0] = (first[i][0] < second[i][0]) ? first[i][0]  : second[i][0] 
           minMaxMatrix[i][1] = (first[i][1] > second[i][1]) ? first[i][1] : second[i][1] 
     }
     return minMaxMatrix
 }
-
+// end::MinMaxDimensions[]
 
 Integer[][] createWirePath(intstructions, centralPort, matrixDimensions)
 {
-    //TODO there is a of by one error somewhere which creates an array out of bound exception
-    matrix = new Integer[matrixDimensions[0]+1][matrixDimensions[1]+1] 
+    matrix = new Integer[matrixDimensions[0] + 1][matrixDimensions[1] + 1] 
 
     int x = centralPort[0]
     int y = centralPort[1]
@@ -92,9 +91,7 @@ Integer[][] createWirePath(intstructions, centralPort, matrixDimensions)
                 y -= value
                 break    
         }
-
     }
-        println "matrix first point is: " + matrix[4226][5000]
     return matrix
 }
 
@@ -126,6 +123,7 @@ Integer[][] moveDown(matrix, steps, x, y){
     return matrix
 }
 
+// tag::getCrossings[]
 def getCrossings(matrix1, matrix2, matrixDimensions)
 {
     def intersections = []
@@ -138,12 +136,12 @@ def getCrossings(matrix1, matrix2, matrixDimensions)
 
     return intersections
 }
+// end::getCrossings[]
 
 Integer getSmallestDistance(crossings, centralPort){
     min = 100000
     minI = 0
     for(int i = 0; i < crossings.size(); i++){
-        println "crossing ${i} is: " + crossings[i]
         dist = calcManhattanDistance(crossings[i], centralPort)
         if(dist < min){
             min = dist
@@ -163,9 +161,6 @@ Integer calcManhattanDistance(intersection, centralPort){
 }
 
 wire_instructions = readFile("input.txt")
-println wire_instructions[0]
-println "--------------"
-println wire_instructions[1]
 
 firstWireDimensions = getMatrixDimensions(wire_instructions[0])
 secondWireDimensions = getMatrixDimensions(wire_instructions[1])
@@ -192,7 +187,6 @@ def getPointWithShortestTotalDistance(wire_instructions, crossings, centralPort)
     min = 10000000
     minI = 0
     for(int i = 0; i < crossings.size(); i++){
-        println "crossing ${i} is: " + crossings[i]
         distWire1 = getDistanceToPoint(wire_instructions[0], crossings[i][0], crossings[i][1], centralPort)
         distWire2 = getDistanceToPoint(wire_instructions[1], crossings[i][0], crossings[i][1], centralPort)
         dist = distWire1 + distWire2
@@ -212,7 +206,7 @@ Integer getDistanceToPoint(instructions, xInter, yInter, centralPort)
     int x = centralPort[0] 
     int y = centralPort[1] 
     int totalDist = 0
-    //instructions.each{ instruction ->
+
     for(int i = 0; i < instructions.size(); i++){
         instruction = instructions[i]
         operator = instruction[0]
@@ -220,8 +214,7 @@ Integer getDistanceToPoint(instructions, xInter, yInter, centralPort)
         value = instruction.substring(1).toInteger()
         switch (operator) {
             case "L":
-                for(int j = 1; j <= value; j++)
-                {
+                for(int j = 1; j <= value; j++){
                     x--
                     if((xInter == x)&&(yInter == y)){
                         return totalDist + j                  
@@ -229,8 +222,7 @@ Integer getDistanceToPoint(instructions, xInter, yInter, centralPort)
                 }
                 break
             case "R":
-                for(int j = 1; j <= value; j++)
-                {
+                for(int j = 1; j <= value; j++){
                     x++
                     if((xInter == x)&&(yInter == y)){
                         return totalDist + j                
@@ -238,8 +230,7 @@ Integer getDistanceToPoint(instructions, xInter, yInter, centralPort)
                 }
                 break
             case "U":
-                for(int j = 1; j <= value; j++)
-                {
+                for(int j = 1; j <= value; j++){
                     y++
                     if((xInter == x)&&(yInter == y)){
                         return totalDist + j       
@@ -247,8 +238,7 @@ Integer getDistanceToPoint(instructions, xInter, yInter, centralPort)
                 }
                 break
             case "D":
-                for(int j = 1; j <= value; j++)
-                {
+                for(int j = 1; j <= value; j++){
                     y--
                     if((xInter == x)&&(yInter == y)){
                         return totalDist + j                   
@@ -257,8 +247,6 @@ Integer getDistanceToPoint(instructions, xInter, yInter, centralPort)
                 break    
         }
         totalDist += value
-        println xInter + ":" + yInter + "  " + x + ":" + y
-        
     }
     return totalDist
 }

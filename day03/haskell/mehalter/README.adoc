@@ -1,7 +1,7 @@
 == Crossed Wires
 
 To run the final program you need Haskell installed, and simply run the
-`runhaskell answer.hs`.
+`./run.sh`.
 
 My solution takes a brute force approach that generates all the points each
 wire touches using the `getAllPoints` function, then gets the intersection of
@@ -19,4 +19,9 @@ cross.
 [source, haskell]
 ----
 include::answer.hs[]
+----
+
+[source, bash]
+----
+include::run.sh[]
 ----

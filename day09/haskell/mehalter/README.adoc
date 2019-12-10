@@ -1,0 +1,19 @@
+== Sensor Boost
+
+To run the final program you need Haskell installed, and simply run the
+`./run.sh`.
+
+This solution extends my Day 07 solution by adding an parameter mode to treat a
+parameter as a relative memory offset from a base.
+
+== Solution
+
+[source, haskell]
+----
+include::answer.hs[]
+----
+
+[source, bash]
+----
+include::run.sh[]
+----

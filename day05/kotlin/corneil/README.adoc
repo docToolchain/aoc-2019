@@ -17,3 +17,10 @@ I couldn't decide if the program counter belongs in the program state or if it s
 ----
 include::src/main/kotlin/solution.kt[]
 ----
+
+=== IntCode
+
+[source,kotlin,numbered]
+----
+include::../../../corneil/intcode/src/main/kotlin/intcode.kt[]
+----

@@ -6,7 +6,7 @@ fun passwordCriteriaLength(input: String): Boolean {
 
 fun passwordCriteriaDoubleDigits(input: String): Boolean {
     var prevChar = input[0]
-    for (i in 1..(input.length - 1)) {
+    for (i in 1 until input.length) {
         val c = input[i]
         if (c == prevChar) {
             return true
@@ -19,7 +19,7 @@ fun passwordCriteriaDoubleDigits(input: String): Boolean {
 fun passwordCriteriaMustHaveAtLeastOneOnlyDoubleDigitsAndNoMore(input: String): Boolean {
     var prevChar = input[0]
     var matchCount = 0
-    for (i in 1..(input.length - 1)) {
+    for (i in 1 until input.length) {
         val c = input[i]
         if (c == prevChar) {
             matchCount += 1
@@ -36,7 +36,7 @@ fun passwordCriteriaMustHaveAtLeastOneOnlyDoubleDigitsAndNoMore(input: String): 
 
 fun passwordCriteriaIncrease(input: String): Boolean {
     var prevChar = input[0]
-    for (i in 1..(input.length - 1)) {
+    for (i in 1 until input.length) {
         val c = input[i]
         if (c < prevChar) {
             return false

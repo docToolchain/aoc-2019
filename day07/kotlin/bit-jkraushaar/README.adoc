@@ -1,0 +1,57 @@
+== Day 07
+
+Another Intcode computer puzzle.
+I am reusing a lot of my code from day 5.
+The only thing I have changed is the possibility to define an input provider and an output consumer.
+With this change I can automate writing to and reading from the program.
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=day05]
+----
+
+Next I need a recursive function to create all possible permutations of the phase settings.
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=createPermutations]
+----
+
+I like how Kotlin allows me to add and remove elements from sets and lists by using `+` and `-`.
+
+To read the program from input, I also used the code from day 5.
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=readProgram]
+----
+
+=== First Star
+
+To solve the first star I am creating a virtual CPU for each amplifier.
+Here I used the new possibility to provide an input and an output function to connect the amplifiers.
+For each combination I am calculating a result and then returning the maximum value which is the result of the first star.
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=firstStar]
+----
+
+=== Second Star
+
+The second star is a little bit more complicated.
+I would use Kotlin Coroutines, but this would require additional dependencies.
+I like to implement all my solutions as Kotlin Script, so instead I am using Threads.
+
+For the amplifiers I wrote a class containing the program an input queue and an output queue.
+Both queues are blocking, so the threads wait until they get new input.
+Then, in `runProgramOnAmplifiersWithFeedback`, I first initialize the input queues with the phase settings.
+Afterwards I am creating the amplifiers by connecting the blocking queues.
+I start the threads and provide the initial input to the first amplifier.
+I have to wait for all threads to finish bevor I can take the element on the output queue from amplifier 5.
+This is the result for the second star, which has to be maximized.
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=secondStar]
+----

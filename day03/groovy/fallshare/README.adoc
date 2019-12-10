@@ -1,0 +1,50 @@
+== Day02
+
+This is the solution for the third day of AoC:
+https://adventofcode.com/2019/day/3[Crossed Wires]
+
+=== First Star
+So it is slowly gets interesting. 
+I am having two ideas how to solve this riddle. I guess I'll come back later to try out both variants.
+I first will write down some assumptions and ideas before I start coding.
+My first idea is it to create two matrices that mark all points that are part of the wires paths (0; no wire; 1:wire present)
+If I add both matrices the resulting matrix shall have the value two where the two wires overlap.
+I only have to find those points and calculate the Manhattan distance.
+BUT there are two details missing: 
+    - What is the location of the central port in my matrices?
+    - What is the size of the matrices?
+Those questions must be answered first before I get started with the path calculation.
+So let's get started.
+
+===== Caculating the matrix size and port location
+As usual we a first reading in the input file. This time a list of string list will be returned.
+The first dimension defines which wire is selected, the second contains the instructions to draw the wires.
+[source, groovy, numbered]
+....
+include::solution.groovy[tags=readFile]
+.... 
+Both lines start at the central port. We assume that this is the origin of our coordinate sytem for the time being.
+We need to calculate the absolute locations of the wire by adding the wire instructions. 
+The resulting coordinates are stored as tuples in a list:
+[source, groovy, numbered]
+....
+include::solution.groovy[tags=matrixDimensions]
+.... 
+Once we are done with calculating the whole wire path we can find the smalles and biggest value of the x and y axis with the getMatrixMinMax() method.
+This gives us the total dimension  of the coordiante system.
+
+With this informtaion we can create two matrices (two dimensional arrays) and store the wire paths in themby using the createWirePath() method.
+
+Once this is done the two matrices can be compared so that we get all points that overlap (= crossings)
+[source, groovy, numbered]
+....
+include::solution.groovy[tags=getCrossings]
+.... 
+Now we can caculate the Manhattan distance for all retrieved points and then can get the point with the smalles distance.
+And we are done :)
+
+=== Second Star
+If I knew what the star 2 challenge would be then my star 1 solution would look differnt.
+I lost my patience a litle bit and just hacked down the rest of the challenge.
+I take the list of found crossings and then I iterate through the wire instructions until this point is reached.
+By adding the distance and finding the smalles total distance the star 2 challenge is done.

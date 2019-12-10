@@ -1,0 +1,20 @@
+== Space Image Format
+
+To run the final program you need Haskell installed, and simply run the
+`./run.sh`.
+
+This solution takes the input as an array of characters, splits it into the
+layers, and does a search through the layers to calculate part 1 and to decode
+the image for part 2.
+
+== Solution
+
+[source, haskell]
+----
+include::answer.hs[]
+----
+
+[source, bash]
+----
+include::run.sh[]
+----

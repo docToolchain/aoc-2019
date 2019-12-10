@@ -1,0 +1,16 @@
+Solution for Day 05 of the AoC 2019: https://adventofcode.com/2019/day/5[Day 5: Sunny with a Chance of Astroids]
+
+== Solution
+
+This time I refactored my solution for day 02 a bit - which was a good decision.
+I created a Memory class which stores the current instruction pointer and added 
+helper functions to get the next parameter depending on the instruction pointer and 
+the current value of the parameter mode (for which I have also created a small helper class).
+
+With these classes, the implementation was rather straight forward.
+
+As a further TODO, one could template the parameter function to always get all 1 or 2 parameters as a parameter pack, which would make the code a bit more readable.
+
+....
+include::solution.cpp
+....

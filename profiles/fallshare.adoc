@@ -1,0 +1,29 @@
+
+:fallshare-avatar: https://avatars0.githubusercontent.com/u/52582314?v=4
+:fallshare-twitter: -
+:fallshare-realName: fallshare
+:fallshare-blog: -
+
+
+//tag::free-form[]
+
+[cols="1,5"]
+|===
+| image:{fallshare-avatar}[]
+a| **fallshare** +
+//{fallshare-realName} +
+icon:github[]: https://github.com/fallshare[fallshare]
+ifeval::[{fallshare-twitter} != -]
+  icon:twitter[] : https://twitter.com/{fallshare-twitter}[fallshare-twitter] +
+endif::[]
+ifeval::[{fallshare-blog} != -]
+  Blog : {fallshare-blog} 
+endif::[]
+|===
+
+=== About me
+
+Nothing here yet. Update your profile at https://github.com/docToolchain/aoc-2019/blob/master/profiles/fallshare.adoc[/profiles/fallshare.adoc] 
+
+//end::free-form[]
+

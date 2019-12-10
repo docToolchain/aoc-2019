@@ -1,0 +1,13 @@
+Day 2 - Solution in Python
+
+Coding in the train :-) Need to learn some python test frameworks next time.
+
+[source, python]
+....
+include::solution.py[]
+....
+
+[source, python]
+....
+include::computer.py[]
+....

@@ -1,0 +1,42 @@
+
+:corneil-avatar: https://avatars0.githubusercontent.com/u/466422?v=4
+:corneil-twitter: corneil
+:corneil-realName: Corneil du Plessis
+:corneil-blog: https://www.baeldung.com/author/corneil-duplessis/
+
+
+//tag::free-form[]
+
+[cols="1,5"]
+|===
+| image:{corneil-avatar}[]
+a| **corneil** +
+{corneil-realName} +
+GitHub: https://github.com/corneil[corneil]
+Twitter: https://twitter.com/{corneil-twitter}[{corneil-twitter}] +
+Blog : {corneil-blog} 
+|===
+
+=== About me
+
+Software Architect with #SkinInTheGame at https://jumpco.io[JumpCO] +
+Passionate about developer experience, and an organizer at https://www.meetup.com/Jozi-JUG[JoziJUG] +
+I'm also a regular speaker at user groups and conferences in South Africa. I haven't been lucky enough to land an invite to an
+international conference.
+
+I was lucky enough to attend JavaOne in 2005. Sharing the Mosconi centre hall with 15000 people was incredible.
+It was the 10th birthday of Java and John Gage had the original team on stage.
+
+I work mostly in JVM languages like Java, Groovy, Kotlin and some Scala.
+My current favourite is Kotlin.
+My first Java application when into production in early 1999 soon after the release of 1.2.
+Before Java I did most of my work in pass:[C++] for Windows, OS/2 and embedded systems.
+We were one of the first teams to embed pass:[C++] on the 80186.
+
+Before pass:[C++] came C, Clipper, Pascal, Fortran and COBOL.
+
+I'm a relative newbie to modern functional programming terminology. However as I learn I realize we did a lot of what would be classified
+as functional programming that in C and pass:[C++].
+
+//end::free-form[]
+

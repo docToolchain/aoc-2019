@@ -1,0 +1,22 @@
+== Universal Orbit Map
+
+I have written my solutions in Haskell. I am using this year's Advent of Code to
+brush up on my functional programming.
+
+To run the final program you need Haskell installed, and simply run the
+`./run.sh`.
+
+This solution takes a dynamic programming approach to finding the total orbits,
+and maps to find the path between you and Santa
+
+== Solution
+
+[source, haskell]
+----
+include::answer.hs[]
+----
+
+[source, bash]
+----
+include::run.sh[]
+----

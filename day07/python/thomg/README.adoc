@@ -1,0 +1,9 @@
+== Disclaimer
+I’m not a professional developer and only doing this for fun. The solutions might be messy.
+
+== Day 07
+Gave the intcomp its own file. For star 1, I used quinary (digits from 0 to 4) to go through all possible phase settings
+in a single for loop.
+
+For star 2, I added return values to the execution of a program: the current state of the program as a list of ints and the pointer
+to the instruction where the program halted.

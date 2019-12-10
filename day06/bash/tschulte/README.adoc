@@ -1,0 +1,34 @@
+== Universal Orbit Map
+
+I wanted to solve this days puzzle using git and bash.
+
+The idea was pretty straightforward:
+
+* create a git repository
+* initialize it with the branch `COM` and an empty commit
+* for each line of the input file
+** split it into two parts
+** checkout the branch named by the first part
+** create a new branch named by the second part and create an empty commit
+* iterate over all branches and count the number of commits (and subtract 1)
+
+This worked nice with the sample input, but the lines in the real input where not in the correct order.
+There where lines, where the first branch has not been created yet.
+Therefore I had to change the code to not process lines, where the first branch has not been created yet, but process all unprocessed lines again and again, until all lines have been processed.
+
+.day06_1.sh
+[source]
+....
+include::day06_1.sh[]
+....
+
+The initialization of the git repo took very long.
+
+But for the second star, I could now only count the number of commits `YOU..SAN~` and `SAN..YOU~`.
+
+.day06_2.sh
+[source]
+....
+include::day06_2.sh[]
+....
+

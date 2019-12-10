@@ -1,0 +1,19 @@
+== Sunny with a Chance of Asteroids
+
+To run the final program you need Haskell installed, and simply run the
+`./run.sh`.
+
+This solution extends my Day 02 solution by adding extra checks and functionality
+for the new op codes.
+
+== Solution
+
+[source, haskell]
+----
+include::answer.hs[]
+----
+
+[source, bash]
+----
+include::run.sh[]
+----

@@ -1,0 +1,35 @@
+
+:mehalter-avatar: https://avatars3.githubusercontent.com/u/1591837?v=4
+:mehalter-twitter: -
+:mehalter-realName: Micah Halter
+:mehalter-blog: -
+
+
+//tag::free-form[]
+
+[cols="1,5"]
+|===
+| image:{mehalter-avatar}[]
+a| **mehalter** +
+//{mehalter-realName} +
+icon:github[]: https://github.com/mehalter[mehalter]
+ifeval::[{mehalter-twitter} != -]
+  icon:twitter[] : https://twitter.com/{mehalter-twitter}[mehalter-twitter] +
+endif::[]
+ifeval::[{mehalter-blog} != -]
+  Blog : {mehalter-blog}
+endif::[]
+|===
+
+=== About me
+
+I am a researcher at the Georgia Tech Research Institute and Co-Owner/Mixologist
+of https://kindredspiritsatl.com[Kindred Spirits Atlanta]. My main research is
+in scientific knowledge representation, and am currently working on
+https://aske.gtri.gatech.edu/docs/latest/[SemanticModels.jl] that uses Category
+Theory based representations of scientific models to enhance meta-modeling tasks
+such as model augmentation, construction, and verification.
+
+More information on myself can be found at https://mehalter.com[mehalter.com].
+
+//end::free-form[]

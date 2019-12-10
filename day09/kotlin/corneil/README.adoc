@@ -1,0 +1,48 @@
+= Day 09 - Sensor Boost
+
+Updated program to support Long for input and output.
+Added opcodes.
+Relative in conjunction with assignment tripped me up a little.
+
+== Class Diagram of the IntCode program model
+
+[plantuml]
+----
+@startuml
+class ProgramCounter {
+    pc: Int
+    run: Boolean
+}
+
+class ProgramState {
+    memory: List<Long>
+    inputs: List<Long>
+    output = List<Long>
+    base : Long
+    executeProgram(): ProgramState
+    executeUntilOutput(input: List<Long>): List<Long>
+}
+
+ProgramState --> ProgramCounter: counter
+
+class Program {
+    code: List<Long>
+
+    executeProgram(input: List<Long>): ProgramState
+    createProgram(input: List<Long>): ProgramState
+}
+
+Program ..left..> ProgramState: <<produces>>
+
+@enduml
+----
+
+[source,kotlin,numbered]
+----
+include::src/main/kotlin/solution.kt[]
+----
+
+[source,kotlin,numbered]
+----
+include::../../../corneil/intcode/src/main/kotlin/intcode.kt[]
+----

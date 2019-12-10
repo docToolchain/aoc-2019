@@ -1,0 +1,59 @@
+== https://adventofcode.com/2019/day/6[Universal Orbit Map]
+
+I was so hoping for something to be solved with the help of my favorite database and query language.
+Enter https://neo4j.com[Neo4j] and https://en.wikipedia.org/wiki/Cypher_(query_language)[Cypher].
+
+As with my SQL solution for day1, I'm gonna run all of this in a dockerized version of the database.
+
+----
+docker run -d -p 7474:7474 -p 7687:7687 -e 'NEO4J_AUTH=neo4j/secret' --name neo4j1 neo4j:3.5.13 # <1>
+docker cp input.txt neo4j1:/var/lib/neo4j/import # <2>
+docker exec -it neo4j1 cypher-shell -u neo4j -p secret # <3>
+----
+<1> Startup a Neo4j container, publish the HTTP and Bolt ports and define a passwort (`secret`)
+<2> Copy the input file into Neo4j's import directory
+<3> Login into the container and open the cypher shell for executing commandos.
+
+I'm gonna use the shell, but you can of course also use the http://localhost:7474/browser/[Neo4j browser].
+It has a friendly interface to get you started with your first graph and some nice visualisations.
+Here's the one from the puzzle's description:
+
+image::/images/day6.png[]
+
+I'm gonna use `LOAD CSV` as described (among other things) in one of my https://speakerdeck.com/michaelsimons/going-from-relational-databases-to-databases-with-relations-with-neo4j-and-spring-data-b5522486-f2bb-4609-9a35-be54feae6702[Neo4j related talks].
+`LOAD CSV` processes CSV files line by line and takes in an optional field separator, which will be `)` in our case:
+
+[source,cypher]
+----
+include::prepare.cypher[]
+----
+<1> Create `Object` nodes. We use a merge statement, that checks whether a given pattern exists or not to avoid duplicates
+<2> Create the `ORBITS` relationship between the objects.
+    We could have done all of this in one step, but than nodes would have been duplicated, as `MERGE` always checks for
+    the existence of the whole pattern.
+
+Having the data, both star one and star two are rather short Cypher statements:
+
+[source,cypher]
+----
+include::star1.cypher[]
+----
+
+This reads: "Match the object named 'COM' (Center of Mass), than match the path from all other objects to this object and return the sum of the length of those paths.".
+This works because the input is a https://en.wikipedia.org/wiki/Tree_(graph_theory)[tree] respectivly a https://en.wikipedia.org/wiki/Directed_acyclic_graph[directed acyclic graph], to be precise.
+
+Star two uses the built-in `shortestPath` operation
+
+[source,cypher]
+----
+include::star2.cypher[]
+----
+<1> Find the starting objects (one step away from `YOU` and `SAN`)
+<2> Pass them on to the next section of the query
+<3> Match the shortest path and return its length.
+
+And with the SQL example from day 1: Don't just dump unstructured data into your databases.
+Use them the way they where meant to be used.
+
+NOTE: Tested with `neo4j:3.5.13`
+      Correct solutions are: `135690` and `298`.

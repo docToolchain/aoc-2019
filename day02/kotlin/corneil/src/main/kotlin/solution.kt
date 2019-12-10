@@ -1,4 +1,4 @@
-package com.github.corneil.aoc2019
+package com.github.corneil.aoc2019.day2
 
 import java.io.File
 
@@ -6,9 +6,9 @@ fun readProgram(input: String) = input.split(",").map { it.toInt() }
 
 fun readProgram(input: File) = readProgram(input.readText().trim())
 
-inline fun deref(input: List<Int>, address: Int): Int = input[input[address]]
+fun deref(input: List<Int>, address: Int): Int = input[input[address]]
 
-inline fun assign(input: MutableList<Int>, address: Int, value: Int) {
+fun assign(input: MutableList<Int>, address: Int, value: Int) {
     input[input[address]] = value
 }
 

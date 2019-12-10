@@ -1,0 +1,31 @@
+
+:wiedmann-avatar: https://avatars0.githubusercontent.com/u/5105977?s=460&v=4
+:wiedmann-twitter: -
+:wiedmann-realName: Christian Wiedmann
+:wiedmann-blog: -
+
+
+//tag::free-form[]
+
+[cols="1,5"]
+|===
+| image:{wiedmann-avatar}[]
+a| **wiedmann** +
+//{wiedmann-realName} +
+GitHub: https://github.com/beckel[beckel]
+ifeval::[{wiedmann-twitter} != -]
+  icon:twitter[] : https://twitter.com/{wiedmann-twitter}[wiedmann-twitter] +
+endif::[]
+ifeval::[{wiedmann-blog} != -]
+  Blog : {wiedmann-blog} 
+endif::[]
+|===
+
+=== About me
+
+Struggling with my name change - since changing your github user name breaks all links to the _old_ repository, I decided not to do it and live in a world of confusion instead :-)
+
+I am solving the puzzles in Python to refresh my programming skills and have some fun on the train rides to/from work. I'd like to use the chance to learn a new language (e.g., Go or Rust), but time is limited. Let's see if I re-solve some of the older puzzles or if I postpone this step to next year's AoC.
+
+//end::free-form[]
+

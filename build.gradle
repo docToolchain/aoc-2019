@@ -1,3 +1,4 @@
+import groovy.json.*
 buildscript {
     dependencies {
         classpath 'org.asciidoctor:asciidoctorj-diagram:1.5.4.1'
@@ -45,6 +46,7 @@ task generateIndex() {
     doLast {
         def src = new File('.')
 
+        def stats = [coders:0,languages:0,stars:[:],days:[]]
         // build up an index of all code
         def days = [:]
         def languages = [:]
@@ -71,9 +73,11 @@ task generateIndex() {
                 }
             }
         }
+        days.sort({k1, k2 -> k1.substring(3).toInteger() <=> k2.substring(3).toInteger()} as Comparator)
         new File(projectDir, "build/.").mkdirs()
         new File(projectDir, 'src/site/content/generated/.').mkdirs()
         def coderIndex = ""
+        stats.coders = coders.size()
         coders.sort{it.key.toLowerCase()}.each { coder, data ->
             // * anoff
             def daysFile = new File(projectDir, "src/site/content/generated/coder/${coder}/generatedDays.adoc")
@@ -88,6 +92,9 @@ task generateIndex() {
 include::../../../config.adoc[]
 
 == $coder
+
+include::../../../../../../profiles/${coder}.adoc[]
+
 
 """)
             coderIndex += "* link:../generated/coder/$coder/generatedDays.html[$coder]\n\n"
@@ -124,21 +131,37 @@ include::${file.canonicalPath-(currentFolder.canonicalPath+'/')}[]
         }
         new File(projectDir, 'src/site/content/generated/byCoder.adoc').write(coderIndex)
         def dayIndex = ""
-        days.each { day, data ->
+        days.sort{it.key}.each { day, data ->
+            def dayNum = (day - "day").replaceAll("^0", "")
+            stats.days << dayNum
             dayIndex += """
 === Day ${day-"day"}
 
-The riddle for day ${day-"day"} can be found at https://adventofcode.com/2019/day/${(day-"day").replaceAll("^0","")}.
-
+"""
+            if (day!="day00") {
+                dayIndex += """
+The riddle for day ${day - "day"} can be found at https://adventofcode.com/2019/day/${(day - "day").replaceAll("^0", "")}.
+"""
+            }
+            dayIndex += """
 [cols="2"]
 |===
 """
-            data.eachWithIndex { datum, i ->
+            def lastCoder = ""
+            data.sort{it[0].toLowerCase()}.eachWithIndex { datum, i ->
                 def coder = datum[0]
                 def language = datum[1].replaceAll("[+]","p")
                 dayIndex += """\
-| $coder | link:/generated/coder/${coder}/generatedDays.html#_day_${day-"day"}_${language}[$language]
+| ${lastCoder==coder?"":coder} | link:/generated/coder/${coder}/generatedDays.html#_day_${day-"day"}_${language}[$language]
 """
+                dayNum = (day - "day").replaceAll("^0", "")
+                if (lastCoder!=coder) {
+                    if (!stats.stars[coder]) {
+                        stats.stars[coder] = [:]
+                    }
+                    stats.stars[coder][dayNum]=1
+                }
+                lastCoder = coder
             }
             dayIndex += "|===\n"
         }
@@ -147,7 +170,8 @@ The riddle for day ${day-"day"} can be found at https://adventofcode.com/2019/da
 
         new File('src/site/content/generated/byDay.adoc').write(dayIndex)
         def langIndex = ""
-        languages.each { language, data ->
+        stats.languages = languages.size()
+        languages.sort{it.key.toLowerCase()}each { language, data ->
             langIndex += """
 === ${language}
 
@@ -166,5 +190,69 @@ The riddle for day ${day-"day"} can be found at https://adventofcode.com/2019/da
             langIndex += "|===\n"
         }
         new File('src/site/content/generated/byLanguage.adoc').write(langIndex)
+
+        def statsFile = """
+= Stats and Leaderboard
+
+Here are some stats for those who are interested.
+
+The repository contains solutions in ${stats.languages} languages by ${stats.coders} developers.
+
+[cols="${stats.days.size()+2}"]
+|===
+|Developer ^| ${stats.days.collect{"Day $it"}.join(' ^| ')} ^| Sum
+"""
+        def emojis=['👋','🕯','🎄','🎶','❄','🔔','🧦','☃','🕯🕯','🎁','🎄','🔔','☃','❄','⛪','🕯🕯🕯','🦌','🧝','🤶','🎄','☃','❄','🕯🕯🕯🕯','🎶','🎅','👪👼🦌']
+        stats.stars.sort{e1, e2 -> e2.value.size() <=> e1.value.size()}.each{ coder, stars ->
+            statsFile += "a|link:/generated/coder/${coder}/generateddays[$coder] ^| ${stats.days.collect{ stars[it]?emojis[it as Integer]:'-' }.join(' ^| ')} ^| ${stars.size()}\n"
+        }
+        statsFile += """
+|===
+"""
+        new File('src/site/content/generated/stats.adoc').write(statsFile)
+
+        def userInfo = ""
+        stats.stars.each {coder, stars->
+            File coderProfile = new File("./profiles/${coder}.adoc")
+            if (!coderProfile.exists()) {
+                def api = "https://api.github.com/users/"
+                def res = []
+                try {
+                    res = new JsonSlurper().parseText(new URL(api + coder).text)
+                } catch (Exception e) {
+                    println "couldn't read $coder : $e"
+                }
+                coderProfile.write("""
+:${coder}-avatar: ${res['avatar_url']}
+:${coder}-twitter: -
+:${coder}-realName: ${res['name']}
+:${coder}-blog: -
+
+
+//tag::free-form[]
+
+[cols="1,5"]
+|===
+| image:{${coder}-avatar}[]
+a| **$coder** +
+//{${coder}-realName} +
+icon:github[]: ${res['html_url']}[${coder}]
+ifeval::[{${coder}-twitter} != -]
+  icon:twitter[] : https://twitter.com/{${coder}-twitter}[${coder}-twitter] +
+endif::[]
+ifeval::[{${coder}-blog} != -]
+  Blog : {${coder}-blog} 
+endif::[]
+|===
+
+=== About me
+
+Nothing here yet. Update your profile at https://github.com/docToolchain/aoc-2019/blob/master/profiles/${coder}.adoc[/profiles/${coder}.adoc] 
+
+//end::free-form[]
+
+""")
+            }
+        }
     }
 }

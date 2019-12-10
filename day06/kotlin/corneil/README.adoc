@@ -1,0 +1,31 @@
+= Day 06 - Universal Orbit Map
+
+My test cases matched the supplied cases.
+
+My answer for the number of transfer was 2 lower than the "correct" answer.
+
+== Model
+[plantuml]
+----
+@startuml
+class Orbitable {
+    name: String
+}
+
+class Orbit
+
+class OrbitData
+
+Orbit ---> Orbitable: centre
+Orbit ---> Orbitable: orbits
+
+OrbitData ---> Orbit: orbits
+OrbitData ---> Orbitable: objects
+
+@enduml
+----
+
+[source,kotlin,numbered]
+----
+include::src/main/kotlin/solution.kt[]
+----

@@ -1,0 +1,9 @@
+﻿== Day 9: 
+
+The original puzzle can be found at https://adventofcode.com/2019/day/9
+
+== Star 1
+reusing the IntCom module out of day 07 and adding relative mode. with only few errors to fix it was not that difficult. See AoC_2019_day09_part1.xlms for details
+
+== Star 2
+only small change to initialize the additional memory, both parts can be calculated by selecting input 1 or 2

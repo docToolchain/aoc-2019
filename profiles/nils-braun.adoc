@@ -1,0 +1,29 @@
+
+:nils-braun-avatar: https://avatars2.githubusercontent.com/u/6116188?v=4
+:nils-braun-twitter: -
+:nils-braun-realName: Nils Braun
+:nils-braun-blog: -
+
+
+//tag::free-form[]
+
+[cols="1,5"]
+|===
+| image:{nils-braun-avatar}[]
+a| **nils-braun** +
+//{nils-braun-realName} +
+icon:github[]: https://github.com/nils-braun[nils-braun]
+ifeval::[{nils-braun-twitter} != -]
+  icon:twitter[] : https://twitter.com/{nils-braun-twitter}[nils-braun-twitter] +
+endif::[]
+ifeval::[{nils-braun-blog} != -]
+  Blog : {nils-braun-blog} 
+endif::[]
+|===
+
+=== About me
+
+Nothing here yet. Update your profile at https://github.com/docToolchain/aoc-2019/blob/master/profiles/nils-braun.adoc[/profiles/nils-braun.adoc] 
+
+//end::free-form[]
+

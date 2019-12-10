@@ -1,0 +1,9 @@
+﻿== Day 7: 
+
+The original puzzle can be found at https://adventofcode.com/2019/day/7
+
+== Star 1
+tbfol (to be filled out later)
+
+== Star 2
+tbfol (to be filled out later)

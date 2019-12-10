@@ -1,0 +1,10 @@
+
+== Sunny with a Chance of Asteroids
+
+For this days task I just copied the sollution from day 2, removed the `restoreState` and `bruteForce` methods, and altered the `computeOutput` method.
+
+.computeOutput
+[source]
+....
+include::day05.groovy[tags=computeOutput]
+....

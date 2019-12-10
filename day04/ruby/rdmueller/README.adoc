@@ -1,0 +1,25 @@
+= Day 4: Secure Container
+
+This sounds like an easy puzzle today.
+Let's take the brute force approach for star one.
+
+https://adventofcode.com/2019/day/4
+
+== Star One
+
+Let's iterate over all possible passwords and count how many of them are valid.
+The processing power should be enough.
+
+[source, ruby, numbered, indent=0]
+----
+include::solution.rb[]
+----
+
+== Star Two
+
+I think I can stay with the brute force approach, but I have to update my checks.
+
+[source, ruby, numbered, indent=0]
+----
+include::solution_s2.rb[]
+----

@@ -181,7 +181,7 @@ class ProgramState(
         }
     }
 
-    fun executeProgram(): ProgramState {
+    fun execute(): ProgramState {
         counter = ProgramCounter(0, true)
         while (counter.run && counter.pc < memory.size) {
             counter = readAndExecute()
@@ -201,17 +201,35 @@ class ProgramState(
 
 class Program(
     private val code: List<Long>,
-    private val fetchInput: (() -> Long)? = null,
-    private val outputHandler: ((Long) -> Unit)? = null
+    private val globalFetchInput: (() -> Long)? = null,
+    private val globalOutputHandler: ((Long) -> Unit)? = null
 ) {
 
-    fun executeProgram(input: List<Long>): ProgramState {
-        val state = ProgramState(code.toMutableList(), input.toMutableList(), fetchInput, outputHandler)
-        state.executeProgram()
+    fun executeProgram(
+        input: List<Long>,
+        fetchInput: (() -> Long)? = null,
+        outputHandler: ((Long) -> Unit)? = null
+    ): ProgramState {
+        val state = ProgramState(
+            code.toMutableList(),
+            input.toMutableList(),
+            fetchInput ?: globalFetchInput,
+            outputHandler ?: globalOutputHandler
+        )
+        state.execute()
         return state
     }
 
-    fun createProgram(input: List<Long> = emptyList()): ProgramState {
-        return ProgramState(code.toMutableList(), input.toMutableList(), fetchInput, outputHandler)
+    fun createProgram(
+        input: List<Long> = emptyList(),
+        fetchInput: (() -> Long)? = null,
+        outputHandler: ((Long) -> Unit)? = null
+    ): ProgramState {
+        return ProgramState(
+            code.toMutableList(),
+            input.toMutableList(),
+            fetchInput ?: globalFetchInput,
+            outputHandler ?: globalOutputHandler
+        )
     }
 }

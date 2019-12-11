@@ -70,7 +70,8 @@ fun runRobot(input: List<Long>, startingColor: Int): Int {
     val robot = Robot(Coord(0, 0), NORTH)
     val grid = Grid()
     var outputState = false
-    val code = Program(input, fetchInput = {
+    val code = Program(input)
+    val program = code.createProgram(listOf(startingColor.toLong()), fetchInput = {
         grid.cellColor(robot.position).toLong()
     }, outputHandler = { output ->
         if (!outputState) {
@@ -81,9 +82,8 @@ fun runRobot(input: List<Long>, startingColor: Int): Int {
             outputState = false
         }
     })
-    val program = code.createProgram(listOf(startingColor.toLong()))
     do {
-        program.executeProgram()
+        program.execute()
     } while (!program.isHalted())
     printGrid(grid)
     return grid.cells.values.count { it.painted }
@@ -105,7 +105,8 @@ fun printGrid(grid: Grid) {
 
 fun main(args: Array<String>) {
     val fileName = if (args.size > 1) args[0] else "input.txt"
-    val painted = runRobot(readProgram(File(fileName)), 0)
+    val code = readProgram(File(fileName))
+    val painted = runRobot(code, 0)
     println("Painted = $painted")
-    runRobot(readProgram(File(fileName)), 1)
+    runRobot(code, 1)
 }

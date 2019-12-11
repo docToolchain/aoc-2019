@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 import java.util.function.BiFunction;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.IntStream;
 
@@ -19,10 +20,8 @@ public class Solution {
 
 		private final long[] program;
 
-		// tag::memorySpace[]
 		private final Map<Long, Long> memory;
 
-		// end::memorySpace[]
 		private Optional<Long> next;
 
 		private long base = 0L;
@@ -81,7 +80,6 @@ public class Solution {
 			return this;
 		}
 
-		// tag::usingNewIo[]
 		private Optional<Long> readStdIn() {
 
 			return Optional.ofNullable(stdIn.poll());
@@ -111,8 +109,6 @@ public class Solution {
 			return Optional.ofNullable(this.stdOut.poll());
 		}
 
-		// end::usingNewIo[]
-
 		public boolean expectsInput() {
 			return next.isPresent();
 		}
@@ -129,13 +125,11 @@ public class Solution {
 					store(load(ptr++, 0), modes[2], numericOperations.get(opcode).apply(p1, p2));
 					yield Optional.of(ptr);
 				}
-				// tag::newIoHandling[]
 				case 3 -> {
 					var v = readStdIn().orElseThrow(InputRequiredException::new);
 					store(load(ptr++, 0), modes[0], v);
 					yield Optional.of(ptr);
 				}
-				// end::newIoHandling[]
 				case 4 -> {
 					writeStdOut(load(load(ptr++, 0), modes[0]));
 					yield Optional.of(ptr);
@@ -151,13 +145,11 @@ public class Solution {
 					store(load(ptr++, 0), modes[2], comparisons.get(opcode).apply(p1, p2) ? 1L : 0L);
 					yield Optional.of(ptr);
 				}
-				// tag::relativeMemory[]
 				case 9 -> {
 					var l = load(load(ptr++, 0), modes[0]);
 					base += l;
 					yield Optional.of(ptr);
 				}
-				// end::relativeMemory[]
 				case 99 -> Optional.empty();
 				default -> throw new IllegalArgumentException(String.format("Invalid opcode %d", opcode));
 			};
@@ -169,10 +161,9 @@ public class Solution {
 				.toArray();
 		}
 
-		// tag::memorySpace[]
 		private long resolveAddress(long address, int mode) {
 
-			return mode == 2 ? base + address : address;  // <1>
+			return mode == 2 ? base + address : address;
 		}
 
 		private Long load(long p, int mode) {
@@ -190,7 +181,6 @@ public class Solution {
 			var address = resolveAddress(p, mode);
 			this.memory.put(address, v);
 		}
-		// end::memorySpace[]
 	}
 
 	// tag::basicComponents[]
@@ -203,7 +193,13 @@ public class Solution {
 	}
 
 	enum View {
-		NORTH, SOUTH, WEST, EAST;
+		NORTH("^"), SOUTH("v"), WEST("<"), EAST(">");
+
+		private final String rep;
+
+		View(String rep) {
+			this.rep = rep;
+		}
 
 		View turn(Direction direction) {
 			return switch (this) {
@@ -212,6 +208,11 @@ public class Solution {
 				case SOUTH -> direction == Direction.LEFT ? EAST : WEST;
 				case EAST -> direction == Direction.LEFT ? NORTH : SOUTH;
 			};
+		}
+
+		@Override
+		public String toString() {
+			return this.rep;
 		}
 	}
 
@@ -303,27 +304,105 @@ public class Solution {
 		return sb.toString();
 	}
 	// end::painting[]
+	
+	// Not so much relevant to the puzzle but for animating it
+	interface Event<T> {
+		Panel getPanel();
+
+		T getAttribute();
+	}
+	
+	abstract static class AbstractEvent<T> implements Event<T> {
+		final Panel panel;
+
+		AbstractEvent(Panel panel) {
+			this.panel = panel;
+		}
+
+		@Override
+		public Panel getPanel() {
+			return panel;
+		}
+	}
+
+	static class PanelPaintedEvent extends AbstractEvent<Color> {
+		final Color color;
+
+		PanelPaintedEvent(Panel panel, Color color) {
+			super(panel);
+			this.color = color;
+		}
+
+		@Override
+		public Color getAttribute() {
+			return color;
+		}
+	}
+
+	static class MovedToPanelEvent extends AbstractEvent<View> {
+		final View view;
+
+		MovedToPanelEvent(Panel panel, View view) {
+			super(panel);
+			this.view = view;
+		}
+
+		@Override
+		public View getAttribute() {
+			return view;
+		}
+	}
+
+	static class StoppedEvent extends AbstractEvent<Void> {
+
+		StoppedEvent(Panel panel) {
+			super(panel);
+		}
+
+		@Override
+		public Void getAttribute() {
+			return null;
+		}
+	}
 
 	// tag::solution[]
-	static Map<Panel, Color> walkHull(Computer computer, Map.Entry<Panel, Color> startPanel) {
+	static Map<Panel, Color> walkHull(Computer computer, Map.Entry<Panel, Color> startPanel, Consumer<Event> callback) {
 
 		var panelComparator = Comparator
 			.comparing(Panel::getY).reversed().thenComparing(Panel::getX); // <.>
-
 		var panels = new TreeMap<Panel, Color>(panelComparator);
-		panels.put(startPanel.getKey(), startPanel.getValue());
+
+		Consumer<Event> handler = event -> {
+			if (event instanceof PanelPaintedEvent) {
+				PanelPaintedEvent panelPaintedEvent = (PanelPaintedEvent) event;
+				panels.put(panelPaintedEvent.getPanel(), panelPaintedEvent.getAttribute());
+			}
+		};
+		handler = handler.andThen(callback);
 
 		var currentView = View.NORTH;
 		var currentPanel = startPanel.getKey();
+
+		// Need to initialize the start color
+		handler.accept(new PanelPaintedEvent(currentPanel, startPanel.getValue()));
 		do {
+			// Compute
 			computer
 				.pipe(panels.getOrDefault(currentPanel, Color.BLACK).toLong()) // <.>
 				.run(false);
 			var output = computer.drain();
-			panels.put(currentPanel, Color.fromLong(output.get(0)));
+
+			// Paint
+			var currentColor = Color.fromLong(output.get(0));
+			handler.accept(new PanelPaintedEvent(currentPanel, currentColor));
+
+			// Move
 			currentView = currentView.turn(Direction.fromLong(output.get(1)));
 			currentPanel = currentPanel.next(currentView);
+			handler.accept(new MovedToPanelEvent(currentPanel, currentView));
 		} while (computer.expectsInput());
+
+		handler.accept(new StoppedEvent(currentPanel));
 
 		computer.reset();
 		return panels;
@@ -331,17 +410,48 @@ public class Solution {
 	// end::solution[]
 
 	public static void main(String... a) throws IOException {
+
 		var instructions = Files.readAllLines(Path.of("input.txt")).stream().flatMap(s -> Arrays.stream(s.split(",")))
 			.map(String::trim)
 			.map(Long::parseLong)
 			.collect(toList());
 
 		var computer = Computer.loadProgram(instructions);
-		var panels = walkHull(computer, Map.entry(new Panel(0, 0), Color.BLACK));
-		System.out.println(String.format("Star one %d", panels.size()));
+		Consumer<Event> eventHandler = event -> {
+		};
+		var panels = walkHull(computer, Map.entry(new Panel(0, 0), Color.BLACK), eventHandler);
 
-		panels = walkHull(computer, Map.entry(new Panel(0, 0), Color.WHITE));
+		var animate = a.length == 1 && a[0].equals("--animate");
+		if (animate) {
+			var esc = 0x1B;
+			eventHandler = event -> {
+				try {
+					Thread.sleep(10);
+				} catch (Exception e) {
+				}
+
+				var fmt = "";
+				var cur = event.getPanel();
+				if (event instanceof StoppedEvent) {
+					fmt = "\n\n";
+				} else if (event instanceof PanelPaintedEvent) {
+					fmt = "%c[%d;%df%s";
+				} else {
+					fmt = "%c[%d;%df%1$c[1;31m%s%1$c[0m";
+				}
+				var msg = String.format(fmt, esc, 3 + Math.abs(cur.y), 1 + cur.x, event.getAttribute());
+				System.out.print(msg);
+			};
+
+			System.out.print(String.format("%c[2J", esc));
+			System.out.print(String.format("%c[%d;%dH", esc, 1, 0));
+		}
+
+		System.out.println(String.format("Star one %d", panels.size()));
 		System.out.println("Star two");
-		System.out.println(paint(panels));
+		panels = walkHull(computer, Map.entry(new Panel(0, 0), Color.WHITE), eventHandler);
+		if (!animate) {
+			System.out.println(paint(panels));
+		}
 	}
 }

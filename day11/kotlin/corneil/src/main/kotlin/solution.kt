@@ -69,18 +69,21 @@ data class Grid(val cells: MutableMap<Coord, Cell> = mutableMapOf()) {
 fun runRobot(input: List<Long>, startingColor: Int): Int {
     val robot = Robot(Coord(0, 0), NORTH)
     val grid = Grid()
-    val code = Program(input) { grid.cellColor(robot.position).toLong() }
+    var outputState = false
+    val code = Program(input, fetchInput = {
+        grid.cellColor(robot.position).toLong()
+    }, outputHandler = { output ->
+        if (!outputState) {
+            grid.paintCell(robot.position, output.toInt())
+            outputState = true
+        } else {
+            robot.turn(output.toInt())
+            outputState = false
+        }
+    })
     val program = code.createProgram(listOf(startingColor.toLong()))
     do {
-        val outputs = mutableListOf<Long>()
-        while (outputs.size < 2 && !program.isHalted()) {
-            outputs.addAll(program.executeUntilOutput(emptyList()))
-        }
-        if (outputs.isNotEmpty()) {
-            require(outputs.size == 2)
-            grid.paintCell(robot.position, outputs[0].toInt())
-            robot.turn(outputs[1].toInt())
-        }
+        program.executeProgram()
     } while (!program.isHalted())
     printGrid(grid)
     return grid.cells.values.count { it.painted }

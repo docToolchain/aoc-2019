@@ -109,9 +109,6 @@ class TestAsteroidMonitoring {
         println("best=$best")
         assertThat(best).isEqualTo(Pair(Coord(11, 13), 210))
         val shot = shootInOrder(map, best!!.first)
-        shot.forEachIndexed { index, coord ->
-            println("Shot:$index = $coord")
-        }
         assertThat(shot[199]).isEqualTo(Coord(8, 2))
     }
 }

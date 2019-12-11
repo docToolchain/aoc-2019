@@ -1,4 +1,4 @@
-== Amplification Circuit
+== Sensor Boost
 
 The solutions are written in Typescript. To run them use the following commands.
 
@@ -19,7 +19,7 @@ and handling for opcode 9.
 include::src/Computer.ts[tag=opcode9]
 ....
 
-Extending other capabilities was not necessary. Lareg numbers are supported from number object in Typescript and array is automaticly extended if write a value to new index. Only return 0 if index not exists was added.
+Extending other capabilities was not necessary. Large numbers are supported from number object in Typescript and array is automaticly extended if write a value to new index. Only return 0 if index not exists was added.
 ....
 include::src/Program.ts[tag=getInput1]
 ....
@@ -31,7 +31,7 @@ include::src/Computer.ts[tag=load]
 
 === First and Second Star
 
-Difference between solution 1 and 2 is the used input parameter.
+Difference between solution one and two is the used input parameter.
 [source, typescript, numbered]
 ....
 include::src/solution1.ts[tag=permutation]

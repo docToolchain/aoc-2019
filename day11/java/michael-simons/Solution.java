@@ -304,64 +304,55 @@ public class Solution {
 		return sb.toString();
 	}
 	// end::painting[]
-	
+
 	// Not so much relevant to the puzzle but for animating it
 	interface Event<T> {
 		Panel getPanel();
 
-		T getAttribute();
+		T getPayload();
+
 	}
-	
+
 	abstract static class AbstractEvent<T> implements Event<T> {
 		final Panel panel;
 
-		AbstractEvent(Panel panel) {
+		final T payload;
+
+		AbstractEvent(Panel panel, T payload) {
 			this.panel = panel;
+			this.payload = payload;
 		}
 
 		@Override
 		public Panel getPanel() {
 			return panel;
 		}
+
+		@Override
+		public T getPayload() {
+			return payload;
+		}
 	}
 
 	static class PanelPaintedEvent extends AbstractEvent<Color> {
-		final Color color;
 
 		PanelPaintedEvent(Panel panel, Color color) {
-			super(panel);
-			this.color = color;
-		}
-
-		@Override
-		public Color getAttribute() {
-			return color;
+			super(panel, color);
 		}
 	}
 
 	static class MovedToPanelEvent extends AbstractEvent<View> {
-		final View view;
 
 		MovedToPanelEvent(Panel panel, View view) {
-			super(panel);
-			this.view = view;
+			super(panel, view);
 		}
 
-		@Override
-		public View getAttribute() {
-			return view;
-		}
 	}
 
 	static class StoppedEvent extends AbstractEvent<Void> {
 
 		StoppedEvent(Panel panel) {
-			super(panel);
-		}
-
-		@Override
-		public Void getAttribute() {
-			return null;
+			super(panel, null);
 		}
 	}
 
@@ -375,16 +366,17 @@ public class Solution {
 		Consumer<Event> handler = event -> {
 			if (event instanceof PanelPaintedEvent) {
 				PanelPaintedEvent panelPaintedEvent = (PanelPaintedEvent) event;
-				panels.put(panelPaintedEvent.getPanel(), panelPaintedEvent.getAttribute());
+				panels.put(panelPaintedEvent.getPanel(), panelPaintedEvent.getPayload());
 			}
 		};
 		handler = handler.andThen(callback);
 
 		var currentView = View.NORTH;
 		var currentPanel = startPanel.getKey();
+		var currentColor = startPanel.getValue();
 
 		// Need to initialize the start color
-		handler.accept(new PanelPaintedEvent(currentPanel, startPanel.getValue()));
+		handler.accept(new PanelPaintedEvent(currentPanel, currentColor));
 		do {
 			// Compute
 			computer
@@ -393,7 +385,7 @@ public class Solution {
 			var output = computer.drain();
 
 			// Paint
-			var currentColor = Color.fromLong(output.get(0));
+			currentColor = Color.fromLong(output.get(0));
 			handler.accept(new PanelPaintedEvent(currentPanel, currentColor));
 
 			// Move
@@ -439,7 +431,7 @@ public class Solution {
 				} else {
 					fmt = "%c[%d;%df%1$c[1;31m%s%1$c[0m";
 				}
-				var msg = String.format(fmt, esc, 3 + Math.abs(cur.y), 1 + cur.x, event.getAttribute());
+				var msg = String.format(fmt, esc, 3 + Math.abs(cur.y), 1 + cur.x, event.getPayload());
 				System.out.print(msg);
 			};
 

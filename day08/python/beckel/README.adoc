@@ -1,0 +1,8 @@
+Day 8 - Solution in Python
+
+Cool puzzle - needed to glitch the eyes a bit to be able to read the code though :)
+
+[source, python]
+....
+include::solution.py[]
+....

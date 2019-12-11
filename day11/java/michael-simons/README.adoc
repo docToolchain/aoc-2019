@@ -38,5 +38,9 @@ include::Solution.java[tags=solution]
 
 I think that the above solution is a nice way of speaking the domains language without creating ivory towers.
 
+Bonus: I added some handler code that gets each state event and can create this:
+
+image::/images/day11.gif[]
+
 NOTE: Run with `java --source 13 --enable-preview Solution.java`.
       Tested with `java version "13" 2019-09-17`, correct solutions are: `1732` and `ABCLFUHJ`.

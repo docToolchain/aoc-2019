@@ -40,7 +40,5 @@ def paint(program, initial_color):
             current_color = 1 if position in white else 0
             computer.provide_input(current_color)
 
-    print("Black:",len(black),"White:",len(white))
-
-    return len(black) + len(white)
+    return [black, white]
             

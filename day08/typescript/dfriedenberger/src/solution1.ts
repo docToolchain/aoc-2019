@@ -8,10 +8,10 @@ let code = fs.readFileSync("input.txt").toString('utf-8');
 layerManager.load(code);
 
 
-// tag::star1
+// tag::star1[]
 let layer : Layer = layerManager.selectWithFewestDigits('0');
 var result = layer.count('1') * layer.count('2');
-// end::star1
+// end::star1[]
 
 
 

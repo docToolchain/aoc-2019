@@ -77,7 +77,6 @@ class TestGridInspector {
         val grid = Grid()
         grid.updateGrid(instructions1, 1)
         grid.updateGrid(instructions2, 2)
-        val start = Coord(0, 0)
         val best = grid.findLowestStepsIntersection(2)
         // then
         println("Best=$best")
@@ -94,7 +93,6 @@ class TestGridInspector {
         val grid = Grid()
         grid.updateGrid(instructions1, 1)
         grid.updateGrid(instructions2, 2)
-        val start = Coord(0, 0)
         val best = grid.findLowestStepsIntersection(2)
         // then
         println("Best=$best")
@@ -113,7 +111,6 @@ class TestGridInspector {
         val grid = Grid()
         grid.updateGrid(instructions1, 1)
         grid.updateGrid(instructions2, 2)
-        val start = Coord(0, 0)
         val best = grid.findLowestStepsIntersection(2)
         // then
         println("Best=$best")

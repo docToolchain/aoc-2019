@@ -5,23 +5,22 @@ import 'util/util.dart';
 
 int getParamWithInst(
     int inst, int index, int offset, int base, CustomList intCodes) {
-  
   print('Inst: $inst, Index: $index, Offset: $offset, Base: $base');
-  
+
   switch (inst) {
     // positioned mode
     case 0:
-      return intCodes[intCodes[index + offset]];
+      return intCodes[index + offset];
       break;
 
     // immediate mode
     case 1:
-      return intCodes[index + offset];
+      return index + offset;
       break;
 
     // positioned mode with base shift
     case 2:
-      return intCodes[intCodes[index + offset] + base];
+      return intCodes[index + offset] + base;
       break;
 
     default:
@@ -34,133 +33,85 @@ int iterateOpCodes(Amplifier currAmp) {
 
   for (int i = currAmp.pointer; i < intCodes.instructions.length;) {
     List<int> opCodes = parseOpCodes(intCodes[i]);
+    // print(intCodes.instructions);
 
     if (opCodes[0] == 99) {
       currAmp.pointer = i;
       break;
     }
 
+    int firstInst = opCodes[1];
+    int secInst = opCodes[2];
+    int thirdInst = opCodes[3];
+
+    int firstParam =
+        getParamWithInst(firstInst, i, 1, currAmp.relativeBase, intCodes);
+    int secParam =
+        getParamWithInst(secInst, i, 2, currAmp.relativeBase, intCodes);
+    int outPos =
+        getParamWithInst(thirdInst, i, 3, currAmp.relativeBase, intCodes);
+
+
     switch (opCodes[0]) {
       case 1:
-        int firstInst = opCodes[1];
-        int secInst = opCodes[2];
-
-        int firstParam =
-            getParamWithInst(firstInst, i, 1, currAmp.relativeBase, intCodes);
-        int secParam =
-            getParamWithInst(secInst, i, 2, currAmp.relativeBase, intCodes);
-        int outPos = getParamWithInst(1, i, 3, currAmp.relativeBase, intCodes);
-
-        intCodes[outPos] = firstParam + secParam;
+        intCodes[outPos] = intCodes[firstParam] + intCodes[secParam];
         i += 4;
-        print('Addition called: $firstParam + $secParam to $outPos');
+        print('Addition called: ${intCodes[firstParam]} + ${intCodes[secParam]} to $outPos');
         break;
 
       case 2:
-        int firstInst = opCodes[1];
-        int secInst = opCodes[2];
-
-        int firstParam =
-            getParamWithInst(firstInst, i, 1, currAmp.relativeBase, intCodes);
-        int secParam =
-            getParamWithInst(secInst, i, 2, currAmp.relativeBase, intCodes);
-        int outPos = getParamWithInst(1, i, 3, currAmp.relativeBase, intCodes);
-
-        intCodes[outPos] = firstParam * secParam;
+        intCodes[outPos] = intCodes[firstParam] * intCodes[secParam];
         i += 4;
-        print('Multiplication called: $firstParam * $secParam to $outPos');
+        print('Multiplication called: ${intCodes[firstParam]} * ${intCodes[secParam]} to $outPos');
         break;
 
       case 3:
-        int firstParam = intCodes[i + 1];
         print('Please enter the System ID to run the test on:');
         int userIn = int.parse(stdin.readLineSync());
 
         intCodes[firstParam] = userIn;
         i += 2;
-        print('Storing called: $userIn in $firstParam');
+        print('Storing called: $userIn in ${firstParam}');
         break;
 
       case 4:
-        int firstInst = opCodes[1];
-        int firstParam =
-            getParamWithInst(firstInst, i, 1, currAmp.relativeBase, intCodes);
-
         i += 2;
-        print('Printing called: $firstParam');
+        print('Printing called: ${intCodes[firstParam]}');
         currAmp.pointer = i;
-
         break;
 
       case 5:
-        int firstInst = opCodes[1];
-        int secInst = opCodes[2];
+        bool doJump = intCodes[firstParam] != 0;
 
-        int firstParam =
-            getParamWithInst(firstInst, i, 1, currAmp.relativeBase, intCodes);
-        int secParam =
-            getParamWithInst(secInst, i, 2, currAmp.relativeBase, intCodes);
-        bool doJump = firstParam != 0;
-
-        i = doJump ? secParam : i + 3;
-        print('Jump if True: $firstParam is $doJump, $secParam');
+        i = doJump ? intCodes[secParam] : i + 3;
+        print('Jump if True: ${intCodes[firstParam]} is $doJump, ${intCodes[secParam]}');
         break;
 
       case 6:
-        int firstInst = opCodes[1];
-        int secInst = opCodes[2];
+        bool doJump = intCodes[firstParam] == 0;
 
-        int firstParam =
-            getParamWithInst(firstInst, i, 1, currAmp.relativeBase, intCodes);
-        int secParam =
-            getParamWithInst(secInst, i, 2, currAmp.relativeBase, intCodes);
-        bool doJump = firstParam == 0;
-
-        i = doJump ? secParam : i + 3;
-        print('Jump if False: $firstParam is $doJump, $secParam');
+        i = doJump ? intCodes[secParam] : i + 3;
+        print('Jump if False: ${intCodes[firstParam]} is $doJump, ${intCodes[secParam]}');
         break;
 
       case 7:
-        int firstInst = opCodes[1];
-        int secInst = opCodes[2];
-
-        int firstParam =
-            getParamWithInst(firstInst, i, 1, currAmp.relativeBase, intCodes);
-        int secParam =
-            getParamWithInst(secInst, i, 2, currAmp.relativeBase, intCodes);
-        int outPos = getParamWithInst(1, i, 3, currAmp.relativeBase, intCodes);
-
-        intCodes[outPos] = firstParam < secParam ? 1 : 0;
+        intCodes[outPos] = intCodes[firstParam] < intCodes[secParam] ? 1 : 0;
         print(
-            'Store 1 if less else 0: $firstParam < $secParam, ${intCodes[outPos]}');
+            'Store 1 if less else 0: ${intCodes[firstParam]} < ${intCodes[secParam]}, ${intCodes[outPos]} in in $outPos');
         i += 4;
         break;
 
       case 8:
-        int firstInst = opCodes[1];
-        int secInst = opCodes[2];
-
-        int firstParam =
-            getParamWithInst(firstInst, i, 1, currAmp.relativeBase, intCodes);
-        int secParam =
-            getParamWithInst(secInst, i, 2, currAmp.relativeBase, intCodes);
-        int outPos = getParamWithInst(1, i, 3, currAmp.relativeBase, intCodes);
-
-        intCodes[outPos] = firstParam == secParam ? 1 : 0;
+        intCodes[outPos] = intCodes[firstParam] == intCodes[secParam] ? 1 : 0;
         print(
-            'Store 1 if equal else 0: $firstParam = $secParam, ${intCodes[outPos]}');
+            'Store 1 if equal else 0: ${intCodes[firstParam]} = ${intCodes[secParam]}, ${intCodes[outPos]} in $outPos');
         i += 4;
-        break;
+        break; 
 
       case 9:
-        int firstInst = opCodes[1];
-
-        int firstParam =
-            getParamWithInst(firstInst, i, 1, currAmp.relativeBase, intCodes);
-
-        currAmp.relativeBase += firstParam;
+        currAmp.relativeBase += intCodes[firstParam];
         print(
-            'Adjusting relative base of Amplifier $currAmp by $firstParam to ${currAmp.relativeBase}');
+            'Adjusting relative base of Amplifier $currAmp by ${intCodes[firstParam]} to ${currAmp.relativeBase}');
         i += 2;
         break;
 

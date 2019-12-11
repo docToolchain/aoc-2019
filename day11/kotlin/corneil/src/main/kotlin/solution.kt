@@ -69,18 +69,21 @@ data class Grid(val cells: MutableMap<Coord, Cell> = mutableMapOf()) {
 fun runRobot(input: List<Long>, startingColor: Int): Int {
     val robot = Robot(Coord(0, 0), NORTH)
     val grid = Grid()
-    val code = Program(input) { grid.cellColor(robot.position).toLong() }
-    val program = code.createProgram(listOf(startingColor.toLong()))
+    var outputState = false
+    val code = Program(input)
+    val program = code.createProgram(listOf(startingColor.toLong()), fetchInput = {
+        grid.cellColor(robot.position).toLong()
+    }, outputHandler = { output ->
+        if (!outputState) {
+            grid.paintCell(robot.position, output.toInt())
+            outputState = true
+        } else {
+            robot.turn(output.toInt())
+            outputState = false
+        }
+    })
     do {
-        val outputs = mutableListOf<Long>()
-        while (outputs.size < 2 && !program.isHalted()) {
-            outputs.addAll(program.executeUntilOutput(emptyList()))
-        }
-        if (outputs.isNotEmpty()) {
-            require(outputs.size == 2)
-            grid.paintCell(robot.position, outputs[0].toInt())
-            robot.turn(outputs[1].toInt())
-        }
+        program.execute()
     } while (!program.isHalted())
     printGrid(grid)
     return grid.cells.values.count { it.painted }
@@ -102,7 +105,8 @@ fun printGrid(grid: Grid) {
 
 fun main(args: Array<String>) {
     val fileName = if (args.size > 1) args[0] else "input.txt"
-    val painted = runRobot(readProgram(File(fileName)), 0)
+    val code = readProgram(File(fileName))
+    val painted = runRobot(code, 0)
     println("Painted = $painted")
-    runRobot(readProgram(File(fileName)), 1)
+    runRobot(code, 1)
 }

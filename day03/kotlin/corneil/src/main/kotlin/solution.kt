@@ -153,7 +153,6 @@ fun main(args: Array<String>) {
     }
     val grid = Grid()
     lines.forEachIndexed { index, line ->
-        println("Index=$index:$line")
         grid.updateGrid(stringToInstructions(line), index + 1)
     }
     val start = Coord(0, 0)

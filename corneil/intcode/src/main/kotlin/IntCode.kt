@@ -46,7 +46,8 @@ data class ProgramCounter(val pc: Int, val run: Boolean) {
 class ProgramState(
     private val memory: MutableList<Long>,
     private val inputs: MutableList<Long> = mutableListOf(),
-    private val fetchInput: (() -> Long)? = null
+    private val fetchInput: (() -> Long)? = null,
+    private val outputHandler: ((Long) -> Unit)? = null
 ) {
     var counter = ProgramCounter(0, true)
         private set
@@ -149,7 +150,11 @@ class ProgramState(
 
     private fun outputValue(): ProgramCounter {
         val value = paramValue(1)
-        output.add(value)
+        if (outputHandler != null) {
+            outputHandler.invoke(value)
+        } else {
+            output.add(value)
+        }
         return counter.add(2)
     }
 
@@ -176,7 +181,7 @@ class ProgramState(
         }
     }
 
-    fun executeProgram(): ProgramState {
+    fun execute(): ProgramState {
         counter = ProgramCounter(0, true)
         while (counter.run && counter.pc < memory.size) {
             counter = readAndExecute()
@@ -194,15 +199,37 @@ class ProgramState(
     }
 }
 
-class Program(private val code: List<Long>, private val fetchInput: (() -> Long)?) {
+class Program(
+    private val code: List<Long>,
+    private val globalFetchInput: (() -> Long)? = null,
+    private val globalOutputHandler: ((Long) -> Unit)? = null
+) {
 
-    fun executeProgram(input: List<Long>): ProgramState {
-        val state = ProgramState(code.toMutableList(), input.toMutableList(), fetchInput)
-        state.executeProgram()
+    fun executeProgram(
+        input: List<Long>,
+        fetchInput: (() -> Long)? = null,
+        outputHandler: ((Long) -> Unit)? = null
+    ): ProgramState {
+        val state = ProgramState(
+            code.toMutableList(),
+            input.toMutableList(),
+            fetchInput ?: globalFetchInput,
+            outputHandler ?: globalOutputHandler
+        )
+        state.execute()
         return state
     }
 
-    fun createProgram(input: List<Long> = emptyList()): ProgramState {
-        return ProgramState(code.toMutableList(), input.toMutableList(), fetchInput)
+    fun createProgram(
+        input: List<Long> = emptyList(),
+        fetchInput: (() -> Long)? = null,
+        outputHandler: ((Long) -> Unit)? = null
+    ): ProgramState {
+        return ProgramState(
+            code.toMutableList(),
+            input.toMutableList(),
+            fetchInput ?: globalFetchInput,
+            outputHandler ?: globalOutputHandler
+        )
     }
 }

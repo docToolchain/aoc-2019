@@ -1,0 +1,9 @@
+== The Tyranny of the Rocket Equation
+
+I wrote my solution in PHP.
+To run the final program you need PHP installed. You can run the script and it will give you the solution as output.
+
+== Solution
+
+1.php contains the solution of the first task of day 01
+1_extra.php contains the solution of the second task of day 01

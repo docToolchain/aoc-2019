@@ -1,0 +1,38 @@
+== Monitoring Station
+
+The solutions are written in Typescript. To run them use the following commands.
+
+....
+npm install
+gulp
+node dist/solution1.js
+node dist/solution2.js
+....
+
+Implement AsteroidMap with document first, so I was thinking implementing the following functions:
+
+* add row (calculate width and high)
+* is an asteroid at x,y
+* cnt asteroids in diagonal
+* cnt reachable asteroids from x,y
+* find best position
+
+for vaporization i would sort arrays by angle and distance.
+....
+include::src/AsteroidMap.ts[]
+....
+
+
+=== First Start
+[source, typescript, numbered]
+....
+include::src/solution1.ts[tag=find]
+....
+
+
+=== Second Star
+[source, typescript, numbered]
+....
+include::src/solution2.ts[tag=vaporize]
+....
+

@@ -1,0 +1,28 @@
+== Space Police
+
+The solutions are written in Typescript. To run them use the following commands.
+
+....
+npm install
+gulp
+node dist/solution1.js
+node dist/solution2.js
+....
+
+Implement Panel class and reused unmodified Computer.
+....
+include::src/Panel.ts[]
+....
+
+=== First Start
+[source, typescript, numbered]
+....
+include::src/solution1.ts[]
+....
+=== Second Star
+
+[source, typescript, numbered]
+....
+include::src/solution2.ts[]
+....
+

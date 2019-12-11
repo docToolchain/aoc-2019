@@ -9,7 +9,7 @@ let code = fs.readFileSync("input.txt").toString('utf-8');
 
 layerManager.load(code);
 
-// tag::star2
+// tag::star2[]
 let layer : Layer = layerManager.joinLayers();
 for(let t = 0;t < 6;t++)
 {
@@ -21,7 +21,7 @@ for(let t = 0;t < 6;t++)
     }
     console.log(line);
 }
-// end::star2
+// end::star2[]
 
 
 

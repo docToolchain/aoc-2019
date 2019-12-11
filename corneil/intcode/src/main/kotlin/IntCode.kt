@@ -45,7 +45,8 @@ data class ProgramCounter(val pc: Int, val run: Boolean) {
 
 class ProgramState(
     private val memory: MutableList<Long>,
-    private val inputs: MutableList<Long> = mutableListOf()
+    private val inputs: MutableList<Long> = mutableListOf(),
+    private val fetchInput: (() -> Long)? = null
 ) {
     var counter = ProgramCounter(0, true)
         private set
@@ -108,8 +109,13 @@ class ProgramState(
     }
 
     private fun saveInput(): ProgramCounter {
-        assert(inputs.isNotEmpty())
-        assign(paramAddress(1), inputs.removeAt(0))
+        val value = if (inputs.isEmpty() && fetchInput != null) {
+            fetchInput?.invoke()
+        } else {
+            require(inputs.isNotEmpty()) { "Input is empty" }
+            inputs.removeAt(0)
+        }
+        assign(paramAddress(1), value)
         return counter.add(2)
     }
 
@@ -188,15 +194,15 @@ class ProgramState(
     }
 }
 
-class Program(private val code: List<Long>) {
+class Program(private val code: List<Long>, private val fetchInput: (() -> Long)?) {
 
     fun executeProgram(input: List<Long>): ProgramState {
-        val state = ProgramState(code.toMutableList(), input.toMutableList())
+        val state = ProgramState(code.toMutableList(), input.toMutableList(), fetchInput)
         state.executeProgram()
         return state
     }
 
     fun createProgram(input: List<Long> = emptyList()): ProgramState {
-        return ProgramState(code.toMutableList(), input.toMutableList())
+        return ProgramState(code.toMutableList(), input.toMutableList(), fetchInput)
     }
 }

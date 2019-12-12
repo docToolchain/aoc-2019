@@ -1,0 +1,21 @@
+== Day05
+
+This is the solution for the second day of AoC:
+https://adventofcode.com/2019/day/6[Universal Orbit Map]
+
+Yeah finally a graph.
+Here is my plan for today:
+    In phase 1 I focus on creating a object structure that reprents my graph.
+    Every object is unique and itentified by its name.
+    I introduce a UniverseCreator class that keeps track of all space objects.
+    If a required space object is not existing yet it will be created.
+    Afterwards the objects will be linked.
+    
+    In phase 2 I will try to extract the required information from the graph.
+
+=== Star 1
+Got that one done. Using some recursion got the tricky part done.
+
+=== Star 2
+Got that one done too. Here the trick was to find the common orbit 
+and calculate the distance from santa and me to the orbit and sum up the distances.

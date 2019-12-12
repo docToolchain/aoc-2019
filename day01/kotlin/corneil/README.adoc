@@ -1,6 +1,6 @@
-= Day 01 - The Tyranny of the Rocket Equation
+== The Tyranny of the Rocket Equation
 
-== Part 1 - Calculation of fuel for modules.
+=== Part 1 - Calculation of fuel for modules.
 
 The calculation of fuel for a specific module.
 
@@ -29,7 +29,7 @@ include::src/main/kotlin/solution.kt[tags=calc2]
 ----
 
 
-== Part2 - Calculation of fuel for fuel and modules.
+=== Part2 - Calculation of fuel for fuel and modules.
 
 Calculating the fuel required for the fuel is a recursive function.
 
@@ -37,4 +37,10 @@ Calculating the fuel required for the fuel is a recursive function.
 [source,kotlin,numbered]
 ----
 include::src/main/kotlin/solution.kt[tags=calc3]
+----
+
+=== Solution source
+[source,kotlin,numbered]
+----
+include::src/main/kotlin/solution.kt[]
 ----

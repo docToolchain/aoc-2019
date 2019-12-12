@@ -1,4 +1,4 @@
-= Day 05 - Sunny with a Chance of Asteroids
+== Sunny with a Chance of Asteroids
 
 I found a phrase in the description ambiguous.
 
@@ -13,13 +13,13 @@ Each instruction modifies memory and returns a new program counter.
 
 I couldn't decide if the program counter belongs in the program state or if it should be passed along.
 
+=== Solution source
 [source,kotlin,numbered]
 ----
 include::src/main/kotlin/solution.kt[]
 ----
 
-=== IntCode
-
+=== IntCode source
 [source,kotlin,numbered]
 ----
 include::../../../corneil/intcode/src/main/kotlin/IntCode.kt[]

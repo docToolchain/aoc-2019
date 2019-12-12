@@ -1,6 +1,6 @@
-= Day 12 - The N-Body Problem
+== The N-Body Problem
 
-== Part 1
+=== Part 1
 
 The first part was fairly easy.
 
@@ -50,7 +50,7 @@ fun main() {
 }
 ----
 
-== Part 2
+=== Part 2
 
 This was much more difficult.
 
@@ -153,14 +153,14 @@ fun lowestCommonMultiplier(list: List<BigInteger>): BigInteger {
 }
 ----
 
-== Full Source
+=== Solution Source
 
 [source,kotlin,numbered]
 ----
 include::src/main/kotlin/solution.kt[]
 ----
 
-== Test Code
+=== Test Code
 [source,kotlin,numbered]
 ----
 include::src/test/kotlin/TestNBodyProblem.kt[]

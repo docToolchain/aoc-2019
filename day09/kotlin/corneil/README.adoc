@@ -1,10 +1,10 @@
-= Day 09 - Sensor Boost
+== Sensor Boost
 
 Updated program to support Long for input and output.
 Added opcodes.
 Relative in conjunction with assignment tripped me up a little.
 
-== Class Diagram of the IntCode program model
+=== Class Diagram of the IntCode program model
 
 [plantuml]
 ----
@@ -37,11 +37,13 @@ Program ..left..> ProgramState: <<produces>>
 @enduml
 ----
 
+=== Solution source
 [source,kotlin,numbered]
 ----
 include::src/main/kotlin/solution.kt[]
 ----
 
+=== IntCode source
 [source,kotlin,numbered]
 ----
 include::../../../corneil/intcode/src/main/kotlin/IntCode.kt[]

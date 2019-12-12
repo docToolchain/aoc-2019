@@ -1,4 +1,4 @@
-= Day 00 - Hello World
+== Hello World
 
 Hello World!
 

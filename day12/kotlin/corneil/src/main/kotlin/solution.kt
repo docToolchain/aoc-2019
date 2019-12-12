@@ -14,10 +14,12 @@ class Moon(
     val pos: Axis,
     val vel: Axis
 ) {
-
-    fun applyGravity(moons: List<Moon>) {
+    init {
         require(pos.size == 3)
         require(vel.size == 3)
+    }
+
+    fun applyGravity(moons: List<Moon>) {
         for (i in 0..2) {
             vel[i] += moons.count { pos[i] < it.pos[i] } - moons.count { pos[i] > it.pos[i] }
         }
@@ -34,6 +36,24 @@ class Moon(
     fun copy() = Moon(id, pos.copy(), vel.copy())
 
     fun snapShot(index: Int) = Pair(pos[index], vel[index])
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Moon
+
+        if (!pos.contentEquals(other.pos)) return false
+        if (!vel.contentEquals(other.vel)) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = pos.contentHashCode()
+        result = 31 * result + vel.contentHashCode()
+        return result
+    }
 }
 
 typealias SnapShot = List<Pair<Int, Int>>
@@ -53,7 +73,7 @@ class Orbits(val moons: List<Moon>) {
     fun sameAs(original: Orbits): Boolean {
         return moons.filterIndexed { index, moon ->
             val orig = original.moons[index]
-            moon.pos.contentEquals(orig.pos) && moon.vel.contentEquals(orig.vel)
+            moon == orig
         }.count() == moons.size
     }
 
@@ -75,12 +95,13 @@ fun readBlock(line: String): Map<String, String> {
         val token = tokens[i]
         when (token) {
             "="      -> {
-                value = tokens[i + 1].trim();
                 name = tokens[i - 1].trim()
+                require(name.length > 0) { "Expected name to be not empty" }
+                value = tokens[i + 1].trim()
+                require(value.length > 0) { "Expected value for $name to be not empty" }
             }
             ">", "," -> result.put(name, value)
-            else     -> {
-            }
+            else     -> Unit
         }
     }
     return result
@@ -96,17 +117,17 @@ fun readOrbits(lines: List<String>): Orbits {
     })
 }
 
+fun mapAxis(input: Map<String, String>): Axis {
+    return input.map {
+        it.key to it.value.toInt()
+    }.toMap().let {
+        arrayOf(it["x"]!!, it["y"]!!, it["z"]!!).toIntArray()
+    }
+}
+
 fun readPosition(line: String): Pair<Axis, Axis> {
-    val position = readBlock(line.substringAfter("pos=").substringBefore(", vel=")).map {
-        it.key to it.value.toInt()
-    }.toMap().let {
-        arrayOf(it["x"]!!, it["y"]!!, it["z"]!!).toIntArray()
-    }
-    val velocity = readBlock(line.substringAfter("vel=")).map {
-        it.key to it.value.toInt()
-    }.toMap().let {
-        arrayOf(it["x"]!!, it["y"]!!, it["z"]!!).toIntArray()
-    }
+    val position = mapAxis(readBlock(line.substringAfter("pos=").substringBefore(", vel=")))
+    val velocity = mapAxis(readBlock(line.substringAfter("vel=")))
     return Pair(position, velocity)
 }
 
@@ -119,12 +140,10 @@ fun findCycles(orbits: Orbits): List<Long> {
         orbits.advanceOrbit()
         counter++
         for (x in 0..2) {
-            if (snap.containsKey(x)) {
-                if (snap[x] == orbits.snapShot(x)) {
-                    println("Cycle[$x]=$counter")
-                    cycle.add(counter)
-                    snap.remove(x)
-                }
+            if (snap.containsKey(x) && snap[x] == orbits.snapShot(x)) {
+                println("Cycle[$x]=$counter")
+                cycle.add(counter)
+                snap.remove(x)
             }
         }
     } while (snap.isNotEmpty())

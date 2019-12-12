@@ -52,14 +52,23 @@ void processCode(code, input)
     //TODO turn into while loop
     while (ip < code.length) {
 
-        
-
         instruction = splitNumberInDigits(code[ip])
 
         int opcode = getOpcode(instruction)
+        
+        //if we reach the end of the program we stop instead of reading possible parameters
+        if (opcode == 99) {
+            println "End of program"
+            break
+        }
+
         int[] paraModes = getParameterModes(instruction)
         int[] operands = [0,0,0]
-
+        //with this implemntation we always read in the next 3 values after an opcode as parameter
+        //even if those values are actually not parameters
+        //we could just check how many parameters the opcode has but then I'm scattering information about the operatoins in several places
+        //now it becomes handy to use a obejct oriented design.
+        //due to time constrains i keep the things as they are for the time being
         for(int i = 0; i <= 2; i++){
             if(paraModes[i] == 0){
                 //position mode
@@ -91,10 +100,40 @@ void processCode(code, input)
             //print value
             println "[${operands[0]}] >> " + code[operands[0]]
             ip += 2
-        }
-         else if (opcode == 99) {
-            println "End of program"
-            break
+        } else if (opcode == 5) {
+            //jump if true
+            println "jump to [${code[operands[1]]}] if [${operands[0]}]:${code[operands[0]]} == 1"
+            if(code[operands[0]] != 0){
+                ip = code[operands[1]]
+            } else {
+                ip += 3
+            }
+        } else if (opcode == 6) {
+            //jump if false
+            println "jump to [${code[operands[1]]}] if [${operands[0]}]:${code[operands[0]]} == 0"
+            if(code[operands[0]] == 0){
+                ip = code[operands[1]]
+            } else {
+                ip += 3
+            }
+        } else if (opcode == 7) {
+            // less than
+            println "[${code[operands[2]]}] is 1 if [${operands[0]}]:${code[operands[0]]} < [${operands[1]}]:${code[operands[1]]} else 0"
+            if(code[operands[0]] < code[operands[1]]){
+                code[operands[2]] = 1
+            } else {
+                code[operands[2]] = 0
+            }
+            ip += 4
+        } else if (opcode == 8) {    
+            //equals
+            println "[${code[operands[2]]}] is 1 if [${operands[0]}]:${code[operands[0]]} == [${operands[1]}]:${code[operands[1]]} else 0"
+            if(code[operands[0]] == code[operands[1]]){
+                code[operands[2]] = 1
+            } else {
+                code[operands[2]] = 0
+            }
+            ip += 4
         } else {
             println "Opcode: ${opcode} - ip: ${ip}"
             throw new Exception("Invalid opcode found!")
@@ -108,10 +147,13 @@ memory = readFile("input.txt")
 //the input could be read in using readline
 // but then the script can't be executed without know the "magic" number hence I'm hardcoding it
 int input = 1
-processCode(memory, input)
+//processCode(memory, input)
 println "Star 1 done"
 // end::start1[]
 
 // tag::star2[]
-
+input = 5
+memory = readFile("input.txt")
+processCode(memory, input)
+println "Star 2 done"
 // end::star2[]

@@ -1,0 +1,9 @@
+{
+    "files": [
+        "src/solution1.ts" , "src/solution2.ts" , "src/AsteroidMap.ts"
+    ],
+    "compilerOptions": {
+        "noImplicitAny": true,
+        "target": "es5"
+    }
+}

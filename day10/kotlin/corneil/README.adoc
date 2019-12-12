@@ -1,6 +1,12 @@
-= Day 10 - TBA
+= Day 10 - Monitoring Station
+
+Thanks to Michael Simons I could finish the 2nd part.
 
 [source,kotlin,numbered]
 ----
 include::src/main/kotlin/solution.kt[]
 ----
+
+Normalizing the angle and then using atan2 to order to angles made simple work of the rest.
+
+You do not want to know which depths I have explored today!

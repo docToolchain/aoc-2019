@@ -44,5 +44,5 @@ include::src/main/kotlin/solution.kt[]
 
 [source,kotlin,numbered]
 ----
-include::../../../corneil/intcode/src/main/kotlin/intcode.kt[]
+include::../../../corneil/intcode/src/main/kotlin/IntCode.kt[]
 ----

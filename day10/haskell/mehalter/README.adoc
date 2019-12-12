@@ -1,0 +1,23 @@
+== Monitoring Station
+
+To run the final program you need Haskell installed, and simply run the
+`./run.sh`.
+
+This solution uses a brute force method for part 1 to check which asteroid can
+see the most number of other asteroids.
+
+For part 2, I used arctangent to calculate the angle an asteroid is from
+straight up from the asteroid firing the laser. Then sorts by the angles to get
+the vaporization order.
+
+== Solution
+
+[source, haskell]
+----
+include::answer.hs[]
+----
+
+[source, bash]
+----
+include::run.sh[]
+----

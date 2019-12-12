@@ -1,0 +1,8 @@
+Day 10 - Solution in Python
+
+Good chance to get the old school trigonometry skills back on track.
+
+[source, python]
+....
+include::solution.py[]
+....

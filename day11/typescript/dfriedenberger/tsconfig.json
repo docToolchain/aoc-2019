@@ -1,0 +1,13 @@
+{
+    "files": [
+        "src/solution1.ts", "src/solution2.ts", 
+        "./src/Computer.ts" , "./src/ComputerState.ts" , 
+        "./src/Program.ts" ,         "./src/Panel.ts"
+    ],
+    "compilerOptions": {
+        "noImplicitAny": true,
+        "target": "es5",
+        "downlevelIteration": true
+    }
+
+}

@@ -14,5 +14,8 @@ Here is my plan for today:
     In phase 2 I will try to extract the required information from the graph.
 
 === Star 1
+Got that one done. Using some recursion got the tricky part done.
 
 === Star 2
+Got that one done too. Here the trick was to find the common orbit 
+and calculate the distance from santa and me to the orbit and sum up the distances.

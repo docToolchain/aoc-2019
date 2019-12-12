@@ -1,0 +1,17 @@
+== Day05
+
+This is the solution for the second day of AoC:
+https://adventofcode.com/2019/day/5[Sunny with a Chance of Asteroids ]
+
+I use this readme to collect all the thoughts and ideas I'm having for the challenge.
+This is a loose connection of all the thoughts I'm having.
+I need:
+* a program or instruction counter, that is incremented after the instruction is finished
+* a functionn that reads the next opcode and the parameters that belong to it
+* a way how to resolve the parameter mode
+
+=== Star 1
+I'm currently lacking the time to write a proper documentation.
+What I can say is that I implemented all the thoughts mentioned above.
+
+=== Star 2

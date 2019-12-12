@@ -1,0 +1,20 @@
+== Space Police
+
+To run the final program you need Haskell installed, and simply run the
+`./run.sh`.
+
+This solution extends my Day 09 by adding a paint function that controls the
+paint robot. First I get all the points that are painted from the computer,
+then I fold them into a multiline string that prints the picture
+
+== Solution
+
+[source, haskell]
+----
+include::answer.hs[]
+----
+
+[source, bash]
+----
+include::run.sh[]
+----

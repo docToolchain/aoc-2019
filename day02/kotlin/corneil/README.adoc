@@ -1,4 +1,4 @@
-= Day 02 - 1202 Program Alarm
+== 1202 Program Alarm
 
 It will be simple to add more operation with the support for an operation lambda.
 
@@ -6,6 +6,7 @@ I find this style of breaking down into functions still useful it worked well 35
 
 I can see that I might be refactoring elements of the IntCode program into classes as this thing moves forward.
 
+=== Solution source
 [source,kotlin,numbered]
 ----
 include::src/main/kotlin/solution.kt[]

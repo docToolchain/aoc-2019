@@ -1,0 +1,48 @@
+== The N-Body Problem
+
+The solutions are written in Typescript. To run them use the following commands.
+
+....
+npm install
+gulp
+node dist/solution1.js
+node dist/solution2.js
+....
+
+=== First Star
+
+Solved solution one by implementing Space and Moon.
+[source, typescript, numbered]
+....
+include::src/Moon.ts[]
+....
+
+....
+include::src/Space.ts[]
+....
+
+
+Then run 1000 time steps
+....
+include::src/solution1.ts[tag=timesteps]
+....
+
+=== Second Star
+
+Second solution tried by brute force. As expected would need very long time before repeating. 
+So I tried with success calculating cycle for each index (because indexes are independent)
+[source, typescript, numbered]
+....
+include::src/solution2.ts[tag=cycle]
+....
+
+Furthermore hat to take the divisors into consideration, so I calculated ggt (copied from internet)
+....
+include::src/solution2.ts[tag=ggt]
+....
+
+The result I calculated with calctool.de
+++++
+(22958 / 2) * (231614 / 2) * (286332 / 2) * 2
+++++
+

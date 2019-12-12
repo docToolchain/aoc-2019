@@ -1,4 +1,4 @@
-== The Tyranny of the Rocket Equation
+== 1202 Program Alarm
 
 I wrote my solution in PHP.
 To run the final program you need PHP installed. You can run the script and it will give you the solution as output.

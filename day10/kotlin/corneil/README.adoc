@@ -1,7 +1,8 @@
-= Day 10 - Monitoring Station
+== Monitoring Station
 
 Thanks to Michael Simons I could finish the 2nd part.
 
+=== Solution source
 [source,kotlin,numbered]
 ----
 include::src/main/kotlin/solution.kt[]

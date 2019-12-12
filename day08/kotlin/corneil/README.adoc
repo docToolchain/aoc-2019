@@ -1,4 +1,4 @@
-= Day 08 - Space Image Format
+== Space Image Format
 
 Kotlin made this one very straight forward, especially `minBy`
 
@@ -6,6 +6,7 @@ Things a learned 30 years ago directly manipulating the screen memory on my PC c
 
 Thanks to Mr Norton.
 
+=== Full Source
 [source,kotlin,numbered]
 ----
 include::src/main/kotlin/solution.kt[]

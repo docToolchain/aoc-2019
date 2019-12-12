@@ -1,0 +1,167 @@
+== The N-Body Problem
+
+=== Part 1
+
+The first part was fairly easy.
+
+[source,kotlin,numbered]
+----
+class Moon(
+    val id: Int,
+    val pos: Position,
+    val vel: Velocity
+) {
+    fun move() {
+        pos.x += vel.x
+        pos.y += vel.y
+        pos.z += vel.z
+    }
+
+    fun applyGravity(moons: List<Moon>) {
+        vel.x += moons.count { pos.x < it.pos.x } - moons.count { pos.x > it.pos.x }
+        vel.y += moons.count { pos.y < it.pos.y } - moons.count { pos.y > it.pos.y }
+        vel.z += moons.count { pos.z < it.pos.z } - moons.count { pos.z > it.pos.z }
+    }
+    fun totalEnergy(): Int = pos.potentialEnergy() * vel.kineticEnergy()
+}
+
+class Orbits(val moons: List<Moon> ) {
+    fun advanceOrbit() {
+        moons.forEach { moon ->
+            moon.applyGravity(moons)
+        }
+        moons.forEach { moon ->
+            moon.move()
+        }
+    }
+
+    fun totalEnergy() = moons.sumBy { it.totalEnergy() }
+
+}
+
+fun main() {
+    // input not shown
+    val orbits = readOrbits(input.split('\n'))
+    repeat(1000) {
+        orbits.advanceOrbits()
+    }
+    val totalEnergy = orbits.totalEnergy()
+    println("Total Energy=$totalEnergy")
+}
+----
+
+=== Part 2
+
+This was much more difficult.
+
+[source,kotlin,numbered]
+----
+class Orbit {
+    // additional functions
+    fun copy() = Orbits(moons.map { it.copy() })
+    fun sameAs(original: Orbits): Boolean {
+        return moons.filterIndexed { index, moon ->
+            val orig = original.moons[index]
+            moon.pos == orig.pos && moon.vel == orig.vel
+        }.count() == moons.size
+    }
+}
+// Brute force counting
+val orbits = readOrbits(input.split('\n'))
+val original = orbits.copy()
+var count = 0
+do {
+    orbits.advanceOrbit()
+    count++
+} while (!orbits.sameAs(original))
+
+----
+This doesn't work because the number seems to be much higher as described in problem statement.
+
+I first tried to optimize the code but realized there has to be a different solution.
+
+The hint was that each pair of position and velocity will cycle separately.
+We then need to find the lowest common multiplier of the cycles.
+
+Extracting a snapshot of each axis into a map of list of pairs of ints.
+Advance the orbits until a snapshot matches and you have a cycle count.
+
+I refactored the Position and Velocity to IntArray typealias as Axis to reduce the amount of code for snapshot and calcuations in orbit.
+
+[source,kotlin,numbered]
+----
+typealias SnapShot = List<Pair<Int, Int>>
+
+typealias Axis = IntArray
+
+class Moon {
+    // additional function
+    fun snapShot(index: Int) = Pair(pos[index], vel[index])
+}
+class Orbit {
+    // additional functions
+    fun snapShot(index: Int): SnapShot {
+        return moons.map { it.snapShot(index) }
+    }
+
+    fun makeSnapShot(): Map<Int, SnapShot> =
+        (0..2).map {
+            it to snapShot(it)
+        }.toMap()
+}
+
+fun findCycles(orbits: Orbits): List<Long> {
+    val snap = orbits.makeSnapShot().toMutableMap()
+    val cycle = mutableListOf<Long>()
+    var counter = 0L
+    do {
+        orbits.advanceOrbit()
+        counter++
+        for (x in 0..2) {
+            if (snap.containsKey(x)) {
+                if (snap[x] == orbits.snapShot(x)) {
+                    println("Cycle[$x]=$counter")
+                    cycle.add(counter)
+                    snap.remove(x)
+                }
+            }
+        }
+    } while (snap.isNotEmpty())
+    return cycle
+}
+----
+
+BigInteger to the rescue.
+This will find the lowest common multiplier of each element and the following in the list.
+
+[source,kotlin,numbered]
+----
+fun lowestCommonMultiplier(v1: BigInteger, v2: BigInteger): BigInteger {
+    return (v1 * v2).abs() / v1.gcd(v2)
+}
+
+fun lowestCommonMultiplier(list: List<BigInteger>): BigInteger {
+    return if (list.size == 2) {
+        lowestCommonMultiplier(list[0], list[1])
+    } else {
+        val lcds = mutableListOf<BigInteger>()
+        for (i in 0 until list.size - 1) {
+            lcds.add(lowestCommonMultiplier(list[i], list[i + 1]))
+        }
+        lowestCommonMultiplier(lcds)
+    }
+}
+----
+
+=== Solution Source
+
+[source,kotlin,numbered]
+----
+include::src/main/kotlin/solution.kt[]
+----
+
+=== Test Code
+[source,kotlin,numbered]
+----
+include::src/test/kotlin/TestNBodyProblem.kt[]
+----

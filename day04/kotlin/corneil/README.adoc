@@ -1,7 +1,8 @@
-= Day 04 - Secure Container
+== Secure Container
 
 I decided to keep it simple on not try and use regex to do the validations.
 
+=== Solution source
 [source,kotlin,numbered]
 ----
 include::src/main/kotlin/solution.kt[]

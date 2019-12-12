@@ -1,0 +1,29 @@
+== The N-Body Problem
+
+To run the final program you need Haskell installed, and simply run the
+`./run.sh`.
+
+My solution for part 1 is pretty straight forward, define a `timeStep` function
+that calculates the new velocities and then positions for each of the moons for
+a single time step. Then the `timeSteps` function loops for a given number of
+time steps, and then a `totalEnergy` function calculates the sum of all the
+positions times velocities of each moon.
+
+Part 2 was a little trickier, and came after realizing that the positions and
+velocities are periodic, and therefore the first repeated state must be the same
+as the initial state. Then because the 3 axes are changing independently of each
+other, you can find cycle of each axis, and calculate the least common multiple
+of the 3. This allows you to go through much fewer time steps and still find the
+total cycle of the system.
+
+== Solution
+
+[source, haskell]
+----
+include::answer.hs[]
+----
+
+[source, bash]
+----
+include::run.sh[]
+----

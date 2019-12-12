@@ -76,7 +76,7 @@ do {
 } while (!orbits.sameAs(original))
 
 ----
-This doesn't work becuase the number seems to be much higher
+This doesn't work because the number seems to be much higher as described in problem statement.
 
 I first tried to optimize the code but realized there has to be a different solution.
 
@@ -84,6 +84,7 @@ The hint was that each pair of position and velocity will cycle separately.
 We then need to find the lowest common multiplier of the cycles.
 
 Extracting a snapshot of each axis into a map of list of pairs of ints.
+Advance the orbits until a snapshot matches and you have a cycle count.
 
 I refactored the Position and Velocity to IntArray typealias as Axis to reduce the amount of code for snapshot and calcuations in orbit.
 

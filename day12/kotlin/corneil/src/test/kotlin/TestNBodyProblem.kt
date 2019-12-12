@@ -87,7 +87,6 @@ class TestNBodyProblem {
             <x=4, y=-8, z=8>
             <x=3, y=5, z=-1>""".trimIndent()
         val orbits = readOrbits(input.split('\n'))
-        // val original = moons.map { it.copy() }
         val count = lowestCommonMultiplier(findCycles(orbits).map { it.toBigInteger() })
 
         println("Count=$count")
@@ -103,7 +102,6 @@ class TestNBodyProblem {
             <x=9, y=-8, z=-3>
         """.trimIndent()
         val orbits = readOrbits(input.split('\n'))
-        // val original = moons.map { it.copy() }
         val count = lowestCommonMultiplier(findCycles(orbits).map { it.toBigInteger() })
 
         println("Count=$count")

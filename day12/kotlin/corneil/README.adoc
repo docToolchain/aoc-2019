@@ -41,11 +41,11 @@ class Orbits(val moons: List<Moon> ) {
 
 fun main() {
     // input not shown
-    val moons = readMoons(input.split('\n'))
+    val orbits = readOrbits(input.split('\n'))
     repeat(1000) {
-        advanceOrbit(moons)
+        orbits.advanceOrbits()
     }
-    val totalEnergy = moons.sumBy { it.totalEnergy() }
+    val totalEnergy = orbits.totalEnergy()
     println("Total Energy=$totalEnergy")
 }
 ----

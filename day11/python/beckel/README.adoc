@@ -1,0 +1,19 @@
+Day 11 - Solution in Python
+
+Glad we got yet another Intcode puzzle - this time no changes to the computer were needed except for a helper function that returns the last two outputs instead of returning the whole output at once.
+
+
+[source, python]
+....
+include::solution.py[]
+....
+
+[source, python]
+....
+include::painting_robot.py[]
+....
+
+[source, python]
+....
+include::computer.py[]
+....

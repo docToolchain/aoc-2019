@@ -1,0 +1,13 @@
+= Day 11 - Space Police
+
+Robot code
+[source,kotlin,numbered]
+----
+include::src/main/kotlin/solution.kt[]
+----
+
+=== IntCode
+[source,kotlin,numbered]
+----
+include::../../../corneil/intcode/src/main/kotlin/IntCode.kt[]
+----

@@ -1,0 +1,46 @@
+== https://adventofcode.com/2019/day/11[Space Police]
+
+++++
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">I&#39;m getting slightly nervous ticks… <a href="https://twitter.com/hashtag/IntComputer?src=hash&amp;ref_src=twsrc%5Etfw">#IntComputer</a> <a href="https://twitter.com/hashtag/AdventOfCode?src=hash&amp;ref_src=twsrc%5Etfw">#AdventOfCode</a></p>&mdash; Michael Simons (@rotnroll666) <a href="https://twitter.com/rotnroll666/status/1204667911027208193?ref_src=twsrc%5Etfw">December 11, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+++++
+
+I could reuse my day 9 solution completely, which is kinda good, I guess.
+I added a `reset` method to the computer, so that I don't need to reload the program each time.
+
+Nothing special to the solution of the puzzle.
+Basic walking around stuff.
+As I will stick in https://www.javaland.eu/de/[Javaland] with IntComputer tasks, I might as well do it nicely object oriented with a bunch of classes:
+
+[source,java,numbered,indent=0]
+----
+include::Solution.java[tags=basicComponents]
+----
+
+You get the idea:
+A `Direction` is derived from an instruction,
+a `View` uses that direction to compute the next view
+and a `Panel` uses that to compute the next one.
+
+Given an enum `Color` with appropriate method to load and represent it self, the solution basically is the prose above:
+
+[source,java,numbered,indent=0]
+----
+include::Solution.java[tags=color]
+
+include::Solution.java[tags=solution]
+----
+<.> Probably the most intesting thing here: Creating a comparator for the panels.
+    This saves me from adding `equals` and `hashCode` to panel, as I use a `TreeMap` for storing them.
+    The `TreeMap` identifies two objects as equal when they are comparing to `0`.
+    I could `Panel`  let implement `Comparable`, but than the comparision would always be the same.
+    For my usecase (painting / printing) them, I want to to be ordered by their `y`-axis in reversed order first, than by `x`.
+<.> I don't use `computeIfAbsent` here as I'm gonna put the panel into the map anyway, thus avoiding one operation.
+
+I think that the above solution is a nice way of speaking the domains language without creating ivory towers.
+
+Bonus: I added some handler code that gets each state event and can create this:
+
+image::/images/day11.gif[]
+
+NOTE: Run with `java --source 13 --enable-preview Solution.java`.
+      Tested with `java version "13" 2019-09-17`, correct solutions are: `1732` and `ABCLFUHJ`.

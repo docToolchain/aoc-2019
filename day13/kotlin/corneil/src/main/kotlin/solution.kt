@@ -10,9 +10,9 @@ import com.github.corneil.aoc2019.intcode.readProgram
 import org.fusesource.jansi.Ansi
 import org.fusesource.jansi.Ansi.Color.BLACK
 import org.fusesource.jansi.Ansi.Color.WHITE
+import org.fusesource.jansi.Ansi.Erase.FORWARD
 import org.fusesource.jansi.AnsiConsole
 import java.io.File
-import java.util.*
 
 enum class TILE(val tile: Int) {
     EMPTY(0),
@@ -49,17 +49,42 @@ data class Grid(var score: Int, val cells: MutableMap<Coord, Cell> = mutableMapO
     }
 }
 
-fun getInput(prompt: String): String {
-    print(prompt)
-    AnsiConsole.systemUninstall()
-    val scanner = Scanner(System.`in`)
-    val result = scanner.nextLine()
-    AnsiConsole.systemInstall()
-    return result
+fun printCell(cell: Cell) {
+    print(Ansi.ansi().saveCursorPosition().cursor(cell.pos.y, cell.pos.x))
+    val tile = cell.tile
+    when (tile) {
+        EMPTY  -> print(Ansi.ansi().render(" "))
+        WALL   -> print(Ansi.ansi().render("#"))
+        BLOCK  -> print(Ansi.ansi().bg(WHITE).fg(BLACK).render("$").reset())
+        PADDLE -> print(Ansi.ansi().render("_"))
+        BALL   -> print(Ansi.ansi().render("*"))
+    }
+    print(Ansi.ansi().restoreCursorPosition())
+}
+
+fun determineInput(grid: Grid): Int {
+    val maxY = grid.cells.keys.maxBy { it.y }?.y ?: 40
+    val ball = grid.findTile(BALL)
+    val paddle = grid.findTile(PADDLE)
+    val movement = when {
+        ball.x > paddle.x -> {
+            print(Ansi.ansi().cursor(maxY, 0).fgBlue().render(">").reset())
+            1
+        }
+        ball.x < paddle.x -> {
+            print(Ansi.ansi().cursor(maxY, 0).fgGreen().render("<").reset())
+            -1
+        }
+        else              -> {
+            print(Ansi.ansi().cursor(maxY, 0).render("."))
+            0
+        }
+    }
+    return movement
 }
 
 fun runGame(code: List<Long>, input: List<Long>): Grid {
-
+    print(Ansi.ansi().eraseScreen())
     val grid = Grid(0)
     val code = Program(code)
     var output = mutableListOf<Long>()
@@ -71,7 +96,7 @@ fun runGame(code: List<Long>, input: List<Long>): Grid {
             val tile = output[2]?.toInt() ?: 0
             if (x == -1 && y == 0) {
                 grid.score = tile
-                print(Ansi.ansi().cursor(0, 0).render(grid.score.toString() + " "))
+                print(Ansi.ansi().cursor(0, 0).render(grid.score.toString() + " ").eraseLine(FORWARD))
             } else {
                 val cell = grid.setTile(Coord(x, y), fromValue(tile))
                 printCell(cell)
@@ -94,39 +119,6 @@ fun runGame(code: List<Long>, input: List<Long>): Grid {
     return grid
 }
 
-fun determineInput(grid: Grid): Int {
-    val maxY = grid.cells.keys.maxBy { it.y }?.y ?: 40
-    val ball = grid.findTile(BALL)
-    val paddle = grid.findTile(PADDLE)
-    val movement = when {
-        ball.x > paddle.x -> {
-            print(Ansi.ansi().cursor(maxY, 0).render(">"))
-            1
-        }
-        ball.x < paddle.x -> {
-            print(Ansi.ansi().cursor(maxY, 0).render("<"))
-            -1
-        }
-        else              -> {
-            print(Ansi.ansi().cursor(maxY, 0).render("."))
-            0
-        }
-    }
-    return movement
-}
-
-fun printCell(cell: Cell) {
-    print(Ansi.ansi().cursor(cell.pos.y, cell.pos.x))
-    val tile = cell.tile
-    when (tile) {
-        EMPTY  -> print(Ansi.ansi().render(" "))
-        WALL   -> print(Ansi.ansi().render("#"))
-        BLOCK  -> print(Ansi.ansi().bg(WHITE).fg(BLACK).render("$").reset())
-        PADDLE -> print(Ansi.ansi().render("_"))
-        BALL   -> print(Ansi.ansi().render("*"))
-    }
-}
-
 fun main(args: Array<String>) {
     AnsiConsole.systemInstall()
     val fileName = if (args.size > 1) args[1] else "input.txt"
@@ -135,10 +127,8 @@ fun main(args: Array<String>) {
     val tiles = grid.cells.count { it.value.tile == BLOCK }
     println("Tiles = $tiles")
 
-    print(Ansi.ansi().eraseScreen())
     val free = code.toMutableList()
     free.set(0, 2L)
     runGame(free, emptyList())
     AnsiConsole.systemUninstall()
-
 }

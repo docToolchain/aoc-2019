@@ -1,0 +1,9 @@
+== Day07
+
+This is the solution for the second day of AoC:
+https://adventofcode.com/2019/day/7[Amplification Circuit]
+
+
+=== Star 1
+
+=== Star 2

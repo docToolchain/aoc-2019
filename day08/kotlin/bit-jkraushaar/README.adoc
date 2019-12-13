@@ -1,0 +1,33 @@
+== Day 08
+
+This day was fun.
+
+=== First Star
+
+For the first star I read the image and then split it into layers using the very handy function `chunked()`.
+Afterwards I enhance the layers with an index, transform my layeres by counting the zeros and find the layer with the least zeros.
+Then I only have to count the ones and twos in that layer.
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=firstStar]
+----
+
+=== Second Star
+
+I had problems with my rendering function, but first things first.
+I start by reducing my layers.
+To merge them, I define a function `mergeLayers`.
+The function calls `zip()` to get a pair of chars, first char from the front layer, second char from the back layer.
+If the front pixel is transparent, I return the back pixel, otherwise the front pixel.
+The `reduce()` function takes the first and the second layer, merges them and applies the result to the third layer, merges them, ...
+
+Now I have to render the resulting reduced layer.
+Again I am using `chunked()` to get the rows of my layer.
+In each row I map the pixel to `*` for white and a blank for black.
+The result is printed to the console.
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=secondStar]
+----

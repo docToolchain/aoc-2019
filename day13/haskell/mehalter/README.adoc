@@ -1,0 +1,23 @@
+== Care Package
+
+To run the final program you need Haskell installed, and simply run the
+`./run.sh`.
+
+Part 1 is a pretty straight forward solution, run the program, count the number
+of elements that are block items.
+
+Part 2 took some more time because I couldn't figure out an elegant solution to
+making the game interactive, so instead I went into the input and gave myself an
+entire row of paddles instead of the one, and let the game play out like that!
+
+== Solution
+
+[source, haskell]
+----
+include::answer.hs[]
+----
+
+[source, bash]
+----
+include::run.sh[]
+----

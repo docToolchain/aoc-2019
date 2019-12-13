@@ -51,6 +51,8 @@ class ProgramState(
 ) {
     var counter = ProgramCounter(0, true)
         private set
+    var waitingInput = false
+        private set
     private var base = 0L
     private val output = mutableListOf<Long>()
     fun counter() = counter
@@ -113,8 +115,12 @@ class ProgramState(
         val value = if (inputs.isEmpty() && fetchInput != null) {
             fetchInput?.invoke()
         } else {
-            require(inputs.isNotEmpty()) { "Input is empty" }
-            inputs.removeAt(0)
+            if (inputs.isEmpty()) {
+                waitingInput = true
+                return counter
+            } else {
+                inputs.removeAt(0)
+            }
         }
         assign(paramAddress(1), value)
         return counter.add(2)
@@ -182,8 +188,9 @@ class ProgramState(
     }
 
     fun execute(): ProgramState {
+        waitingInput = false
         counter = ProgramCounter(0, true)
-        while (counter.run && counter.pc < memory.size) {
+        while (counter.run && counter.pc < memory.size && !waitingInput) {
             counter = readAndExecute()
         }
         return this
@@ -191,11 +198,20 @@ class ProgramState(
 
     // Not that this removes the output from program state and returns the output
     fun executeUntilOutput(input: List<Long>): List<Long> {
+        waitingInput = false
         inputs.addAll(input)
-        while (counter.run && counter.pc < memory.size && output.isEmpty()) {
+        while (counter.run && counter.pc < memory.size && output.isEmpty() && !waitingInput) {
             counter = readAndExecute()
         }
         return extractOutput()
+    }
+
+    fun executeUntilInput(input: List<Long>) {
+        waitingInput = false
+        inputs.addAll(input)
+        while (counter.run && counter.pc < memory.size && !waitingInput) {
+            counter = readAndExecute()
+        }
     }
 }
 

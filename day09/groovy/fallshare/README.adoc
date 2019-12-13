@@ -1,0 +1,9 @@
+== Day09
+This is the solution for the second day of AoC:
+https://adventofcode.com/2019/day/9[Sensor Boost]
+
+=== Star 1
+Enhanced the computer according to spec.
+
+=== Star 2
+Nice. No extra work this time just a different input.

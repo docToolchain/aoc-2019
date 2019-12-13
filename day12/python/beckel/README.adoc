@@ -1,0 +1,10 @@
+Day 11 - Solution in Python
+
+Cool puzzle!
+Made a small conceptual mistake in part 2 that made the solution ages to compute. Gladly (and with some help) I could fix it. Waiting wouldn't have been a lot of fun ...
+
+[source, python]
+....
+include::solution.py[]
+....
+

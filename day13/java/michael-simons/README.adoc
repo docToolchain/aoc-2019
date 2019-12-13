@@ -1,0 +1,37 @@
+== https://adventofcode.com/2019/day/13[Care Package]
+
+
+God damn it. https://github.com/michael-simons/aoc/commit/417a26a2d303ad0518abe3a6b11895777b9e050c[I had to fix the comparision method YET ANOTHER TIME]. 
+Why? Because I compared to `Long` with `==` and not `equals` (from before I moved to virtual memory I used `long`. 
+So why does this work at times and sometimes don't?
+
+Java keeps a cache for `Integer` and `Long` instances. The caches reaches from -128 upto 127 (the high mark is configurable for integers).
+So, two different instances of `Integer` or `Long` with the same value compare to true if they are in that range, otherwise not (because `==` compares addresses).
+The numerical operators (`<`, `>`, `<=`, `>=`) are not affected, because auto-unboxing kicks in for them.
+
+Yay. I was so damn annoyed because I actually know that stuff.
+
+Anyway, after that, the Int-Computer didn't require any changes, the solution to part 1 is trival. 
+Just count every third output if it is a block:
+
+[source,java,numbered,indent=0]
+----
+include::Solution.java[tags=starOne]
+----
+
+The second part? Really? Playing brick out on that thing? Naaah.
+
+[source,java,numbered,indent=0]
+----
+include::Solution.java[tags=starTwo]
+----
+<.> The puzzle say you have to change the instructions 🤔
+    Why not hack all of the instructions?
+<.> See if we find the game data: An empty thing, followed by the paddle and another empty thing.
+<.> Make the paddle a bit bigger… until it reaches walls on both sides
+<.> Load the new instructions
+<.> Run and never move
+<.> Last output is the high score after destroying all blocks.
+
+NOTE: Run with `java --source 13 --enable-preview Solution.java`.
+      Tested with `java version "13" 2019-09-17`, correct solutions are: `326` and `15988`.

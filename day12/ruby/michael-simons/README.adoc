@@ -1,0 +1,60 @@
+== https://adventofcode.com/2019/day/12[The N-Body Problem]
+
+I had help today on a business trip to Malmö and I liked it very much:
+
+++++
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">On our way to Malmö for the Christmas party with my wonderful <a href="https://twitter.com/hashtag/Neo4j?src=hash&amp;ref_src=twsrc%5Etfw">#Neo4j</a> colleagues. Solving <a href="https://twitter.com/hashtag/AdventOfCode?src=hash&amp;ref_src=twsrc%5Etfw">#AdventOfCode</a> on the way with <a href="https://twitter.com/tinasimons?ref_src=twsrc%5Etfw">@tinasimons</a> 😂 <a href="https://t.co/nf8esydqLB">pic.twitter.com/nf8esydqLB</a></p>&mdash; Michael Simons (@rotnroll666) <a href="https://twitter.com/rotnroll666/status/1205076240551555072?ref_src=twsrc%5Etfw">December 12, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+++++
+
+Honestly, I would have come up with a solution for part 2 today without staring at the slowly increments of by brute force loop with my wife seeing that the axis and their velocities are independent.
+
+And yes, https://twitter.com/ericwastl[Eric Wastl] was very right with:
+
+"This set of initial positions takes 4686774924 steps before it repeats a previous state! Clearly, you might need to find a more efficient way to simulate the universe."
+-- Advent of Code 2019, Day 12
+
+Today we used Ruby again. Some highlights:
+
+[source,ruby,numbered,indent=0]
+----
+include::solution.rb[tags=monkeyPatching]
+----
+
+Open classes, yeah! Here adding a pairwise `add` to Rubys array class
+
+We added some classes that allow adding and applying gravity and velocity like this:
+
+[source,ruby,numbered,indent=0]
+----
+# Other methods obmitteted for brevity
+
+include::solution.rb[tags=moon]
+----
+
+Than first part is fairly trivial and again, readable as in the puzzle:
+
+
+[source,ruby,numbered,indent=0]
+----
+include::solution.rb[tags=starOne]
+----
+<.> Cloning the input because we need it unmodified later
+<.> Create pairs of moons and apply their gravity onto each other
+<.> This reduction is nice: Map take's a block taking the mapped value, 
+    but we can use `&` to turn the element of the block into a proc and calling
+    the symbolic name `energy` (via the `:`) on it, that happens to be our computation for the enegery.
+
+Second star was hard for me to spot... Implementation than was easy:
+
+[source,ruby,numbered,indent=0]
+----
+include::solution.rb[tags=starTwo]
+----
+<.>  On three axis independently, check whether it has seen before in this combination (combination of all moon's axis in question)
+<.> Break if the moons happened to be back or when all axis have completed a cycle
+<.> Reduce the number of cycles to their least common multple
+
+Fun stuff to do and I'm really happy about it.
+
+NOTE: Tested with `ruby 2.6.3p62`
+      Correct solutions are: `7013` and `324618307124784`

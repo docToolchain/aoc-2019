@@ -1,0 +1,32 @@
+== Day07
+
+This is the solution for the second day of AoC:
+https://adventofcode.com/2019/day/7[Amplification Circuit]
+
+Solving all the challenges is more time consuming than I expected.
+Hence I have to keep the docu part short.
+
+=== Star 1
+I started to take my code from day 5 and turn it into a Computer class.
+Then I added further functionality like waiting for input and providing output.
+Once the class was having all required features I started to create 5 instances of it.
+One for each amplifier. My connecting the in- and outouts I was able to create the amplifier chain as requried.
+Luckily groovy has the `eachPermutation` method that allows to perumtate an array and to execute code for every permutation.
+With every iteration a simple compare checks if the output is a new max output.
+
+.code.groovy
+[source,groovy]
+----
+[0,1,2,3,4].eachPermutation{ phaseSetting ->
+    // do stuff
+}
+----
+
+=== Star 2
+For star 2 some change in my Computer class code was required. 
+The Computer has now a `isActive` method that indicates if the program already reached the program stop opcode.
+In addition I ran into an bug. I always read in 3 parameters for an operation indepent of the actually required amount for the opcode.
+This resulted into an array out of bound errors.
+I fixed it by only reading as many paramters as required.
+For the calculations the `eachPermutation` method is used again.
+In addition the amplifiers are running inside a while loop that only steps when the last amplifiert program stops.

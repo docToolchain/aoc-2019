@@ -1,0 +1,35 @@
+== Care Package
+
+=== Part 1
+
+The first part was simple leveraging previous components.
+
+=== Part 2
+
+I used the JANSI library from http://fusesource.github.io/jansi/
+
+to control screen output and added an output handler that only prints the modified cells.
+
+I added a fetchHandler to provide the input keeping the paddle under the ball.
+Then I realized the program doesn't stop running when all the blocks are cleared so I adapted the IntCode computer to exit waiting for
+input and then the next input is determined after checking if there are any blocks left.
+
+=== Running
+[source,bash]
+----
+cd corneil
+./gradlew :solution-day13:build
+tar xvf ../day13/kotlin/corneil/build/distributions/solution-day13.tar
+cp ../day13/kotlin/corneil/input.txt .
+./solution-day13/bin/solution-day13
+----
+
+image::game-recording.gif[]
+
+=== Solution Source
+
+[source,kotlin,numbered]
+----
+include::src/main/kotlin/solution.kt[]
+----
+

@@ -1,0 +1,9 @@
+﻿== Day 13: 
+
+The original puzzle can be found at https://adventofcode.com/2019/day/13
+
+== Star 1
+with a running intcode program it was easy to adapt to this game. what puzzles me, even if that intcode comes up so often, there is no "real" reuse, I alwas have to adapt especially the input/output part of the intcode computer. Maybe this could possible avoided by using a function call in op code 03 an 04, but then you have the same effort not in the intcode computer but in the function calls.
+
+== Star 2
+first I really thought I could play the game by myself, but soon it to took to long, so I programmed a "little" gaming robot :-). Therefore the game is running by its own. Checking the if the actual position of the ball is lower than the paddle, than the joystick is pressed left, if the ball's position is greater than the paddle's position, the joystick will be pushed left.

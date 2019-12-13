@@ -1,0 +1,14 @@
+== Day08
+
+This is the solution for the second day of AoC:
+https://adventofcode.com/2019/day/8[Space Image Format]
+
+
+=== Star 1
+Finally a more simpe challenge.
+Not much to say. 
+Read the input. Split into layers.
+Count the zeros. And so on..
+
+=== Star 2
+Loops for the win.

@@ -1,0 +1,7 @@
+== Disclaimer
+I’m not a professional developer and only doing this for fun. The solutions might be messy.
+
+== Day 12
+Star 1 was straightforward. For star 2, the "trick" (at least for me) was not to make the simulation more efficient.
+Instead, it was to realize that the axes are independent, so it is enough to simulate only until a period in each axis has been found.
+The period for the entire system then has to be the least common multiple of the individual axes' periods.

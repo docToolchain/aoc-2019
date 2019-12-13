@@ -1,17 +1,41 @@
 class Computer {
 
+    Boolean isActive
     Integer[] code
     def  input
     Integer output
+    int ip;
+
+    //this map stores how many paramter a certrain operator has
+    def numberOfParameters = [
+        1 : 3,
+        2 : 3,
+        3 : 1,
+        4 : 1,
+        5 : 2,
+        6 : 2,
+        7 : 3,
+        8 : 3
+    ]
 
     Computer(String filePath){
+        isActive = true
         input = []
         code = readFile(filePath)
+        ip = 0;
+    }
+
+    Boolean isActive(){
+        this.isActive
+    }
+
+    Integer processInput(Integer input){
+        this.input += input
+        return this.processCode()
     }
 
     void addInput(Integer input){
         this.input += input
-        println "input: " + this.input
     }
 
     // tag::readFile[]
@@ -64,28 +88,28 @@ class Computer {
     // tag::processor[]
     Integer processCode()
     {
-        int ip = 0;
+        output = null
         //TODO turn into while loop
         while (ip < code.length) {
 
             def instruction = splitNumberInDigits(code[ip])
 
             int opcode = getOpcode(instruction)
-            
+            println opcode
             //if we reach the end of the program we stop instead of reading possible parameters
             if (opcode == 99) {
                 println "End of program"
+                isActive = false
                 break
             }
 
             int[] paraModes = getParameterModes(instruction)
             int[] operands = [0,0,0]
-            //with this implemntation we always read in the next 3 values after an opcode as parameter
-            //even if those values are actually not parameters
-            //we could just check how many parameters the opcode has but then I'm scattering information about the operatoins in several places
-            //now it becomes handy to use a obejct oriented design.
-            //due to time constrains i keep the things as they are for the time being
-            for(int i = 0; i <= 2; i++){
+         
+            //currently the operator and the information how many parameter it has is decoupled (defined in the beginning of this class)
+            //a OO desgin would help here to keep information together.
+            //due to time reason I keep things as they are right now.
+            for(int i = 0; i <= (numberOfParameters[opcode] - 1); i++){
                 if(paraModes[i] == 0){
                     //position mode
                     operands[i] = code[ip + (i + 1)]
@@ -109,14 +133,20 @@ class Computer {
                 ip += 4
             } else if (opcode == 3) {
                 //read value
-                code[operands[0]] = input.remove(0)
-                println "[${operands[0]}] << " + code[operands[0]]
-                ip += 2
+                println "input: " + input
+                if(input.isEmpty()){
+                    println "Waiting for input"
+                    break
+                } else {
+                    code[operands[0]] = input.remove(0)
+                    println "[${operands[0]}] << " + code[operands[0]]
+                    ip += 2
+                }
             } else if (opcode == 4) {
-                //print value
-                output = code[operands[0]]
+                //output value
                 println "[${operands[0]}] >> " + code[operands[0]]
                 ip += 2
+                output = code[operands[0]]
             } else if (opcode == 5) {
                 //jump if true
                 println "jump to [${code[operands[1]]}] if [${operands[0]}]:${code[operands[0]]} == 1"
@@ -162,7 +192,7 @@ class Computer {
 }
 
 
-// tag::start1[]
+// tag::star1[]
 
 int maxOutput = 0
 int[] maxOutoutPhaseSetting = []
@@ -171,48 +201,43 @@ int[] maxOutoutPhaseSetting = []
 
     amp1 = new Computer("input.txt")
     //add phase setting as first input
-    amp1.addInput(phaseSetting[0])
+    amp1.processInput(phaseSetting[0])
     //add input as second input
-    amp1.addInput(0)
-    outAmp1 = amp1.processCode()
-
+    outAmp1 = amp1.processInput(0)
     println "Amp1 returns: " + outAmp1
 
     amp2 = new Computer("input.txt")
     //add phase setting as first input
-    amp2.addInput(phaseSetting[1])
+    amp2.processInput(phaseSetting[1])
     //add input as second input
-    amp2.addInput(outAmp1)
-    outAmp2 = amp2.processCode()
+    outAmp2 =  amp2.processInput(outAmp1)
 
     println "Amp2 returns: " + outAmp2
 
     amp3 = new Computer("input.txt")
     //add phase setting as first input
-    amp3.addInput(phaseSetting[2])
+    amp3.processInput(phaseSetting[2])
     //add input as second input
-    amp3.addInput(outAmp2)
-    outAmp3 = amp3.processCode()
+    outAmp3 =  amp3.processInput(outAmp2)
 
     println "Amp3 returns: " + outAmp3
 
 
     amp4 = new Computer("input.txt")
     //add phase setting as first input
-    amp4.addInput(phaseSetting[3])
+    amp4.processInput(phaseSetting[3])
     //add input as second input
-    amp4.addInput(outAmp3)
-    outAmp4 = amp4.processCode()
+    outAmp4 = amp4.processInput(outAmp3)
+   
 
     println "Amp4 returns: " + outAmp4
 
 
     amp5 = new Computer("input.txt")
     //add phase setting as first input
-    amp5.addInput(phaseSetting[4])
+    amp5.processInput(phaseSetting[4])
     //add input as second input
-    amp5.addInput(outAmp4)
-    outAmp5 = amp5.processCode()
+    outAmp5 = amp5.processInput(outAmp4)
 
     println "Amp5 returns: " + outAmp5
 
@@ -222,16 +247,51 @@ int[] maxOutoutPhaseSetting = []
     }
 
 }
+// end::star1[]
+
+// tag::star2[]
+
+int maxOutputStar2 = 0
+int[] maxOutoutPhaseSettingStar2 = []
+
+[5,6,7,8,9].eachPermutation{ phaseSetting ->
+
+    amp1 = new Computer("input.txt")
+    amp1.processInput(phaseSetting[0])
+    
+    amp2 = new Computer("input.txt")
+    amp2.processInput(phaseSetting[1])
+
+    amp3 = new Computer("input.txt")
+    amp3.processInput(phaseSetting[2])
+
+    amp4 = new Computer("input.txt")
+    amp4.processInput(phaseSetting[3])
+
+    amp5 = new Computer("input.txt")
+    amp5.processInput(phaseSetting[4])
+
+    int feedBackLoop = 0
+    while(amp5.isActive())
+    {   
+        outAmp1 = amp1.processInput(feedBackLoop)
+        outAmp2 = amp2.processInput(outAmp1)
+        outAmp3 = amp3.processInput(outAmp2)
+        outAmp4 = amp4.processInput(outAmp3)
+        feedBackLoop = amp5.processInput(outAmp4)
+    }
+
+    if(maxOutputStar2 < feedBackLoop){
+        maxOutputStar2 = feedBackLoop
+        maxOutoutPhaseSettingStar2 = phaseSetting
+    }
+
+}
+
+println "Max output Star 2: " + maxOutputStar2
+println "Max output phase setting Star 2: " + maxOutoutPhaseSettingStar2
+// end::star2[]
+
 
 println "Max output: " + maxOutput
 println "Max output phase setting: " + maxOutoutPhaseSetting
-
-// end::start1[]
-
-// tag::star2[]
-input = 5
-memory = readFile("input.txt")
-processCode(memory, input)
-println "Star 2 done"
-// end::star2[]
-*/

@@ -12,4 +12,9 @@ include::../config.adoc[]
 
 This overview lists all solutions by programming language.
 
-include::../generated/byLanguage.adoc[]
+
+include::../generated/stats2.adoc[leveloffset=+2]
+
+=== Alphabetical Order
+
+include::../generated/byLanguage.adoc[leveloffset=+1]

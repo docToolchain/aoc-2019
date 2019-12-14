@@ -1,0 +1,52 @@
+== Day 09
+
+Most of the time for this days puzzle I spend with small refactorings on my virtual CPU.
+
+I had to add an additional parameter mode and operation to my existing enums.
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=operation]
+----
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=parameterMode]
+----
+
+Of course I also had to enhance the parameter processing.
+I moved all write operations to a write function.
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=parameterProcessing]
+----
+
+What was actually more complicated was to move from a list of integer values to an array of long values.
+I had to adopt my CPU at several positions.
+Thankfully Kotlin as statically typed language helped me a lot.
+
+The updated definition of my CPU looks like this:
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=updatedDefinition]
+----
+
+As you can see I now have a separate memory variable.
+It is initialized with a given memory size.
+During initialization the program is inserted at the start of the memory.
+
+With these changes, I was able to successfully run my Intcode computer:
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=runProgram]
+----
+
+=== Complete Intcode Computer
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=intcodeComputer]
+----

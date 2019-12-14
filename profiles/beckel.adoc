@@ -1,3 +1,7 @@
+:beckel-avatar: https://avatars0.githubusercontent.com/u/5105977?s=460&v=4
+:beckel-twitter: -
+:beckel-realName: Christian Wiedmann
+:beckel-blog: -
 
 :wiedmann-avatar: https://avatars0.githubusercontent.com/u/5105977?s=460&v=4
 :wiedmann-twitter: -

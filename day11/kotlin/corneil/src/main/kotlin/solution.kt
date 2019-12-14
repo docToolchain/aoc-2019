@@ -97,7 +97,7 @@ fun printGrid(grid: Grid) {
     for (y in minY..maxY) {
         for (x in minX..maxX) {
             val color = grid.cellColor(Coord(x, y))
-            print(if (color == 0) '.' else '#')
+            print(if (color == 0) ' ' else '#')
         }
         println()
     }

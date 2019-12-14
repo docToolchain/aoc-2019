@@ -24,7 +24,7 @@ cp ../day13/kotlin/corneil/input.txt .
 ./solution-day13/bin/solution-day13
 ----
 
-image::game-recording.gif[]
+image::/images/game-recording.gif[]
 
 === Solution Source
 

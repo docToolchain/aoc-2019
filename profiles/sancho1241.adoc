@@ -1,0 +1,29 @@
+
+:sancho1241-avatar: https://avatars0.githubusercontent.com/u/24798802?s=40
+:sancho1241-twitter: -
+:sancho1241-realName: []
+:sancho1241-blog: -
+
+
+//tag::free-form[]
+
+[cols="1,5"]
+|===
+| image:{sancho1241-avatar}[]
+a| **sancho1241** +
+//{sancho1241-realName} +
+icon:github[]: [][sancho1241]
+ifeval::[{sancho1241-twitter} != -]
+  icon:twitter[] : https://twitter.com/{sancho1241-twitter}[sancho1241-twitter] +
+endif::[]
+ifeval::[{sancho1241-blog} != -]
+  Blog : {sancho1241-blog} 
+endif::[]
+|===
+
+=== About me
+
+Nothing here yet. Update your profile at https://github.com/docToolchain/aoc-2019/blob/master/profiles/sancho1241.adoc[/profiles/sancho1241.adoc] 
+
+//end::free-form[]
+

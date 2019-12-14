@@ -1,0 +1,28 @@
+== Space Stoichiometry
+
+=== Part 1
+
+This was relatively easy and I was number 996 to get Star 1.
+
+=== Part 2
+
+This took a little longer.
+I had a mistake and it ran very long.
+Then I thought there was some trick to it.
+This led me astray for a while until I found the mistake and saw the straight forward solution doesn't run that long.
+
+I did add some optimisation to reduce the time.
+
+=== Solution Source
+
+[source,kotlin,numbered]
+----
+include::src/main/kotlin/solution.kt[]
+----
+
+=== Test Code
+
+[source,kotlin,numbered]
+----
+include::src/test/kotlin/TestStoichiometry.kt[]
+----

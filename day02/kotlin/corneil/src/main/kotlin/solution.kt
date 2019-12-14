@@ -20,18 +20,10 @@ fun applyOperation(input: MutableList<Int>, pc: Int, operation: (Int, Int) -> In
 
 fun readAndExecute(pc: Int, input: MutableList<Int>): Int {
     return when (val opcode = input[pc]) {
-        1    -> {
-            applyOperation(input, pc) { a, b -> a + b }
-        }
-        2    -> {
-            applyOperation(input, pc) { a, b -> a * b }
-        }
-        99   -> {
-            input.size
-        }
-        else -> {
-            throw Exception("Invalid opcode $opcode")
-        }
+        1    -> applyOperation(input, pc) { a, b -> a + b }
+        2    -> applyOperation(input, pc) { a, b -> a * b }
+        99   -> input.size
+        else -> error("Invalid opcode $opcode")
     }
 }
 

@@ -28,7 +28,7 @@ fun fromValue(input: Int): TILE {
             return v
         }
     }
-    throw Exception("Invalid TILE $input")
+    error("Invalid TILE $input")
 }
 
 data class Coord(val x: Int, val y: Int)

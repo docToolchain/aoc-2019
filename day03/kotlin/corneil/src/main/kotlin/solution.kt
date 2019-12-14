@@ -80,19 +80,11 @@ class Grid {
         trace.forEach { instruction ->
             val direction = translateInstruction(instruction)
             position = when (direction.first) {
-                'R'  -> {
-                    addEntriesX(position.x, position.x + direction.second, position.y, line, stepsCounted)
-                }
-                'L'  -> {
-                    addEntriesX(position.x, position.x - direction.second, position.y, line, stepsCounted)
-                }
-                'U'  -> {
-                    addEntriesY(position.y, position.y + direction.second, position.x, line, stepsCounted)
-                }
-                'D'  -> {
-                    addEntriesY(position.y, position.y - direction.second, position.x, line, stepsCounted)
-                }
-                else -> throw Exception("Unknown instruction $instruction")
+                'R'  -> addEntriesX(position.x, position.x + direction.second, position.y, line, stepsCounted)
+                'L'  -> addEntriesX(position.x, position.x - direction.second, position.y, line, stepsCounted)
+                'U'  -> addEntriesY(position.y, position.y + direction.second, position.x, line, stepsCounted)
+                'D'  -> addEntriesY(position.y, position.y - direction.second, position.x, line, stepsCounted)
+                else -> error("Unknown instruction $instruction")
             }
             stepsCounted += direction.second
         }

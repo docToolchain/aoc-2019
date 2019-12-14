@@ -21,7 +21,7 @@ data class ParameterModes(private val modes: List<ParameterMode>) {
 
 fun parameterMode(mode: Int) = ParameterMode.values().find {
     it.mode == mode
-} ?: throw Exception("Invalid mode $mode")
+} ?: error("Invalid mode $mode")
 
 fun paramModesFrom(mode: Long): ParameterModes {
     var remainingMode = mode
@@ -180,7 +180,7 @@ class ProgramState(
             8    -> operationEquals()
             9    -> adjustBase()
             99   -> halt()
-            else -> throw Exception("Invalid opcode $opcode")
+            else -> error("Invalid opcode $opcode")
         }
     }
 

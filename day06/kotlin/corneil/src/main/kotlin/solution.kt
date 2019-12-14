@@ -36,7 +36,7 @@ class OrbitData {
     }
 
     fun findOrbit(obj: String): Orbit {
-        return orbits[obj] ?: throw Exception("Expected to find $obj orbiting something")
+        return orbits[obj] ?: error("Expected to find $obj orbiting something")
     }
 }
 

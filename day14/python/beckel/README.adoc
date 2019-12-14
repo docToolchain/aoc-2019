@@ -1,0 +1,9 @@
+Day 14 - Solution in Python
+
+For star 2: Used a "manual" binary search due to late night programming lazyness ;-)
+
+[source, python]
+....
+include::solution.py[]
+....
+

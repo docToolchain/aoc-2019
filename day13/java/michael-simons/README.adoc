@@ -23,6 +23,7 @@ The second part? Really? Playing brick out on that thing? Naaah.
 
 [source,java,numbered,indent=0]
 ----
+include::Solution.java[tags=freePlay]
 include::Solution.java[tags=starTwo]
 ----
 <.> The puzzle say you have to change the instructions 🤔
@@ -35,3 +36,7 @@ include::Solution.java[tags=starTwo]
 
 NOTE: Run with `java --source 13 --enable-preview Solution.java`.
       Tested with `java version "13" 2019-09-17`, correct solutions are: `326` and `15988`.
+      +
+      `java --source 13 --enable-preview Solution.java --animate` gives you an animated version.
+
+image::/images/day13.gif[]

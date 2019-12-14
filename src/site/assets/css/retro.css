@@ -173,3 +173,6 @@ ol.linenums li {
 div.content {
     background-color: rgba(255,255,255,0.6);
 }
+td div.content {
+    background-color: transparent !important;
+}

@@ -1,5 +1,5 @@
 
-:lukas_grotz-avatar: []
+:lukas_grotz-avatar: https://avatars1.githubusercontent.com/u/7985033?s=40&v=4
 :lukas_grotz-twitter: -
 :lukas_grotz-realName: []
 :lukas_grotz-blog: -
@@ -12,7 +12,7 @@
 | image:{lukas_grotz-avatar}[]
 a| **lukas_grotz** +
 //{lukas_grotz-realName} +
-icon:github[]: [][lukas_grotz]
+GitHub: https://github.com/Transmitt0r[Transmitt0r]
 ifeval::[{lukas_grotz-twitter} != -]
   icon:twitter[] : https://twitter.com/{lukas_grotz-twitter}[lukas_grotz-twitter] +
 endif::[]

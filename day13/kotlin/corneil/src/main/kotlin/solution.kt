@@ -68,15 +68,15 @@ fun determineInput(grid: Grid): Int {
     val paddle = grid.findTile(PADDLE)
     val movement = when {
         ball.x > paddle.x -> {
-            print(Ansi.ansi().cursor(maxY, 0).fgBlue().render(">").reset())
+            print(Ansi.ansi().cursor(maxY, 1).fgBlue().render(">> ").reset())
             1
         }
         ball.x < paddle.x -> {
-            print(Ansi.ansi().cursor(maxY, 0).fgGreen().render("<").reset())
+            print(Ansi.ansi().cursor(maxY, 1).fgGreen().render("<< ").reset())
             -1
         }
         else              -> {
-            print(Ansi.ansi().cursor(maxY, 0).render("."))
+            print(Ansi.ansi().cursor(maxY, 1).render(".. "))
             0
         }
     }

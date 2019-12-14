@@ -176,3 +176,6 @@ div.content {
 td div.content {
     background-color: transparent !important;
 }
+p.tableblock span.image img {
+    max-width: none !important;
+}

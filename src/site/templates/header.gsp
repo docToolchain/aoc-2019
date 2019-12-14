@@ -41,7 +41,7 @@
       html, body {
           font-size: 1.06rem;
       }
-      body.toc2{ overflow-x: hidden}
+      body.toc2{ overflow-x: auto}
       #toc.toc ul {
           padding-inline-start: 0;
       }

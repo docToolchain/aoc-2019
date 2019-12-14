@@ -28,7 +28,7 @@ fun fromValue(input: Int): TILE {
             return v
         }
     }
-    throw Exception("Invalid TILE $input")
+    error("Invalid TILE $input")
 }
 
 data class Coord(val x: Int, val y: Int)
@@ -41,7 +41,7 @@ data class Grid(var score: Int, val cells: MutableMap<Coord, Cell> = mutableMapO
     }
 
     fun hasBlocks(): Boolean {
-        return cells.values.find { it.tile == BLOCK } != null
+        return cells.values.any { it.tile == BLOCK }
     }
 
     fun findTile(tile: TILE): Coord {
@@ -51,13 +51,12 @@ data class Grid(var score: Int, val cells: MutableMap<Coord, Cell> = mutableMapO
 
 fun printCell(cell: Cell) {
     print(Ansi.ansi().saveCursorPosition().cursor(cell.pos.y, cell.pos.x))
-    val tile = cell.tile
-    when (tile) {
+    when (cell.tile) {
         EMPTY  -> print(Ansi.ansi().render(" "))
         WALL   -> print(Ansi.ansi().render("#"))
         BLOCK  -> print(Ansi.ansi().bg(WHITE).fg(BLACK).render("$").reset())
         PADDLE -> print(Ansi.ansi().render("_"))
-        BALL   -> print(Ansi.ansi().render("*"))
+        BALL   -> print(Ansi.ansi().render("o"))
     }
     print(Ansi.ansi().restoreCursorPosition())
 }
@@ -66,7 +65,7 @@ fun determineInput(grid: Grid): Int {
     val maxY = grid.cells.keys.maxBy { it.y }?.y ?: 40
     val ball = grid.findTile(BALL)
     val paddle = grid.findTile(PADDLE)
-    val movement = when {
+    return when {
         ball.x > paddle.x -> {
             print(Ansi.ansi().cursor(maxY, 1).fgBlue().render(">> ").reset())
             1
@@ -80,20 +79,20 @@ fun determineInput(grid: Grid): Int {
             0
         }
     }
-    return movement
 }
 
-fun runGame(code: List<Long>, input: List<Long>): Grid {
+fun runGame(code: List<Long>): Grid {
     print(Ansi.ansi().eraseScreen())
     val grid = Grid(0)
-    val code = Program(code)
-    var output = mutableListOf<Long>()
-    val program = code.executeProgram(input, outputHandler = {
+    val program = Program(code)
+    val output = mutableListOf<Long>()
+    val state = program.executeProgram(emptyList()) {
+        // outputHandler
         output.add(it)
         if (output.size == 3) {
-            val x = output[0]?.toInt() ?: 0
-            val y = output[1]?.toInt() ?: 0
-            val tile = output[2]?.toInt() ?: 0
+            val x = output.removeAt(0).toInt()
+            val y = output.removeAt(0).toInt()
+            val tile = output.removeAt(0).toInt()
             if (x == -1 && y == 0) {
                 grid.score = tile
                 print(Ansi.ansi().cursor(0, 0).render(grid.score.toString() + " ").eraseLine(FORWARD))
@@ -101,12 +100,11 @@ fun runGame(code: List<Long>, input: List<Long>): Grid {
                 val cell = grid.setTile(Coord(x, y), fromValue(tile))
                 printCell(cell)
             }
-            output.clear()
         }
-    })
+    }
     val input = mutableListOf<Long>()
     do {
-        program.executeUntilInput(input)
+        state.executeUntilInput(input)
         input.clear()
         if (grid.score > 0 && !grid.hasBlocks()) {
             println(Ansi.ansi().eraseScreen().render("Score:${grid.score}!!"))
@@ -114,7 +112,7 @@ fun runGame(code: List<Long>, input: List<Long>): Grid {
         }
         input.add(determineInput(grid).toLong())
 
-    } while (!program.isHalted())
+    } while (!state.isHalted())
 
     return grid
 }
@@ -123,12 +121,12 @@ fun main(args: Array<String>) {
     AnsiConsole.systemInstall()
     val fileName = if (args.size > 1) args[1] else "input.txt"
     val code = readProgram(File(fileName))
-    val grid = runGame(code, emptyList())
+    val grid = runGame(code)
     val tiles = grid.cells.count { it.value.tile == BLOCK }
     println("Tiles = $tiles")
 
     val free = code.toMutableList()
-    free.set(0, 2L)
-    runGame(free, emptyList())
+    free[0] = 2L
+    runGame(free)
     AnsiConsole.systemUninstall()
 }

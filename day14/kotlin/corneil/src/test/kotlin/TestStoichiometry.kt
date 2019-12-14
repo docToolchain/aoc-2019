@@ -6,7 +6,7 @@ import org.junit.Test
 
 class TestStoichiometry {
     @Test
-    fun `test1`() {
+    fun test1() {
         val input = """
             10 ORE => 10 A
             1 ORE => 1 B
@@ -21,7 +21,7 @@ class TestStoichiometry {
     }
 
     @Test
-    fun `test2`() {
+    fun test2() {
         val input = """
             9 ORE => 2 A
             8 ORE => 3 B
@@ -37,7 +37,7 @@ class TestStoichiometry {
     }
 
     @Test
-    fun `test3`() {
+    fun test3() {
         val input = """
             157 ORE => 5 NZVS
             165 ORE => 6 DCFZ
@@ -57,7 +57,7 @@ class TestStoichiometry {
     }
 
     @Test
-    fun `test4`() {
+    fun test4() {
         val input = """
             2 VPVL, 7 FWMGM, 2 CXFTF, 11 MNCFX => 1 STKFG
             17 NVRVD, 3 JNWZP => 8 VPVL
@@ -80,7 +80,7 @@ class TestStoichiometry {
     }
 
     @Test
-    fun `test5`() {
+    fun test5() {
         val input = """
             171 ORE => 8 CNZTR
             7 ZLQW, 3 BMBT, 9 XCVML, 26 XMNCP, 1 WPTQ, 2 MZWV, 1 RJRHP => 4 PLWSL

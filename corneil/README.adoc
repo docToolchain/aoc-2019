@@ -1,0 +1,16 @@
+= Advent of Code 2019
+
+== Building
+
+[source,bash]
+----
+./gradlew build
+----
+
+== Executing
+
+[source,bash]
+----
+./gradlew run
+----
+

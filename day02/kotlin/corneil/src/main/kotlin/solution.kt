@@ -19,25 +19,16 @@ fun applyOperation(input: MutableList<Int>, pc: Int, operation: (Int, Int) -> In
 }
 
 fun readAndExecute(pc: Int, input: MutableList<Int>): Int {
-    val opcode = input[pc]
-    return when (opcode) {
-        1    -> {
-            applyOperation(input, pc) { a, b -> a + b }
-        }
-        2    -> {
-            applyOperation(input, pc) { a, b -> a * b }
-        }
-        99   -> {
-            input.size
-        }
-        else -> {
-            throw Exception("Invalid opcode $opcode")
-        }
+    return when (val opcode = input[pc]) {
+        1    -> applyOperation(input, pc) { a, b -> a + b }
+        2    -> applyOperation(input, pc) { a, b -> a * b }
+        99   -> input.size
+        else -> error("Invalid opcode $opcode")
     }
 }
 
 fun executeProgram(input: MutableList<Int>): List<Int> {
-    var pc = 0;
+    var pc = 0
     while (pc < input.size) {
         pc = readAndExecute(pc, input)
     }
@@ -67,7 +58,7 @@ fun main(args: Array<String>) {
                 if (result[0] == 19690720) {
                     val answer = 100 * i + j
                     println("Result=$answer")
-                    break@mainLoop;
+                    break@mainLoop
                 }
             } catch (x: Throwable) {
                 println("Iteration failed:$x")

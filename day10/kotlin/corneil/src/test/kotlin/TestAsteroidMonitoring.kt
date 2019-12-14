@@ -6,7 +6,7 @@ import org.junit.Test
 
 class TestAsteroidMonitoring {
     @Test
-    fun `test1`() {
+    fun test1() {
         val input = """.#..#
                             .....
                             #####
@@ -25,7 +25,7 @@ class TestAsteroidMonitoring {
     }
 
     @Test
-    fun `test2`() {
+    fun test2() {
         val input = """......#.#.
                             #..#.#....
                             ..#######.
@@ -44,7 +44,7 @@ class TestAsteroidMonitoring {
     }
 
     @Test
-    fun `test3`() {
+    fun test3() {
         val input = """#.#...#.#.
                             .###....#.
                             .#....#...
@@ -63,7 +63,7 @@ class TestAsteroidMonitoring {
     }
 
     @Test
-    fun `test4`() {
+    fun test4() {
         val input = """.#..#..###
                             ####.###.#
                             ....###.#.
@@ -82,7 +82,7 @@ class TestAsteroidMonitoring {
     }
 
     @Test
-    fun `test5`() {
+    fun test5() {
         val input = """.#..##.###...#######
                             ##.############..##.
                             .#.######.########.#

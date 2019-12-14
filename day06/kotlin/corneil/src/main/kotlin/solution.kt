@@ -27,7 +27,7 @@ class OrbitData {
     fun findTransfers(start: String, end: String): List<Pair<Orbitable, Orbitable>> {
         val startOrbits = findOrbits(start)
         val endOrbits = findOrbits(end)
-        val shared = startOrbits.find { orbit -> endOrbits.find { it == orbit } != null }
+        val shared = startOrbits.find { orbit -> endOrbits.any { it == orbit } }
         requireNotNull(shared) { "Expected a shared orbit" }
         val inward = startOrbits.subList(0, startOrbits.indexOf(shared))
         val outward = endOrbits.subList(0, endOrbits.indexOf(shared))
@@ -36,7 +36,7 @@ class OrbitData {
     }
 
     fun findOrbit(obj: String): Orbit {
-        return orbits[obj] ?: throw Exception("Expected to find $obj orbiting something")
+        return orbits[obj] ?: error("Expected to find $obj orbiting something")
     }
 }
 
@@ -72,6 +72,6 @@ fun main(args: Array<String>) {
     println("YOU=$you")
     println("SAN=$san")
     val transfer = orbits.findTransfers(you.centre.name, san.centre.name)
-    println(transfer.map { it.first.name + " -> " + it.second.name }.joinToString("\n"))
+    println(transfer.joinToString("\n") { it.first.name + " -> " + it.second.name })
     println("Transfers=${transfer.size}")
 }

@@ -6,7 +6,7 @@ import org.junit.Test
 
 class TestNBodyProblem {
     @Test
-    fun `test1`() {
+    fun test1() {
         val input = """
             <x=-1, y=0, z=2>
             <x=2, y=-10, z=-7>
@@ -63,7 +63,7 @@ class TestNBodyProblem {
     }
 
     @Test
-    fun `test2`() {
+    fun test2() {
         val input = """<x=-1, y=0, z=2>
             <x=2, y=-10, z=-7>
             <x=4, y=-8, z=8>
@@ -81,7 +81,7 @@ class TestNBodyProblem {
     }
 
     @Test
-    fun `test3`() {
+    fun test3() {
         val input = """<x=-1, y=0, z=2>
             <x=2, y=-10, z=-7>
             <x=4, y=-8, z=8>
@@ -94,7 +94,7 @@ class TestNBodyProblem {
     }
 
     @Test
-    fun `test4`() {
+    fun test4() {
         val input = """
             <x=-8, y=-10, z=0>
             <x=5, y=5, z=10>

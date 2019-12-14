@@ -19,8 +19,7 @@ fun applyOperation(input: MutableList<Int>, pc: Int, operation: (Int, Int) -> In
 }
 
 fun readAndExecute(pc: Int, input: MutableList<Int>): Int {
-    val opcode = input[pc]
-    return when (opcode) {
+    return when (val opcode = input[pc]) {
         1    -> {
             applyOperation(input, pc) { a, b -> a + b }
         }
@@ -37,7 +36,7 @@ fun readAndExecute(pc: Int, input: MutableList<Int>): Int {
 }
 
 fun executeProgram(input: MutableList<Int>): List<Int> {
-    var pc = 0;
+    var pc = 0
     while (pc < input.size) {
         pc = readAndExecute(pc, input)
     }
@@ -67,7 +66,7 @@ fun main(args: Array<String>) {
                 if (result[0] == 19690720) {
                     val answer = 100 * i + j
                     println("Result=$answer")
-                    break@mainLoop;
+                    break@mainLoop
                 }
             } catch (x: Throwable) {
                 println("Iteration failed:$x")

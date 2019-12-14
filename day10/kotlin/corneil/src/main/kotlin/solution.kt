@@ -5,18 +5,19 @@ import java.math.BigDecimal
 import java.math.RoundingMode.HALF_EVEN
 import kotlin.math.atan2
 import kotlin.math.max
+import kotlin.math.pow
 import kotlin.math.sqrt
 
 data class Coord(val x: Int, val y: Int)
 
 data class AsteroidMap(val width: Int, val height: Int, val asteroidLocations: List<Coord>) {
     fun contains(point: Coord): Boolean {
-        return point.x >= 0 && point.x < width && point.y >= 0 && point.y < height
+        return point.y >= 0 && point.y < height && point.x in 0 until width
     }
 }
 
 fun readMap(input: List<String>): AsteroidMap {
-    var width: Int = 0
+    var width = 0
     val result = mutableListOf<Coord>()
     input.forEachIndexed { y, line ->
         line.trim().forEachIndexed { x, c ->
@@ -32,7 +33,7 @@ fun readMap(input: List<String>): AsteroidMap {
 // I had to look at other solutions to do the 2nd part. Tx Michael Simons
 fun direction(start: Coord, end: Coord) = Coord(end.x - start.x, end.y - start.y)
 
-fun distance(pt: Coord): Double = sqrt(Math.pow(pt.x.toDouble(), 2.0) + Math.pow(pt.y.toDouble(), 2.0))
+fun distance(pt: Coord): Double = sqrt(pt.x.toDouble().pow(2.0) + pt.y.toDouble().pow(2.0))
 typealias Normalized = Pair<BigDecimal, BigDecimal>
 
 fun normalized(pt: Coord): Normalized {
@@ -51,9 +52,9 @@ fun prepareOtherAsteroids(map: AsteroidMap, coord: Coord): Map<Normalized, Mutab
         val norm = normalized(dir)
         val target = Pair(it, dist)
         if (result.containsKey(norm)) {
-            result.get(norm)!!.add(target)
+            result[norm]!!.add(target)
         } else {
-            result.put(norm, mutableListOf(target))
+            result[norm] = mutableListOf(target)
         }
     }
     result.forEach { entry ->

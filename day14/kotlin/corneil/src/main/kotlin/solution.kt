@@ -16,10 +16,7 @@ fun readReaction(input: String): ReactionFormula {
     val inputs = input.substringBefore("=>").split(",").map {
         readChemicalQty(it)
     }
-    val output = input.substringAfter("=>").let {
-        readChemicalQty(it)
-    }
-    return ReactionFormula(inputs, output)
+    return ReactionFormula(inputs, readChemicalQty(input.substringAfter("=>")))
 }
 
 fun readReactions(input: List<String>) = input.map { readReaction(it) }
@@ -123,7 +120,7 @@ fun determineOuputForInput(input: ChemicalQty, output: String, formulae: List<Re
     var increment = 1000L // Start with 100 and drop down to save some time
     var counter: Long
     do {
-        increment = increment / 10L
+        increment /= 10L
         val pair = executeReactions(increment, input, output, formula, used)
         counter = pair.first
         increment = pair.second

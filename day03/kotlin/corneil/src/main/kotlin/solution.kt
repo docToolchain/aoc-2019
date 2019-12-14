@@ -22,7 +22,7 @@ fun translateInstruction(instruction: String): Pair<Char, Int> {
 }
 
 class Grid {
-    val cells = mutableMapOf<Coord, Cell>(Coord(0, 0) to Cell(Coord(0, 0), 0))
+    val cells = mutableMapOf(Coord(0, 0) to Cell(Coord(0, 0), 0))
     private fun addCell(x: Int, y: Int, value: Int, steps: Int) {
         if (!(x == 0 && y == 0)) {
             val key = Coord(x, y)
@@ -101,9 +101,9 @@ class Grid {
     fun findNearest(coord: Coord, minValue: Int): Cell {
         val closest = cells.values.filter { cell ->
             cell.value > minValue
-        }.sortedBy { cell ->
+        }.minBy { cell ->
             coord.distance(cell.coord)
-        }.firstOrNull()
+        }
         requireNotNull(closest) { "Could not find any cells!!!" }
         return closest
     }
@@ -111,9 +111,10 @@ class Grid {
     fun findLowestStepsIntersection(minValue: Int): Int {
         val best = cells.values.filter { cell ->
             cell.value > minValue
-        }.sortedBy { cell ->
+        }.minBy { cell ->
             cell.steps.values.sum()
-        }.first()
+        }
+        requireNotNull(best) { "Expected a minimum value" }
         return best.steps.values.sum()
     }
 
@@ -149,7 +150,7 @@ fun main(args: Array<String>) {
     val fileName = if (args.size > 1) args[0] else "input.txt"
     val lines = BufferedReader(FileReader(File(fileName))).readLines().mapNotNull {
         val line = it.trim()
-        if (line.length > 0) line else null
+        if (line.isNotEmpty()) line else null
     }
     val grid = Grid()
     lines.forEachIndexed { index, line ->

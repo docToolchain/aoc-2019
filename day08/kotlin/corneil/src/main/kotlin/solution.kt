@@ -21,7 +21,7 @@ fun printImage(image: Image) {
     for (y in 0 until image.height) {
         for (x in 0 until image.width) {
             val offset = x + (y * image.width)
-            val pixel = (0 until image.layers.size).map {
+            val pixel = (image.layers.indices).map {
                 image.layers[it][offset]
             }.find { it != 2 } ?: 0
             print(if (pixel == 1) "*" else " ")
@@ -35,7 +35,7 @@ fun main(args: Array<String>) {
     val fileName = if (args.size > 1) args[0] else "input.txt"
     val image = readImage(25, 6, File(fileName).readText().trim())
     println("Layers=${image.layers.size}")
-    val minZeros = image.layers.minBy { it.count { it == 0 } }
+    val minZeros = image.layers.minBy { layer -> layer.count { it == 0 } }
     requireNotNull(minZeros) { "Expected to find a layer with 0" }
     val result = minZeros.count { it == 1 } * minZeros.count { it == 2 }
     println("Result = $result")

@@ -124,6 +124,12 @@ include::${file.canonicalPath-(currentFolder.canonicalPath+'/')}[]
                     readme.write(text)
                 }
                 if (readme.exists()) {
+                    daysFile.append("""
+++++
+<a id="${datum[0]}" />
+++++
+
+""")
                     daysFile.append("=== Day ${datum[0]-"day"}: ${datum[1]}\n\n")
                     daysFile.append("include::../../../../../../${datum[0]}/${datum[1]}/${coder}/README.adoc[leveloffset=+2]\n\n")
                 }
@@ -207,12 +213,23 @@ include::../../../../profiles/allUsers.adoc[]
 """
         def emojis=['👋','🕯','🎄','🎶','❄','🔔','🧦','☃','🕯🕯','🎁','🎄','🔔','☃','❄','⛪','🕯🕯🕯','🦌','🧝','🤶','🎄','☃','❄','🕯🕯🕯🕯','🎶','🎅','👪👼🦌']
         stats.stars.sort{e1, e2 -> e2.value.size() <=> e1.value.size()}.each{ coder, stars ->
-            statsFile += "a| image:{${coder}-avatar}[width=32px] link:/generated/coder/${coder}/generateddays[$coder] ^| ${stats.days.collect{ stars[it]?emojis[it as Integer]:'-' }.join(' ^| ')} ^| ${stars.size()}\n"
+            statsFile += "a| image:{${coder}-avatar}[width=32px] link:/generated/coder/${coder}/generatedDays.html[$coder] "
+            def dayList = stats.days.collect {
+                                def entry = '-'
+                                if (stars[it]) {
+                                    def emojiOfTheDay = emojis[it as Integer]
+                                    def currentDayAnchor = it.toString().padLeft(2, '0')
+                                    entry = "link:/generated/coder/${coder}/generatedDays.html#day${currentDayAnchor}[${emojiOfTheDay}]"
+                                }
+                                return entry
+                            }.join(' ^| ')
+            statsFile += "^| ${dayList} "
+            statsFile += "^| ${stars.size()}\n"
         }
         statsFile += """
 |===
 """
-        new File('src/site/content/generated/stats.adoc').write(statsFile)
+        new File('src/site/content/generated/stats.adoc').write(statsFile, 'utf-8')
 
         def userInfo = ""
         def allUsers = ""

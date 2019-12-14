@@ -213,14 +213,14 @@ The repository contains solutions in ${stats.languages} languages by ${stats.cod
 
 include::../../../../profiles/allUsers.adoc[]
 
-[cols="${stats.days.size()+2}"]
+[cols="${stats.days.size()+3}"]
 |===
-.2+^.>| Developer ${stats.days.size()}+^| Day .2+^.>| Sum
-^| ${stats.days.collect{"$it"}.join(' ^| ')}
+2+^.>|  ${stats.days.size()}+^| Day .2+^.>| Sum
+2+^.>| Developer ^| ${stats.days.collect{"$it"}.join(' ^| ')}
 """
         def emojis=['👋','🕯','🎄','🎶','❄','🔔','🧦','☃','🕯🕯','🎁','🎄','🔔','☃','❄','⛪','🕯🕯🕯','🦌','🧝','🤶','🎄','☃','❄','🕯🕯🕯🕯','🎶','🎅','👪👼🦌']
         stats.stars.sort{e1, e2 -> e2.value.size() <=> e1.value.size()}.each{ coder, stars ->
-            statsFile += "a| image:{${coder}-avatar}[width=32px] link:/generated/coder/${coder}/generatedDays.html[$coder] "
+            statsFile += "a| image::{${coder}-avatar}[width=32px] a| link:/generated/coder/${coder}/generatedDays.html[$coder] "
             def dayList = stats.days.collect {
                                 def entry = '-'
                                 if (stars[it]) {
@@ -250,8 +250,6 @@ include::../../../../profiles/allUsers.adoc[]
 """
         println stats
         stats.lang.sort{e1, e2 -> e2.value.size() <=> e1.value.size()}.each{ currentLanguage ->
-            println "="*80
-            println currentLanguage.inspect()
             statsFile2 += "a| ${currentLanguage.key} "
             def langCoders = 0
             def langDays = 0
@@ -259,9 +257,6 @@ include::../../../../profiles/allUsers.adoc[]
             def dayList = stats.days.collect { currentDay ->
                 def entry = '-'
                 def currentDayAnchor = "day"+currentDay.toString().padLeft(2, '0')
-                println "currentDay: "+currentDay
-                println "currentAnchor: "+currentDayAnchor
-                println "codersForLang: "+codersForLang
                 if (codersForLang[currentDayAnchor]) {
 
                     langDays ++

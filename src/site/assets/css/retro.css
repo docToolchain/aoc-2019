@@ -179,3 +179,6 @@ td div.content {
 p.tableblock span.image img {
     max-width: none !important;
 }
+td div.content div.imageblock div.content img {
+    max-width: none !important;
+}

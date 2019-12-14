@@ -38,30 +38,51 @@ fun produce(
 ) {
     val remain = sideEffect[output.second]
     if (remain != null && remain > 0L) {
-        if (remain >= output.first) {
-            val qty = remain - output.first
-            sideEffect[output.second] = qty
-            require(qty >= 0) { "Expected Qty to be zero or greater for ${output.second} not $qty" }
-        } else {
-            sideEffect.remove(output.second)
-            produce(ChemicalQty(output.first - remain, output.second), formulae, sideEffect, used)
-        }
+        useRemainingChemicals(remain, output, formulae, sideEffect, used)
     } else {
         val formula = formulae[output.second]
         if (formula != null) {
-            val repeats = if (output.first < formula.output.first) {
-                1L
-            } else {
-                output.first / formula.output.first + if (output.first % formula.output.first == 0L) 0L else 1L
-            }
-            val produced = apply(formula, repeats, formulae, sideEffect, used)
-            if (output.first < produced.first) {
-                sideEffect[output.second] = produced.first - output.first
-            }
+            applyFormula(output, formula, formulae, sideEffect, used)
         } else {
             // This is usually the ORE
             add(used, output)
         }
+    }
+}
+
+fun useRemainingChemicals(
+    remain: Long,
+    output: ChemicalQty,
+    formulae: Map<String, ReactionFormula>,
+    sideEffect: MutableMap<String, Long>,
+    used: MutableMap<String, Long>
+) {
+    if (remain >= output.first) {
+        val qty = remain - output.first
+        sideEffect[output.second] = qty
+        require(qty >= 0) { "Expected Qty to be zero or greater for ${output.second} not $qty" }
+    } else {
+        sideEffect.remove(output.second)
+        produce(ChemicalQty(output.first - remain, output.second), formulae, sideEffect, used)
+    }
+}
+
+fun applyFormula(
+    output: ChemicalQty,
+    formula: ReactionFormula,
+    formulae: Map<String, ReactionFormula>,
+    sideEffect: MutableMap<String, Long>,
+    used: MutableMap<String, Long>
+) {
+    val repeats = if (output.first < formula.output.first) {
+        1L
+    } else {
+        output.first / formula.output.first +
+                if (output.first % formula.output.first == 0L) 0L else 1L
+    }
+    val produced = apply(formula, repeats, formulae, sideEffect, used)
+    if (output.first < produced.first) {
+        sideEffect[output.second] = produced.first - output.first
     }
 }
 

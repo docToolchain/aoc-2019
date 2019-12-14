@@ -198,13 +198,16 @@ Here are some stats for those who are interested.
 
 The repository contains solutions in ${stats.languages} languages by ${stats.coders} developers.
 
+include::../../../../profiles/allUsers.adoc[]
+
 [cols="${stats.days.size()+2}"]
 |===
-|Developer ^| ${stats.days.collect{"Day $it"}.join(' ^| ')} ^| Sum
+.2+^.>| Developer ${stats.days.size()}+^| Day .2+^.>| Sum
+^| ${stats.days.collect{"$it"}.join(' ^| ')}
 """
         def emojis=['👋','🕯','🎄','🎶','❄','🔔','🧦','☃','🕯🕯','🎁','🎄','🔔','☃','❄','⛪','🕯🕯🕯','🦌','🧝','🤶','🎄','☃','❄','🕯🕯🕯🕯','🎶','🎅','👪👼🦌']
         stats.stars.sort{e1, e2 -> e2.value.size() <=> e1.value.size()}.each{ coder, stars ->
-            statsFile += "a|link:/generated/coder/${coder}/generateddays[$coder] ^| ${stats.days.collect{ stars[it]?emojis[it as Integer]:'-' }.join(' ^| ')} ^| ${stars.size()}\n"
+            statsFile += "a| image:{${coder}-avatar}[width=32px] link:/generated/coder/${coder}/generateddays[$coder] ^| ${stats.days.collect{ stars[it]?emojis[it as Integer]:'-' }.join(' ^| ')} ^| ${stars.size()}\n"
         }
         statsFile += """
 |===
@@ -212,8 +215,10 @@ The repository contains solutions in ${stats.languages} languages by ${stats.cod
         new File('src/site/content/generated/stats.adoc').write(statsFile)
 
         def userInfo = ""
+        def allUsers = ""
         stats.stars.each {coder, stars->
             File coderProfile = new File("./profiles/${coder}.adoc")
+            allUsers += "include::${coder}.adoc[tags=!free-form]\n"
             if (!coderProfile.exists()) {
                 def api = "https://api.github.com/users/"
                 def res = []
@@ -254,5 +259,6 @@ Nothing here yet. Update your profile at https://github.com/docToolchain/aoc-201
 """)
             }
         }
+        new File("./profiles/allUsers.adoc").write(allUsers)
     }
 }

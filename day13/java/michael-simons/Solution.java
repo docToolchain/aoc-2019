@@ -1,11 +1,17 @@
 import static java.util.stream.Collectors.*;
 
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.function.BiFunction;
-import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.IntStream;
 
@@ -33,7 +39,7 @@ public class Solution {
 
 		private final Map<Integer, Function<Long, Boolean>> conditions = Map.of(
 			5, (a) -> a != 0L,
-			6, (a) -> a == 0L
+			6, (a) -> a.equals(0L)
 		);
 
 		private final Map<Integer, BiFunction<Long, Long, Boolean>> comparisons = Map.of(
@@ -183,12 +189,139 @@ public class Solution {
 		}
 	}
 
-	public static void main(String... a) throws IOException {
+	private static final char esc = 0x1B;
 
-		final var EMPTY = 0L;
-		final var WALL = 1L;
-		final var BLOCK = 2L;
-		final var PADDLE = 3L;
+	enum TileType {
+		EMPTY(" "), WALL("█"), BLOCK("X"), PADDLE("═"), BALL("■");
+
+		private final String rep;
+
+		TileType(String rep) {
+			this.rep = rep;
+		}
+
+		long toLong() {
+			return this.toInt();
+		}
+
+		int toInt() {
+			return switch (this) {
+				case EMPTY -> 0;
+				case WALL -> 1;
+				case BLOCK -> 2;
+				case PADDLE -> 3;
+				case BALL -> 4;
+			};
+		}
+
+		static TileType fromLong(long l) {
+			return fromInt((int) l);
+		}
+
+		static TileType fromInt(int i) {
+			return switch (i) {
+				case 0 -> EMPTY;
+				case 1 -> WALL;
+				case 2 -> BLOCK;
+				case 3 -> PADDLE;
+				case 4 -> BALL;
+				default -> EMPTY;
+			};
+		}
+
+		@Override
+		public String toString() {
+			return this.rep;
+		}
+	}
+
+	public static void print(String c) {
+		System.out.print(c);
+	}
+
+	private static void clearScreen() {
+		printSequence("2J");
+	}
+
+	private static void moveTo(int r, int c) {
+		printSequence(String.format("%d;%dH", r, c));
+	}
+
+	private static void printSequence(String seq) {
+		System.out.print(String.format("%c[%S", esc, seq));
+	}
+
+	private static void sleep() {
+		try {
+			Thread.sleep(50);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static void cheatedStarTwo(List<Long> instructions) {
+
+		// tag::starTwo[]
+		var paddlePattern = List.of(TileType.EMPTY.toLong(), TileType.PADDLE.toLong(), TileType.EMPTY.toLong()); // <.>
+		for (int i = 0; i < instructions.size(); i += 2) {
+			if (instructions.subList(i, i + 3).equals(paddlePattern)) { // <.>
+				var paddleAt = i + 1;
+				var j = paddleAt;
+				while (instructions.get(--j) != TileType.WALL.toInt()) {
+					instructions.set(j, TileType.PADDLE.toLong());
+				}
+				j = paddleAt;
+				while (instructions.get(++j) != TileType.WALL.toInt()) {
+					instructions.set(j, TileType.PADDLE.toLong());
+				}
+				break;
+			}
+		}
+
+		var computer = Computer.loadProgram(instructions); // <.>
+		while (computer.run(false).expectsInput()) {
+			computer.pipe(0L); // <.>
+		}
+		computer.head()
+			.ifPresent(d -> System.out.println(String.format("Star two %d", d)));
+		// end::starTwo[]
+	}
+
+	private static void animatedStarTwo(List<Long> instructions) {
+
+		var computer = Computer.loadProgram(instructions); // <.>
+
+		clearScreen();
+		var ballX = -1;
+		var paddleX = -1;
+
+		while (computer.run(false).expectsInput()) {
+			var output = computer.drain();
+			for (int i = 0; i < output.size(); i += 3) {
+				var value = output.get(i + 2).intValue();
+				if (output.get(i) == -1 && output.get(i + 1) == 0) {
+					moveTo(2, 2);
+					print(String.format("Score: %d", value));
+				} else {
+					var x = output.get(i).intValue();
+					var y = output.get(i + 1).intValue();
+
+					var type = TileType.fromInt(value);
+					if (type == TileType.BALL) {
+						ballX = x;
+					} else if (type == TileType.PADDLE) {
+						paddleX = x;
+					}
+					moveTo(y + 4, x + 2);
+					print(type.toString());
+				}
+			}
+			sleep();
+			computer.pipe((long) Integer.compare(ballX, paddleX)); // <.>
+		}
+	}
+
+	public static void main(String... a) throws Exception {
 
 		var instructions = Files.readAllLines(Path.of("input.txt")).stream().flatMap(s -> Arrays.stream(s.split(",")))
 			.map(String::trim)
@@ -197,39 +330,26 @@ public class Solution {
 
 		// tag::starOne[]
 		var computer = Computer.loadProgram(instructions);
-		List<Long> output = computer.run().drain();
+		var output = computer.run().drain();
 		int cnt = 0;
 		for (int i = 0; i < output.size(); ++i) {
-			if (i % 3 == 2 && output.get(i) == BLOCK) {
+			if (i % 3 == 2 && TileType.fromLong(output.get(i)) == TileType.BLOCK) {
 				++cnt;
 			}
 		}
 		System.out.println(String.format("Star one %d", cnt));
 		// end::starOne[]
 
-		// tag::starTwo[]
+		// tag::freePlay[]
 		instructions.set(0, 2L); // <.>
-		var paddlePattern = List.of(EMPTY, PADDLE, EMPTY); // <.>
-		for (int i = 0; i < instructions.size(); i += 2) {
-			if (instructions.subList(i, i + 3).equals(paddlePattern)) { // <.>
-				var paddleAt = i + 1;
-				var j = paddleAt;
-				while (instructions.get(--j) != WALL) {
-					instructions.set(j, PADDLE);
-				}
-				j = paddleAt;
-				while (instructions.get(++j) != WALL) {
-					instructions.set(j, PADDLE);
-				}
-				break;
-			}
+
+		// end::freePlay[]
+
+		var animate = a.length == 1 && a[0].equals("--animate");
+		if (animate) {
+			animatedStarTwo(instructions);
+		} else {
+			cheatedStarTwo(instructions);
 		}
-		computer = Computer.loadProgram(instructions); // <.>
-		while (computer.run(false).expectsInput()) {
-			computer.pipe(0L); // <.>
-		}
-		computer.head()
-			.ifPresent(d -> System.out.println(String.format("Star two %d", d)));
-		// end::starTwo[]
 	}
 }

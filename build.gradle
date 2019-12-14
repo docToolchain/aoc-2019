@@ -243,9 +243,9 @@ include::../../../../profiles/allUsers.adoc[]
 
 include::../../../../profiles/allUsers.adoc[]
 
-[cols="${stats.days.size()+2}"]
+[cols="${stats.days.size()+3}"]
 |===
-.2+^.>| Language ${stats.days.size()}+^| Day .2+^.>| Sum
+.2+^.>| Language ${stats.days.size()}+^| Day .2+^.>| #Days .2+^.>| #Sol
 ^| ${stats.days.collect{"$it"}.join(' ^| ')}
 """
         println stats
@@ -267,13 +267,13 @@ include::../../../../profiles/allUsers.adoc[]
                     langDays ++
                     entry = codersForLang[currentDayAnchor].collect { coder ->
                         langCoders ++
-                       "image:{${coder}-avatar}[width=32]"
+                       "image:{${coder}-avatar}[width=32,link=/generated/coder/${coder}/generatedDays.html#_day_${currentDay.padLeft(2,'0')}_${currentLanguage.key}]"
                     }.join(" ")
                 }
                 return entry
             }.join(' ^| ')
             statsFile2 += "^| ${dayList} "
-            statsFile2 += "^| ${langDays} / ${langCoders}\n"
+            statsFile2 += "^| ${langDays} ^| ${langCoders}\n"
         }
         statsFile2 += """
 |===

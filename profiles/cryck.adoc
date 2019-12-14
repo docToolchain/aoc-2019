@@ -1,0 +1,29 @@
+
+:cryck-avatar: https://avatars0.githubusercontent.com/u/12096132?s=460&v=4
+:cryck-twitter: -
+:cryck-realName: cryck
+:cryck-blog: -
+
+
+//tag::free-form[]
+
+[cols="1,5"]
+|===
+| image:{cryck-avatar}[]
+a| **cryck** +
+//{cryck-realName} +
+GitHub: https://github.com/cryck[cryck]
+ifeval::[{cryck-twitter} != -]
+  icon:twitter[] : https://twitter.com/{cryck-twitter}[cryck-twitter] +
+endif::[]
+ifeval::[{cryck-blog} != -]
+  Blog : {cryck-blog} 
+endif::[]
+|===
+
+=== About me
+
+Nothing here yet. Update your profile at https://github.com/docToolchain/aoc-2019/blob/master/profiles/cryck.adoc[/profiles/cryck.adoc] 
+
+//end::free-form[]
+

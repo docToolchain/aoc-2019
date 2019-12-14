@@ -10,8 +10,10 @@ include::../config.adoc[]
 
 == Solutions by Coder
 
-This overview lists all developers who publish theis Advent of Code solutions in this repository.
+This overview lists all developers who publish their Advent of Code solutions in this repository.
 
-Alphabetical order.
+include::../generated/stats.adoc[leveloffset=+2]
+
+=== Alphabetical order.
 
 include::../generated/byCoder.adoc[]

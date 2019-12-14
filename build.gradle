@@ -46,7 +46,7 @@ task generateIndex() {
     doLast {
         def src = new File('.')
 
-        def stats = [coders:0,languages:0,stars:[:],days:[]]
+        def stats = [coders:0,languages:0,stars:[:],days:[],lang:[:]]
         // build up an index of all code
         def days = [:]
         def languages = [:]
@@ -67,6 +67,13 @@ task generateIndex() {
                                     languages[language.name]=[]
                                 }
                                 languages[language.name] << ([coder.name, day.name])
+                                if (!stats.lang[language.name]) {
+                                    stats.lang[language.name]=[:]
+                                }
+                                if (!stats.lang[language.name][day.name]) {
+                                    stats.lang[language.name][day.name]=[]
+                                }
+                                stats.lang[language.name][day.name]<<coder.name
                             }
                         }
                     }
@@ -124,6 +131,12 @@ include::${file.canonicalPath-(currentFolder.canonicalPath+'/')}[]
                     readme.write(text)
                 }
                 if (readme.exists()) {
+                    daysFile.append("""
+++++
+<a id="${datum[0]}" />
+++++
+
+""")
                     daysFile.append("=== Day ${datum[0]-"day"}: ${datum[1]}\n\n")
                     daysFile.append("include::../../../../../../${datum[0]}/${datum[1]}/${coder}/README.adoc[leveloffset=+2]\n\n")
                 }
@@ -198,22 +211,82 @@ Here are some stats for those who are interested.
 
 The repository contains solutions in ${stats.languages} languages by ${stats.coders} developers.
 
+include::../../../../profiles/allUsers.adoc[]
+
 [cols="${stats.days.size()+2}"]
 |===
-|Developer ^| ${stats.days.collect{"Day $it"}.join(' ^| ')} ^| Sum
+.2+^.>| Developer ${stats.days.size()}+^| Day .2+^.>| Sum
+^| ${stats.days.collect{"$it"}.join(' ^| ')}
 """
         def emojis=['👋','🕯','🎄','🎶','❄','🔔','🧦','☃','🕯🕯','🎁','🎄','🔔','☃','❄','⛪','🕯🕯🕯','🦌','🧝','🤶','🎄','☃','❄','🕯🕯🕯🕯','🎶','🎅','👪👼🦌']
         stats.stars.sort{e1, e2 -> e2.value.size() <=> e1.value.size()}.each{ coder, stars ->
-            statsFile += "a|link:/generated/coder/${coder}/generateddays[$coder] ^| ${stats.days.collect{ stars[it]?emojis[it as Integer]:'-' }.join(' ^| ')} ^| ${stars.size()}\n"
+            statsFile += "a| image:{${coder}-avatar}[width=32px] link:/generated/coder/${coder}/generatedDays.html[$coder] "
+            def dayList = stats.days.collect {
+                                def entry = '-'
+                                if (stars[it]) {
+                                    def emojiOfTheDay = emojis[it as Integer]
+                                    def currentDayAnchor = it.toString().padLeft(2, '0')
+                                    entry = "link:/generated/coder/${coder}/generatedDays.html#day${currentDayAnchor}[${emojiOfTheDay}]"
+                                }
+                                return entry
+                            }.join(' ^| ')
+            statsFile += "^| ${dayList} "
+            statsFile += "^| ${stars.size()}\n"
         }
         statsFile += """
 |===
 """
-        new File('src/site/content/generated/stats.adoc').write(statsFile)
+        new File('src/site/content/generated/stats.adoc').write(statsFile, 'utf-8')
+
+        // Solutions by Language as stats
+        def statsFile2 = """
+
+include::../../../../profiles/allUsers.adoc[]
+
+[cols="${stats.days.size()+2}"]
+|===
+.2+^.>| Language ${stats.days.size()}+^| Day .2+^.>| Sum
+^| ${stats.days.collect{"$it"}.join(' ^| ')}
+"""
+        println stats
+        stats.lang.sort{e1, e2 -> e2.value.size() <=> e1.value.size()}.each{ currentLanguage ->
+            println "="*80
+            println currentLanguage.inspect()
+            statsFile2 += "a| ${currentLanguage.key} "
+            def langCoders = 0
+            def langDays = 0
+            def codersForLang = currentLanguage.value
+            def dayList = stats.days.collect { currentDay ->
+                def entry = '-'
+                def currentDayAnchor = "day"+currentDay.toString().padLeft(2, '0')
+                println "currentDay: "+currentDay
+                println "currentAnchor: "+currentDayAnchor
+                println "codersForLang: "+codersForLang
+                if (codersForLang[currentDayAnchor]) {
+
+                    langDays ++
+                    entry = codersForLang[currentDayAnchor].collect { coder ->
+                        langCoders ++
+                       "image:{${coder}-avatar}[width=32]"
+                    }.join(" ")
+                }
+                return entry
+            }.join(' ^| ')
+            statsFile2 += "^| ${dayList} "
+            statsFile2 += "^| ${langDays} / ${langCoders}\n"
+        }
+        statsFile2 += """
+|===
+"""
+        new File('src/site/content/generated/stats2.adoc').write(statsFile2, 'utf-8')
+
+        // End Solutions by Language
 
         def userInfo = ""
+        def allUsers = ""
         stats.stars.each {coder, stars->
             File coderProfile = new File("./profiles/${coder}.adoc")
+            allUsers += "include::${coder}.adoc[tags=!free-form]\n"
             if (!coderProfile.exists()) {
                 def api = "https://api.github.com/users/"
                 def res = []
@@ -254,5 +327,6 @@ Nothing here yet. Update your profile at https://github.com/docToolchain/aoc-201
 """)
             }
         }
+        new File("./profiles/allUsers.adoc").write(allUsers)
     }
 }

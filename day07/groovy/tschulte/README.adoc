@@ -1,0 +1,26 @@
+
+== Amplification Circuit
+
+For this days task I just copied the sollution from day 9 (since I solved that day first) and altered the `computeOutput` method to allow multiple inputs for opcode 3.
+
+.computeOutput
+[source]
+....
+include::day07.groovy[tags=computeOutput]
+....
+
+.First Star
+[source]
+....
+include::day07.groovy[tags=maxThrusterSignal]
+include::day07.groovy[tags=starOne]
+....
+
+I was not able to solve the second star yet. The following does not work.
+
+.Second Star
+[source]
+....
+include::day07.groovy[tags=maxThrusterSignalFeedbackLoop]
+include::day07.groovy[tags=starTwo]
+....

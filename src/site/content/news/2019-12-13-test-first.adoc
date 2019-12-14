@@ -1,0 +1,36 @@
+= Three: Test First
+:jbake-type: post
+:jbake-date: 2019-12-13
+:jbake-status: published
+:jbake-tags: tdd
+
+As developers we create software products out of ideas. This means that we have to translate fuzzy and incomplete requirements into precise and comprehensive implementations, which makes it such a challenging task and also a lot of fun :-).
+There is a quite a good chance to miss the goal or just essential details while doing this. So bridging the gap between what our customers want and what we build makes the difference between success or failure. Fortunately there is an efficient method that can help you to succeed: Test First!
+
+== Specification by Example
+We all know these requests from our customers that sound so simple but cause our alarm bells ringing: "It should just work like the old system" or "Can you simply make the report view more like Excel?". Instead of just jumping into coding and giving our best to meet the expectations we should stop for a moment and try to figure out what exactly has to be implemented. The best way to build a common understanding of the requirements between stakeholders and developers are test cases. They specify the expected behaviour of our product using examples and come with these benefits:
+
+precise::
+Writing test cases forces you to be as specific as possible about the interaction details, input parameters and result values for a new feature.
+
+verifiable::
+With tests as specification you can automatically verify your product against the requirements, again and again.
+
+comprehensible::
+All stakeholders - developers, QA experts and customers - are capable of understanding and contributing to test cases. In a way they are their https://dictionary.cambridge.org/de/worterbuch/englisch/lingua-franca[Lingua Franca].
+
+== Practice makes perfect
+The Test First approach seems quite simple but you need some practice to master it. What is an efficient and effective test selection? How to write maintainable and concise tests? There are a lot of things to learn about test design and implementation. So, where to start? Why not with the Advent of Code exercises! Just start with extracting tests from the problem descriptions and then make them pass one by one by writing your implementation code. You will need some time to get used to this approach. Here are two tips to facilitate your first steps.
+
+- *Start with the happy path* It's easier to add edge cases and exception handling when you already have a working algorithm.
+
+- *one behaviour per test* This reduces the implementation steps and the time spent in the "red zone" of failing tests.
+
+== What else?
+There are also other fields where you can use the Test First approach. For example this method can help you to learn new programming languages with Koans. These are failing Unit tests which forces you to apply language features to make the tests pass. In this way you are not just learning a new language but also how to develop test driven. So, what are you waiting for?
+
+If you want to learn more about Test Driven Development visit my website http://agiledojo.de.
+
+Happy Testing,
+Christian
+

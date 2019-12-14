@@ -1,0 +1,10 @@
+Day 13 - Solution in Python
+
+That was fun!
+I was tempted to do a manual version (instead of an "AI") as well but retrieving console input while the program is running turned out to be too tedious.
+
+[source, python]
+....
+include::solution.py[]
+....
+

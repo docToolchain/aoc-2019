@@ -17,7 +17,7 @@ verifiable::
 With tests as specification you can automatically verify your product against the requirements, again and again.
 
 comprehensible::
-All stakeholders - developers, QA experts and customers - are capable of understanding and contributing to test cases. In a way they are their [Lingua Franca](https://dictionary.cambridge.org/de/worterbuch/englisch/lingua-franca).
+All stakeholders - developers, QA experts and customers - are capable of understanding and contributing to test cases. In a way they are their https://dictionary.cambridge.org/de/worterbuch/englisch/lingua-franca[Lingua Franca].
 
 == Practice makes perfect
 The Test First approach seems quite simple but you need some practice to master it. What is an efficient and effective test selection? How to write maintainable and concise tests? There are a lot of things to learn about test design and implementation. So, where to start? Why not with the Advent of Code exercises! Just start with extracting tests from the problem descriptions and then make them pass one by one by writing your implementation code. You will need some time to get used to this approach. Here are two tips to facilitate your first steps.
@@ -28,6 +28,8 @@ The Test First approach seems quite simple but you need some practice to master 
 
 == What else?
 There are also other fields where you can use the Test First approach. For example this method can help you to learn new programming languages with Koans. These are failing Unit tests which forces you to apply language features to make the tests pass. In this way you are not just learning a new language but also how to develop test driven. So, what are you waiting for?
+
+If you want to learn more about Test Driven Development visit my website http://agiledojo.de.
 
 Happy Testing,
 Christian

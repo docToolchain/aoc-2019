@@ -46,7 +46,7 @@ task generateIndex() {
     doLast {
         def src = new File('.')
 
-        def stats = [coders:0,languages:0,stars:[:],days:[]]
+        def stats = [coders:0,languages:0,stars:[:],days:[],lang:[:]]
         // build up an index of all code
         def days = [:]
         def languages = [:]
@@ -67,6 +67,13 @@ task generateIndex() {
                                     languages[language.name]=[]
                                 }
                                 languages[language.name] << ([coder.name, day.name])
+                                if (!stats.lang[language.name]) {
+                                    stats.lang[language.name]=[:]
+                                }
+                                if (!stats.lang[language.name][day.name]) {
+                                    stats.lang[language.name][day.name]=[]
+                                }
+                                stats.lang[language.name][day.name]<<coder.name
                             }
                         }
                     }
@@ -230,6 +237,50 @@ include::../../../../profiles/allUsers.adoc[]
 |===
 """
         new File('src/site/content/generated/stats.adoc').write(statsFile, 'utf-8')
+
+        // Solutions by Language as stats
+        def statsFile2 = """
+
+include::../../../../profiles/allUsers.adoc[]
+
+[cols="${stats.days.size()+2}"]
+|===
+.2+^.>| Language ${stats.days.size()}+^| Day .2+^.>| Sum
+^| ${stats.days.collect{"$it"}.join(' ^| ')}
+"""
+        println stats
+        stats.lang.sort{e1, e2 -> e2.value.size() <=> e1.value.size()}.each{ currentLanguage ->
+            println "="*80
+            println currentLanguage.inspect()
+            statsFile2 += "a| ${currentLanguage.key} "
+            def langCoders = 0
+            def langDays = 0
+            def codersForLang = currentLanguage.value
+            def dayList = stats.days.collect { currentDay ->
+                def entry = '-'
+                def currentDayAnchor = "day"+currentDay.toString().padLeft(2, '0')
+                println "currentDay: "+currentDay
+                println "currentAnchor: "+currentDayAnchor
+                println "codersForLang: "+codersForLang
+                if (codersForLang[currentDayAnchor]) {
+
+                    langDays ++
+                    entry = codersForLang[currentDayAnchor].collect { coder ->
+                        langCoders ++
+                       "image:{${coder}-avatar}[width=32]"
+                    }.join(" ")
+                }
+                return entry
+            }.join(' ^| ')
+            statsFile2 += "^| ${dayList} "
+            statsFile2 += "^| ${langDays} / ${langCoders}\n"
+        }
+        statsFile2 += """
+|===
+"""
+        new File('src/site/content/generated/stats2.adoc').write(statsFile2, 'utf-8')
+
+        // End Solutions by Language
 
         def userInfo = ""
         def allUsers = ""

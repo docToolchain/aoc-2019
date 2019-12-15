@@ -1,0 +1,36 @@
+== Space Stoichiometry
+
+The solutions are written in Typescript. To run them use the following commands.
+
+....
+npm install
+gulp
+node dist/solution1.js
+node dist/solution2.js
+....
+
+
+The core algorithm is recursice function wich calculate the consumed ore. Furthermore has a set of leftover chemicals which can used by the following reactions.
+
+[source, typescript, numbered]
+....
+include::src/NanoFactory.ts[tag=calculateOre]
+....
+
+=== First Star
+
+Solved by calling calculateOre
+[source, typescript, numbered]
+....
+include::src/solution1.ts[]
+....
+
+
+=== Second Star
+
+Second solution solved through finding how much FUEL consumes maximal 1 trillion ORE. Searched with binary search.
+
+[source, typescript, numbered]
+....
+include::src/solution2.ts[]
+....

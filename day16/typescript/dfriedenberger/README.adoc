@@ -1,0 +1,37 @@
+== Flawed Frequency Transmission
+
+The solutions are written in Typescript. To run them use the following commands.
+
+....
+npm install
+gulp
+node dist/solution1.js
+node dist/solution2.js
+....
+
+=== First Star
+
+Implementing algorithm for calulate next sequence straight forward.
+[source, typescript, numbered]
+....
+include::src/Calculator.ts[tag=next]
+....
+
+And run it 100 times for given input data.
+[source, typescript, numbered]
+....
+include::src/solution1.ts[]
+....
+=== Second Star
+
+When I started algorithm with input repeated 10000 times I quickly realized that the runtime complexity is O(n^2^) with a real runtime over an hour only called once. Found out that the last numbers only are sum of successors. So implemented optimized algorithm with runtime complexity O(n)
+[source, typescript, numbered]
+....
+include::src/Calculator.ts[tag=nextOptimized]
+....
+
+This I could run 100 times in short time. A good example for showing difference between runtime complexity O(n) and O(n^2^)
+[source, typescript, numbered]
+....
+include::src/solution2.ts[]
+....

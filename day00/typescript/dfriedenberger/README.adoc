@@ -1,0 +1,20 @@
+== Hello World
+
+The solutions are written in Typescript. To compile Typescript to Javascript you can use gulp runner.
+For running you can use node
+
+....
+npm install
+gulp
+node dist/solution1.js
+....
+
+Why Typescript?
+
+"TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.""
+
+
+[source, typescript, numbered]
+....
+include::src/solution1.ts[]
+....

@@ -17,6 +17,11 @@ entire row of paddles instead of the one, and let the game play out like that!
 include::answer.hs[]
 ----
 
+[source, haskell]
+----
+include::Intcode.hs[]
+----
+
 [source, bash]
 ----
 include::run.sh[]

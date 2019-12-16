@@ -13,6 +13,11 @@ for the new op codes.
 include::answer.hs[]
 ----
 
+[source, haskell]
+----
+include::Intcode.hs[]
+----
+
 [source, bash]
 ----
 include::run.sh[]

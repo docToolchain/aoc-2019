@@ -14,6 +14,11 @@ then I fold them into a multiline string that prints the picture
 include::answer.hs[]
 ----
 
+[source, haskell]
+----
+include::Intcode.hs[]
+----
+
 [source, bash]
 ----
 include::run.sh[]

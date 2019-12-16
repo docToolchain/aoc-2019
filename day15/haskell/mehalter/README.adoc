@@ -1,0 +1,26 @@
+== Oxygen System
+
+To run the final program you need Haskell installed, and simply run the
+`./run.sh`.
+
+I used the same function for both part 1 and part 2. First I found all of the
+points on the grid using a breadth first search on the given intcode program.
+Then I used breadth first search again to find the maximum empty space away from
+the found oxygen tank.
+
+== Solution
+
+[source, haskell]
+----
+include::answer.hs[]
+----
+
+[source, haskell]
+----
+include::Intcode.hs[]
+----
+
+[source, bash]
+----
+include::run.sh[]
+----

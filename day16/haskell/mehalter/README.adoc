@@ -1,0 +1,26 @@
+== Sensor Boost
+
+To run the final program you need Haskell installed, and simply run the
+`./run.sh`.
+
+My solution for part 1 is the trivial solution of applying the pattern to the
+input for 100 iterations and then return the first 8 characters
+
+Part 2 was tricky because of the large input overflowing the stack and taking
+forever trying to run the FFT algorithm on the input repeated 10,000 times.
+To optimize this, you have to realize the fact that the offset is over half the
+list, and therefore you are only adding numbers with the pattern and never
+multiplying by 0 or -1. So you can keep track of a cumulative summation of the
+rest of the digits after the offset.
+
+== Solution
+
+[source, haskell]
+----
+include::answer.hs[]
+----
+
+[source, bash]
+----
+include::run.sh[]
+----

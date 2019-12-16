@@ -1,0 +1,26 @@
+{
+  "name": "dfriedenberger",
+  "version": "1.0.0",
+  "description": "Solutions for Advent of Code",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --compilers ts:ts-node/register ./test/*.spec.ts"
+  },
+  "author": "Dirk Friedenberger",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chai": "^4.2.5",
+    "@types/mocha": "^5.2.7",
+    "chai": "^4.2.0",
+    "gulp": "^4.0.0",
+    "gulp-mocha": "^7.0.2",
+    "gulp-typescript": "^6.0.0-alpha.1",
+    "mocha": "^6.2.2",
+    "ts-node": "^8.5.4",
+    "typescript": "^3.7.2"
+  },
+  "dependencies": {
+    "@types/node": "^12.12.14",
+    "jimp": "^0.9.3"
+  }
+}

@@ -12,7 +12,10 @@ After seeing that we now have input of 650 characters that has to be repeated 10
 It looks like the name FFT is the hint because there are parts of Fast fourier transform that uses a technique called Chinese number
 theorem to reduce the number of calculations.
 
-I just need to figure out how it works.
+I just need to figure out how it works. It is a public holiday. My brain is also on holiday.
+Will revisit this when I feel sharper.
+
+Nope this one will be forfeit.
 
 === Solution Source
 

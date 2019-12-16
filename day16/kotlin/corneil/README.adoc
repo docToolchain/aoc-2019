@@ -15,7 +15,9 @@ theorem to reduce the number of calculations.
 I just need to figure out how it works. It is a public holiday. My brain is also on holiday.
 Will revisit this when I feel sharper.
 
-Nope this one will be forfeit.
+Turns out that because of the size the mutliplier from the base pattern isn't in the picture.
+It becomes like an inverted Pascal tower.
+Accumulating from the end include the digit before the offset.
 
 === Solution Source
 

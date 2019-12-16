@@ -10,6 +10,7 @@ repositories {
 
 dependencies {
     implementation project(':intcode')
+    implementation project(':common')
     implementation 'org.fusesource.jansi:jansi:1.18'
     implementation 'org.jetbrains.kotlin:kotlin-reflect'
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'

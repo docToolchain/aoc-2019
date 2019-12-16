@@ -13,6 +13,11 @@ parameter as a relative memory offset from a base.
 include::answer.hs[]
 ----
 
+[source, haskell]
+----
+include::Intcode.hs[]
+----
+
 [source, bash]
 ----
 include::run.sh[]

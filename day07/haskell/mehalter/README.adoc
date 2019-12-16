@@ -14,6 +14,11 @@ part 2, have the ability to start a computer back up at a given state.
 include::answer.hs[]
 ----
 
+[source, haskell]
+----
+include::Intcode.hs[]
+----
+
 [source, bash]
 ----
 include::run.sh[]

@@ -1,0 +1,46 @@
+== Set and Forget
+
+The solutions are written in Typescript. To run them use the following commands.
+
+....
+npm install
+gulp
+node dist/solution1.js
+node dist/solution1find.js
+node dist/solution2.js
+....
+
+
+
+=== First Start
+
+Implement Panel class for load output to x-y-field data structure and calulate alignment.
+[source, typescript, numbered]
+....
+include::src/Panel.ts[tags=load;getIntersectionAlignmentSum]
+....
+
+=== Second Star
+
+
+First resolved path along the scaffold under the assumption, the robot would always run straight on for as long as possible.
+[source, typescript, numbered]
+....
+include::src/Panel.ts[tag=getPath]
+....
+
+Result tested manually for pattern and noticed that'a a possible solution.
+
+[yellow-background]#L,8,R,10,L,8,R,8,# *L,12,R,8,R,8,* [yellow-background]#L,8,R,10,L,8,R,8,# L,8,R,6,R,6,R,10,L,8,
+L,8,R,6,R,6,R,10,L,8,[yellow-background]#L,8,R,10,L,8,R,8,# *L,12,R,8,R,8,* L,8,R,6,R,6,R,10,L,8, *L,12,R,8,R,8,* *L,12,R,8,R,8*
+
+which could be split into submodules 
+
+A,B,A,C,C,A,B,C,B,B
+
+This used for computer input
+[source, typescript, numbered]
+....
+include::src/solution2.ts[tags=run;!dump]
+....
+

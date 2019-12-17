@@ -184,6 +184,10 @@ class ProgramState(
         }
     }
 
+    fun reset() {
+        counter = ProgramCounter(0, true)
+    }
+
     fun execute(): ProgramState {
         waitingInput = false
         counter = ProgramCounter(0, true)
@@ -209,6 +213,10 @@ class ProgramState(
         while (counter.run && counter.pc < memory.size && !waitingInput) {
             counter = readAndExecute()
         }
+    }
+
+    fun setMemory(index: Int, value: Long) {
+        memory[index] = value
     }
 }
 

@@ -81,3 +81,7 @@ include::../day15/kotlin/corneil/README.adoc[]
 == Day 16
 
 include::../day16/kotlin/corneil/README.adoc[]
+
+== Day 17
+
+include::../day17/kotlin/corneil/README.adoc[]

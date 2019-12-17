@@ -21,6 +21,7 @@ data class Coord(val x: Int, val y: Int) {
     fun south(distance: Int) = copy(y = y + distance)
     fun west(distance: Int) = copy(x = x - distance)
     fun east(distance: Int) = copy(x = x + distance)
+    fun distance(target: Coord):Int = abs(target.x - x) + abs(target.y - y)
 }
 
 data class Movement(val movement: Char, val distance: Int) {
@@ -188,9 +189,8 @@ fun createMovementUntilEnd(robot: Robot, next: Coord, grid: Grid): Movement {
     while (isScaffold(grid.cells[step] ?: ' ')) {
         step = step.copy(x = step.x + diffX, y = step.y + diffY)
     }
-    val distance = abs(step.x - next.x) + abs(step.y - next.y)
     val movement = determineMovement(robot.direction, determineDirection(robot.pos, next))
-    return Movement(movement, distance)
+    return Movement(movement, step.distance(next))
 }
 
 fun determineRouteInstructions(grid: Grid): List<Movement> {

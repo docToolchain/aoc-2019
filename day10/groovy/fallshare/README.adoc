@@ -1,0 +1,17 @@
+== Day10
+This is the solution for the second day of AoC:
+https://adventofcode.com/2019/day/10[Monitoring Station]
+
+
+=== Star 1
+Wow this was a though one. I had some idea in mind how to solve the riddle.
+I came up with my own algorithm to scan the space.. Which didn't work.
+Then I rewrote my implementation to just remember parts that have already been scanned.
+I was able to figure out Star 1 with that. See solution_attempt1.groovy
+
+=== Star 2
+Then Star 2 came and I had to learn that my scan approach does not scan the astroids in the order as required for star 2.
+I doubled checked and Star 1 did not mention that the beam/scan was happening in a circular motion.
+I wanted to avoid any angle calculation and stuff hence I came up with the first solution.
+Thanks to an tip I realized that I somehow had to use the angle or gradient in order to scan in the right order for part 2.
+It turned out that the second solution (solution.groovy) is a lot simpler compared to my first overcomplicated attempt.

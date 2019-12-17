@@ -1,0 +1,17 @@
+== Oxygen System
+
+=== Part 1
+After spending half a day trying to get it working with the wrong input file, I eventually realized I need to just walk the maze with a
+simple strategy to discover the structure and then use a Graph shortest path algorithm to solve.
+
+I found a reasonable implementation of Dijkstra's algoritm at http://rosettacode.org/wiki/Dijkstra%27s_algorithm#Kotlin
+I made if Generic so now I can reuse as I need.
+
+Run with `-p` to see the robot walk the maze.
+
+=== Solution Source
+
+[source,kotlin,numbered]
+----
+include::src/main/kotlin/solution.kt[]
+----

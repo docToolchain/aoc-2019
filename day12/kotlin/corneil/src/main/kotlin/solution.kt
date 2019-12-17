@@ -91,16 +91,15 @@ fun readBlock(line: String): Map<String, String> {
     var name = ""
     var value = ""
     val result = mutableMapOf<String, String>()
-    for (i in 0 until tokens.size) {
-        val token = tokens[i]
-        when (token) {
+    for (i in tokens.indices) {
+        when (tokens[i]) {
             "="      -> {
                 name = tokens[i - 1].trim()
-                require(name.length > 0) { "Expected name to be not empty" }
+                require(name.isNotEmpty()) { "Expected name to be not empty" }
                 value = tokens[i + 1].trim()
-                require(value.length > 0) { "Expected value for $name to be not empty" }
+                require(value.isNotEmpty()) { "Expected value for $name to be not empty" }
             }
-            ">", "," -> result.put(name, value)
+            ">", "," -> result[name] = value
             else     -> Unit
         }
     }
@@ -111,7 +110,7 @@ fun readOrbits(lines: List<String>): Orbits {
     return Orbits(lines.map { line ->
         readBlock(line).map { it.key to it.value.toInt() }.toMap()
     }.map {
-        arrayOf(it["x"]!!, it["y"]!!, it["z"]!!).toIntArray()
+        arrayOf(it["x"] ?: error("Expected x"), it["y"] ?: error("expected y"), it["z"] ?: error("expected z")).toIntArray()
     }.mapIndexed { i, pos ->
         Moon(i, pos, arrayOf(0, 0, 0).toIntArray())
     })
@@ -121,7 +120,7 @@ fun mapAxis(input: Map<String, String>): Axis {
     return input.map {
         it.key to it.value.toInt()
     }.toMap().let {
-        arrayOf(it["x"]!!, it["y"]!!, it["z"]!!).toIntArray()
+        arrayOf(it["x"] ?: error("expected x"), it["y"] ?: error("expected y"), it["z"] ?: error("expected z")).toIntArray()
     }
 }
 

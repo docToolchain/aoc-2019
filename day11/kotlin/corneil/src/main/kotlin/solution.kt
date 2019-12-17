@@ -73,7 +73,7 @@ fun runRobot(input: List<Long>, startingColor: Int): Int {
     val code = Program(input)
     val program = code.createProgram(listOf(startingColor.toLong()), fetchInput = {
         grid.cellColor(robot.position).toLong()
-    }, outputHandler = { output ->
+    }) { output ->
         if (!outputState) {
             grid.paintCell(robot.position, output.toInt())
             outputState = true
@@ -81,7 +81,7 @@ fun runRobot(input: List<Long>, startingColor: Int): Int {
             robot.turn(output.toInt())
             outputState = false
         }
-    })
+    }
     do {
         program.execute()
     } while (!program.isHalted())
@@ -97,7 +97,7 @@ fun printGrid(grid: Grid) {
     for (y in minY..maxY) {
         for (x in minX..maxX) {
             val color = grid.cellColor(Coord(x, y))
-            print(if (color == 0) '.' else '#')
+            print(if (color == 0) ' ' else '#')
         }
         println()
     }

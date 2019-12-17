@@ -1,0 +1,35 @@
+== Oxygen System
+
+The solutions are written in Typescript. To run them use the following commands.
+
+....
+npm install
+gulp
+node dist/solution1.js
+node dist/solution2.js
+....
+
+The core Algorithmus is starting from given position and get candidates which are not visited
+[source, typescript, numbered]
+....
+include::src/Panel.ts[tag=getCandidates]
+....
+
+With candidates that are not walls search for next candidates.
+[source, typescript, numbered]
+....
+ coordinates = candidates
+                    .filter(item => item.t == 1)
+                    .map((o : any ) =>  {return { x : o.x, y : o.y , w : o.w }});
+....
+
+=== First Start
+
+Solved by finding nearest (from 0,0) unvisited field und tile computer return 2. 
+Then get length of shortest path from this point to 0,0
+
+=== Second Star
+
+Solved by create map until no "no visited" filed exists. Then calculate maximal length from oxygen system to each point in the map.
+
+

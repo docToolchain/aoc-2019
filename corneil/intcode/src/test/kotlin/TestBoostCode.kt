@@ -6,7 +6,7 @@ import org.junit.Test
 
 class TestBoostCode {
     @Test
-    fun `test1`() {
+    fun test1() {
         // given
         val program = readProgram("109,1,204,-1,1001,100,1,100,1008,100,16,101,1006,101,0,99")
         // when
@@ -17,7 +17,7 @@ class TestBoostCode {
     }
 
     @Test
-    fun `test2`() {
+    fun test2() {
         // given
         val program = readProgram("1102,34915192,34915192,7,4,7,99,0")
         //when
@@ -28,7 +28,7 @@ class TestBoostCode {
     }
 
     @Test
-    fun `test3`() {
+    fun test3() {
         // given
         val program = readProgram("104,1125899906842624,99")
         // when

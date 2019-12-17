@@ -1,0 +1,34 @@
+== Flawed Frequency Transmission
+
+=== Part 1
+
+I got to the first part in about an hour
+
+=== Part 2
+
+After seeing that we now have input of 650 characters that has to be repeated 10000 times to be the input signal I realized that
+42 249 993 500 000 calculations for a single phase is going to be a problem.
+
+It looks like the name FFT is the hint because there are parts of Fast fourier transform that uses a technique called Chinese number
+theorem to reduce the number of calculations.
+
+I just need to figure out how it works. It is a public holiday. My brain is also on holiday.
+Will revisit this when I feel sharper.
+
+Turns out that because of the size the mutliplier from the base pattern isn't in the picture.
+It becomes like an inverted Pascal tower.
+Accumulating from the end include the digit before the offset.
+
+=== Solution Source
+
+[source,kotlin,numbered]
+----
+include::src/main/kotlin/solution.kt[]
+----
+
+=== Test Code
+
+[source,kotlin,numbered]
+----
+include::src/test/kotlin/TestFFT.kt[]
+----

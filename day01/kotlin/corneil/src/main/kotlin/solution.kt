@@ -24,7 +24,7 @@ fun main() {
     BufferedReader(FileReader(File("input.txt"))).use { reader ->
         reader.readLines().forEach { line ->
             val mass = line.trim()
-            if (mass.length > 0) {
+            if (mass.isNotEmpty()) {
                 massValues.add(mass.toLong())
             }
         }

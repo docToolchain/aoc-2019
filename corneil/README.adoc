@@ -1,0 +1,87 @@
+= Advent of Code 2019
+
+== Building
+
+[source,bash]
+----
+./gradlew build
+----
+
+== Executing
+
+[source,bash]
+----
+./gradlew run
+----
+
+== Day 00
+
+include::../day00/kotlin/corneil/README.adoc[]
+
+== Day 01
+
+include::../day01/kotlin/corneil/README.adoc[]
+
+== Day 02
+
+include::../day02/kotlin/corneil/README.adoc[]
+
+== Day 03
+
+include::../day03/kotlin/corneil/README.adoc[]
+
+== Day 04
+
+include::../day04/kotlin/corneil/README.adoc[]
+
+== Day 05
+
+include::../day05/kotlin/corneil/README.adoc[]
+
+== Day 06
+
+include::../day06/kotlin/corneil/README.adoc[]
+
+== Day 07
+
+include::../day07/kotlin/corneil/README.adoc[]
+
+== Day 08
+
+include::../day08/kotlin/corneil/README.adoc[]
+
+== Day 09
+
+include::../day09/kotlin/corneil/README.adoc[]
+
+== Day 10
+
+include::../day10/kotlin/corneil/README.adoc[]
+
+== Day 11
+
+include::../day11/kotlin/corneil/README.adoc[]
+
+== Day 12
+
+include::../day12/kotlin/corneil/README.adoc[]
+
+== Day 13
+
+include::../day13/kotlin/corneil/README.adoc[]
+
+== Day 14
+
+include::../day14/kotlin/corneil/README.adoc[]
+
+== Day 15
+
+include::../day15/kotlin/corneil/README.adoc[]
+
+== Day 16
+
+include::../day16/kotlin/corneil/README.adoc[]
+
+== Day 17
+
+include::../day17/kotlin/corneil/README.adoc[]

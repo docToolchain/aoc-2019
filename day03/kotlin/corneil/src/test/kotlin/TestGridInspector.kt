@@ -7,7 +7,7 @@ import org.junit.Test
 
 class TestGridInspector {
     @Test
-    fun `test1`() {
+    fun test1() {
         // given
         val input1 = "R8,U5,L5,D3"
         val input2 = "U7,R6,D4,L4"
@@ -27,7 +27,7 @@ class TestGridInspector {
 
     }
     @Test
-    fun `test2`() {
+    fun test2() {
         // given
         val input1 = "R75,D30,R83,U83,L12,D49,R71,U7,L72"
         val input2 = "U62,R66,U55,R34,D71,R55,D58,R83"
@@ -47,7 +47,7 @@ class TestGridInspector {
 
     }
     @Test
-    fun `test3`() {
+    fun test3() {
         // given
         val input1 = "R98,U47,R26,D63,R33,U87,L62,D20,R33,U53,R51"
         val input2 = "U98,R91,D20,R16,D67,R40,U7,R15,U6,R7"
@@ -68,7 +68,7 @@ class TestGridInspector {
     }
 
     @Test
-    fun `testBest1`() {
+    fun testBest1() {
         val input1 = "R8,U5,L5,D3"
         val input2 = "U7,R6,D4,L4"
         val instructions1 = stringToInstructions(input1)
@@ -83,7 +83,7 @@ class TestGridInspector {
         assertThat(best).isEqualTo(30)
     }
     @Test
-    fun `testBest2`() {
+    fun testBest2() {
         // given
         val input1 = "R75,D30,R83,U83,L12,D49,R71,U7,L72"
         val input2 = "U62,R66,U55,R34,D71,R55,D58,R83"
@@ -101,7 +101,7 @@ class TestGridInspector {
     }
 
     @Test
-    fun `testBest3`() {
+    fun testBest3() {
         // given
         val input1 = "R98,U47,R26,D63,R33,U87,L62,D20,R33,U53,R51"
         val input2 = "U98,R91,D20,R16,D67,R40,U7,R15,U6,R7"

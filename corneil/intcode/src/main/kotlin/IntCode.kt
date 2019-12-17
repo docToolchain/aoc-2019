@@ -21,14 +21,14 @@ data class ParameterModes(private val modes: List<ParameterMode>) {
 
 fun parameterMode(mode: Int) = ParameterMode.values().find {
     it.mode == mode
-} ?: throw Exception("Invalid mode $mode")
+} ?: error("Invalid mode $mode")
 
 fun paramModesFrom(mode: Long): ParameterModes {
     var remainingMode = mode
     val result = mutableListOf<ParameterMode>()
     while (remainingMode > 0) {
         result.add(parameterMode((remainingMode % 10).toInt()))
-        remainingMode = remainingMode / 10
+        remainingMode /= 10
     }
     return ParameterModes(result)
 }
@@ -38,7 +38,7 @@ fun readProgram(input: String) = input.split(",").map { it.toLong() }
 fun readProgram(input: File) = readProgram(input.readText().trim())
 
 data class ProgramCounter(val pc: Int, val run: Boolean) {
-    fun add(value: Int): ProgramCounter = copy(pc + value)
+    fun add(value: Int): ProgramCounter = copy(pc = pc + value)
     fun jump(target: Int): ProgramCounter = copy(pc = target)
     fun halt(): ProgramCounter = copy(run = false)
 }
@@ -55,7 +55,6 @@ class ProgramState(
         private set
     private var base = 0L
     private val output = mutableListOf<Long>()
-    fun counter() = counter
     fun memory() = memory.toList()
     fun memory(index: Int): Long = memory[index]
     fun outputs() = output.toList()
@@ -70,12 +69,11 @@ class ProgramState(
     private fun paramModes() = paramModesFrom(read(counter.pc.toLong()) / 100L)
 
     private fun deref(parameterMode: ParameterMode, address: Long): Long {
-        val result = when (parameterMode) {
+        return when (parameterMode) {
             IMMEDIATE -> address
             POSITION  -> read(address)
             RELATIVE  -> read(base + address)
         }
-        return result
     }
 
     private fun read(address: Long): Long = if (address < memory.size) memory[address.toInt()] else 0L
@@ -113,7 +111,7 @@ class ProgramState(
 
     private fun saveInput(): ProgramCounter {
         val value = if (inputs.isEmpty() && fetchInput != null) {
-            fetchInput?.invoke()
+            fetchInput.invoke()
         } else {
             if (inputs.isEmpty()) {
                 waitingInput = true
@@ -171,10 +169,9 @@ class ProgramState(
     }
 
     private fun readAndExecute(): ProgramCounter {
-        val opcode = (memory[counter.pc] % 100L).toInt()
-        return when (opcode) {
-            1    -> applyOperation() { a, b -> a + b }
-            2    -> applyOperation() { a, b -> a * b }
+        return when (val opcode = (memory[counter.pc] % 100L).toInt()) {
+            1    -> applyOperation { a, b -> a + b }
+            2    -> applyOperation { a, b -> a * b }
             3    -> saveInput()
             4    -> outputValue()
             5    -> jumpIfTrue()
@@ -183,8 +180,12 @@ class ProgramState(
             8    -> operationEquals()
             9    -> adjustBase()
             99   -> halt()
-            else -> throw Exception("Invalid opcode $opcode")
+            else -> error("Invalid opcode $opcode")
         }
+    }
+
+    fun reset() {
+        counter = ProgramCounter(0, true)
     }
 
     fun execute(): ProgramState {
@@ -212,6 +213,10 @@ class ProgramState(
         while (counter.run && counter.pc < memory.size && !waitingInput) {
             counter = readAndExecute()
         }
+    }
+
+    fun setMemory(index: Int, value: Long) {
+        memory[index] = value
     }
 }
 

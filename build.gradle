@@ -213,14 +213,14 @@ The repository contains solutions in ${stats.languages} languages by ${stats.cod
 
 include::../../../../profiles/allUsers.adoc[]
 
-[cols="${stats.days.size()+2}"]
+[cols="${stats.days.size()+3}"]
 |===
-.2+^.>| Developer ${stats.days.size()}+^| Day .2+^.>| Sum
-^| ${stats.days.collect{"$it"}.join(' ^| ')}
+2+^.>|  ${stats.days.size()}+^| Day .2+^.>| Sum
+2+^.>| Developer ^| ${stats.days.collect{"$it"}.join(' ^| ')}
 """
         def emojis=['👋','🕯','🎄','🎶','❄','🔔','🧦','☃','🕯🕯','🎁','🎄','🔔','☃','❄','⛪','🕯🕯🕯','🦌','🧝','🤶','🎄','☃','❄','🕯🕯🕯🕯','🎶','🎅','👪👼🦌']
         stats.stars.sort{e1, e2 -> e2.value.size() <=> e1.value.size()}.each{ coder, stars ->
-            statsFile += "a| image:{${coder}-avatar}[width=32px] link:/generated/coder/${coder}/generatedDays.html[$coder] "
+            statsFile += "a| image::{${coder}-avatar}[width=32px] a| link:/generated/coder/${coder}/generatedDays.html[$coder] "
             def dayList = stats.days.collect {
                                 def entry = '-'
                                 if (stars[it]) {
@@ -243,15 +243,13 @@ include::../../../../profiles/allUsers.adoc[]
 
 include::../../../../profiles/allUsers.adoc[]
 
-[cols="${stats.days.size()+2}"]
+[cols="${stats.days.size()+3}"]
 |===
-.2+^.>| Language ${stats.days.size()}+^| Day .2+^.>| Sum
+.2+^.>| Language ${stats.days.size()}+^| Day .2+^.>| #Days .2+^.>| #Sol
 ^| ${stats.days.collect{"$it"}.join(' ^| ')}
 """
         println stats
         stats.lang.sort{e1, e2 -> e2.value.size() <=> e1.value.size()}.each{ currentLanguage ->
-            println "="*80
-            println currentLanguage.inspect()
             statsFile2 += "a| ${currentLanguage.key} "
             def langCoders = 0
             def langDays = 0
@@ -259,21 +257,18 @@ include::../../../../profiles/allUsers.adoc[]
             def dayList = stats.days.collect { currentDay ->
                 def entry = '-'
                 def currentDayAnchor = "day"+currentDay.toString().padLeft(2, '0')
-                println "currentDay: "+currentDay
-                println "currentAnchor: "+currentDayAnchor
-                println "codersForLang: "+codersForLang
                 if (codersForLang[currentDayAnchor]) {
 
                     langDays ++
                     entry = codersForLang[currentDayAnchor].collect { coder ->
                         langCoders ++
-                       "image:{${coder}-avatar}[width=32]"
+                       "image:{${coder}-avatar}[width=32,link=/generated/coder/${coder}/generatedDays.html#_day_${currentDay.padLeft(2,'0')}_${currentLanguage.key}]"
                     }.join(" ")
                 }
                 return entry
             }.join(' ^| ')
             statsFile2 += "^| ${dayList} "
-            statsFile2 += "^| ${langDays} / ${langCoders}\n"
+            statsFile2 += "^| ${langDays} ^| ${langCoders}\n"
         }
         statsFile2 += """
 |===

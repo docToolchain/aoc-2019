@@ -1,0 +1,10 @@
+{
+    "files": [
+        "src/solution1.ts" , "src/Chemical.ts" , "src/ChemicalSet.ts" , "src/NanoFactory.ts" ,
+        "src/Reaction.ts" ,"src/solution2.ts"
+    ],
+    "compilerOptions": {
+        "noImplicitAny": true,
+        "target": "es5"
+    }
+}

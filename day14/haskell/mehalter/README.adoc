@@ -1,0 +1,23 @@
+== Space Stoichiometry
+
+To run the final program you need Haskell installed, and simply run the
+`./run.sh`.
+
+Part 1 ended up being pretty tricky since you can have excess resources after a
+reaction, but basically recurses down to get the amount of ore needed for each
+element and as it does so, keeps track of the excess items.
+
+Part 2 was pretty simple after that, doing a simple binary search to find the
+max amount of fuel you can produce with a given amount of ore.
+
+== Solution
+
+[source, haskell]
+----
+include::answer.hs[]
+----
+
+[source, bash]
+----
+include::run.sh[]
+----

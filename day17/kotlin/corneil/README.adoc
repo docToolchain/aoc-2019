@@ -1,0 +1,22 @@
+== Set and Forget
+
+=== Part 1
+First part went quick.
+My algorithm found 7 solutions for the sample input.
+
+=== Part 2
+I had a solution that I could trace by hand but it would fail all the time.
+Eventually I created a new instance of the program before executing the cleaning program and it worked!
+
+=== Solution Source
+
+[source,kotlin,numbered]
+----
+include::src/main/kotlin/solution.kt[]
+----
+
+=== Test Source
+[source,kotlin,numbered]
+----
+include::src/test/kotlin/TestRobot.kt[]
+----

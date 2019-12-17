@@ -1,0 +1,14 @@
+Day 15 - Solution in Python
+
+That was fun - looks quite arbitrary for a FFT :)
+
+[source, python]
+....
+include::solution.py[]
+....
+
+[source, python]
+....
+include::test.py[]
+....
+

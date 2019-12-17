@@ -19,14 +19,24 @@ isIntersection (x, y) m = and (map (\k -> 35 == (Map.findWithDefault (-1) k m)) 
 calibrate :: Map.Map (Int, Int) Int -> Int
 calibrate m = Map.foldlWithKey (\total (x,y) i -> total + (if (isIntersection (x, y) m) && i == 35 then (x*y) else 0)) 0 m
 
+getInput :: [String] -> [Int]
+getInput = foldl (\out i -> out ++ i ++ [ord '\n']) [] . map (map ord)
+
 main = do
   input <- getArgs
   let parsed = parseProg $ input!!0
 
   let points = getPoints (reverse $ computeTilHalt $ startingState parsed []) ((0, 0), Map.empty)
   putStr $ drawMap points
+
   print $ calibrate points
-  print (flip (!!) 0 $ computeTilHalt $ startingState (Map.insert 0 2 parsed) [65,44,67,44,65,44,67,44,66,44,66,44,67,44,65,44,67,44,66,10,76,44,49,48,44,82,44,49,48,44,76,44,49,48,44,76,44,49,48,10,82,44,49,50,44,76,44,49,50,44,82,44,54,10,82,44,49,48,44,82,44,49,50,44,76,44,49,50,10,110,10])
+
+  let directions = ["A,C,A,C,B,B,C,A,C,B",
+                    "L,10,R,10,L,10,L,10",
+                    "R,12,L,12,R,6",
+                    "R,10,R,12,L,12",
+                    "n"]
+  print (flip (!!) 0 $ computeTilHalt $ startingState (Map.insert 0 2 parsed) $ getInput directions)
 
 
   -- L10R10L10L10R10R12L12L10R10L10L10R10R12L12R12L12R6R12L12R6R10R12L12L10R10L10L10R10R12L12R12L12R6
@@ -65,5 +75,3 @@ main = do
   -- L,10,R,10,L,10,L,10
   -- R,12,L,12,R,6
   -- R,10,R,12,L,12
-  --
-  -- [65,44,67,44,65,44,67,44,66,44,66,44,67,44,65,44,67,44,66,10,76,44,49,48,44,82,44,49,48,44,76,44,49,48,44,76,44,49,48,10,82,44,49,50,44,76,44,49,50,44,82,44,54,10,82,44,49,48,44,82,44,49,50,44,76,44,49,50,10,110,10]

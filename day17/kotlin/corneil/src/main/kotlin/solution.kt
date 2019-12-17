@@ -21,12 +21,11 @@ data class Coord(val x: Int, val y: Int) {
     fun south(distance: Int) = copy(y = y + distance)
     fun west(distance: Int) = copy(x = x - distance)
     fun east(distance: Int) = copy(x = x + distance)
-    fun distance(target: Coord):Int = abs(target.x - x) + abs(target.y - y)
+    fun distance(target: Coord): Int = abs(target.x - x) + abs(target.y - y)
 }
 
 data class Movement(val movement: Char, val distance: Int) {
     fun output() = if (movement.toInt() != 0) "$movement,$distance" else "$distance"
-    fun len() = output().length
 }
 
 data class CleaningProgram(val mainRoutine: List<Char>, val subroutines: Map<Char, List<Movement>>) {
@@ -34,11 +33,29 @@ data class CleaningProgram(val mainRoutine: List<Char>, val subroutines: Map<Cha
         require(mainRoutine.toSet() == subroutines.keys)
     }
 
+    fun printToString(): String {
+        val sw = StringWriter()
+        sw.use {
+            PrintWriter(it).use { pw ->
+                val main = mainString()
+                pw.println("Main Routine=${main}: ${createIntCodeInput(main)}")
+                names().forEach { name ->
+                    val functionString = subRoutine(name)
+                    val functionInput = createIntCodeInput(functionString)
+                    pw.println("Function $name: $functionString: $functionInput")
+                }
+            }
+        }
+        return sw.toString()
+    }
+
     fun names() = subroutines.keys.toList().sorted()
     fun mainString(): String = mainRoutine.joinToString(",")
-    fun subRountine(name: Char): String = subroutines[name]!!.map { it.output() }.joinToString(",")
+    fun subRoutine(name: Char): String =
+        (subroutines[name] ?: error("Expected $name in $subroutines")).joinToString(",") { it.output() }
+
     fun movements(): List<Movement> {
-        return mainRoutine.flatMap { subroutines[it]!! }
+        return mainRoutine.flatMap { subroutines[it] ?: error("Expected $it in $subroutines") }
     }
 }
 
@@ -60,10 +77,6 @@ class Grid(val cells: MutableMap<Coord, Char> = mutableMapOf()) {
         }
         return sw.toString()
     }
-}
-
-fun printGrid(grid: Grid) {
-    println(grid.printToString())
 }
 
 fun loadGrid(output: List<Long>): Grid {
@@ -132,7 +145,7 @@ fun turnRight(direction: Char): Char {
     }
 }
 
-fun applyMovement(direction: Char, movement: Char): Char {
+fun nextMovement(direction: Char, movement: Char): Char {
     return if (movement == 'L') {
         turnLeft(direction)
     } else {
@@ -211,7 +224,7 @@ fun determineRouteInstructions(grid: Grid): List<Movement> {
 }
 
 fun walk(robot: Robot, direction: Movement): Robot {
-    val newDirection = applyMovement(robot.direction, direction.movement)
+    val newDirection = nextMovement(robot.direction, direction.movement)
     val newLocation = when (newDirection) {
         '^'  -> robot.pos.north(direction.distance)
         '>'  -> robot.pos.east(direction.distance)
@@ -223,7 +236,7 @@ fun walk(robot: Robot, direction: Movement): Robot {
 }
 
 data class Attempt(var name: Char, val movements: List<Movement>) {
-    fun output() = movements.map { it.output() }.joinToString(",")
+    fun output() = movements.joinToString(",") { it.output() }
     fun len() = output().length
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -262,23 +275,22 @@ fun attemptRoute(sets: Set<Attempt>, movements: List<Movement>): Pair<Boolean, L
     return Pair(false, emptyList())
 }
 
-fun isSuccess(sets: Set<Attempt>, movements: List<Movement>): Pair<Boolean, List<Attempt>> {
+fun checkValidAndResults(sets: Set<Attempt>, movements: List<Movement>): Pair<Boolean, List<Attempt>> {
     val attemptMap = sets.map { it.name to it }.toMap()
     val result = attemptRoute(sets, movements)
-    if (result.first) {
-        // check if expanded route is the same as movements
-        val expanded = mutableListOf<Movement>()
-        result.second.forEach {
-            expanded.addAll((attemptMap[it] ?: error("Expected $it in $attemptMap")).movements)
-        }
-        require(expanded == movements) {
-            val expandedString = expanded.map { it.output() }.joinToString(",")
-            val movementString = movements.map { it.output() }.joinToString(",")
-            "Expected \n$expandedString == \n$movementString"
-        }
-        return Pair(result.first, result.second.map { attemptMap[it] ?: error("Expected $it in $attemptMap") })
-    }
-    return Pair(false, emptyList())
+    return Pair(result.first, result.second.map { attemptMap[it] ?: error("Expected $it in $attemptMap") })
+}
+
+fun createIntCodeInput(functionString: String) = functionString.map { it.toLong() } + 10L
+
+fun createCleaningProgram(instructionSet: Pair<Set<Attempt>, List<Attempt>>): CleaningProgram {
+    val names = instructionSet.first.map { it to it.name }.toMap()
+    require(instructionSet.second.all { names.keys.contains(it) })
+    require(names.size == names.size)
+    val mainRoutine = instructionSet.second.map { names[it] ?: error("Expected $it in $names") }
+    require(mainRoutine.toSet().size == names.size)
+    val subroutines = names.keys.map { it.name to it.movements }.toMap()
+    return CleaningProgram(mainRoutine, subroutines)
 }
 
 fun findRepeating(
@@ -296,22 +308,19 @@ fun findRepeating(
         }.toSet()
     }
     println("Testing combinations = ${attemptSets.size}")
-    val validCombinations = mutableListOf<Pair<Set<Attempt>, List<Attempt>>>()
-    for (combination in attemptSets) {
-        val result = isSuccess(combination, movements)
-        if (result.first) {
-            if (result.second.size * 2 <= maxOutput) {
-                validCombinations.add(Pair(combination, result.second))
-            }
-        }
-    }
+    val validCombinations = attemptSets.map {
+        Pair(it, checkValidAndResults(it, movements))
+    }.filter {
+        it.second.first && it.second.second.size * 2 <= maxOutput
+    }.map {
+        Pair(it.first, it.second.second)
+    }.sortedBy { it.second.size }
+
     println("Valid Combindations=${validCombinations.size}")
-    validCombinations.sortByDescending { it.second.size }
     val programs = validCombinations.map { createCleaningProgram(it) }
     programs.forEachIndexed { index, cleaningProgram ->
-        print("Main Routine:$index:")
-        println(cleaningProgram.mainString())
-        println("Functions:\n\t" + cleaningProgram.names().map { "$it:${cleaningProgram.subRountine(it)}" }.joinToString("\n\t"))
+        print("Valid:$index:")
+        println(cleaningProgram.printToString())
         require(movements == cleaningProgram.movements()) { "Expected $movements == ${cleaningProgram.movements()}" }
     }
     return programs
@@ -322,7 +331,7 @@ fun createAttempts(
     maxOutput: Int
 ): MutableMap<Attempt, Int> {
     val attempts = mutableMapOf<Attempt, Int>()
-    for (i in 0 until movements.size) {
+    for (i in movements.indices) {
         for (j in (i + 2)..movements.size) {
             val attempt = Attempt(0.toChar(), movements.subList(i, j))
             if (attempt.len() < maxOutput) {
@@ -334,31 +343,14 @@ fun createAttempts(
     return attempts
 }
 
-fun createIntCodeInput(functionString: String) = functionString.map { it.toLong() } + 10L
-
-fun createCleaningProgram(instructionSet: Pair<Set<Attempt>, List<Attempt>>): CleaningProgram {
-    val names = instructionSet.first.map { it to it.name }.toMap()
-    require(instructionSet.second.all { names.keys.contains(it) })
-    require(names.size == names.size)
-    val mainRoutine = instructionSet.second.map { names[it]!! }
-    require(mainRoutine.toSet().size == names.size)
-    val subroutines = names.keys.map { it.name to it.movements }.toMap()
-    return CleaningProgram(mainRoutine, subroutines)
-}
-
 fun executeInstructions(program: ProgramState, cleaningProgram: CleaningProgram) {
     program.setMemory(0, 2L)
     program.reset()
-    val main = cleaningProgram.mainRoutine.joinToString(",")
+    println(cleaningProgram.printToString())
     val totalInput = mutableListOf<Long>()
-    val input = createIntCodeInput(main)
-    totalInput.addAll(input)
-    println("Main Routine=$main: $input")
-    cleaningProgram.subroutines.keys.toList().sorted().forEach { name ->
-        val functionString = cleaningProgram.subroutines[name]!!.map { it.output() }.joinToString(",")
-        val functionInput = createIntCodeInput(functionString)
-        println("Function $name: $functionString: $functionInput")
-        totalInput.addAll(functionInput)
+    totalInput.addAll(createIntCodeInput(cleaningProgram.mainString()))
+    cleaningProgram.names().forEach { name ->
+        totalInput.addAll(createIntCodeInput(cleaningProgram.subRoutine(name)))
     }
     totalInput.addAll(createIntCodeInput("n"))
     println("All Input = $totalInput")
@@ -368,22 +360,22 @@ fun executeInstructions(program: ProgramState, cleaningProgram: CleaningProgram)
         if (output.size == 1) {
             println("Output=\n$output")
         } else {
-            val str = output.map { if (it < 256L) it.toChar().toString() else it.toString() }.joinToString("")
+            val str = output.joinToString("") { if (it < 256L) it.toChar().toString() else it.toString() }
             println(str)
         }
         totalInput.clear()
     } while (!program.isHalted())
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val code = readProgram(File("input.txt"))
     val program = Program(code).executeProgram(emptyList())
     val grid = loadGrid(program.extractOutput())
-    printGrid(grid)
+    println(grid.printToString())
     val ap = calculateAlignment(grid)
     println("Alignment Parameter = $ap")
     val movements = determineRouteInstructions(grid)
-    val instructions = movements.map { it.output() }.joinToString(",")
+    val instructions = movements.joinToString(",") { it.output() }
     println("Movements:$instructions")
     val programs = findRepeating(3, 20, movements)
     programs.forEach { cleaningProgram ->

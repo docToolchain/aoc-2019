@@ -27,6 +27,7 @@ class TestRobot {
         """.trimIndent()
         val output = input.map { it.toLong() }
         val grid = loadGrid(output)
+        println(grid.printToString())
         val movements = determineRouteInstructions(grid)
         val mov = movements.map { it.output() }.joinToString(",")
         println("Movements=$mov")
@@ -34,12 +35,8 @@ class TestRobot {
         var found = false
         val instructionSets = findRepeating(3, 20, movements)
         instructionSets.forEach { instructionSet ->
-            println("Main Routine = ${instructionSet.mainString()}")
-            println("Functions =")
-            instructionSet.names().forEach { name ->
-                println("\t${instructionSet.subRountine(name)}")
-            }
-            val routines = instructionSet.names().map { instructionSet.subRountine(it) }.toSet()
+            println(instructionSet.printToString())
+            val routines = instructionSet.names().map { instructionSet.subRoutine(it) }.toSet()
             if (routines.contains("R,8,R,8") &&
                 routines.contains("R,4,R,4,R,8") &&
                 routines.contains("L,6,L,2")

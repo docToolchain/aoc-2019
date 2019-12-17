@@ -1,0 +1,19 @@
+Day 15 - Solution in Python
+
+Learned a lot (refreshed BFS, collections.deque, and usage of tuples) 
+
+[source, python]
+....
+include::solution.py[]
+....
+
+[source, python]
+....
+include::labyrinth.py[]
+....
+
+[source, python]
+....
+include::computer.py[]
+....
+

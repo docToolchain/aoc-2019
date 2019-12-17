@@ -1,0 +1,9 @@
+﻿== Day 16: Flawed Frequency Transmission
+
+The original puzzle can be found at https://adventofcode.com/2019/day/16
+
+== Star 1
+First I started to calculated all FFT patterns in a excel sheet, and then I did the multiplication each cell by cell. This took a lot of runtime, so I switched to store the FFI patterns only in an n x n array, which then was much faster. For part2 it came out, that for such an high dimension of the necessary array not enough memory is available, so I had to split the array to three n x 1 arrays, one for the input, one for the acutal FFT pattern, and one for the output. The FFT pattern then has to be calculated each run again, which takes more run time, but not as much as the first solutin. One optimization was, that with increasing frequenzy the FFT pattern has more and more zero's from the beginnig, so your nested loops have not to be calculated n x n but (n x n)/2 
+
+== Star 2
+The Code is ready, only it is still running, so there is up to now no prove of done :-)

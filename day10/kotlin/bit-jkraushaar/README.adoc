@@ -1,0 +1,37 @@
+== Day 10
+
+Only a short documentation this time.
+The puzzle was really hard to solve for me and it is already late.
+
+First of all I wrote some helper methods to convert the given map into a set of asteroids.
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=asteroids]
+----
+
+And to handle the line of sight.
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=lineOfSight]
+----
+
+=== First Star
+
+With this set up, solving the first star war as simple as iterating over all asteroids, calculating the line of sight and check if it is obstructed. 
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=firstStar]
+----
+
+=== Second Star
+
+The second star nearly crushed me, until I checked Michael Simons solution (thanks!)
+This pointed me to the atan2 function, which is required to sort the asteroids clockwise.
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=secondStar]
+----

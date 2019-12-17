@@ -1,0 +1,34 @@
+== Set and Forget
+
+To run the final program you need Haskell installed, and simply run the
+`./run.sh`.
+
+I took a simple bruteforce solution for Part 1 of collecting the points
+from the Intcode computer, and searching for points were character '#'
+and were also surrounded by '#'s.
+
+For Part 2 for speed, I printed the map and manually found the ideal path
+since the output was simple enough to parse easily by hand. I included the way I
+went from the path to the solution as comments in `answer.hs`, as well as a copy
+of the outputted map as `map.txt`
+
+== Solution
+
+[source, haskell]
+----
+include::answer.hs[]
+----
+
+----
+include::map.txt[]
+----
+
+[source, haskell]
+----
+include::Intcode.hs[]
+----
+
+[source, bash]
+----
+include::run.sh[]
+----

@@ -21,7 +21,7 @@ dependencies {
 }
 
 application {
-    mainClassName = 'com.github.corneil.aoc2019.day15.SolutionKt'
+    mainClassName = 'com.github.corneil.aoc2019.day17.SolutionKt'
 }
 
 // project.getTasksByName('run', false).each { args "$project.projectDir/input.txt" }

@@ -69,14 +69,14 @@ fun loadGrid(output: List<Long>): Grid {
     val grid = Grid()
     var x = 0
     var y = 0
-    output.forEach { output ->
-        if (output == 10L) {
+    output.forEach { out ->
+        if (out == 10L) {
             x = 0
             y += 1
         } else {
             val coord = Coord(x, y)
             x += 1
-            grid.cells[coord] = output.toChar()
+            grid.cells[coord] = out.toChar()
         }
     }
     return grid
@@ -92,7 +92,7 @@ fun isRobot(c: Char) = when (c) {
     else               -> false
 }
 
-fun isIntersection(c: Char, coord: Coord, grid: Grid): Boolean {
+fun isIntersection(coord: Coord, grid: Grid): Boolean {
     val left = grid.cells[coord.left()] ?: ' '
     val right = grid.cells[coord.right()] ?: ' '
     val top = grid.cells[coord.top()] ?: ' '
@@ -101,7 +101,7 @@ fun isIntersection(c: Char, coord: Coord, grid: Grid): Boolean {
 }
 
 fun calculateAlignment(grid: Grid): Long {
-    val intersections = grid.cells.filter { isScaffold(it.value) && isIntersection(it.value, it.key, grid) }
+    val intersections = grid.cells.filter { isScaffold(it.value) && isIntersection(it.key, grid) }
     return intersections.keys.map { it.x * it.y }.sum().toLong()
 }
 

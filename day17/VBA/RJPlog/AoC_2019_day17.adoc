@@ -1,0 +1,10 @@
+﻿== Day 17: Set and Forget
+
+The original puzzle can be found at https://adventofcode.com/2019/day/17
+
+== Star 1
+For part1 I adapted my IntCode program to the output in ASCII and draw a field. Instead of then searching of the robot and programming an algorithm to follow the path and just count crossings, I scanned over the complete field, which was not efficient looking at part2, but it worked.
+
+== Star 2
+For part2 I tried to apply that track following algorithm but my approach led to to much if/else.., since it was very late in the evening and the path very short, I just evaluated the sequence by hand (L12, L8….). Even I do not know how to make a simple algorithm for sequencing the path in A, B, C, also this I did manually. All outputs are stored in column N, there the last entry will be the value looked for.
+

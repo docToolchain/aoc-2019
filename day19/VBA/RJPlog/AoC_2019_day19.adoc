@@ -1,6 +1,6 @@
-﻿== Day 17: Set and Forget
+﻿== Day 19: Tractor Beam
 
-The original puzzle can be found at https://adventofcode.com/2019/day/17
+The original puzzle can be found at https://adventofcode.com/2019/day/19
 
 == Star 1
 For part1 I adapted my IntCode program to the puzzle and run it through the 50x50 area, counting every attraction point

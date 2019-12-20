@@ -10,7 +10,7 @@ node dist/solution2.js
 ....
 
 I found an approach to search shortest path from start position, by iterate over each reachable key from a node.
-But this approach has runtime of O(n!). So hat to cheat a little bit and found optimation with cache.
+But this approach has runtime of O(n!). So had to cheat a little bit and found optimation with cache.
 
 The combinations after passing through the three nodes a,b,c and from node c are the same
 

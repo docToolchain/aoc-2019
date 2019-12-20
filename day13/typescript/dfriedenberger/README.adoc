@@ -21,6 +21,9 @@ include::src/solution1.ts[]
 === Second Star
 
 Solved by playing the game. Moving the panel synchron to the ball.
+
+video::P0tw9cFUj5U[youtube]
+
 [source, typescript, numbered]
 ....
 include::src/solution2.ts[]

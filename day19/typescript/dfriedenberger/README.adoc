@@ -1,0 +1,29 @@
+== Tractor Beam
+
+The solutions are written in Typescript. To run them use the following commands.
+
+....
+npm install
+gulp
+node dist/solution1.js
+node dist/solution2.js
+....
+
+
+=== First Start
+
+Simple run for the 50x50 grid and count the digits "1".
+
+[source, typescript, numbered]
+....
+include::src/solution1.ts[]
+....
+=== Second Star
+
+Scanned for each line the width of tractor and the x Positions. Then check if square fits.
+
+[source, typescript, numbered]
+....
+include::src/solution2.ts[]
+....
+

@@ -110,8 +110,8 @@ fun checkSolution(grid: Grid, size: Int, start: Int = size + 1): Long {
         if (last == exit) {
             error("No solution")
         }
-        val first = grid.tractorActiveLine(top - size)
-        if (last.first.x == (first.second.x - size)) {
+        val first = grid.tractorActiveLine(top - size + 1)
+        if (last.first.x == (first.second.x - size) + 1) {
             println("\nFirst = $first, Last = $last")
             return (last.first.x.toLong() * 10000L) + first.first.y.toLong()
         }
@@ -141,5 +141,6 @@ fun main() {
     require(affected == 126)
     val loc = scanStanta(code, 100)
     println("Answer = $loc")
+    require(loc == 11351625L)
 }
 

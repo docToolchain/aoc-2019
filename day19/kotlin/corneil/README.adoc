@@ -1,0 +1,23 @@
+== Tractor Beam
+
+=== Part 1
+First part went quick.
+
+=== Part 2
+If I try my algorithm on the same my answer is out by 2 on x and y.
+I have counted it by hand and I disagree with the sample explanation. I may be wrong?
+
+My answer to input is also deemed incorrect.
+
+=== Solution Source
+
+[source,kotlin,numbered]
+----
+include::src/main/kotlin/solution.kt[]
+----
+
+=== Test Source
+[source,kotlin,numbered]
+----
+include::src/test/kotlin/TestRobot.kt[]
+----

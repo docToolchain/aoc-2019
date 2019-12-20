@@ -1,0 +1,28 @@
+== Donut Maze
+
+=== Part 1
+
+My previous work on the mazes came in handy for this one.
+I had to identify the tiles that were portal and add edges to connect them to each other.
+
+=== Part 2
+
+In this case I would create an inner Grid and connect all the inner portal tiles or the outer grid to the outer portal tiles of the inner grid.
+If I don't find a solution then I add another inner grid.
+
+Had to increase the stack size on JVM for the final solution.
+
+=== Solution source
+
+[source,kotlin,numbered]
+----
+include::src/main/kotlin/solution.kt[]
+----
+
+=== Test Source
+
+[source,kotlin,numbered]
+----
+include::src/test/kotlin/TestGridWalker.kt[]
+----
+

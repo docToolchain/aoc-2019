@@ -1,13 +1,13 @@
-﻿== Day 17: Set and Forget
+﻿== Day 19: Tractor Beam
 
-The original puzzle can be found at https://adventofcode.com/2019/day/17
+The original puzzle can be found at https://adventofcode.com/2019/day/19
 
 == Star 1
-For part1 I adapted my IntCode program to the puzzle and run it through the 50x50 area, counting every actraction point
+For part1 I adapted my IntCode program to the puzzle and run it through the 50x50 area, counting every attraction point
 
 == Star 2 
-For part2 I started inside the beam assuming the acutal position the upper left edge, means this is an actraction point. 
+For part2 I started inside the beam with the acutal position of the upper left edge, means there is an actraction point (shape of the beam is known out of part1).
 
-If in x and y direction plus 100-1 no attraction point is to be found, I increase x (if in y direction the 100's are not covered) or increase y (if in x direction the 100's are not covered) or  both. 
+If in x and y direction plus 100-1 no attraction point is to be found, then the beam is to narrow, and I increase x (if in y direction the 100's are not covered) or increase y (if in x direction the 100's are not covered) or  both. 
 
-This will lead to the nearest point (you have to consider the gain of the beam when increasing x and y, if your gain is wrong you may end up outside the beam, this you have to correct. 
+This will lead to the nearest point. When doing so, one have to consider the gain of the beam while increasing x or y, if your gain is wrong you may end up outside the beam, if so this will be corrected inside the program.

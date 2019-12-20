@@ -1,0 +1,5 @@
+== Day10
+This is the solution for the second day of AoC:
+https://adventofcode.com/2019/day/11[Space Police]
+
+Not much to say. Create a new class for the robot and do what you are told to do.

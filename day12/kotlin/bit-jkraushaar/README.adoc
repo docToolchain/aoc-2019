@@ -1,0 +1,69 @@
+== Day 12
+
+Well, I think I like the Intcode puzzles more...
+
+First I start by configuring some helper functions.
+Their purpose is to implement some basic vector operations by extending Kotlins `Triple` object.
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=helperFunctions]
+----
+
+Then I define a `Moon` class.
+It handles all the algorithms involved in calculating the position and velocity of the moons.
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=moon]
+----
+
+I also implement a factory function to create the pairs of moons.
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=pairOfMoonsFactory]
+----
+
+And, of course, I need a function to parse the input using regular expressions.
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=parseInput]
+----
+
+=== First Star
+
+The first star is as simple as:
+
+. Load the program
+. Start the robot
+. Check the size of the set containing all visited panels
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=firstStar]
+----
+
+=== Second Star
+
+For the second star, the robot is initialized with white color (`1`).
+I extract the min and max values of x and y coordinates.
+Then I iterate over the x and y values and print the color to the console.
+
+Please note two things:
+
+* I had to iterate from max y down to min y, because otherwise it prints mirror-inverted letters
+* I am using `!!` to disable Kotlins null-check. Don`t do this at home.
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=secondStar]
+----
+
+=== Intcode computer
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=intcodeComputer]
+----

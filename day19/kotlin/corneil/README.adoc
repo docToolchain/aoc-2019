@@ -7,7 +7,8 @@ First part went quick.
 If I try my algorithm on the same my answer is out by 2 on x and y.
 I have counted it by hand and I disagree with the sample explanation. I may be wrong?
 
-My answer to input is also deemed incorrect.
+Yes, I was a classic off by one error.
+image:https://openmoji.org/data/color/618x618/1F926-200D-2642-FE0F.png[FacePalm,48,48]
 
 === Solution Source
 

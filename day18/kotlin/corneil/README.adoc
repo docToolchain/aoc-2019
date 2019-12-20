@@ -1,0 +1,23 @@
+== Many-Worlds Interpretation
+
+=== Part 1
+
+This is like the traveling salesman.
+I could not get an algorithm that passed all the tests.
+The one that had some success ran far too long.
+Too many permutations to consider.
+
+Trying to think how a search will work when the tree is not a binary tree.
+
+=== Solution source
+[source,kotlin,numbered]
+----
+include::src/main/kotlin/solution.kt[]
+----
+
+=== Test Source
+[source,kotlin,numbered]
+----
+include::src/test/kotlin/TestMapWalker.kt[]
+----
+

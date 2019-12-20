@@ -51,6 +51,19 @@ class Graph<T : Comparable<T>>(
                 path.add(Pair(key, distance))
             }
         }
+
+        fun findNeighbours(path: MutableList<Pair<T, Int>>, depth: Int, matcher: (T) -> Boolean): Boolean {
+            return if(depth >= 0) {
+                val valid = neighbours.filter {
+                    matcher(it.key.key)
+                }.filter {
+                    it.key.findNeighbours(path, depth - 1, matcher)
+                }.map { it.key.key to it.value + depth }
+                path.addAll(valid)
+                true
+            } else
+                false
+        }
     }
 
     data class Edge<T>(val c1: T, val c2: T, val distance: Int)
@@ -113,6 +126,13 @@ class Graph<T : Comparable<T>>(
                 }
             }
         }
+    }
+
+    fun findNeighbours(start: T, depth: Int, matches: (T) -> Boolean): Set<Pair<T, Int>> {
+        dijkstra(start)
+        val path = mutableListOf<Pair<T, Int>>()
+        graph[start]!!.findNeighbours(path, depth, matches)
+        return path.toSet()
     }
 
     /**

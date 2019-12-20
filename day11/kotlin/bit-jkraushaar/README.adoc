@@ -1,0 +1,63 @@
+== Day 11
+
+Intcode computer is back! 😎
+
+I started by copy-pasting (as every good software engineer does) my Intcode computer from day 9.
+Find the complete source code of the Intcode computer at the end.
+
+Next I defined an abstraction of the panels to be painted.
+My panels consist of coordinates (using Kotlins `Pair` data type) and a color.
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=panel]
+----
+
+Next the painting robot.
+I tried to use a Kotlin `object`, but it seems that Kotlin scripts cannot handle them.
+So it is basically a class containing my Intcode computer CPU, its current coordinates, all visited panels, the command state and the direction.
+The command state is to tell my robot how to interpret the next output of the CPU.
+The `readCamera()` and `next(Long)` functions are used as input and output functions for the CPU.
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=paintingRobot]
+----
+
+With everything set up, I can now start to solve the puzzles.
+
+=== First Star
+
+The first star is as simple as:
+
+. Load the program
+. Start the robot
+. Check the size of the set containing all visited panels
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=firstStar]
+----
+
+=== Second Star
+
+For the second star, the robot is initialized with white color (`1`).
+I extract the min and max values of x and y coordinates.
+Then I iterate over the x and y values and print the color to the console.
+
+Please note two things:
+
+* I had to iterate from max y down to min y, because otherwise it prints mirror-inverted letters
+* I am using `!!` to disable Kotlins null-check. Don`t do this at home.
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=secondStar]
+----
+
+=== Intcode computer
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=intcodeComputer]
+----

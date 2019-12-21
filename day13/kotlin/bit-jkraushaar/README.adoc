@@ -1,0 +1,49 @@
+== Day 13
+
+Yesterdays puzzle took me several hours to solve.
+So I was a little bit lazy today and only implemented the absolute necessary things.
+I saw that some people implemented a graphical output for the game.
+That is pretty cool.
+Maybe next time.
+
+So I started by implementing the arcade cabinet.
+It has a `readNext(input)` method to read the output from my Intcode computer and a simple draw method which only adds the tile to my virtual screen.
+The `draw(input)` method also handles updating of the score, paddle and ball (see <<Second Star>>)
+The `jostick()` method is the input for my Intcode computer (again, see <<Second Star>>).
+
+NOTE: This implementation already contains code from the second star.
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=arcadeCabinet]
+----
+
+=== First Star
+
+The first star is solved by providing the program to the CPU.
+The input provider is not used, so I throw a `RuntimeException`.
+I tried to skip this parameter, but it seems that Kotlin script does not support that (a ClassDefNotFound exception was thrown).
+The result is the number of block tiles after the program has finished.
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=firstStar]
+----
+
+=== Second Star
+
+For the second star I added the `joystick()` method to provide input for the Intcode computer.
+The idea is, that I always synchronize the x position of the paddle with the x position of the ball.
+Hence the paddle will reflect the ball.
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=secondStar]
+----
+
+=== Intcode computer
+
+[source,kotlin,numbered]
+----
+include::solution.kts[tags=intcodeComputer]
+----

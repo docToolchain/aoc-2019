@@ -1,6 +1,7 @@
-Day 15 - Solution in Python
+Day 16 - Solution in Python
 
 That was fun - looks quite arbitrary for a FFT :)
+Part 2: Not sure why it only works for input.txt and one of the tests - maybe a minor offset problem - well, works for the input and hence contributed to rescuing Santa ...
 
 [source, python]
 ....

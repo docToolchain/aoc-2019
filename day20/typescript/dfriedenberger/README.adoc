@@ -1,0 +1,29 @@
+== Donut Maze
+
+The solutions are written in Typescript. To run them use the following commands.
+
+....
+npm install
+gulp
+node dist/solution1.js
+node dist/solution2.js
+....
+
+=== First Star
+
+Created Maze and searched shortest path with BFS. Created function getNext for next reachable filed with distance 1. 
+
+[source, typescript, numbered]
+....
+include::src/Maze.ts[tag=getNext]
+....
+
+
+=== Second Star
+
+Created recursive Maze and searched shortest path with BFS. Changed getNext for this Maze.
+
+[source, typescript, numbered]
+....
+include::src/RecursiveMaze.ts[tag=getNext]
+....

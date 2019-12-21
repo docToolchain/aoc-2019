@@ -9,6 +9,8 @@ Too many permutations to consider.
 
 Trying to think how a search will work when the tree is not a binary tree.
 
+I now have a recursive search that works but runs a bit long.
+
 === Solution source
 [source,kotlin,numbered]
 ----

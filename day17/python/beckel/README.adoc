@@ -1,0 +1,19 @@
+Day 17 - Solution in Python
+
+Did part 2 manually - like everybody on reddit ;-)
+
+[source, python]
+....
+include::solution.py[]
+....
+
+[source, python]
+....
+include::scaffold.py[]
+....
+
+[source, python]
+....
+include::computer.py[]
+....
+

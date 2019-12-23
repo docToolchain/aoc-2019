@@ -1,8 +1,12 @@
 package com.github.corneil.aoc2019.day18
 
-import com.github.corneil.aoc2019.common.Graph
-import com.github.corneil.aoc2019.common.Graph.Edge
-import com.github.corneil.aoc2019.common.permuteInvoke
+import org.jgrapht.Graph
+import org.jgrapht.alg.shortestpath.DijkstraShortestPath
+import org.jgrapht.alg.shortestpath.JohnsonShortestPaths
+import org.jgrapht.graph.DefaultUndirectedWeightedGraph
+import org.jgrapht.graph.DefaultWeightedEdge
+import org.jgrapht.traverse.BreadthFirstIterator
+import java.io.File
 import kotlin.math.abs
 
 data class Coord(val x: Int, val y: Int) : Comparable<Coord> {
@@ -20,6 +24,8 @@ data class Coord(val x: Int, val y: Int) : Comparable<Coord> {
         return result
     }
 }
+
+data class Key(val name: String, val pos: Coord)
 
 data class Cell(val c: Char, val pos: Coord) : Comparable<Cell> {
     override fun compareTo(other: Cell): Int {
@@ -63,20 +69,29 @@ data class Map(val cells: MutableMap<Coord, Cell>) {
 }
 
 class World(val map: Map) {
-    private val edges: MutableList<Edge<Cell>> = mutableListOf()
-    private var graph: Graph<Cell>
-    private val pathCache: MutableMap<Pair<Cell, Cell>, List<Pair<Cell, Int>>> = mutableMapOf()
+    val graph: Graph<Cell, DefaultWeightedEdge>
+    private val dsp: DijkstraShortestPath<Cell, DefaultWeightedEdge>
 
     init {
-        edges.addAll(createEdges(map))
-        graph = Graph(edges, false)
+        graph = DefaultUndirectedWeightedGraph<Cell, DefaultWeightedEdge>(DefaultWeightedEdge::class.java)
+        redoEdges()
+        dsp = DijkstraShortestPath(graph)
     }
 
     private fun redoEdges() {
-        edges.clear()
-        edges.addAll(createEdges(map))
-        graph = Graph(edges, false)
-        pathCache.clear()
+        graph.removeAllEdges(graph.edgeSet())
+        map.cells.values.filter { !it.isWall() }.forEach {
+            graph.addVertex(it)
+        }
+        map.cells.values.filter { !it.isWall() }.forEach { centre ->
+            val loc = centre.pos
+            loc.surrounds().forEach { neighbour ->
+                val cell = map.cells[neighbour]
+                if (cell != null && !cell.isWall()) {
+                    graph.addEdge(centre, cell)
+                }
+            }
+        }
     }
 
     fun keys(): Set<Cell> = map.cells.values.filter { it.isKey() }.toSet()
@@ -90,203 +105,250 @@ class World(val map: Map) {
     }
 
     fun entrance(): Cell = map.cells.values.find { it.c == '@' } ?: error("Expected entrance")
-    fun collectKey(key: Cell) {
-        map.remove(key.pos)
-        val door = map.find(key.c.toUpperCase())
-        if (door != null) {
-            map.remove(door.pos)
-        }
-        redoEdges()
+    fun findPath(start: Cell, end: Cell): List<Cell> {
+        val path = dsp.getPath(start, end)
+        return path.vertexList
     }
 
-    fun collectKeys(keys: Collection<Cell>) {
-        keys.forEach { key ->
-            map.remove(key.pos)
-            val door = map.find(key.c.toUpperCase())
-            if (door != null) {
-                map.remove(door.pos)
-            }
-        }
-        redoEdges()
-    }
-
-    fun isValid(route: List<Cell>, keys: Set<Cell>): List<Pair<Cell, Int>> {
-        val result = mutableListOf<Pair<Cell, Int>>()
-        val unlockedDoors = keys.mapNotNull { door(it.c) }.toMutableSet()
+    fun isValid(route: List<Cell>, keys: Set<Cell>): List<Cell> {
+        val result = mutableListOf<Cell>()
+        val unlockedDoors = keys.mapNotNull { door(it.c) }.toSet().toMutableSet()
         val collectedKeys = keys.toMutableSet()
         var start = route.first()
         for (i in 1..route.lastIndex) {
             val end = route[i] ?: error("Expected entry $i in $route")
-            val path = graph.findPath(start, end)
+            val path = findPath(start, end)
             if (path.isNotEmpty()) {
-                var allowed = path.all {
+                var allowed = path.filter {
                     when {
-                        it.first.isKey()  -> {
-                            collectedKeys.add(it.first)
-                            val door = door(it.first.c)
+                        it.isKey()  -> {
+                            collectedKeys.add(it)
+                            val door = door(it.c)
                             if (door != null) {
                                 unlockedDoors.add(door)
                             }
                             true
                         }
-                        it.first.isDoor() -> {
-                            unlockedDoors.contains(it.first)
+                        it.isDoor() -> {
+                            unlockedDoors.contains(it)
                         }
-                        else              -> true
+                        else        -> true
                     }
-                }
+                }.size == path.size
                 if (!allowed) {
                     return emptyList()
                 }
-                if (result.isEmpty()) {
-                    result.addAll(path)
-                } else {
-                    val last = result.last()
-                    path.forEach {
-                        result.add(it.copy(second = it.second + last.second))
-                    }
-                }
+                result.addAll(path)
             }
         }
         return result
     }
 
-    fun canAccess(target: Cell, source: Cell, keys: Set<Cell>): List<Pair<Cell, Int>> {
+    fun canAccess(target: Cell, source: Cell, keys: Set<Cell>): List<Cell> {
         val unlockedDoors = keys.mapNotNull { door(it.c) }.toMutableSet()
         val collectedKeys = keys.toMutableSet()
-        val path = graph.findPath(source, target)
-        if (path.isNotEmpty()) {
-            var allowed = path.all {
+        val path = findPath(source, target)
+        val result = if (path.isNotEmpty()) {
+            var allowed = path.filter {
                 when {
-                    it.first.isKey()  -> {
-                        collectedKeys.add(it.first)
-                        val door = door(it.first.c)
+                    it == target -> true
+                    it == source -> true
+                    it.isKey()   -> {
+                        collectedKeys.add(it)
+                        val door = door(it.c)
                         if (door != null) {
                             unlockedDoors.add(door)
                         }
                         true
                     }
-                    it.first.isDoor() -> {
-                        unlockedDoors.contains(it.first)
+                    it.isDoor()  -> {
+                        unlockedDoors.contains(it)
                     }
-                    else              -> true
+                    else         -> true
                 }
-            }
-            if (!allowed) {
-                return emptyList()
-            }
-            return path
-        }
-        return emptyList()
+            }.size == path.size
+            if (!allowed) emptyList() else path
+        } else emptyList()
+        println("Testing ${source.c} -> ${target.c} = $result")
+        return result
     }
 
     fun path(target: Cell, source: Cell): Int {
-        val key = Pair(target, source)
-        val path = pathCache[key] ?: graph.findPath(source, target)
-        if (!pathCache.containsKey(key)) {
-            pathCache[key] = path
-        }
+        val path = findPath(source, target)
         return if (path.isNotEmpty()) {
-            path.last().second
+            path.size - 1
         } else {
             -1
         }
     }
 }
-typealias KeyPath = List<Pair<Cell, Int>>
 
-fun visitPath(
-    visit: List<Cell>,
-    collectedKeys: MutableSet<Cell>,
-    visitingOrder: MutableList<Cell>,
-    world: World,
-    unlocked: MutableSet<Cell>,
-    start: Cell,
-    totalDistance: Int
-): Pair<Cell, Int> {
-    var start1 = start
-    var totalDistance1 = totalDistance
-    visit.forEach { key ->
-        println("Visit=$key")
-        collectedKeys.add(key)
-        visitingOrder.add(key)
-        val door = world.door(key.c)
-        if (door != null) {
-            unlocked.add(door)
-            println("Unlock $door")
+typealias Solution = Pair<Int, List<Cell>>
+
+fun addSolution(solution: Solution, solutions: MutableMap<Int, MutableSet<Solution>>) {
+    val current = solutions[solution.first] ?: mutableSetOf<Solution>()
+    current.add(solution)
+    solutions[solution.first] = current
+}
+
+fun findPathRecursive(
+    graph: Graph<Cell, DefaultWeightedEdge>,
+    visited: List<Cell>,
+    solutions: MutableMap<Int, MutableSet<Solution>>,
+    world: World
+): List<Cell> {
+    val jsp = JohnsonShortestPaths(graph)
+    // println("From ${visited.map { it.c }.joinToString(", ")}")
+    val start = visited.last()
+    val visitedKeys = visited.filter { it.isKey() }.toSet()
+    val keys = world.keys() - visitedKeys
+    val validVisits = mutableSetOf<Cell>()
+    val shortestPaths = jsp.getPaths(start)
+    shortestPaths.graph.vertexSet().filter { it.isKey() }.filter {
+        !visitedKeys.contains(it)
+    }.forEach { cell ->
+        val testRoute = visited + cell
+        if (world.isValid(testRoute, visited.toSet()).isNotEmpty()) {
+            validVisits.add(cell)
         }
-        val dist = world.path(key, start1)
-        println("Step = $dist")
-        totalDistance1 += dist
-        start1 = key
     }
-    return Pair(start1, totalDistance1)
+    if (validVisits.isEmpty()) {
+        keys.forEach { cell ->
+            val path = jsp.getPath(start, cell)
+            if (path != null && path.length > 0) {
+                val testRoute = visited + cell
+                if (world.isValid(testRoute, visited.toSet()).isNotEmpty()) {
+                    validVisits.add(cell)
+                }
+            } else {
+                println("Expected to find a path from $start to $cell in \n\t${graph.edgeSet().joinToString("\n\t")}")
+                require(graph.vertexSet().contains(start)) { "Expected to find $start in graph ${graph.edgeSet()}" }
+                require(graph.vertexSet().contains(cell)) { "Expected to find $cell in graph ${graph.edgeSet()}" }
+            }
+        }
+        println("Checking Visits:${validVisits.map { it.c }.joinToString(", ")}")
+    }
+    // TODO eliminate combinations where keys are not on the shortest path. If a visit to a includes b then b don't need to be tested?
+    if (validVisits.size == 1) {
+        val totalVisit = visited + validVisits.first()
+        val route = totalVisit.filter { it.isKey() }
+        val keys = route.toSet()
+        val allKeys = world.keys()
+        if (allKeys == keys) {
+            val path = world.isValid(route, visited.toSet())
+            return if (path.isNotEmpty()) {
+                totalVisit
+            } else {
+                emptyList()
+            }
+        }
+        return findPathRecursive(graph, totalVisit, solutions, world)
+    }
+    val visitLengths = mutableListOf<Solution>()
+    validVisits.forEach {
+        val path = findPathRecursive(graph, visited + it, solutions, world)
+        if (path.isNotEmpty()) {
+            val distance = calculateSteps(path.filter { it.isKey() }, visited.first(), world)
+            val solution = Solution(distance, path)
+            visitLengths.add(solution)
+            addSolution(solution, solutions)
+        }
+    }
+    visitLengths.sortBy { it.first }
+    if (visitLengths.isNotEmpty()) {
+        return visitLengths.first().second
+    }
+    return emptyList()
+}
+
+fun findPath(world: World, start: Cell): Pair<List<Cell>, Int> {
+    val jsp = JohnsonShortestPaths(world.graph)
+    val iterator = BreadthFirstIterator<Cell, DefaultWeightedEdge>(world.graph, start)
+    val edges = mutableMapOf<Pair<Cell, Cell>, Int>()
+    var prevCell = start
+    while (iterator.hasNext()) {
+        val cell = iterator.next()
+        if (cell != prevCell && (cell.isKey() || cell.isEntrance() || cell.isDoor())) {
+            val path = jsp.getPath(prevCell, cell)
+            if (path != null && path.length > 0) {
+                val nodes = path.vertexList.filter { it.isKey() || it.isDoor() || it.isEntrance() }.filter {
+                    it != prevCell && it != cell
+                }
+                if (nodes.isEmpty()) {
+                    val key = Pair(prevCell, cell)
+                    edges[key] = path.length
+                } else {
+                    var first = prevCell
+                    for (node in nodes) {
+                        val local = jsp.getPath(first, node)
+                        val key = Pair(first, node)
+                        edges[key] = local.length
+                        first = node
+                    }
+                    val last = jsp.getPath(first, cell)
+                    val key = Pair(first, cell)
+                    edges[key] = last.length
+                }
+                prevCell = cell
+            } else {
+                println("Building KeysAndDoors:Expected to find a path from $prevCell to $cell in \n\t${world.graph.edgeSet().joinToString("\n\t")}")
+                require(world.graph.vertexSet().contains(prevCell)) { "Expected to find $prevCell in graph ${world.graph.edgeSet()}" }
+                require(world.graph.vertexSet().contains(cell)) { "Expected to find $cell in graph ${world.graph.edgeSet()}" }
+            }
+        }
+    }
+
+    val keysDoors = DefaultUndirectedWeightedGraph<Cell, DefaultWeightedEdge>(DefaultWeightedEdge::class.java)
+    keysDoors.addVertex(world.entrance())
+    world.keys().forEach { keysDoors.addVertex(it) }
+    world.doors().forEach { keysDoors.addVertex(it) }
+    edges.forEach {
+        println("Edge: ${it.key.first.c} -> ${it.key.second.c} = ${it.value}")
+        if (keysDoors.getEdge(it.key.first, it.key.second) == null) {
+            keysDoors.addEdge(it.key.first, it.key.second)
+        }
+        val edge = keysDoors.getEdge(it.key.first, it.key.second)
+        keysDoors.setEdgeWeight(edge, it.value.toDouble())
+    }
+    val solutions = mutableMapOf<Int, MutableSet<Solution>>()
+    val path = findPathRecursive(keysDoors, listOf(start), solutions, world).filter { it != start }
+    if (path.isEmpty()) {
+        require(solutions.isEmpty()) { "Didn't expect solutions:$solutions" }
+        return Pair(emptyList(), 0)
+    }
+    val winning = solutions.keys.min()
+    val winningSolutions = solutions[winning] ?: mutableSetOf()
+    if (winningSolutions.size > 1) {
+        println("Multiple Solutions:${winningSolutions.size}")
+        winningSolutions.forEach {
+            println("\t${it.second.filter { it.isKey() }.map { it.c }.joinToString(", ")}")
+        }
+    }
+    val distance = calculateSteps(path, start, world)
+    return Pair(path, distance)
 }
 
 fun findKeys(map: Map): Pair<Int, List<Cell>> {
     val world = World(map)
-    val keys = world.keys()
-    val doors = world.doors()
-    val unlocked = mutableSetOf<Cell>()
     var start = world.entrance()
-    val collectedKeys = mutableSetOf<Cell>()
-    var totalDistance = 0
-    val visitingOrder = mutableListOf<Cell>()
-    while (doors != unlocked || keys != collectedKeys) {
-        println("Start=$start")
-        val candidates = mutableMapOf<List<Cell>, Int>()
-        var tests = 0
-        permuteInvoke((keys - collectedKeys).toList()) { visit ->
-            if (visit.isNotEmpty()) {
-                val path = world.isValid(visit, unlocked.toSet().toMutableSet())
-                tests += 1
-                if (path.isNotEmpty()) {
-                    val visit = extractVisit(path, start)
-                    val current = candidates[visit]
-                    if (current == null) {
-                        val distance = calculateSteps(visit, start, world)
-                        candidates[visit] = distance
-                        println("Tests=$tests, Candidates=${candidates.size}\r")
-                    }
-                }
-                if (tests % 1000 == 0) {
-                    println("Tests=$tests, Candidates=${candidates.size}\r")
-                }
-            }
-        }
-        val sorted = candidates.entries.map { it.key to it.value }.sortedBy { it.second }
-        println("\nAll Candidates:${sorted.size}")
-        sorted.forEach {
-            println(it)
-        }
-        val allGoodCanditates = sorted.filter { it.second == sorted.first().second }
-        if (allGoodCanditates.isNotEmpty()) {
-            println("Best Candidates:${allGoodCanditates.size}/${sorted.size}")
-            allGoodCanditates.forEach {
-                println(it)
-            }
-        }
-        return Pair(sorted.first().second, sorted.first().first)
-    }
-    return Pair(totalDistance, visitingOrder)
-}
-
-fun extractVisit(path: KeyPath, start: Cell): List<Cell> {
-    val visited = mutableSetOf<Cell>()
-    val result = mutableListOf<Cell>()
-    path.filter { it.first.isKey() }.filter { it.first != start }.forEach {
-        if (!visited.contains(it.first)) {
-            visited.add(it.first)
-            result.add(it.first)
-        }
-    }
-    return result
+    println("World:${world.entrance()}")
+    println("Keys:${world.keys().map { it.c }.joinToString(", ")}")
+    println("Doors:${world.doors().map { it.c }.joinToString(", ")}")
+    val result = findPath(world, start)
+    println("Route=${result.first.map { it.c }.joinToString(", ")}")
+    println("Steps=${result.second}")
+    return Pair(result.second, result.first)
 }
 
 fun calculateSteps(visit: List<Cell>, start: Cell, world: World): Int {
-    var distance = world.path(visit.first(), start)
+    val jsp = JohnsonShortestPaths(world.graph)
+    val path = jsp.getPath(start, visit.first())
+    // println("From ${start.c} -> ${visit.first().c} = ${path.length}")
+    var distance = path.length
     for (i in 0 until visit.lastIndex) {
-        distance += world.path(visit[i + 1], visit[i])
+        val steps = jsp.getPath(visit[i], visit[i + 1])
+        // println("From ${visit[i].c} -> ${visit[i + 1].c} = ${steps.length}")
+        distance += steps.length
     }
     return distance
 }
@@ -305,82 +367,10 @@ fun readMap(input: String): Map {
     return Map(cells)
 }
 
-fun createManyEdges(map: Map): List<Edge<Cell>> {
-    val maxY = map.maxY()
-    val maxX = map.maxX()
-    val edges = mutableListOf<Edge<Cell>>()
-    var prev: Cell? = null
-    var prevLoc = Coord(0, 0)
-    for (y in 1 until maxY) {
-        for (x in 1 until maxX) {
-            val loc = Coord(x, y)
-            val centre = map.cells[loc]
-            if (centre != null && !centre.isWall()) {
-                loc.surrounds().forEach { neighbour ->
-                    val cell = map.cells[neighbour]
-                    if (cell != null && !cell.isWall()) {
-                        edges.add(Edge(centre, cell, cell.pos.distance(centre.pos)))
-                    }
-                }
-            }
-        }
-    }
-    return edges
-}
-
-fun createEdges(map: Map): List<Edge<Cell>> {
-    val edges = createManyEdges(map).toMutableList()
-    val result = mutableListOf<Edge<Cell>>()
-    val keys = map.cells.values.filter { it.isKey() }.toSet()
-    val doors = map.cells.values.filter { it.isDoor() }.toSet()
-    val entrance = map.cells.values.find { it.isEntrance() } ?: error("Expected an entrance")
-    val combinations = mutableSetOf<Set<Cell>>()
-    val graph = Graph(edges, false)
-    doors.forEach { door ->
-        val path = graph.findPath(entrance, door)
-        if (path.isNotEmpty()) {
-            result.addAll(makeShorter(path, combinations))
-        }
-    }
-    keys.forEach { key ->
-        val path = graph.findPath(entrance, key)
-        if (path.isNotEmpty()) {
-            result.addAll(makeShorter(path, combinations))
-        }
-    }
-    keys.forEach { key ->
-        val neighbours = graph.findNeighbours(key, 2) { cell ->
-            cell.isKey() || cell.isDoor()
-        }.map {
-            it.first
-        }.filter { !combinations.contains(setOf(key, it)) }
-        if (neighbours.isNotEmpty()) {
-            neighbours.forEach { end ->
-                val path = graph.findPath(key, end)
-                if (path.isNotEmpty()) {
-                    result.addAll(makeShorter(path, combinations))
-                }
-            }
-        }
-    }
-    return result
-}
-
-fun makeShorter(path: List<Pair<Cell, Int>>, combinations: MutableSet<Set<Cell>>): List<Edge<Cell>> {
-    val edges = mutableListOf<Edge<Cell>>()
-    val filtered = path.filter { it.first.isDoor() || it.first.isKey() || it.first.isEntrance() }
-    for (i in 0..filtered.lastIndex - 1) {
-        val c1 = path[i]
-        val c2 = path[i + 1]
-        val combo = setOf(c1.first, c2.first)
-        if (!combinations.contains(combo)) {
-            combinations.add(combo)
-            edges.add(Edge(c1.first, c2.first, c2.second - c1.second))
-        }
-    }
-    return edges
-}
-
 fun main() {
+    val input = File("input.txt").readText()
+    val map = readMap(input)
+    val distance = findKeys(map)
+    println(distance)
 
 }

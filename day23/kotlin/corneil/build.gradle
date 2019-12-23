@@ -20,11 +20,8 @@ dependencies {
 }
 
 application {
-    mainClassName = 'com.github.corneil.aoc2019.day19.SolutionKt'
+    mainClassName = 'com.github.corneil.aoc2019.day23.SolutionKt'
 }
-
-// project.getTasksByName('run', false).each { args "$project.projectDir/input.txt" }
-
 
 test {
     useJUnit()

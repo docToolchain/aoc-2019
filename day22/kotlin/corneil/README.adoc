@@ -1,0 +1,30 @@
+== Slam Shuffle
+
+=== Part 1
+
+This was interesting and reasonable.
+
+=== Part 2
+
+It was obvious that I would need to change the code to calculate the indexes and reverse versions of all the functions.
+
+After implementing functions to calculate the transformations I realized the reverse increment function is problematic.
+
+I am not equipped for Advent of Math.
+My implementation breaks down in some cases and since it is a modular function I don't know of any solver techniques that would even help.
+With the large numbers if Long is going to have potential issues.
+So I'm using BigInteger for the parts that may have a problem.
+
+=== Solution Source
+
+[source,kotlin,numbered]
+----
+include::src/main/kotlin/solution.kt[]
+----
+
+=== Test Source
+
+[source,kotlin,numbered]
+----
+include::src/test/kotlin/TestShuffle.kt[]
+----

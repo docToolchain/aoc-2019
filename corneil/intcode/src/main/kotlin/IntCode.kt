@@ -42,12 +42,14 @@ data class ProgramCounter(val pc: Int, val run: Boolean) {
     fun jump(target: Int): ProgramCounter = copy(pc = target)
     fun halt(): ProgramCounter = copy(run = false)
 }
+typealias InputProvider = () -> Long
+typealias OutputProvider = (Long) -> Unit
 
 class ProgramState(
     private val memory: MutableList<Long>,
     private val inputs: MutableList<Long> = mutableListOf(),
-    private val fetchInput: (() -> Long)? = null,
-    private val outputHandler: ((Long) -> Unit)? = null
+    private val fetchInput: InputProvider? = null,
+    private val outputHandler: OutputProvider? = null
 ) {
     var counter = ProgramCounter(0, true)
         private set

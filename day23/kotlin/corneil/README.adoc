@@ -1,0 +1,10 @@
+== Category Six
+
+Previous work on IntCode paid off!!
+
+=== Solution Source
+
+[source,kotlin,numbered]
+----
+include::src/main/kotlin/solution.kt[]
+----

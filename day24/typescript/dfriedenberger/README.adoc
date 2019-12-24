@@ -1,0 +1,38 @@
+== Planet of Discord
+
+The solutions are written in Typescript. To run them use the following commands.
+
+....
+npm install
+gulp
+node dist/solution1.js
+node dist/solution2.js
+....
+
+=== First Star
+
+Implemented Eris.
+[source, typescript, numbered]
+....
+include::src/Eris.ts[]
+....
+
+For finding first layout that appears twice used biodiversity rating because is unique for each layout.
+
+....
+include::src/solution1.ts[]
+....
+
+=== Second Star
+
+Implemented RecursiveEris.
+[source, typescript, numbered]
+....
+include::src/Eris.ts[]
+....
+
+Run it 200 times and count bugs.
+[source, typescript, numbered]
+....
+include::src/solution2.ts[]
+....

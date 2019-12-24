@@ -1,0 +1,9 @@
+{
+    "files": [
+        "src/solution1.ts" , "src/Eris.ts" ,  "src/solution2.ts" ,"src/RecursiveEris.ts"
+    ],
+    "compilerOptions": {
+        "noImplicitAny": true,
+        "target": "es5"
+    }
+}

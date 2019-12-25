@@ -1,0 +1,12 @@
+== Cryostasis
+
+=== Part 1
+
+I built a little program around intcode where I could enter commands like I did with "The Hobbit" on my ZX Spectrum in 1983. The I added code to parse the output and navigate the ship and eventually to drop random items when the pressure plate thinks the droid is too heavy or or collect one random item when it is too light.
+
+=== Solution Source
+
+[source,kotlin,numbered]
+----
+include::src/main/kotlin/solution.kt[]
+----

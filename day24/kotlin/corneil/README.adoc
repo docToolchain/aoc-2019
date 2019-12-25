@@ -1,0 +1,24 @@
+== Planet of Discord
+
+=== Part 1
+
+This one was interesting. I realized from the start that fitting the representation of the grid into a BitSet or even a 32 bit value will
+be efficient when it needs to scale. Finding the same pattern again was easy.
+
+=== Part 2
+
+I did some refactoring to provide the grid with the possibility of multiple levels and a derived class that will handle the recursive
+levels.
+
+=== Solution Source
+
+[source,kotlin,numbered]
+----
+include::src/main/kotlin/solution.kt[]
+----
+
+=== Test Source
+[source,kotlin,numbered]
+----
+include::src/test/kotlin/TestBugsLife.kt[]
+----

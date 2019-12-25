@@ -1,0 +1,10 @@
+{
+    "files": [
+        "src/solution1.ts" , "src/Maze.ts",
+        "src/solution2.ts" , "src/RecursiveMaze.ts"
+    ],
+    "compilerOptions": {
+        "noImplicitAny": true,
+        "target": "es5"
+    }
+}

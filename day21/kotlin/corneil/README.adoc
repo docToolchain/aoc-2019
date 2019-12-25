@@ -1,0 +1,10 @@
+== Springdroid Adventure
+
+Thanks for mainframe assembler and boolean logic in 1981!
+
+=== Solution Source
+
+[source,kotlin,numbered]
+----
+include::src/main/kotlin/solution.kt[]
+----

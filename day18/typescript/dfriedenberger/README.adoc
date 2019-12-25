@@ -1,0 +1,36 @@
+== Many-Worlds Interpretation
+
+The solutions are written in Typescript. To run them use the following commands.
+
+....
+npm install
+gulp
+node dist/solution1.js
+node dist/solution2.js
+....
+
+I found an approach to search shortest path from start position, by iterate over each reachable key from a node.
+But this approach has runtime of O(n!). So had to cheat a little bit and found optimation with cache.
+
+The combinations after passing through the three nodes a,b,c and from node c are the same
+
+@ -> a -> b -> c
+
+@ -> b -> a -> c
+
+
+[source, typescript, numbered]
+....
+include::src/TunnelMap.ts[tag=cache]
+....
+
+With this approach found solution within seconds.
+
+=== First Star
+
+Solved by searching shortest path with all nodes.
+
+
+=== Second Star
+
+Second solution solved by search for path in each separate sections assuming that the missing keys for doors collected by the others robots.

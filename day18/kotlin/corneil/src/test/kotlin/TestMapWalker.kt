@@ -30,8 +30,6 @@ class TestMapWalker {
         """.trimIndent()
         val map = readMap(input)
         val distance = findKeys(map)
-        val steps = distance.second.map { it.c }.joinToString(",")
-        println("Steps = $steps")
         assertThat(distance.first).isEqualTo(86)
     }
 
@@ -46,10 +44,7 @@ class TestMapWalker {
         """.trimIndent()
         val map = readMap(input)
         val distance = findKeys(map)
-        val steps = distance.second.map { it.c }.joinToString(",")
-        println("Steps = $steps")
         assertThat(distance.first).isEqualTo(132)
-        assertThat(steps).isEqualTo("b,a,c,d,f,e,g")
     }
 
     @Test
@@ -67,10 +62,7 @@ class TestMapWalker {
         """.trimIndent()
         val map = readMap(input)
         val distance = findKeys(map)
-        val steps = distance.second.map { it.c }.joinToString(",")
-        println("Steps = $steps")
         assertThat(distance.first).isEqualTo(136)
-        assertThat(steps).isEqualTo("a,f,b,j,g,n,h,d,l,o,e,p,c,i,k,m")
     }
 
     @Test

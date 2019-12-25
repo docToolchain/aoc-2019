@@ -1,0 +1,38 @@
+== Slam Shuffle
+
+The solutions are written in Typescript. To run them use the following commands.
+
+....
+npm install
+gulp
+node dist/solution1.js
+node dist/solution2.js
+....
+
+=== First Star
+
+Solved by implementing the shuffle service and searching for 2019.
+
+[source, typescript, numbered]
+....
+include::src/ShuffleService.ts[]
+....
+
+
+=== Second Star
+
+I knew that 119315717514047 space cards shuffling 101741582076661 times is not solvable with the solution for star 1. I realized that the transformation of one shuffling process could used for for each loop. Furthermore, it is not necessary to calculate the whole array to determine the position. But I not found an approach for reduce loop count. So I had to cheat again. I've found an approch and will explain it here.
+
+All three transformations are invertible and composition of all inverted transformation is posible. We calculate the mapping for one inverted shuffle process.
+
+[source, typescript, numbered]
+....
+include::src/solution2.ts[tag=composition]
+....
+
+Than calculate result with fast exponentiation.
+
+[source, typescript, numbered]
+....
+include::src/solution2.ts[tag=fast]
+....

@@ -1,0 +1,17 @@
+var fs = require('fs');
+import { RecursiveMaze } from './RecursiveMaze';
+
+
+
+let  map : RecursiveMaze = new RecursiveMaze();
+
+let data : string = fs.readFileSync("input.txt").toString('utf-8');
+
+map.load(data.split("\r\n"));
+
+let s : number = map.findPath("AA","ZZ");
+
+
+
+console.log("My puzzle answer is " + s);
+

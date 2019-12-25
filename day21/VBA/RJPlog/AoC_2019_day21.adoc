@@ -1,0 +1,9 @@
+﻿== Day 21: Set and Forget
+
+The original puzzle can be found at https://adventofcode.com/2019/day/21
+
+== Star 1
+
+
+== Star 2
+

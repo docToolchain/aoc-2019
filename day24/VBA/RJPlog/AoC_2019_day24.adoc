@@ -1,0 +1,8 @@
+﻿== Day 24: Planet of Discord
+
+The original puzzle can be found at https://adventofcode.com/2019/day/24
+
+== Star 1
+
+
+== Star 2

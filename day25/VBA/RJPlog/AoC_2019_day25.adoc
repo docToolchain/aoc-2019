@@ -1,0 +1,9 @@
+﻿== Day 25: Cryostasis
+
+The original puzzle can be found at https://adventofcode.com/2019/day/21
+
+== Star 1
+this was quite stressfull, having to implement all variants of items as ascii orders, but at the end it worked out!
+
+== Star 2
+well, Santa's message is, that I am missing 12 stars to proceed, means I have to work out all the last day's parts. THIS WAS GREAT FUN! - SPECIAL THANKS TO RALF!

@@ -1,5 +1,7 @@
 package com.github.corneil.aoc2019.common
 
+import java.math.BigInteger
+
 // found on https://rosettacode.org/wiki/Permutations#Kotlin
 fun <T> permute(input: List<T>): List<List<T>> {
     if (input.isEmpty()) return emptyList()
@@ -15,6 +17,11 @@ fun <T> permute(input: List<T>): List<List<T>> {
     }
     return perms
 }
+
+fun permutationsBI(n: BigInteger): BigInteger =
+    n * if (n > BigInteger.ONE) permutationsBI(n - BigInteger.ONE) else BigInteger.ONE
+
+fun permutations(n: Int): BigInteger = permutationsBI(n.toBigInteger())
 
 fun <T> permuteInvoke(input: List<T>, handlePermuation: (List<T>) -> Unit) {
     if (input.size == 1) {

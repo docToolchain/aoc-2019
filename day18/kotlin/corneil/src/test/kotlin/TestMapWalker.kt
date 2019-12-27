@@ -13,8 +13,9 @@ class TestMapWalker {
             #########
         """.trimIndent()
         val map = readMap(input)
-        val distance = findKeys(map)
-        val steps = distance.second.map { it.c }.joinToString(",")
+
+        val distance = findKeys(true, map)
+        val steps = distance.second
         println("Steps = $steps")
         assertThat(distance.first).isEqualTo(8)
     }
@@ -29,7 +30,7 @@ class TestMapWalker {
             ########################
         """.trimIndent()
         val map = readMap(input)
-        val distance = findKeys(map)
+        val distance = findKeys(true, map)
         assertThat(distance.first).isEqualTo(86)
     }
 
@@ -43,7 +44,7 @@ class TestMapWalker {
             ########################
         """.trimIndent()
         val map = readMap(input)
-        val distance = findKeys(map)
+        val distance = findKeys(true, map)
         assertThat(distance.first).isEqualTo(132)
     }
 
@@ -61,7 +62,7 @@ class TestMapWalker {
             #################
         """.trimIndent()
         val map = readMap(input)
-        val distance = findKeys(map)
+        val distance = findKeys(System.getProperty("print.progress", "false").toBoolean(), map)
         assertThat(distance.first).isEqualTo(136)
     }
 
@@ -76,9 +77,7 @@ class TestMapWalker {
             ########################
         """.trimIndent()
         val map = readMap(input)
-        val distance = findKeys(map)
-        val steps = distance.second.map { it.c }.joinToString(",")
-        println("Steps = $steps")
+        val distance = findKeys(true, map)
         assertThat(distance.first).isEqualTo(81)
         // There are 4 solutions for 81 steps.
     }

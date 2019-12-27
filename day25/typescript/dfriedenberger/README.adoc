@@ -1,0 +1,34 @@
+== Cryostasis
+
+The solutions are written in Typescript. To run them use the following commands.
+
+....
+npm install
+gulp
+node dist/solution1.js
+....
+
+=== First Start
+
+First I explored the ship and take the items. Don't take all, especially not the infinity loop.
+[source, typescript, numbered]
+....
+include::src/solution1.ts[tag=explore]
+....
+
+Than go to the "Security Checkpoint".
+[source, typescript, numbered]
+....
+include::src/solution1.ts[tag=gotocheckpoint]
+....
+
+And test all combinations of items to pass.
+[source, typescript, numbered]
+....
+include::src/solution1.ts[tag=testitems]
+....
+
+=== Second Star
+
+Nothing to do. :-)
+

@@ -1,0 +1,15 @@
+﻿== Day 15: Oxygen System
+
+The original puzzle can be found at https://adventofcode.com/2019/day/15
+
+== Star 1
+This took me a little bit longer to think about how to set the strategie how by a random moving you are not always turing circles. It's not the best algorithm I found, but at the end it worked out enough for finding the solution. The key was to mark all areas which are a dead end, means the will not contribute to a short path because they are in a edge situation.
+
+Example:  .#
+          D.#  --> the field between the drone and the wall can be marked with special, so that you will not move to it again
+          .#
+                    
+
+== Star 2
+Here I had to improve my skills in recursive programming, hopefully it will also help me out of day14, which I did not solve up to now.
+

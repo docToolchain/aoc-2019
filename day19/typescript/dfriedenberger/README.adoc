@@ -1,4 +1,4 @@
-== Care Package
+== Tractor Beam
 
 The solutions are written in Typescript. To run them use the following commands.
 
@@ -12,17 +12,15 @@ node dist/solution2.js
 
 === First Start
 
-Solved by creating game from IntCode and count the blocks. 
+Simple run for the 50x50 grid and count the digits "1".
+
 [source, typescript, numbered]
 ....
 include::src/solution1.ts[]
 ....
-
 === Second Star
 
-Solved by playing the game. Moving the panel synchron to the ball.
-
-video::P0tw9cFUj5U[youtube]
+Scanned for each line the width of tractor and the x Positions. Then check if square fits.
 
 [source, typescript, numbered]
 ....

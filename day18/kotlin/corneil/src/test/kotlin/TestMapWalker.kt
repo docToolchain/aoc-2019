@@ -12,12 +12,12 @@ class TestMapWalker {
             #b.A.@.a#
             #########
         """.trimIndent()
-        val map = readMap(input)
+        val grid = readGrid(input)
 
-        val distance = findKeys(true, map)
-        val steps = distance.second
-        println("Steps = $steps")
-        assertThat(distance.first).isEqualTo(8)
+        val distance = findKeys(true, grid)
+
+        println("Steps = $distance")
+        assertThat(distance).isEqualTo(8)
     }
 
     @Test
@@ -29,9 +29,9 @@ class TestMapWalker {
             #d.....................#
             ########################
         """.trimIndent()
-        val map = readMap(input)
-        val distance = findKeys(true, map)
-        assertThat(distance.first).isEqualTo(86)
+        val grid = readGrid(input)
+        val distance = findKeys(true, grid)
+        assertThat(distance).isEqualTo(86)
     }
 
     @Test
@@ -43,9 +43,9 @@ class TestMapWalker {
             #.....@.a.B.c.d.A.e.F.g#
             ########################
         """.trimIndent()
-        val map = readMap(input)
-        val distance = findKeys(true, map)
-        assertThat(distance.first).isEqualTo(132)
+        val grid = readGrid(input)
+        val distance = findKeys(true, grid)
+        assertThat(distance).isEqualTo(132)
     }
 
     @Test
@@ -61,9 +61,9 @@ class TestMapWalker {
             #l.F..d...h..C.m#
             #################
         """.trimIndent()
-        val map = readMap(input)
-        val distance = findKeys(System.getProperty("print.progress", "false").toBoolean(), map)
-        assertThat(distance.first).isEqualTo(136)
+        val grid = readGrid(input)
+        val distance = findKeys(System.getProperty("print.progress", "false").toBoolean(), grid)
+        assertThat(distance).isEqualTo(136)
     }
 
     @Test
@@ -76,9 +76,77 @@ class TestMapWalker {
             ###g#h#i################
             ########################
         """.trimIndent()
-        val map = readMap(input)
-        val distance = findKeys(true, map)
-        assertThat(distance.first).isEqualTo(81)
-        // There are 4 solutions for 81 steps.
+        val grid = readGrid(input)
+        val distance = findKeys(true, grid)
+        assertThat(distance).isEqualTo(81)
+    }
+
+    @Test
+    fun test6() {
+        val input = """
+            #######
+            #a.#Cd#
+            ##@#@##
+            #######
+            ##@#@##
+            #cB#Ab#
+            #######
+        """.trimIndent()
+        val grid = readGrid(input)
+        val distance = findKeysMultipleEntrances(true, grid)
+        assertThat(distance).isEqualTo(8)
+    }
+
+    @Test
+    fun test7() {
+        val input = """
+            ###############
+            #d.ABC.#.....a#
+            ######...######
+            ######.@.######
+            ######...######
+            #b.....#.....c#
+            ###############
+        """.trimIndent()
+        val grid = modifyBots(readGrid(input))
+        println(grid.printToString())
+        val distance = findKeysMultipleEntrances(true, grid)
+        assertThat(distance).isEqualTo(24)
+    }
+
+    @Test
+    fun test8() {
+        val input = """
+            #############
+            #DcBa.#.GhKl#
+            #.###...#I###
+            #e#d#.@.#j#k#
+            ###C#...###J#
+            #fEbA.#.FgHi#
+            #############
+        """.trimIndent()
+        val map = modifyBots(readGrid(input))
+        println(map.printToString())
+        val distance = findKeysMultipleEntrances(true, map)
+        assertThat(distance).isEqualTo(32)
+    }
+
+    @Test
+    fun test9() {
+        val input = """
+            #############
+            #g#f.D#..h#l#
+            #F###e#E###.#
+            #dCba...BcIJ#
+            #####.@.#####
+            #nK.L...G...#
+            #M###N#H###.#
+            #o#m..#i#jk.#
+            #############
+        """.trimIndent()
+        val map = modifyBots(readGrid(input))
+        println(map.printToString())
+        val distance = findKeysMultipleEntrances(true, map)
+        assertThat(distance).isEqualTo(72)
     }
 }

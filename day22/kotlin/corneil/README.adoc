@@ -8,12 +8,24 @@ This was interesting and reasonable.
 
 It was obvious that I would need to change the code to calculate the indexes and reverse versions of all the functions.
 
-After implementing functions to calculate the transformations I realized the reverse increment function is problematic.
+After implementing functions to calculate the transformations I realized that reverse modulus is problematic.
 
 I am not equipped for Advent of Math.
-My implementation breaks down in some cases and since it is a modular function I don't know of any solver techniques that would even help.
+
+My first implementation breaks down in some cases and since it is a modular function I don't know of any solver techniques that would even
+help.
+
 With the large numbers if Long is going to have potential issues.
+
 So I'm using BigInteger for the parts that may have a problem.
+
+
+Ouch! This took some time.
+
+I had to update my test cases so the deck size was prime.
+
+Thanks to https://github.com/ephemient I found a solution I could understand!
+
 
 === Solution Source
 

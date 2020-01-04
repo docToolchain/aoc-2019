@@ -110,11 +110,8 @@ fun shuffleFrom(lines: List<String>, deck: Array<Int>, printIntermediate: Boolea
             println(result.joinToString(","))
         }
         val after = result.toList().toSet()
-        if (before != after) {
-            val diff = before - after
-            println("Before $before")
-            println("After $after")
-            error("A card is missing after $it $diff")
+        require(before == after) {
+            "Cards  missing $before -> $after"
         }
     }
     return result
@@ -153,7 +150,7 @@ fun shuffleOperations(
     deck: Long
 ): Operation {
     var r = Operation(deck)
-    for (line in lines) {
+    lines.forEach { line ->
         println("Reversing $line")
         val s = parse(line)
         r = when (s) {

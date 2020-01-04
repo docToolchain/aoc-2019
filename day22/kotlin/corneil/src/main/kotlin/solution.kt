@@ -1,98 +1,84 @@
 package com.github.corneil.aoc2019.day22
 
+import com.github.corneil.aoc2019.day22.Instruction.Cut
+import com.github.corneil.aoc2019.day22.Instruction.Increment
+import com.github.corneil.aoc2019.day22.Instruction.Reverse
 import java.io.File
-import kotlin.math.max
-import kotlin.math.min
+import java.math.BigInteger
 
-fun reverseIndex(index: Long, deck: Long): Long {
-    return deck - index - 1L
+infix fun BigInteger.`%%`(b: BigInteger): BigInteger {
+    val r = this % b
+    return if (r < BigInteger.ZERO) r + b else r
+}
+
+infix fun Long.`%%`(b: Long): Long {
+    return (this.toBigInteger() `%%` b.toBigInteger()).toLong()
+}
+
+sealed class Instruction {
+    data class Increment(val inc: Int) : Instruction()
+    data class Cut(val n: Int) : Instruction()
+    object Reverse : Instruction()
+}
+
+fun parse(input: String): Instruction {
+    val r = mapOf<String, (MatchResult) -> Instruction>(
+        "deal into new stack" to { _ -> Reverse },
+        "deal with increment (\\d+)" to { s -> Increment(s.groupValues.get(1).toInt()) },
+        "cut (-?\\d+)" to { s -> Cut(s.groupValues.get(1).toInt()) }
+    )
+    return r.entries.find {
+        it.key.toRegex().matches(input)
+    }?.let {
+        it.value(it.key.toRegex().matchEntire(input)!!)
+    } ?: error("Could not determine $input")
+}
+
+fun reverseIndex(index: Long, deck: Long, iterations: Long = 1L): Long {
+    return if (iterations % 2L == 0L)
+        index
+    else
+        deck - (index + 1)
 }
 
 fun reverse(deck: Array<Int>): Array<Int> {
     println("deal into new stack")
-    return deck.reversedArray()
+    val result = Array<Int>(deck.size) { -1 }
+    for (i in 0 until deck.size) {
+        val newIndex = reverseIndex(i.toLong(), deck.size.toLong())
+        result[newIndex.toInt()] = deck[i]
+    }
+    return result
+
 }
 
-fun cutIndex(index: Long, n: Int, deck: Long): Long {
-    return (deck - n.toLong() + index) % deck
-}
-
-fun cutIndexReverse(index: Long, n: Int, deck: Long): Long {
-    return cutIndex(index, n * -1, deck)
+fun cutIndex(index: Long, n: Int, deck: Long, iterations: Long = 1L): Long {
+    val i = index.toBigInteger()
+    val cn = n.toBigInteger()
+    val d = deck.toBigInteger()
+    val N = iterations.toBigInteger()
+    return ((N * (i - cn)) `%%` d).toLong()
 }
 
 fun cut(deck: Array<Int>, n: Int): Array<Int> {
     println("cut $n")
     val result = Array<Int>(deck.size) { -1 }
     for (i in 0 until deck.size) {
-        val newIndex = cutIndex(i.toLong(), n, deck.size.toLong())
+        val newIndex = cutIndex(i.toLong(), n, deck.size.toLong(), 1)
         result[newIndex.toInt()] = deck[i]
     }
     return result
 }
 
-fun incrementIndex(index: Long, inc: Int, deck: Long): Long {
-    return (((index.toBigInteger() * inc.toBigInteger()) + deck.toBigInteger()) % deck.toBigInteger()).toLong()
-}
-
-fun incrementIndexReverse(index: Long, inc: Int, deck: Long): Long {
+fun incrementIndex(index: Long, inc: Int, deck: Long, iterations: Long = 1L): Long {
     if (index == 0L) {
         return 0L
     }
-    val r = index / inc
-    if (index % inc == 0L) {
-        val test = incrementIndex(r, inc, deck)
-        require(test == index) { "Expected index=$index to be $r not $test for inc=$inc, deck=$deck " }
-        return r
-    } else {
-        val maxI = inc.toBigInteger() * deck.toBigInteger()
-        val r1 = inc.toBigInteger() * index.toBigInteger()
-        val r2 = (maxI - r1)
-        val result = (r2 % deck.toBigInteger()).toLong()
-        if (incrementIndex(result, inc, deck) != index) {
-            val attempt = deck - result
-            if (incrementIndex(attempt, inc, deck) == index) {
-                return attempt
-            } else {
-                var searches = 0
-                var value: Long? = null
-                var start1 = attempt
-                var start2 = attempt + 1L
-                do {
-                    if (start1 > 0L) {
-                        value = (start1 downTo max(start1 - (inc * 10), 0L)).find {
-                            incrementIndex(it, inc, deck) == index
-                        }
-                        searches += inc * 10
-                    }
-                    if (value == null) {
-                        if (start2 <= deck) {
-                            value = (start2 until min(start2 + (inc * 10), deck)).find {
-                                incrementIndex(it, inc, deck) == index
-                            }
-                        }
-                        searches += inc * 10
-                    }
-                    if (value == null) {
-                        if (start1 <= 0L && start2 >= deck) {
-                            break
-                        }
-                        start1 = max(start1 - (inc * 10), 0L)
-                        start2 = min(start2 + (inc * 10), deck)
-                        if (searches % 1000L == 0L) {
-                            print("Searching for $index inc=$inc and deck=$deck from $start1 -> $attempt -> $start2\r")
-                        }
-                    }
-                } while (value == null)
-                if (value == null) {
-                    error("Could not resolve index=$index for inc=$inc and deck=$deck tried $start1 to $start2")
-                }
-                println("Solution $index inc=$inc and $deck = $value")
-                return value
-            }
-        }
-        return result
-    }
+    val N = iterations.toBigInteger()
+    val i = index.toBigInteger()
+    val c = inc.toBigInteger()
+    val d = deck.toBigInteger()
+    return (N * i * c `%%` d).toLong()
 }
 
 fun increment(deck: Array<Int>, inc: Int): Array<Int> {
@@ -105,42 +91,14 @@ fun increment(deck: Array<Int>, inc: Int): Array<Int> {
     return result
 }
 
-fun shuffle(instruction: String, deck: Array<Int>): Array<Int> {
-    return when {
-        instruction == "deal into new stack"          -> reverse(deck)
-        instruction.startsWith("deal with increment") -> {
-            val n = instruction.substringAfterLast(' ').toInt()
-            increment(deck, n)
-        }
-        instruction.startsWith("cut")                 -> {
-            val n = instruction.substringAfterLast(' ').toInt()
-            cut(deck, n)
-        }
-        else                                          -> error("Unknown instruction $instruction")
+fun shuffle(input: String, deck: Array<Int>): Array<Int> {
+    val instruction = parse(input)
+    return when (instruction) {
+        is Instruction.Reverse   -> reverse(deck)
+        is Instruction.Increment -> increment(deck, instruction.inc)
+        is Instruction.Cut       -> cut(deck, instruction.n)
+        else                     -> error("Unknown instruction $instruction")
     }
-}
-
-fun shuffleReverse(instruction: String, index: Long, deck: Long): Long {
-    return when {
-        instruction == "deal into new stack"          -> reverseIndex(index, deck)
-        instruction.startsWith("deal with increment") -> {
-            val n = instruction.substringAfterLast(' ').toInt()
-            incrementIndexReverse(index, n, deck)
-        }
-        instruction.startsWith("cut")                 -> {
-            val n = instruction.substringAfterLast(' ').toInt()
-            cutIndexReverse(index, n, deck)
-        }
-        else                                          -> error("Unknown instruction $instruction")
-    }
-}
-
-fun applyShuffleReverse(lines: List<String>, index: Long, deck: Long): Long {
-    var result = index
-    for (i in lines.lastIndex downTo 0) {
-        result = shuffleReverse(lines[i], result, deck)
-    }
-    return result
 }
 
 fun shuffleFrom(lines: List<String>, deck: Array<Int>, printIntermediate: Boolean = false): Array<Int> {
@@ -162,6 +120,97 @@ fun shuffleFrom(lines: List<String>, deck: Array<Int>, printIntermediate: Boolea
     return result
 }
 
+data class Operation(
+    val deck: BigInteger,
+    val increment: BigInteger = BigInteger.ONE,
+    val offset: BigInteger = BigInteger.ZERO
+) {
+    constructor(
+        deck: Long,
+        increment: Long = 1L,
+        offset: Long = 0L
+    ) : this(deck.toBigInteger(), increment.toBigInteger(), offset.toBigInteger())
+
+    operator fun times(right: Operation): Operation {
+        return copy(
+            increment = increment * right.increment `%%` deck,
+            offset = ((offset * right.increment `%%` deck) + right.offset) `%%` deck
+        )
+    }
+
+    fun pow(x: Long): Operation {
+        require(x >= 0L)
+        return when {
+            x == 0L      -> Operation(this.deck)
+            x % 2L == 0L -> (this * this).pow(x / 2L)
+            else         -> this * pow(x - 1L)
+        }
+    }
+}
+
+fun shuffleOperations(
+    lines: List<String>,
+    deck: Long
+): Operation {
+    var r = Operation(deck)
+    for (line in lines) {
+        println("Reversing $line")
+        val s = parse(line)
+        r = when (s) {
+            is Reverse   -> {
+                r.copy(increment = -r.increment `%%` r.deck, offset = (-r.offset - BigInteger.ONE) `%%` r.deck)
+            }
+            is Cut       -> {
+                val n = s.n.toBigInteger()
+                r.copy(offset = (r.offset - n) `%%` r.deck)
+            }
+            is Increment -> {
+                val inc = s.inc.toBigInteger()
+                r.copy(
+                    offset = r.offset * inc `%%` r.deck,
+                    increment = r.increment * inc `%%` r.deck
+                )
+            }
+        }
+    }
+    return r
+}
+
+fun getIndex(s: Operation, index: Long): Long {
+    val x = index.toBigInteger()
+    return (((s.increment * x `%%` s.deck) + s.offset) `%%` s.deck).toLong()
+}
+
+fun getReverseIndex(s: Operation, index: Long): Long {
+    require(s.deck.isProbablePrime(10))
+    return getIndex(s.pow(s.deck.toLong() - 2L), index)
+}
+
+fun applyShuffleReverse(lines: List<String>, index: List<Long>, deck: Long, iterations: Long = 1L): List<Long> {
+    require(deck > 0L) { "Deck must have a positive length not $deck" }
+    require(iterations > 0L) { "Iteration must be positive not $iterations" }
+    require(index.all { it >= 0L }) { "Index must be 0 or greater not $index" }
+
+    val s = shuffleOperations(lines, deck)
+    val x = s.pow(iterations)
+
+    return index.map {
+        getReverseIndex(x, it)
+    }
+}
+
+fun applyShuffle(lines: List<String>, index: List<Long>, deck: Long, iterations: Long = 1L): List<Long> {
+    require(deck > 0L) { "Deck must have a positive length not $deck" }
+    require(iterations > 0L) { "Iteration must be positive not $iterations" }
+    require(index.all { it >= 0L }) { "Index must be 0 or greater not $index" }
+
+    val s = shuffleOperations(lines, deck)
+
+    return index.map {
+        getIndex(s, it)
+    }
+}
+
 fun main() {
     val input = File("input.txt").readLines().map { it.trim() }.filter { it.length > 0 }
     require(input.size == 100) { "Expected 100 lines not ${input.size}" }
@@ -169,27 +218,25 @@ fun main() {
     require(deck.indexOf(2019) == 2019)
     val result = shuffleFrom(input, deck)
     val index = result.indexOf(2019)
-    println("Result = $index")
+    val index2 = result.indexOf(2020)
+    println("Result[2019] = $index, Result[2020] = $index2")
     require(index == 7545)
-    val reverse = applyShuffleReverse(input, index.toLong(), deck.size.toLong())
-    val reverseValue = deck[reverse.toInt()]
-    println("Reverse = $reverse, $reverseValue")
+    require(index2 == 5078)
+    // Testing index calculations on same data
+    val index3 = applyShuffle(input, listOf(2019L, 2020L), deck.size.toLong(), 1L)
+    require(index3[0] == 7545L) { "Expected ${index3[0]} to be 7545" }
+    require(index3[1] == 5078L) { "Expected ${index3[1]} to be 5078" }
+    // Testing reverse on same data
+    val reverse = applyShuffleReverse(input, listOf(7545L, 5078), deck.size.toLong(), 1L)
+    val reverseValue = deck[reverse[0]!!.toInt()]
+    val reverseValue2 = deck[reverse[1]!!.toInt()]
+    require(reverse.first() == 2019L) { "Expected ${reverse.first()} to be 2019" }
 
-    val largeDeck = 119315717514047L
-    val iterations = 101741582076661L
-    val gcd = iterations.toBigInteger().gcd(largeDeck.toBigInteger())
-    println("GCD=$gcd")
-    var largeIndex = 2020L
-    for (i in 0..iterations) {
-        largeIndex = applyShuffleReverse(input, largeIndex, largeDeck)
-        if (largeIndex == 2020L) {
-            println("Cycle at $i")
-            break
-        }
-        if (i % 100L == 0L) {
-            print("Iteration=$i\r")
-        }
-    }
-    println("Large Number = $largeIndex")
+    // Large inputs
+    val largeDeck = 119_315_717_514_047L
+    val iterations = 101_741_582_076_661L
+    val largeIndex = applyShuffleReverse(input, listOf(2020L), largeDeck, iterations)
+    println("Large Number = ${largeIndex.first()}")
+    require(largeIndex.first() == 12_706_692_375_144L)
 }
 

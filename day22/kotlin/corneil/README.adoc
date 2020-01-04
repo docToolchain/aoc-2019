@@ -15,6 +15,9 @@ My implementation breaks down in some cases and since it is a modular function I
 With the large numbers if Long is going to have potential issues.
 So I'm using BigInteger for the parts that may have a problem.
 
+Ouch! This took some time.
+Thanks to https://github.com/ephemient I found a solution I could understand!
+
 === Solution Source
 
 [source,kotlin,numbered]

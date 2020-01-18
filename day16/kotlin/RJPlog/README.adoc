@@ -1,0 +1,13 @@
+﻿== Flawed Frequency Transmission
+
+=== Part 1
+
+look at VBA
+
+=== Part 2
+
+Trying to solve part to in VBA with just enhancing the input vector I recognised very fast that this will not come to an end in an appropriate time. 
+Not finding a really good solution to make the algorithm easier, I decided to use some other language. This is the first try, I just adapted the VBA code to Kotlin.
+I choosed Kotlin since Corneil was the one with the most solutions, and he did it in kotlin :-)
+It took still 14 hours, but the goal was to start learning something new, here is the first result.
+

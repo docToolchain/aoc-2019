@@ -1,0 +1,12 @@
+﻿== Day 23: Category Six
+
+The original puzzle can be found at https://adventofcode.com/2019/day/22
+
+== Star 1
+since I started in VBA i wanted to reuse my intcode. 
+This ended up in 2 hours coping fifty times my code and adapt each part to specific variables. 
+Finally it worked, but it takes about 30 minutes to reach adress 255. 
+Which means, if for part 2 there are more then a few iterations, i have to reprogram :-(
+
+== Star 2 
+tbfol

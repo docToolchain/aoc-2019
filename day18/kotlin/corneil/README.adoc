@@ -11,6 +11,10 @@ Trying to think how a search will work when the tree is not a binary tree.
 
 I now have a recursive search that works but runs a long.
 
+Started looking around at solutions by other people and found one I could understand and why I as failing.
+Thanks to https://github.com/0legg
+
+
 === Solution source
 [source,kotlin,numbered]
 ----

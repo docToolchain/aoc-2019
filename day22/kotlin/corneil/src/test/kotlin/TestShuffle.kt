@@ -3,9 +3,10 @@ import assertk.assertions.isEqualTo
 import com.github.corneil.aoc2019.day22.applyShuffleReverse
 import com.github.corneil.aoc2019.day22.cut
 import com.github.corneil.aoc2019.day22.cutIndex
-import com.github.corneil.aoc2019.day22.cutIndexReverse
 import com.github.corneil.aoc2019.day22.increment
+import com.github.corneil.aoc2019.day22.incrementIndex
 import com.github.corneil.aoc2019.day22.reverse
+import com.github.corneil.aoc2019.day22.reverseIndex
 import com.github.corneil.aoc2019.day22.shuffleFrom
 import org.junit.Test
 
@@ -16,7 +17,13 @@ class TestShuffle {
         val result = reverse(deck)
         val expected = (9 downTo 0).toList().toTypedArray()
         println("Result = ${result.toList()}")
-        assertThat(result).isEqualTo(expected)
+        assertThat(result.toList()).isEqualTo(expected.toList())
+        val check = Array<Int>(deck.size) { -1 }
+        for (i in 0 until deck.size) {
+            val index = reverseIndex(i.toLong(), deck.size.toLong())
+            check[index.toInt()] = deck[i]
+        }
+        assertThat(check.toList()).isEqualTo(expected.toList())
     }
 
     @Test
@@ -25,11 +32,17 @@ class TestShuffle {
         val result = cut(deck, 3)
         val expected = arrayOf(3, 4, 5, 6, 7, 8, 9, 0, 1, 2)
         println("Cut:${result.toList()}")
-        assertThat(result).isEqualTo(expected)
+        assertThat(result.toList()).isEqualTo(expected.toList())
         expected.forEachIndexed { index, i ->
             val reverseIndex = cutIndex(index.toLong(), -3, deck.size.toLong())
             assertThat(deck[reverseIndex.toInt()] == i)
         }
+        val check = Array<Int>(deck.size) { -1 }
+        for (i in 0 until deck.size) {
+            val index = cutIndex(i.toLong(), 3, deck.size.toLong())
+            check[index.toInt()] = deck[i]
+        }
+        assertThat(check.toList()).isEqualTo(expected.toList())
     }
 
     @Test
@@ -39,6 +52,12 @@ class TestShuffle {
         val expected = arrayOf(8, 9, 0, 1, 2, 3, 4, 5, 6, 7)
         println("Cut:${result.toList()}")
         assertThat(result.toList()).isEqualTo(expected.toList())
+        val check = Array<Int>(deck.size) { -1 }
+        for (i in 0 until deck.size) {
+            val index = cutIndex(i.toLong(), 8, deck.size.toLong())
+            check[index.toInt()] = deck[i]
+        }
+        assertThat(check.toList()).isEqualTo(expected.toList())
     }
 
     @Test
@@ -48,15 +67,12 @@ class TestShuffle {
         val expected = arrayOf(9, 0, 1, 2, 3, 4, 5, 6, 7, 8)
         println("Cut:${result.toList()}")
         assertThat(result.toList()).isEqualTo(expected.toList())
-    }
-
-    @Test
-    fun test3cut_6() {
-        val deck = (0..9).toList().toTypedArray()
-        val result = cut(deck, -6)
-        val expected = arrayOf(4, 5, 6, 7, 8, 9, 0, 1, 2, 3)
-        println("Cut:${result.toList()}")
-        assertThat(result.toList()).isEqualTo(expected.toList())
+        val check = Array<Int>(deck.size) { -1 }
+        for (i in 0 until deck.size) {
+            val index = cutIndex(i.toLong(), -1, deck.size.toLong())
+            check[index.toInt()] = deck[i]
+        }
+        assertThat(check.toList()).isEqualTo(expected.toList())
     }
 
     @Test
@@ -66,6 +82,12 @@ class TestShuffle {
         val expected = arrayOf(0, 7, 4, 1, 8, 5, 2, 9, 6, 3)
         println("Increment:${result.toList()}")
         assertThat(result.toList()).isEqualTo(expected.toList())
+        val check = Array<Int>(deck.size) { -1 }
+        for (i in 0 until deck.size) {
+            val index = incrementIndex(i.toLong(), 3, deck.size.toLong())
+            check[index.toInt()] = deck[i]
+        }
+        assertThat(check.toList()).isEqualTo(expected.toList())
     }
 
     @Test
@@ -75,40 +97,145 @@ class TestShuffle {
         val expected = arrayOf(0, 9, 8, 7, 6, 5, 4, 3, 2, 1)
         println("Increment:${result.toList()}")
         assertThat(result.toList()).isEqualTo(expected.toList())
+        val check = Array<Int>(deck.size) { -1 }
+        for (i in 0 until deck.size) {
+            val index = incrementIndex(i.toLong(), 9, deck.size.toLong())
+            check[index.toInt()] = deck[i]
+        }
+        assertThat(check.toList()).isEqualTo(expected.toList())
     }
 
     @Test
     fun test5() {
-        val deck = (0..9).toList().toTypedArray()
+        val deck = (0..10).toList().toTypedArray()
         val input = """
             deal with increment 7
             deal into new stack
             deal into new stack
-            """.trimIndent().split('\n').map { it.trim() }.filter { it.length > 0 }
+            """.trimIndent().split('\n').map { it.trim() }.filter { it.isNotEmpty() }
 
-        val result = shuffleFrom(input, deck)
+        val result = shuffleFrom(input, deck, true)
         println("Result:${result.toList()}")
-        val expected = arrayOf(0, 3, 6, 9, 2, 5, 8, 1, 4, 7)
+        val expected = arrayOf(0, 8, 5, 2, 10, 7, 4, 1, 9, 6, 3)
         assertThat(result.toList()).isEqualTo(expected.toList())
+        val check = Array<Int>(deck.size) { -1 }
+        applyShuffleReverse(input, (0L until deck.size.toLong()).toList(), deck.size.toLong())
+            .forEachIndexed { index, l ->
+                check[l.toInt()] = expected[index]
+            }
+        assertThat(check.toList()).isEqualTo(deck.toList())
+    }
+
+    @Test
+    fun test5_reverse() {
+        val deck = (0..10).toList().toTypedArray()
+        val input = """
+            deal into new stack
+            deal into new stack
+            """.trimIndent().split('\n').map { it.trim() }.filter { it.isNotEmpty() }
+
+        val result = shuffleFrom(input, deck, true)
+        println("Result:${result.toList()}")
+        val expected = arrayOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+        assertThat(result.toList()).isEqualTo(expected.toList())
+        val check = Array<Int>(deck.size) { -1 }
+        applyShuffleReverse(input, (0L until deck.size.toLong()).toList(), deck.size.toLong())
+            .forEachIndexed { index, l ->
+                check[l.toInt()] = expected[index]
+            }
+        assertThat(check.toList()).isEqualTo(deck.toList())
     }
 
     @Test
     fun test6() {
-        val deck = (0..9).toList().toTypedArray()
+        val deck = (0..10).toList().toTypedArray()
         val input = """
             deal with increment 7
-            deal with increment 9
             cut -2
-        """.trimIndent().split('\n').map { it.trim() }.filter { it.length > 0 }
+            deal with increment 9
+        """.trimIndent().split('\n').map { it.trim() }.filter { it.isNotEmpty() }
         val result = shuffleFrom(input, deck)
         println("Result:${result.toList()}")
-        val expected = arrayOf(6, 3, 0, 7, 4, 1, 8, 5, 2, 9)
+        val expected = arrayOf(6, 2, 9, 5, 1, 8, 4, 0, 7, 3, 10)
         assertThat(result.toList()).isEqualTo(expected.toList())
+
+        val check = Array<Int>(deck.size) { -1 }
+
+        applyShuffleReverse(input, (0L until deck.size.toLong()).toList(), deck.size.toLong())
+            .forEachIndexed { index, l ->
+                check[l.toInt()] = expected[index]
+            }
+
+        assertThat(check.toList()).isEqualTo(deck.toList())
+    }
+
+    @Test
+    fun test6_inc7_cut2() {
+        val deck = (0..10).toList().toTypedArray()
+        val input = """
+            cut -2
+            deal with increment 7
+        """.trimIndent().split('\n').map { it.trim() }.filter { it.isNotEmpty() }
+        val result = shuffleFrom(input, deck)
+        println("Result:${result.toList()}")
+        val expected = arrayOf(9, 6, 3, 0, 8, 5, 2, 10, 7, 4, 1)
+        assertThat(result.toList()).isEqualTo(expected.toList())
+
+        val check = Array<Int>(deck.size) { -1 }
+
+        applyShuffleReverse(input, (0L until deck.size.toLong()).toList(), deck.size.toLong())
+            .forEachIndexed { index, l ->
+                check[l.toInt()] = expected[index]
+            }
+
+        assertThat(check.toList()).isEqualTo(deck.toList())
+    }
+
+    @Test
+    fun test6_inc7() {
+        val deck = (0..10).toList().toTypedArray()
+        val input = """
+            deal with increment 7
+        """.trimIndent().split('\n').map { it.trim() }.filter { it.isNotEmpty() }
+        val result = shuffleFrom(input, deck)
+        println("Start:${result.toList()}")
+        val expected = arrayOf(0, 8, 5, 2, 10, 7, 4, 1, 9, 6, 3)
+        assertThat(result.toList()).isEqualTo(expected.toList())
+
+        val check = Array<Int>(deck.size) { -1 }
+
+        applyShuffleReverse(input, (0L until deck.size.toLong()).toList(), deck.size.toLong())
+            .forEachIndexed { index, l ->
+                check[l.toInt()] = expected[index]
+            }
+
+        assertThat(check.toList()).isEqualTo(deck.toList())
+    }
+
+    @Test
+    fun test6_inc9() {
+        val deck = (0..10).toList().toTypedArray()
+        val input = """
+            deal with increment 9
+        """.trimIndent().split('\n').map { it.trim() }.filter { it.isNotEmpty() }
+        val result = shuffleFrom(input, deck)
+        println("Start:${result.toList()}")
+        val expected = arrayOf(0, 5, 10, 4, 9, 3, 8, 2, 7, 1, 6)
+        assertThat(result.toList()).isEqualTo(expected.toList())
+
+        val check = Array<Int>(deck.size) { -1 }
+
+        applyShuffleReverse(input, (0L until deck.size.toLong()).toList(), deck.size.toLong())
+            .forEachIndexed { index, l ->
+                check[l.toInt()] = expected[index]
+            }
+
+        assertThat(check.toList()).isEqualTo(deck.toList())
     }
 
     @Test
     fun test7() {
-        val deck = (0..9).toList().toTypedArray()
+        val deck = (0..10).toList().toTypedArray()
         val input = """
             deal into new stack
             cut -2
@@ -120,7 +247,7 @@ class TestShuffle {
             deal with increment 9
             deal with increment 3
             cut -1
-        """.trimIndent().split('\n').map { it.trim() }.filter { it.length > 0 }
+        """.trimIndent().split('\n').map { it.trim() }.filter { it.isNotEmpty() }
         require(input.size == 10)
         val result = shuffleFrom(input, deck, true)
         val expected2 =
@@ -128,94 +255,40 @@ class TestShuffle {
         println("Result:${result.toList()}")
         assertThat(result.toList()).isEqualTo(expected2.toList())
         println("Expected 2 = ${expected2.toList()}")
-        val expected = arrayOf(9, 2, 5, 8, 1, 4, 7, 0, 3, 6)
+        val expected = arrayOf(1, 8, 4, 0, 7, 3, 10, 6, 2, 9, 5)
         assertThat(result.toList()).isEqualTo(expected.toList())
+        val check = Array<Int>(deck.size) { -1 }
+        applyShuffleReverse(input, (0L until deck.size.toLong()).toList(), deck.size.toLong())
+            .forEachIndexed { index, l ->
+                check[l.toInt()] = expected[index]
+            }
+        assertThat(check.toList()).isEqualTo(deck.toList())
 
     }
 
     @Test
     fun testinc_9_reverse() {
-        val deck = arrayOf(0, 9, 8, 7, 6, 5, 4, 3, 2, 1)
+        val deck = arrayOf(0, 5, 10, 4, 9, 3, 8, 2, 7, 1, 6)
         val input = """
             deal with increment 9
-        """.trimIndent().split('\n').map { it.trim() }.filter { it.length > 0 }
+        """.trimIndent().split('\n').map { it.trim() }.filter { it.isNotEmpty() }
         println("Deck:${deck.toList()}")
-        val expected = (0..9).toList().toTypedArray()
+        val expected = (0..10).toList().toTypedArray()
+        var check = shuffleFrom(input, expected)
+        println("Check:${check.toList()}")
+        assertThat(check.toList()).isEqualTo(deck.toList())
         val result = Array<Int>(deck.size) { -1 }
-        for (i in 0 until deck.size) {
-            val index = applyShuffleReverse(input, i.toLong(), deck.size.toLong())
-            result[index.toInt()] = deck[i]
-        }
-        println("Result:${result.toList()}")
-        for (i in 0 until deck.size) {
-            val index = applyShuffleReverse(input, i.toLong(), deck.size.toLong())
-            val expectedIndex = expected.indexOf(deck[i]).toLong()
-            // if(index != expectedIndex) {
-            println("inc=9 $i -> $index expected $expectedIndex")
-            // }
-        }
-        assertThat(result.toList()).isEqualTo(expected.toList())
-
-    }
-
-    @Test
-    fun testinc_3_reverse() {
-        val deck = arrayOf(0, 7, 4, 1, 8, 5, 2, 9, 6, 3)
-        val input = """
-            deal with increment 3
-        """.trimIndent().split('\n').map { it.trim() }.filter { it.length > 0 }
-        val result = Array<Int>(deck.size) { -1 }
-        val expected = (0..9).toList().toTypedArray()
-        println("Deck:${deck.toList()}")
-        for (i in 0 until deck.size) {
-            val index = applyShuffleReverse(input, i.toLong(), deck.size.toLong())
-            val expectedIndex = expected.indexOf(deck[i]).toLong()
-            // if(index != expectedIndex) {
-            println("inc=3 $i -> $index expected $expectedIndex")
-            // }
-            result[index.toInt()] = deck[i]
-        }
-        println("Result:${result.toList()}")
-        println("Expected:${expected.toList()}")
-        assertThat(result.toList()).isEqualTo(expected.toList())
-    }
-
-    @Test
-    fun testinc_7_reverse() {
-        val deck = arrayOf(0, 3, 6, 9, 2, 5, 8, 1, 4, 7)
-        val input = """
-            deal with increment 7
-        """.trimIndent().split('\n').map { it.trim() }.filter { it.length > 0 }
-        val result = Array<Int>(deck.size) { -1 }
-        val expected = (0..9).toList().toTypedArray()
-        println("Deck:${deck.toList()}")
-        for (i in 0 until deck.size) {
-            val index = applyShuffleReverse(input, i.toLong(), deck.size.toLong())
-            val expectedIndex = expected.indexOf(deck[i]).toLong()
-            // if(index != expectedIndex) {
-            println("inc=7 $i -> $index expected $expectedIndex")
-            // }
-            result[index.toInt()] = deck[i]
-        }
-        println("Result:${result.toList()}")
-        println("Expected:${expected.toList()}")
-        assertThat(result.toList()).isEqualTo(expected.toList())
-    }
-
-    @Test
-    fun test_cut() {
-        for (deck in 10L until 100L step 10L) {
-            for (n in (0 - deck + 1) until deck) {
-                for (index in 0L until deck) {
-                    val forward = cutIndex(index, n.toInt(), deck)
-                    val reverse = cutIndexReverse(forward, n.toInt(), deck)
-                    if (reverse != index) {
-                        println("N = $n, deck=$deck, $index=$index, reverse=$reverse, $forward=$forward")
-                    }
-                    assertThat(reverse).isEqualTo(index)
-                }
+        applyShuffleReverse(input, (0L until deck.size.toLong()).toList(), deck.size.toLong(), 1L)
+            .forEachIndexed { index, l ->
+                result[l.toInt()] = deck[index]
             }
+
+        println("Result:${result.toList()}")
+        if (result.toSet() != expected.toSet()) {
+            println("Missing values ${expected.toSet() - result.toSet()}")
         }
+        assertThat(result.toList()).isEqualTo(expected.toList())
+
     }
 
 }

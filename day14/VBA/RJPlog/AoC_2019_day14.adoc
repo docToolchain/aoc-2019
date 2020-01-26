@@ -1,0 +1,9 @@
+﻿== Day 14: Space Stoichiometry
+The original puzzle can be found at https://adventofcode.com/2019/day/6
+
+== Star 1
+This puzzle took several attempts to succeed. Finally I made it with some recursiv calculations but called for a line with more than one input several times.
+
+== Star 2
+
+

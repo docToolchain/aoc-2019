@@ -321,7 +321,7 @@ fun main(args: Array<String>) {
     println("Edges=${edges.size}")
     val robotLocation = result.first().start
     val graph = Graph(edges, true)
-    val path = graph.findPath(robotLocation, oxygenLocation!!)
+    val path = graph.findPath(robotLocation, oxygenLocation)
     println("From ${path.first()} -> ${path.last()}")
     val moves = path.last().second
     println("Moves=$moves")

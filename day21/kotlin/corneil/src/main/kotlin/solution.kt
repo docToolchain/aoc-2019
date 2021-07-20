@@ -29,7 +29,7 @@ fun reportHullDamage(code: List<Long>, springCode:String): Int {
         println(str)
 
     } while (!state.isHalted())
-    return result;
+    return result
 }
 
 fun main() {

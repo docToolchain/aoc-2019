@@ -134,7 +134,7 @@ open class Grid(val width: Int = 5, val height: Int = 5) {
                 bd += 2.toBigInteger().pow(index - 1).toLong()
                 bit = index + 1
             } else {
-                break;
+                break
             }
         } while (true)
         return bd

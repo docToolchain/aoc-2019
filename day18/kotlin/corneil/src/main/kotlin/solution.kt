@@ -51,7 +51,7 @@ data class Cell(val c: Char, val pos: Coord) : Comparable<Cell> {
         return when {
             isKey()  -> c - 'a'
             isDoor() -> c - 'A'
-            else     -> error("Didn't expected to support toBit for $c")
+            else     -> error("Didn't expect to support toBit for $c")
         }
     }
 
@@ -102,6 +102,15 @@ data class Visit(val distance: Int, val doors: BitSet) {
 
 data class Grid(val cells: MutableMap<Coord, Cell>) {
 
+    private val keys: Set<Cell> = cells.values.filter { it.isKey() }.toSet()
+    private val doors: Set<Cell> = cells.values.filter { it.isDoor() }.toSet()
+    private val entrances: Set<Cell> = cells.values.filter { it.isEntrance() }.toSet()
+    val route = mutableMapOf<Cell, MutableMap<Cell, Visit>>()
+
+    init {
+        createRoute()
+    }
+
     fun printToString(): String {
         val output = StringBuilder()
         val maxX = cells.keys.maxBy { it.x }?.x ?: error("Expected cells")
@@ -114,17 +123,6 @@ data class Grid(val cells: MutableMap<Coord, Cell>) {
         }
         return output.toString()
     }
-}
-
-class World(val grid: Grid) {
-    private val keys: Set<Cell> = grid.cells.values.filter { it.isKey() }.toSet()
-    private val doors: Set<Cell> = grid.cells.values.filter { it.isDoor() }.toSet()
-    private val entrances: Set<Cell> = grid.cells.values.filter { it.isEntrance() }.toSet()
-    val route = mutableMapOf<Cell, MutableMap<Cell, Visit>>()
-
-    init {
-        createRoute()
-    }
 
     private fun createRoute() {
         val nodes = keys() + entrances()
@@ -134,7 +132,7 @@ class World(val grid: Grid) {
             while (queue.isNotEmpty()) {
                 val current = queue.pop()
                 current.node.pos.surrounds().mapNotNull {
-                    grid.cells[it]
+                    cells[it]
                 }.filterNot {
                     it.isWall()
                 }.filterNot {
@@ -171,18 +169,18 @@ class World(val grid: Grid) {
     fun entrance(): Cell = entrances.first()
 }
 
-fun findPath(progress: Boolean, world: World, start: Cell): Int {
+fun findPath(progress: Boolean, grid: Grid, start: Cell): Int {
     val visited = mutableMapOf<Pair<Cell, BitSet>, Int>()
-    val allVisits = BitSet(world.keys().size)
+    val allVisits = BitSet(grid.keys().size)
     var visits = 0
-    world.keys().forEach { allVisits.or(it.toBitSet()) }
+    grid.keys().forEach { allVisits.or(it.toBitSet()) }
     println("All Visits:$allVisits")
-    val combinations = permutations(world.keys().size)
+    val combinations = permutations(grid.keys().size)
     println("Combinations:$combinations")
     println("Start:$start")
     if (progress) {
         println("Routes:")
-        world.route.forEach { route ->
+        grid.route.forEach { route ->
             println("Route:${route.key}")
             route.value.forEach { entry ->
                 print("\t")
@@ -191,7 +189,7 @@ fun findPath(progress: Boolean, world: World, start: Cell): Int {
         }
     }
     val comparator = compareByDescending<Step> { it.visits.cardinality() }.thenBy { it.distance }
-    val queue = PriorityQueue<Step>(world.keys().size * world.doors().size, comparator)
+    val queue = PriorityQueue<Step>(grid.keys().size * grid.doors().size, comparator)
     queue.add(Step(start, 0))
     var best = Int.MAX_VALUE
     while (queue.isNotEmpty()) {
@@ -200,7 +198,7 @@ fun findPath(progress: Boolean, world: World, start: Cell): Int {
             continue
         }
         if (progress) println("Checking $step")
-        world.route[step.node].orEmpty().asSequence().filterNot { entry ->
+        grid.route[step.node].orEmpty().asSequence().filterNot { entry ->
             // only those we haven't visited yet
             val key = entry.key
             if (key.isKey()) {
@@ -255,18 +253,18 @@ fun findPath(progress: Boolean, world: World, start: Cell): Int {
 
 data class MultiRoute(val from: Cell, val route: Cell, val visit: Visit)
 
-fun findPathMultipleEntrances(progress: Boolean, world: World, start: Set<Cell>): Int {
+fun findPathMultipleEntrances(progress: Boolean, grid: Grid, start: Set<Cell>): Int {
     val visited = mutableMapOf<Pair<Set<Cell>, BitSet>, Int>()
-    val allVisits = BitSet(world.keys().size)
+    val allVisits = BitSet(grid.keys().size)
     var visits = 0
-    world.keys().forEach { allVisits.or(it.toBitSet()) }
+    grid.keys().forEach { allVisits.or(it.toBitSet()) }
     println("All Visits:$allVisits")
-    val combinations = permutations(world.keys().size)
+    val combinations = permutations(grid.keys().size)
     println("Combinations:$combinations")
     println("Start:$start")
     if (progress) {
         println("Routes:")
-        world.route.forEach { route ->
+        grid.route.forEach { route ->
             println("Route:${route.key}")
             route.value.forEach { entry ->
                 print("\t")
@@ -275,7 +273,7 @@ fun findPathMultipleEntrances(progress: Boolean, world: World, start: Set<Cell>)
         }
     }
     val comparator = compareByDescending<MultiStep> { it.visits.cardinality() }.thenBy { it.distance }
-    val queue = PriorityQueue<MultiStep>(world.keys().size * world.doors().size, comparator)
+    val queue = PriorityQueue<MultiStep>(grid.keys().size * grid.doors().size, comparator)
     queue.add(MultiStep(start, 0))
     var best = Int.MAX_VALUE
     while (queue.isNotEmpty()) {
@@ -288,7 +286,7 @@ fun findPathMultipleEntrances(progress: Boolean, world: World, start: Set<Cell>)
         }
 
         step.nodes.flatMap { node ->
-            world.route[node].orEmpty().map { MultiRoute(node, it.key, it.value) }
+            grid.route[node].orEmpty().map { MultiRoute(node, it.key, it.value) }
         }.asSequence().filterNot { entry ->
             // only those we haven't visited yet
             val key = entry.route
@@ -345,36 +343,35 @@ fun findPathMultipleEntrances(progress: Boolean, world: World, start: Set<Cell>)
 }
 
 fun findKeys(progress: Boolean, grid: Grid): Int {
-    val world = World(grid)
+
     println("Grid:${grid.cells.size}")
-    var start = world.entrance()
-    println("Entrance:${world.entrance()}")
-    val combinations = permutations(world.keys().size)
+    var start = grid.entrance()
+    println("Entrance:${grid.entrance()}")
+    val combinations = permutations(grid.keys().size)
     println("Combinations:$combinations")
-    val keys = world.keys()
+    val keys = grid.keys()
     println("Keys:${keys.size}:${keys.map { it.c }.joinToString(", ")}")
-    val doors = world.doors()
+    val doors = grid.doors()
     println("Doors:${doors.size}:${doors.map { it.c }.joinToString(", ")}")
     println("------------------------------------")
-    val result = findPath(progress, world, start)
+    val result = findPath(progress, grid, start)
     println("=====================")
     println("Steps=${result}")
     return result
 }
 
 fun findKeysMultipleEntrances(progress: Boolean, grid: Grid): Int {
-    val world = World(grid)
     println("Grid:${grid.cells.size}")
-    var start = world.entrances()
+    var start = grid.entrances()
     println("Entrances:$start")
-    val combinations = permutations(world.keys().size)
+    val combinations = permutations(grid.keys().size)
     println("Combinations:$combinations")
-    val keys = world.keys()
+    val keys = grid.keys()
     println("Keys:${keys.size}:${keys.map { it.c }.joinToString(", ")}")
-    val doors = world.doors()
+    val doors = grid.doors()
     println("Doors:${doors.size}:${doors.map { it.c }.joinToString(", ")}")
     println("------------------------------------")
-    val result = findPathMultipleEntrances(progress, world, start)
+    val result = findPathMultipleEntrances(progress, grid, start)
     println("=====================")
     println("Steps=${result}")
     return result

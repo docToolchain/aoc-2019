@@ -186,7 +186,7 @@ fun createEdges(map: Grid): List<Edge<Cell>> {
         if (it.value.size == 2) {
             edges.add(Edge(it.value[0], it.value[1], 1))
         } else if (it.value.size > 2) {
-            error("More than 2 Cells ${it}")
+            error("More than 2 Cells $it")
         }
     }
     return edges
@@ -221,9 +221,9 @@ fun findRouteRecursive(grid: Grid, start: String, end: String): List<Pair<Cell, 
     val edges = mutableListOf<Edge<Cell>>()
     val named = grid.findByName()
     val startCell = named[start] ?: error("Expected portal named:$start")
-    require(startCell.size == 1) { "Expected only one named ${start}" }
+    require(startCell.size == 1) { "Expected only one named $start" }
     val endCell = named[end] ?: error("Expected portal name:$end")
-    require(endCell.size == 1) { "Expected only one name ${end}" }
+    require(endCell.size == 1) { "Expected only one name $end" }
     do {
         val outer = levels.last()
         val inner =
@@ -242,9 +242,9 @@ fun findRouteRecursive(grid: Grid, start: String, end: String): List<Pair<Cell, 
 fun findRoute(grid: Grid, start: String, end: String): List<Pair<Cell, Int>> {
     val named = grid.findByName()
     val startCell = named[start] ?: error("Expected portal named:$start")
-    require(startCell.size == 1) { "Expected only one named ${start}" }
+    require(startCell.size == 1) { "Expected only one named $start" }
     val endCell = named[end] ?: error("Expected portal name:$end")
-    require(endCell.size == 1) { "Expected only one name ${end}" }
+    require(endCell.size == 1) { "Expected only one name $end" }
     val graph = Graph(createEdges(grid), false)
     val path = graph.findPath(startCell.first(), endCell.first())
     require(path.isNotEmpty()) { "Could not find path from $start to $end" }

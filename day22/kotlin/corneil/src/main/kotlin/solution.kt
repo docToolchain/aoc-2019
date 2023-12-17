@@ -43,7 +43,7 @@ fun reverseIndex(index: Long, deck: Long, iterations: Long = 1L): Long {
 
 fun reverse(deck: Array<Int>): Array<Int> {
     println("deal into new stack")
-    val result = Array<Int>(deck.size) { -1 }
+    val result = Array(deck.size) { -1 }
     for (i in 0 until deck.size) {
         val newIndex = reverseIndex(i.toLong(), deck.size.toLong())
         result[newIndex.toInt()] = deck[i]
@@ -56,13 +56,13 @@ fun cutIndex(index: Long, n: Int, deck: Long, iterations: Long = 1L): Long {
     val i = index.toBigInteger()
     val cn = n.toBigInteger()
     val d = deck.toBigInteger()
-    val N = iterations.toBigInteger()
-    return ((N * (i - cn)) `%%` d).toLong()
+    val n = iterations.toBigInteger()
+    return ((n * (i - cn)) `%%` d).toLong()
 }
 
 fun cut(deck: Array<Int>, n: Int): Array<Int> {
     println("cut $n")
-    val result = Array<Int>(deck.size) { -1 }
+    val result = Array(deck.size) { -1 }
     for (i in 0 until deck.size) {
         val newIndex = cutIndex(i.toLong(), n, deck.size.toLong(), 1)
         result[newIndex.toInt()] = deck[i]
@@ -74,16 +74,16 @@ fun incrementIndex(index: Long, inc: Int, deck: Long, iterations: Long = 1L): Lo
     if (index == 0L) {
         return 0L
     }
-    val N = iterations.toBigInteger()
+    val n = iterations.toBigInteger()
     val i = index.toBigInteger()
     val c = inc.toBigInteger()
     val d = deck.toBigInteger()
-    return (N * i * c `%%` d).toLong()
+    return (n * i * c `%%` d).toLong()
 }
 
 fun increment(deck: Array<Int>, inc: Int): Array<Int> {
     println("deal with increment $inc")
-    val result = Array<Int>(deck.size) { -1 }
+    val result = Array(deck.size) { -1 }
     for (i in 0 until deck.size) {
         val newIndex = incrementIndex(i.toLong(), inc, deck.size.toLong())
         result[newIndex.toInt()] = deck[i]
@@ -94,9 +94,9 @@ fun increment(deck: Array<Int>, inc: Int): Array<Int> {
 fun shuffle(input: String, deck: Array<Int>): Array<Int> {
     val instruction = parse(input)
     return when (instruction) {
-        is Instruction.Reverse   -> reverse(deck)
-        is Instruction.Increment -> increment(deck, instruction.inc)
-        is Instruction.Cut       -> cut(deck, instruction.n)
+        is Reverse   -> reverse(deck)
+        is Increment -> increment(deck, instruction.inc)
+        is Cut       -> cut(deck, instruction.n)
         else                     -> error("Unknown instruction $instruction")
     }
 }
@@ -225,8 +225,8 @@ fun main() {
     require(index3[1] == 5078L) { "Expected ${index3[1]} to be 5078" }
     // Testing reverse on same data
     val reverse = applyShuffleReverse(input, listOf(7545L, 5078), deck.size.toLong(), 1L)
-    val reverseValue = deck[reverse[0]!!.toInt()]
-    val reverseValue2 = deck[reverse[1]!!.toInt()]
+    val reverseValue = deck[reverse[0].toInt()]
+    val reverseValue2 = deck[reverse[1].toInt()]
     require(reverse.first() == 2019L) { "Expected ${reverse.first()} to be 2019" }
 
     // Large inputs

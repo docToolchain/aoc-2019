@@ -91,7 +91,7 @@ fun execute(state: ProgramState, cmd: String): String {
 
 val directions = setOf("north", "south", "east", "west")
 
-class World(code: List<Long>, val ignoreItems: Set<String>) {
+class World(code: List<Long>) {
     var program = Program(code).createProgram(emptyList())
     val graph = DefaultDirectedGraph<String, DefaultEdge>(DefaultEdge::class.java)
     val links = mutableMapOf<Pair<String, String>, String>()
@@ -110,7 +110,7 @@ class World(code: List<Long>, val ignoreItems: Set<String>) {
                 val triedOptions = robot.tried[robot.location] ?: mutableListOf()
                 triedOptions.add(command)
                 robot.tried[robot.location] = triedOptions
-                println("${robot.location} -> ${command}")
+                println("${robot.location} -> $command")
             }
             output = execute(program, command)
             if (output.contains("You don't see that item here")) {
@@ -194,20 +194,6 @@ fun findUntried(location: String, move: String, world: World, tried: MutableMap<
     return ""
 }
 
-fun opposite(direction: String): String {
-    return when (direction) {
-        "south" -> "north"
-        "north" -> "south"
-        "east"  -> "west"
-        "west"  -> "east"
-        else    -> error("Invalid direction:$direction")
-    }
-}
-
-fun findOpposites(entry: Set<String>): Set<String> {
-    return entry.map { opposite(it) }.toSet()
-}
-
 fun findRoute(start: String, end: String, world: World, robot: Robot): Pair<String, List<String>> {
     val jsp = JohnsonShortestPaths(world.graph)
     val path = jsp.getPath(start, end)
@@ -251,13 +237,14 @@ fun findRoute(start: String, end: String, world: World, robot: Robot): Pair<Stri
 fun findPassword(code: List<Long>): String {
 
     var password = ""
-    val ignoreItems = mutableSetOf<String>("infinite loop")
+    val ignoreItems = mutableSetOf("infinite loop")
     do {
-        var commands = mutableListOf<String>("inv")
+        var commands = mutableListOf("inv")
         var lastTake = ""
         val dropped = mutableSetOf<String>()
-        var world = World(code, emptySet())
+        var world = World(code)
         val robot = Robot()
+        var steps = 0
 
         try {
             do {
@@ -392,7 +379,7 @@ fun findPassword(code: List<Long>): String {
                     }
                     commands.add(str.trim())
                 }
-            } while (password.isBlank() && !world.program.isHalted())
+            } while (password.isBlank() && !world.program.isHalted() && steps++ < 1000)
         } catch (x: Throwable) {
             x.printStackTrace()
         }
@@ -407,8 +394,10 @@ fun findPassword(code: List<Long>): String {
                 it.second.isNotEmpty()
             })
             println("Robot:$robot")
-            println("==IGNORING:$lastTake")
-            ignoreItems.add(lastTake)
+            if(steps < 1000) {
+                println("==IGNORING:$lastTake")
+                ignoreItems.add(lastTake)
+            }
         } else {
             println("Robot is at ${robot.location} carrying: ${robot.objects}")
         }
@@ -421,5 +410,6 @@ fun main() {
     val code = readProgram(File("input.txt"))
     val password = findPassword(code)
     println("Password=$password")
+    require(password.trim() == "262848")
 }
 
